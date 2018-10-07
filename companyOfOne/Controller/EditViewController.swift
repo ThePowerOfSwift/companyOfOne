@@ -23,8 +23,10 @@ class EditViewController: UIViewController {
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
     
     var centerContstraintX = NSLayoutConstraint()
-    
-    
+    var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
+    var titleTagLabelTrailingAnchorToCenterX = NSLayoutConstraint()
+    var titleTagTextFieldLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
+    var titleTagTextFieldLeadingAnchorToCenterX = NSLayoutConstraint()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +42,11 @@ class EditViewController: UIViewController {
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         titleTagLabel.addGestureRecognizer(leftSwipe)
-        titleTagLabel.addGestureRecognizer(rightSwipe)
+        //titleTagLabel.addGestureRecognizer(rightSwipe)
+        titleTagTextField.addGestureRecognizer(rightSwipe)
     }
     
     func setupDocTitleTagLabel(){
-        
         let topOffset = view.frame.height/5
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
@@ -52,8 +54,14 @@ class EditViewController: UIViewController {
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTagLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
         titleTagLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         titleTagLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
+        
+        //these are the global constraints to be animated
+        titleTagLabelLeadingAnchorToCenterX = titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
+        titleTagLabelLeadingAnchorToCenterX.isActive = true
+        titleTagLabelTrailingAnchorToCenterX = titleTagLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor)
+        titleTagLabelTrailingAnchorToCenterX.isActive = false
+        
     }
     
     func setupDocTitleTagTextField(){
@@ -62,8 +70,13 @@ class EditViewController: UIViewController {
         titleTagTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTagTextField.widthAnchor.constraint(equalToConstant:self.view.frame.width/2).isActive = true
         titleTagTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         titleTagTextField.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
+        
+        //these are the global constraints to be animated
+        titleTagTextFieldLeadingAnchorToTrailingAnchor = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
+        titleTagTextFieldLeadingAnchorToCenterX = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
+        titleTagTextFieldLeadingAnchorToCenterX.isActive = false
     }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
@@ -72,20 +85,21 @@ class EditViewController: UIViewController {
             if (sender.direction == .left) {
                 print("swiped left")
                 UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = false
-                    self.titleTagLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                    self.titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = false
-                    self.titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+                    self.titleTagLabelLeadingAnchorToCenterX.isActive = false
+                    self.titleTagLabelTrailingAnchorToCenterX.isActive = true
+                    self.titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = false
+                    self.titleTagTextFieldLeadingAnchorToCenterX.isActive = true
                     self.view.layoutIfNeeded()
                 })
             }
             if (sender.direction == .right) {
                 print("swiped right")
                 UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.titleTagLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = false
-                    self.titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-                    self.titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = false
-                    self.titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+                    self.titleTagLabelTrailingAnchorToCenterX.isActive = false
+                    self.titleTagLabelLeadingAnchorToCenterX.isActive = true
+                           self.titleTagTextFieldLeadingAnchorToCenterX.isActive = false
+                    self.titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
+             
                     self.view.layoutIfNeeded()
                 })
             }
