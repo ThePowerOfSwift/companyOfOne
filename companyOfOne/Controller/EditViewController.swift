@@ -69,7 +69,7 @@ class EditViewController: UIViewController {
         let topOffset = view.frame.height/5
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        titleTagLabel.alpha = 0.7
+        titleTagLabel.alpha = 0.4
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTagLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
         titleTagLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -102,7 +102,7 @@ class EditViewController: UIViewController {
         let topOffset = view.frame.height/5 * 2
         categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
-        categorySubCategoryLabel.alpha = 0.7
+        categorySubCategoryLabel.alpha = 0.4
         categorySubCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categorySubCategoryLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
         categorySubCategoryLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
