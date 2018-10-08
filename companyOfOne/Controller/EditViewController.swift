@@ -23,6 +23,20 @@ class EditViewController: UIViewController {
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
     
     //var centerContstraintX = NSLayoutConstraint()
+    
+    var xPosition1 = CGFloat()
+    var xPosition2 = CGFloat()
+    var xPosition3 = CGFloat()
+    var xPosition4 = CGFloat()
+    var xPosition5 = CGFloat()
+    var yPosition1 = CGFloat()
+    var yPosition2 = CGFloat()
+    var yPosition3 = CGFloat()
+    var yPosition4 = CGFloat()
+    var widthConstant = CGFloat()
+    var labelHeightConstant = CGFloat()
+    var pickerHeightConstant = CGFloat()
+    
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
     var titleTagLabelTrailingAnchorToCenterX = NSLayoutConstraint()
     var titleTagTextFieldLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
@@ -31,19 +45,47 @@ class EditViewController: UIViewController {
     var categorySubCategoryLabelTrailingAnchorToCenterX = NSLayoutConstraint()
     var categoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
     var categoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
+    var subCategoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
+    var subCategoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
+   
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupX_Y_W_H_Constants()
         setupDocTitleTagLabel()
         setupDocTitleTagTextField()
         setupCategorySubCategoryLabel()
         setupCategoryPicker()
+        setupSubCategoryPicker()
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategorySubCategory()
+        addSwipeGuesturesForSubCategory()
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    func setupX_Y_W_H_Constants(){
+        xPosition1 = -1*(view.frame.width)
+        xPosition2 = -1*(view.frame.width/2)
+        xPosition3 = 0
+        xPosition4 = view.frame.width/2
+        xPosition5 = view.frame.width
+        
+        yPosition1 = view.frame.height
+        yPosition2 = 2*(view.frame.height/5)
+        yPosition3 = 3*(view.frame.height/5)
+        yPosition4 = 4*(view.frame.height/5)
+        
+        widthConstant = view.frame.width/2
+        
+        labelHeightConstant = 30
+        pickerHeightConstant = view.frame.height/5
+    }
+    
     //MARK: Setup Gesture Recognizers
+
     
     func addSwipeGuesturesForDocTitle(){
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_:)))
@@ -63,20 +105,30 @@ class EditViewController: UIViewController {
         categoryPickerView.addGestureRecognizer(rightSwipe)
     }
     
+    func addSwipeGuesturesForSubCategory(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        categoryPickerView.addGestureRecognizer(leftSwipe)
+        subCategoryPickerView.addGestureRecognizer(rightSwipe)
+    }
+    
     //MARK: Setup Title and Constraints
     
     func setupDocTitleTagLabel(){
-        let topOffset = view.frame.height/5
+        //setup in position 3
+        //let topOffset = view.frame.height/5
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         titleTagLabel.alpha = 0.4
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleTagLabel.widthAnchor.constraint(equalToConstant: self.view.frame.width/2).isActive = true
-        titleTagLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleTagLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
+        titleTagLabel.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        titleTagLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
+        titleTagLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition1).isActive = true
         
         //these are the global constraints to be animated
-        titleTagLabelLeadingAnchorToCenterX = titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
+        titleTagLabelLeadingAnchorToCenterX = titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
         titleTagLabelLeadingAnchorToCenterX.isActive = true
         titleTagLabelTrailingAnchorToCenterX = titleTagLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor)
         titleTagLabelTrailingAnchorToCenterX.isActive = false
@@ -84,21 +136,23 @@ class EditViewController: UIViewController {
     }
     
     func setupDocTitleTagTextField(){
-        let topOffset = view.frame.height/5
+        //setup in position 4
+        //let topOffset = view.frame.height/5
         titleTagTextField.isUserInteractionEnabled = true
         titleTagTextField.translatesAutoresizingMaskIntoConstraints = false
-        titleTagTextField.widthAnchor.constraint(equalToConstant:self.view.frame.width/2).isActive = true
-        titleTagTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        titleTagTextField.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
+        titleTagTextField.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        titleTagTextField.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
+        titleTagTextField.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition1).isActive = true
         
         //these are the global constraints to be animated
-        titleTagTextFieldLeadingAnchorToTrailingAnchor = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        titleTagTextFieldLeadingAnchorToTrailingAnchor = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: xPosition4)
         titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
         titleTagTextFieldLeadingAnchorToCenterX = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
         titleTagTextFieldLeadingAnchorToCenterX.isActive = false
     }
     
     func setupCategorySubCategoryLabel(){
+        //setup in position 3
         let topOffset = view.frame.height/5 * 2
         categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
@@ -117,34 +171,48 @@ class EditViewController: UIViewController {
     }
     
     func setupCategoryPicker(){
+        //setup in position 4
         let topOffset = view.frame.height/5 * 2
         let sizeOffset = view.frame.height/5
+        categoryPickerView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         categoryPickerView.isUserInteractionEnabled = true
         categoryPickerView.translatesAutoresizingMaskIntoConstraints = false
         categoryPickerView.widthAnchor.constraint(equalToConstant:self.view.frame.width/2).isActive = true
         categoryPickerView.heightAnchor.constraint(equalToConstant: sizeOffset).isActive = true
         categoryPickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
         
-        //these are the global constraints to be animated
+        //these are the global constraints to be animated bring it onto the right side of the view
         categoryPickerViewLeadingAnchorToTrailingAnchor = categoryPickerView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
         categoryPickerViewLeadingAnchorToTrailingAnchor.isActive = true
         categoryPickerViewLeadingAnchorToCenterX = categoryPickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
         categoryPickerViewLeadingAnchorToCenterX.isActive = false
+        
+        //these are the global constraints to be animated bringing it onto the left side of the view
+        //leading anchor to leading anchor should move it to the left
+        //just update the constant to -view/2?
     }
     
     func setupSubCategoryPicker(){
-        //        let topOffset = view.frame.height/5
-        //        titleTagTextField.isUserInteractionEnabled = true
-        //        titleTagTextField.translatesAutoresizingMaskIntoConstraints = false
-        //        titleTagTextField.widthAnchor.constraint(equalToConstant:self.view.frame.width/2).isActive = true
-        //        titleTagTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        //        titleTagTextField.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
-        //
-        //        //these are the global constraints to be animated
-        //        titleTagTextFieldLeadingAnchorToTrailingAnchor = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor)
-        //        titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
-        //        titleTagTextFieldLeadingAnchorToCenterX = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
-        //        titleTagTextFieldLeadingAnchorToCenterX.isActive = false
+        //setup in position 5
+        let topOffset = view.frame.height/5 * 3
+        let sizeOffset = view.frame.height/5
+        let rightLocationOffset = view.frame.width/2
+        categoryPickerView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        subCategoryPickerView.isUserInteractionEnabled = true
+        subCategoryPickerView.translatesAutoresizingMaskIntoConstraints = false
+        subCategoryPickerView.widthAnchor.constraint(equalToConstant:self.view.frame.width/2).isActive = true
+        subCategoryPickerView.heightAnchor.constraint(equalToConstant: sizeOffset).isActive = true
+        subCategoryPickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: topOffset).isActive = true
+        
+        //these are the global constraints to be animated bringing it one step closer to the view
+        subCategoryPickerViewLeadingAnchorToTrailingAnchor = subCategoryPickerView.leadingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: rightLocationOffset)
+        subCategoryPickerViewLeadingAnchorToTrailingAnchor.isActive = true
+        subCategoryPickerViewLeadingAnchorToCenterX = subCategoryPickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: rightLocationOffset)
+        subCategoryPickerViewLeadingAnchorToCenterX.isActive = false
+        
+         //these are the global constraints to be animated bringing it onto the right side of the view
+        //just update the constant in the animation to zero??
+        
     }
     
     
@@ -156,6 +224,7 @@ class EditViewController: UIViewController {
             
             if (sender.direction == .left) {
                 print("swiped left on titleTag label")
+                //titleTagLabel moved to postion 2, titleTagTextInput moved to position 3
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.titleTagLabelLeadingAnchorToCenterX.isActive = false
                     self.titleTagLabelTrailingAnchorToCenterX.isActive = true
@@ -166,6 +235,7 @@ class EditViewController: UIViewController {
             }
             if (sender.direction == .right) {
                 print("swiped right on titleTag text input")
+                //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.titleTagLabelTrailingAnchorToCenterX.isActive = false
                     self.titleTagLabelLeadingAnchorToCenterX.isActive = true
@@ -184,6 +254,7 @@ class EditViewController: UIViewController {
             
             if (sender.direction == .left) {
                 print("swiped left on category label")
+                //categoryLabel moved to postion 2, categoryPicker moved to position 3
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.isActive = false
                     self.categorySubCategoryLabelTrailingAnchorToCenterX.isActive = true
@@ -194,11 +265,53 @@ class EditViewController: UIViewController {
             }
             if (sender.direction == .right) {
                 print("swiped right on category picker")
+                //categoryLabel moved to postion 3, categoryPicker moved to position 4
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelTrailingAnchorToCenterX.isActive = false
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.isActive = true
                     self.categoryPickerViewLeadingAnchorToCenterX.isActive = false
                     self.categoryPickerViewLeadingAnchorToTrailingAnchor.isActive = true
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
+    @objc func swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_ sender:UISwipeGestureRecognizer){
+        DispatchQueue.main.async {[unowned self] in
+            
+            if (sender.direction == .left) {
+                print("swiped left categoryPicker")
+                //categorySubCategoryLabel moved to postion 1, categoryPicker moved to postion 2, categoryPicker moved to position 3
+                let negativeWidthOffset = -1 * (self.view.frame.width/2)
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    
+                    //moves the categorySubCategoryLabel off the view to the left
+                    self.categorySubCategoryLabelTrailingAnchorToCenterX.constant = negativeWidthOffset
+                    
+                    //moves the category to the left
+                    self.categoryPickerViewLeadingAnchorToCenterX.constant = negativeWidthOffset
+                    
+                    //moves the sub category onto the view
+                    self.subCategoryPickerViewLeadingAnchorToTrailingAnchor.isActive = false
+                    self.subCategoryPickerViewLeadingAnchorToCenterX.isActive = true
+                    self.view.layoutIfNeeded()
+                })
+            }
+            if (sender.direction == .right) {
+                print("swiped right on subCategory picker")
+                //categorySubCategoryLabel moved to postion 2, categoryPicker moved to postion 3, subCategoryPicker moved to position 4
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                   //move the categorySubCategoryLabel to the right
+                    self.categorySubCategoryLabelTrailingAnchorToCenterX.constant = 0
+                    
+                    
+                    //moves the category to the right
+                    self.categoryPickerViewLeadingAnchorToCenterX.constant = 0
+                    
+                    //moves the subcategory out of the view to the right
+                    self.subCategoryPickerViewLeadingAnchorToCenterX.isActive = false
+                    self.subCategoryPickerViewLeadingAnchorToTrailingAnchor.isActive = true
                     self.view.layoutIfNeeded()
                 })
             }
