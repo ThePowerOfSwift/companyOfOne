@@ -10,27 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "companyOfOne/Controller/EditViewController.swift"
-            timestampString = "560719775.163855"
+            timestampString = "560722513.390205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "companyOfOne/Controller/EditViewController.swift"
-            timestampString = "560719775.164227"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)"
             landmarkType = "7">
          </BreakpointContent>

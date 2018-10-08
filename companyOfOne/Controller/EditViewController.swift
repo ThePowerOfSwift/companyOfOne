@@ -22,7 +22,6 @@ class EditViewController: UIViewController {
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
     
-    //var centerContstraintX = NSLayoutConstraint()
     
     var xPosition1 = CGFloat()
     var xPosition2 = CGFloat()
@@ -33,19 +32,19 @@ class EditViewController: UIViewController {
     var yPosition2 = CGFloat()
     var yPosition3 = CGFloat()
     var yPosition4 = CGFloat()
-    var widthConstant = CGFloat()
+    var allWidthConstant = CGFloat()
     var labelHeightConstant = CGFloat()
     var pickerHeightConstant = CGFloat()
     
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
-    var titleTagLabelTrailingAnchorToCenterX = NSLayoutConstraint()
-    var titleTagTextFieldLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
+    //var titleTagLabelTrailingAnchorToCenterX = NSLayoutConstraint()
+    //var titleTagTextFieldLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
     var titleTagTextFieldLeadingAnchorToCenterX = NSLayoutConstraint()
     var categorySubCategoryLabelLeadingAnchorToCenterX = NSLayoutConstraint()
-    var categorySubCategoryLabelTrailingAnchorToCenterX = NSLayoutConstraint()
-    var categoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
+    //var categorySubCategoryLabelTrailingAnchorToCenterX = NSLayoutConstraint()
+    //var categoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
     var categoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
-    var subCategoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
+    //var subCategoryPickerViewLeadingAnchorToTrailingAnchor = NSLayoutConstraint()
     var subCategoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
    
     
@@ -73,12 +72,12 @@ class EditViewController: UIViewController {
         xPosition4 = view.frame.width/2
         xPosition5 = view.frame.width
         
-        yPosition1 = view.frame.height
+        yPosition1 = 1*(view.frame.height/5)
         yPosition2 = 2*(view.frame.height/5)
         yPosition3 = 3*(view.frame.height/5)
         yPosition4 = 4*(view.frame.height/5)
         
-        widthConstant = view.frame.width/2
+        allWidthConstant = view.frame.width/2
         
         labelHeightConstant = 30
         pickerHeightConstant = view.frame.height/5
@@ -117,42 +116,35 @@ class EditViewController: UIViewController {
     //MARK: Setup Title and Constraints
     
     func setupDocTitleTagLabel(){
-        //setup in position 3
-        //let topOffset = view.frame.height/5
+        //setup in xPosition 3, yPositon 1
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         titleTagLabel.alpha = 0.4
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleTagLabel.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        titleTagLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         titleTagLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
         titleTagLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition1).isActive = true
         
-        //these are the global constraints to be animated
+        //this the global constraints to be animated
         titleTagLabelLeadingAnchorToCenterX = titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
         titleTagLabelLeadingAnchorToCenterX.isActive = true
-        titleTagLabelTrailingAnchorToCenterX = titleTagLabel.trailingAnchor.constraint(equalTo: self.view.centerXAnchor)
-        titleTagLabelTrailingAnchorToCenterX.isActive = false
-        
     }
     
     func setupDocTitleTagTextField(){
-        //setup in position 4
-        //let topOffset = view.frame.height/5
+        //setup in xPosition 4, yPosition 1
         titleTagTextField.isUserInteractionEnabled = true
         titleTagTextField.translatesAutoresizingMaskIntoConstraints = false
-        titleTagTextField.widthAnchor.constraint(equalToConstant: widthConstant).isActive = true
+        titleTagTextField.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         titleTagTextField.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
         titleTagTextField.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition1).isActive = true
         
-        //these are the global constraints to be animated
-        titleTagTextFieldLeadingAnchorToTrailingAnchor = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: xPosition4)
-        titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
-        titleTagTextFieldLeadingAnchorToCenterX = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor)
-        titleTagTextFieldLeadingAnchorToCenterX.isActive = false
+        //this isthe global constraints to be animated
+        titleTagTextFieldLeadingAnchorToCenterX = titleTagTextField.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
+        titleTagTextFieldLeadingAnchorToCenterX.isActive = true
     }
     
     func setupCategorySubCategoryLabel(){
-        //setup in position 3
+        //setup in xPosition 3, yPosition2
         let topOffset = view.frame.height/5 * 2
         categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
@@ -226,10 +218,8 @@ class EditViewController: UIViewController {
                 print("swiped left on titleTag label")
                 //titleTagLabel moved to postion 2, titleTagTextInput moved to position 3
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.titleTagLabelLeadingAnchorToCenterX.isActive = false
-                    self.titleTagLabelTrailingAnchorToCenterX.isActive = true
-                    self.titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = false
-                    self.titleTagTextFieldLeadingAnchorToCenterX.isActive = true
+                    self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition3
                     self.view.layoutIfNeeded()
                 })
             }
@@ -237,11 +227,8 @@ class EditViewController: UIViewController {
                 print("swiped right on titleTag text input")
                 //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.titleTagLabelTrailingAnchorToCenterX.isActive = false
-                    self.titleTagLabelLeadingAnchorToCenterX.isActive = true
-                    self.titleTagTextFieldLeadingAnchorToCenterX.isActive = false
-                    self.titleTagTextFieldLeadingAnchorToTrailingAnchor.isActive = true
-                    
+                    self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition4
                     self.view.layoutIfNeeded()
                 })
             }
