@@ -60,15 +60,18 @@ class EditViewController: UIViewController {
         setupDocTitleTagTextField()
         setupCategorySubCategoryLabel()
         setupOccuranceLabel()
+        setupDocDateLabel()
         //pickers
         setupCategoryPicker()
         setupSubCategoryPicker()
         setupOccurancePicker()
+        setupDocDatePicker()
         //swipes
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategory()
         addSwipeGuesturesForSubCategory()
         addSwipeGuesturesForOccurance()
+        addSwipeGuesturesForDocDate()
         
     }
     
@@ -105,7 +108,6 @@ class EditViewController: UIViewController {
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         titleTagLabel.addGestureRecognizer(leftSwipe)
-        //titleTagLabel.addGestureRecognizer(rightSwipe) //multiple won't work unless conforms to delegate
         titleTagTextField.addGestureRecognizer(rightSwipe)
     }
     
@@ -136,12 +138,21 @@ class EditViewController: UIViewController {
         occurancePickerView.addGestureRecognizer(rightSwipe)
     }
     
+    func addSwipeGuesturesForDocDate(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocDateLabelShowsAndHidesDocDatePicker(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocDateLabelShowsAndHidesDocDatePicker(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        docDateLabel.addGestureRecognizer(leftSwipe)
+        DocDatePickerView.addGestureRecognizer(rightSwipe)
+    }
+    
     //MARK: Setup Title and Constraints
     
     func setupDocTitleTagLabel(){
         //setup in xPosition 3, yPositon 1
         titleTagLabel.isUserInteractionEnabled = true
-        titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        titleTagLabel.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         titleTagLabel.alpha = labelAlpha
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTagLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
@@ -185,7 +196,7 @@ class EditViewController: UIViewController {
     
     func setupCategoryPicker(){
         //setup in xPosition 4, yPosition 2
-        categoryPickerView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
+        categoryPickerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         categoryPickerView.isUserInteractionEnabled = true
         categoryPickerView.translatesAutoresizingMaskIntoConstraints = false
         categoryPickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
@@ -200,7 +211,7 @@ class EditViewController: UIViewController {
     
     func setupSubCategoryPicker(){
         //setup in xPosition 5, yPosition 2
-        subCategoryPickerView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        subCategoryPickerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         subCategoryPickerView.isUserInteractionEnabled = true
         subCategoryPickerView.translatesAutoresizingMaskIntoConstraints = false
         subCategoryPickerView.widthAnchor.constraint(equalToConstant:allWidthConstant).isActive = true
@@ -218,7 +229,7 @@ class EditViewController: UIViewController {
     func setupOccuranceLabel(){
         //setup in xPosition 3, yPosition 3
         occuranceLabel.isUserInteractionEnabled = true
-        occuranceLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
+        occuranceLabel.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         occuranceLabel.alpha = labelAlpha
         occuranceLabel.translatesAutoresizingMaskIntoConstraints = false
         occuranceLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
@@ -232,7 +243,7 @@ class EditViewController: UIViewController {
     
     func setupOccurancePicker(){
         //setup in xPosition 4, yPosition 3
-        occurancePickerView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        occurancePickerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         occurancePickerView.isUserInteractionEnabled = true
         occurancePickerView.translatesAutoresizingMaskIntoConstraints = false
         occurancePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
@@ -245,9 +256,41 @@ class EditViewController: UIViewController {
         occurancePickerViewLeadingAnchorToCenterX.isActive = true
     }
     
+    //MARK: Setup DocDate and Constraints
+    
+    func setupDocDateLabel(){
+        //setup in xPosition 3, yPosition 4
+        docDateLabel.isUserInteractionEnabled = true
+        docDateLabel.backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
+        docDateLabel.alpha = labelAlpha
+        docDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        docDateLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        docDateLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
+        docDateLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
+
+        //this the global constraints to be animated
+        docDateLabelViewLeadingAnchorToCenterX = docDateLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
+        docDateLabelViewLeadingAnchorToCenterX.isActive = true
+    }
+
+    func setupDocDatePicker(){
+        //setup in xPosition 4, yPosition 4
+        DocDatePickerView.backgroundColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        DocDatePickerView.isUserInteractionEnabled = true
+        DocDatePickerView.translatesAutoresizingMaskIntoConstraints = false
+        DocDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        DocDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        DocDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
+
+        //this is the global constraints to be animated bring it onto the right side of the view
+
+        docDatePickerViewLeadingAnchorToCenterX = DocDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
+        docDatePickerViewLeadingAnchorToCenterX.isActive = true
+    }
+
     
     
-    //MARK: Swipe Functions
+    //MARK: All Swipe Functions
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
         DispatchQueue.main.async {[unowned self] in
@@ -343,6 +386,30 @@ class EditViewController: UIViewController {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occuranceLabelLeadingAnchorToCenterX.constant = self.xPosition3
                     self.occurancePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
+    @objc func swipeOnDocDateLabelShowsAndHidesDocDatePicker(_ sender:UISwipeGestureRecognizer){
+        DispatchQueue.main.async {[unowned self] in
+
+            if (sender.direction == .left) {
+                print("swiped left on docDate label")
+                //docDateLabel moved to postion 2, docDatePicker moved to position 3
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.docDateLabelViewLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.docDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.view.layoutIfNeeded()
+                })
+            }
+            if (sender.direction == .right) {
+                print("swiped right on docDate picker")
+                //docDateLabel moved to postion 3, docDatePicker moved to position 4
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.docDateLabelViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.docDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
                     self.view.layoutIfNeeded()
                 })
             }
