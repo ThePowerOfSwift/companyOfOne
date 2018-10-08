@@ -11,7 +11,7 @@ import UIKit
 
 class EditViewController: UIViewController {
     
-    
+    //MARK: Outlets
     @IBOutlet weak var titleTagLabel: UILabel!
     @IBOutlet weak var titleTagTextField: UITextField!
     @IBOutlet weak var categorySubCategoryLabel: UILabel!
@@ -35,6 +35,7 @@ class EditViewController: UIViewController {
     var allWidthConstant = CGFloat()
     var labelHeightConstant = CGFloat()
     var pickerHeightConstant = CGFloat()
+    var labelAlpha = CGFloat()
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -52,19 +53,26 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupX_Y_W_H_Constants()
+        //constants
+        setupX_Y_W_H_Alpha_Constants()
+        //labels
         setupDocTitleTagLabel()
         setupDocTitleTagTextField()
         setupCategorySubCategoryLabel()
+        setupOccuranceLabel()
+        //pickers
         setupCategoryPicker()
         setupSubCategoryPicker()
+        setupOccurancePicker()
+        //swipes
         addSwipeGuesturesForDocTitle()
-        addSwipeGuesturesForCategorySubCategory()
+        addSwipeGuesturesForCategory()
         addSwipeGuesturesForSubCategory()
+        addSwipeGuesturesForOccurance()
         
     }
     
-    func setupX_Y_W_H_Constants(){
+    func setupX_Y_W_H_Alpha_Constants(){
         //X
         xPosition1 = -1*(view.frame.width)
         xPosition2 = -1*(view.frame.width/2)
@@ -84,6 +92,9 @@ class EditViewController: UIViewController {
         //H
         labelHeightConstant = 30
         pickerHeightConstant = view.frame.height/5
+        
+        //Alpha
+        labelAlpha = 0.6
     }
     
     //MARK: Setup Gesture Recognizers
@@ -98,7 +109,7 @@ class EditViewController: UIViewController {
         titleTagTextField.addGestureRecognizer(rightSwipe)
     }
     
-    func addSwipeGuesturesForCategorySubCategory(){
+    func addSwipeGuesturesForCategory(){
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategorySubCategoryLabelShowsAndHidesCategoryPicker(_:)))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategorySubCategoryLabelShowsAndHidesCategoryPicker(_:)))
         leftSwipe.direction = .left
@@ -116,14 +127,14 @@ class EditViewController: UIViewController {
         subCategoryPickerView.addGestureRecognizer(rightSwipe)
     }
     
-//    func addSwipeGuesturesForSubCategory(){
-//        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)))
-//        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnCategoryPickerShowsAndHidesSubCategoryPicker(_:)))
-//        leftSwipe.direction = .left
-//        rightSwipe.direction = .right
-//        categoryPickerView.addGestureRecognizer(leftSwipe)
-//        subCategoryPickerView.addGestureRecognizer(rightSwipe)
-//    }
+    func addSwipeGuesturesForOccurance(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        occuranceLabel.addGestureRecognizer(leftSwipe)
+        occurancePickerView.addGestureRecognizer(rightSwipe)
+    }
     
     //MARK: Setup Title and Constraints
     
@@ -131,7 +142,7 @@ class EditViewController: UIViewController {
         //setup in xPosition 3, yPositon 1
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        titleTagLabel.alpha = 0.4
+        titleTagLabel.alpha = labelAlpha
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTagLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         titleTagLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
@@ -161,7 +172,7 @@ class EditViewController: UIViewController {
         //setup in xPosition 3, yPosition 2
         categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
-        categorySubCategoryLabel.alpha = 0.4
+        categorySubCategoryLabel.alpha = labelAlpha
         categorySubCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categorySubCategoryLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         categorySubCategoryLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
@@ -202,39 +213,41 @@ class EditViewController: UIViewController {
         subCategoryPickerViewLeadingAnchorToCenterX.isActive = true
     }
     
-//    func setupCategorySubCategoryLabel(){
-//        //setup in xPosition 3, yPosition 2
-//        categorySubCategoryLabel.isUserInteractionEnabled = true
-//        categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
-//        categorySubCategoryLabel.alpha = 0.4
-//        categorySubCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
-//        categorySubCategoryLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-//        categorySubCategoryLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
-//        categorySubCategoryLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition2).isActive = true
-//
-//        //this the global constraints to be animated
-//        categorySubCategoryLabelLeadingAnchorToCenterX = categorySubCategoryLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
-//        categorySubCategoryLabelLeadingAnchorToCenterX.isActive = true
-//    }
-//
-//    func setupCategoryPicker(){
-//        //setup in xPosition 4, yPosition 2
-//        categoryPickerView.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-//        categoryPickerView.isUserInteractionEnabled = true
-//        categoryPickerView.translatesAutoresizingMaskIntoConstraints = false
-//        categoryPickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-//        categoryPickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
-//        categoryPickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition2).isActive = true
-//
-//        //this is the global constraints to be animated bring it onto the right side of the view
-//
-//        categoryPickerViewLeadingAnchorToCenterX = categoryPickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
-//        categoryPickerViewLeadingAnchorToCenterX.isActive = true
-//    }
+     //MARK: Setup Occurance and Constraints
+    
+    func setupOccuranceLabel(){
+        //setup in xPosition 3, yPosition 3
+        occuranceLabel.isUserInteractionEnabled = true
+        occuranceLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
+        occuranceLabel.alpha = labelAlpha
+        occuranceLabel.translatesAutoresizingMaskIntoConstraints = false
+        occuranceLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        occuranceLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
+        occuranceLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
+        
+        //this the global constraints to be animated
+        occuranceLabelLeadingAnchorToCenterX = occuranceLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
+        occuranceLabelLeadingAnchorToCenterX.isActive = true
+    }
+    
+    func setupOccurancePicker(){
+        //setup in xPosition 4, yPosition 3
+        occurancePickerView.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+        occurancePickerView.isUserInteractionEnabled = true
+        occurancePickerView.translatesAutoresizingMaskIntoConstraints = false
+        occurancePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        occurancePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        occurancePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
+        
+        //this is the global constraints to be animated bring it onto the right side of the view
+        
+        occurancePickerViewLeadingAnchorToCenterX = occurancePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
+        occurancePickerViewLeadingAnchorToCenterX.isActive = true
+    }
     
     
     
-    //MARK: Title Swipe Function
+    //MARK: Swipe Functions
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
         DispatchQueue.main.async {[unowned self] in
@@ -311,42 +324,29 @@ class EditViewController: UIViewController {
             }
         }
     }
-//        @objc func swipeOnCategorySubCategoryLabelShowsAndHidesCategoryPicker(_ sender:UISwipeGestureRecognizer){
-//            DispatchQueue.main.async {[unowned self] in
-//                
-//                if (sender.direction == .left) {
-//                    print("swiped left on category label")
-//                    //categoryLabel moved to postion 2, categoryPicker moved to position 3
-//                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-//                        self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition2
-//                        self.categoryPickerViewLeadingAnchorToCenterX.constant = self.xPosition3
-//                        self.subCategoryPickerViewLeadingAnchorToCenterX.constant = self.xPosition4
-//                        self.view.layoutIfNeeded()
-//                    })
-//                }
-//                if (sender.direction == .right) {
-//                    print("swiped right on category picker")
-//                    //categoryLabel moved to postion 3, categoryPicker moved to position 4
-//                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-//                        self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition3
-//                        self.categoryPickerViewLeadingAnchorToCenterX.constant = self.xPosition4
-//                        self.subCategoryPickerViewLeadingAnchorToCenterX.constant = self.xPosition5
-//                        self.view.layoutIfNeeded()
-//                    })
-//                }
-//            }
-//    }
-//    
     
-    
-    
-    
-    
-    func setupReoccurancePicker(){
-        
-    }
-    func setupDocDatePicker(){
-        
+    @objc func swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_ sender:UISwipeGestureRecognizer){
+        DispatchQueue.main.async {[unowned self] in
+            
+            if (sender.direction == .left) {
+                print("swiped left on occurance label")
+                //occuranceLabel moved to postion 2, occurnacePicker moved to position 3
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.occuranceLabelLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.occurancePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.view.layoutIfNeeded()
+                })
+            }
+            if (sender.direction == .right) {
+                print("swiped right on occurance picker")
+                //occuranceLabel moved to postion 3, occurancePicker moved to position 4
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.occuranceLabelLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.occurancePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
     }
 }
 
