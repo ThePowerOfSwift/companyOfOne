@@ -17,8 +17,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var categorySubCategoryLabel: UILabel!
     @IBOutlet weak var categoryPickerView: UIPickerView!
     @IBOutlet weak var subCategoryPickerView: UIPickerView!
-    @IBOutlet weak var occuranceLabel: UILabel!
-    @IBOutlet weak var occurancePickerView: UIPickerView!
+    @IBOutlet weak var occurrenceLabel: UILabel!
+    @IBOutlet weak var occurrencePickerView: UIPickerView!
+    @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
     
@@ -48,8 +49,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var categorySubCategoryLabelLeadingAnchorToCenterX = NSLayoutConstraint()
     var categoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     var subCategoryPickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
-    var occuranceLabelLeadingAnchorToCenterX = NSLayoutConstraint()
-    var occurancePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
+    var occurrenceLabelLeadingAnchorToCenterX = NSLayoutConstraint()
+    var occurrencePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
+    var occurrenceDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     var docDateLabelViewLeadingAnchorToCenterX = NSLayoutConstraint()
     var docDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     
@@ -62,7 +64,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         titleTagTextField.delegate = self
         categoryPickerView.delegate = self
         subCategoryPickerView.delegate = self
-        occurancePickerView.delegate = self
+        occurrencePickerView.delegate = self //fix this spelling
         //data
         setupTempDataForTesting()
         //constants
@@ -71,18 +73,20 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupDocTitleTagLabel()
         setupDocTitleTagTextField()
         setupCategorySubCategoryLabel()
-        setupOccuranceLabel()
+        setupOccurrenceLabel()
         setupDocDateLabel()
         //pickers
         setupCategoryPicker()
         setupSubCategoryPicker()
-        setupOccurancePicker()
+        setupOccurrencePicker()
+        setupOccurrenceDatePicker()
         setupDocDatePicker()
         //swipes
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategory()
         addSwipeGuesturesForSubCategory()
-        addSwipeGuesturesForOccurance()
+        addSwipeGuesturesForOccurrence()
+        addSwipeGuesturesForOccurrenceDate()
         addSwipeGuesturesForDocDate()
     }
     
@@ -90,11 +94,21 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func setupTempDataForTesting(){
         //populate array for category
+        categories = ["Rental Property",
+                      "Capital Gains",
+                      "RRSPs","Dividends",
+                      "Medical",
+                      "Other Income",
+                      "Previous Assessments",
+                      "Tax Payments" ]
         //populate array for subCategory
         //populate array for occurrence
+        occurrences = ["Biweekly",
+                      "Monthly",
+                      "Yearly"]
     }
     
-    //MARK : Title/Tag Delegate Functions
+    //MARK: Title/Tag Delegate Functions
     
     @IBAction func changedTitleTagText(_ sender: Any) {
         titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
@@ -119,7 +133,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if subCategoryPickerView == pickerView {
             return 1
         }
-        if occurancePickerView == pickerView {
+        if occurrencePickerView == pickerView {
             return 1
         }
         return 1
@@ -127,15 +141,28 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return 5 //categories.count
+            return categories.count
         }
         if subCategoryPickerView == pickerView {
             return 5 //subCategories.count
         }
-        if occurancePickerView == pickerView {
-            return 5 //occurances.count
+        if occurrencePickerView == pickerView {
+            return occurrences.count
         }
         return 5
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if categoryPickerView == pickerView {
+            return categories[row]
+        }
+        if subCategoryPickerView == pickerView {
+            return "subCategories[row]"
+        }
+        if occurrencePickerView == pickerView {
+            return occurrences[row]
+        }
+        return "--"
     }
     
     //MARK: Setup Constants
@@ -190,13 +217,22 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         subCategoryPickerView.addGestureRecognizer(rightSwipe)
     }
     
-    func addSwipeGuesturesForOccurance(){
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_:)))
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_:)))
+    func addSwipeGuesturesForOccurrence(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccurrenceLabelShowsAndHidesOccurrencePicker(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccurrenceLabelShowsAndHidesOccurrencePicker(_:)))
         leftSwipe.direction = .left
         rightSwipe.direction = .right
-        occuranceLabel.addGestureRecognizer(leftSwipe)
-        occurancePickerView.addGestureRecognizer(rightSwipe)
+        occurrenceLabel.addGestureRecognizer(leftSwipe)
+        occurrencePickerView.addGestureRecognizer(rightSwipe)
+    }
+    
+    func addSwipeGuesturesForOccurrenceDate(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccurrencePickerShowsAndHidesOccurrenceDatePicker(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnOccurrencePickerShowsAndHidesOccurrenceDatePicker(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        occurrencePickerView.addGestureRecognizer(leftSwipe)
+        occurrenceDatePickerView.addGestureRecognizer(rightSwipe)
     }
     
     func addSwipeGuesturesForDocDate(){
@@ -205,7 +241,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         docDateLabel.addGestureRecognizer(leftSwipe)
-        DocDatePickerView.addGestureRecognizer(rightSwipe)
+        DocDatePickerView.addGestureRecognizer(rightSwipe) //fix this spellingocc
     }
     
     //MARK: Setup Title and Constraints
@@ -296,40 +332,57 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         subCategoryPickerViewLeadingAnchorToCenterX.isActive = true
     }
     
-    //MARK: Setup Occurance and Constraints
+    //MARK: Setup Occurrence and Constraints
     
-    func setupOccuranceLabel(){
+    func setupOccurrenceLabel(){
         //setup the look
-        occuranceLabel.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
-        occuranceLabel.alpha = labelAlpha
-        occuranceLabel.text = "Occurance"
+        occurrenceLabel.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+        occurrenceLabel.alpha = labelAlpha
+        occurrenceLabel.text = "Occurrence"
         //setup in xPosition 3, yPosition 3
-        occuranceLabel.isUserInteractionEnabled = true
-        occuranceLabel.translatesAutoresizingMaskIntoConstraints = false
-        occuranceLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        occuranceLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
-        occuranceLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
+        occurrenceLabel.isUserInteractionEnabled = true
+        occurrenceLabel.translatesAutoresizingMaskIntoConstraints = false
+        occurrenceLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        occurrenceLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
+        occurrenceLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
         //this the global constraints to be animated
-        occuranceLabelLeadingAnchorToCenterX = occuranceLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
-        occuranceLabelLeadingAnchorToCenterX.isActive = true
+        occurrenceLabelLeadingAnchorToCenterX = occurrenceLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
+        occurrenceLabelLeadingAnchorToCenterX.isActive = true
     }
     
-    func setupOccurancePicker(){
+    func setupOccurrencePicker(){
         //setup the look
-        occurancePickerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        occurancePickerView.layer.cornerRadius = 10
-        occurancePickerView.layer.borderWidth = 1
-        occurancePickerView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        occurrencePickerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        occurrencePickerView.layer.cornerRadius = 10
+        occurrencePickerView.layer.borderWidth = 1
+        occurrencePickerView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         //setup in xPosition 4, yPosition 3
-        occurancePickerView.isUserInteractionEnabled = true
-        occurancePickerView.translatesAutoresizingMaskIntoConstraints = false
-        occurancePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        occurancePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
-        occurancePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
+        occurrencePickerView.isUserInteractionEnabled = true
+        occurrencePickerView.translatesAutoresizingMaskIntoConstraints = false
+        occurrencePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        occurrencePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        occurrencePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
         //this is the global constraints to be animated
         
-        occurancePickerViewLeadingAnchorToCenterX = occurancePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
-        occurancePickerViewLeadingAnchorToCenterX.isActive = true
+        occurrencePickerViewLeadingAnchorToCenterX = occurrencePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
+        occurrencePickerViewLeadingAnchorToCenterX.isActive = true
+    }
+    
+    func setupOccurrenceDatePicker(){
+        //setup the look
+        occurrenceDatePickerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        occurrenceDatePickerView.layer.cornerRadius = 10
+        occurrenceDatePickerView.layer.borderWidth = 1
+        occurrenceDatePickerView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //setup in xPosition 5, yPosition 3
+        occurrenceDatePickerView.isUserInteractionEnabled = true
+        occurrenceDatePickerView.translatesAutoresizingMaskIntoConstraints = false
+        occurrenceDatePickerView.widthAnchor.constraint(equalToConstant:allWidthConstant).isActive = true
+        occurrenceDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        occurrenceDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
+        //this is the global constraint to be animated
+        occurrenceDatePickerViewLeadingAnchorToCenterX = occurrenceDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition5)
+        occurrenceDatePickerViewLeadingAnchorToCenterX.isActive = true
     }
     
     //MARK: Setup DocDate and Constraints
@@ -387,11 +440,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 print("swiped right on titleTag text input")
                 //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
                 self.moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
-//                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-//                    self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition3
-//                    self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition4
-//                    self.view.layoutIfNeeded()
-//                })
             }
         }
     }
@@ -457,24 +505,52 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
-    @objc func swipeOnOccuranceLabelShowsAndHidesOccurancePicker(_ sender:UISwipeGestureRecognizer){
+    @objc func swipeOnOccurrenceLabelShowsAndHidesOccurrencePicker(_ sender:UISwipeGestureRecognizer){
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left on occurance label")
-                //occuranceLabel moved to postion 2, occurnacePicker moved to position 3
+                print("swiped left on occurrence label")
+                //occurrenceLabel moved to postion 2, occurrencePicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.occuranceLabelLeadingAnchorToCenterX.constant = self.xPosition2
-                    self.occurancePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.occurrencePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.occurrenceDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
                     self.view.layoutIfNeeded()
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on occurance picker")
-                //occuranceLabel moved to postion 3, occurancePicker moved to position 4
+                print("swiped right on occurrence picker")
+                //occurrenceLabel moved to postion 3, occurrencePicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.occuranceLabelLeadingAnchorToCenterX.constant = self.xPosition3
-                    self.occurancePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
+                    self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.occurrencePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
+                    self.occurrenceDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition5
+                    self.view.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
+    @objc func swipeOnOccurrencePickerShowsAndHidesOccurrenceDatePicker(_ sender:UISwipeGestureRecognizer){
+        DispatchQueue.main.async {[unowned self] in
+
+            if (sender.direction == .left) {
+                print("swiped left occurrencePicker")
+                //occurrenceLabel moved to postion 1, occurrencePicker moved to postion 2, occurrenceDatePicker moved to position 3
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition1
+                    self.occurrencePickerViewLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.occurrenceDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.view.layoutIfNeeded()
+                })
+            }
+            if (sender.direction == .right) {
+                print("swiped right on occurrenceDate picker")
+                //categorySubCategoryLabel moved to postion 2, categoryPicker moved to postion 3, subCategoryPicker moved to position 4
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+                    self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition2
+                    self.occurrencePickerViewLeadingAnchorToCenterX.constant = self.xPosition3
+                    self.occurrenceDatePickerViewLeadingAnchorToCenterX.constant = self.xPosition4
                     self.view.layoutIfNeeded()
                 })
             }
