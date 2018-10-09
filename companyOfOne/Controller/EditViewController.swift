@@ -45,6 +45,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var categories = [String]()
     var subCategories = [String]()
     var occurrences = [String]()
+    var categorySubCategoryLabels = [String]()
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -109,6 +110,16 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                       "Previous Assessments",
                       "Tax Payments" ]
         //populate array for subCategory
+        subCategories = ["To Be SubCategorized",
+                      "Income",
+                      "Expenses",
+                      "Operating Costs",
+                      "Renovation Expenses",
+                      "Special Assessments",
+                      "Realtor Fees",
+                      "Previous Assessments",
+                      "Purchase Documents" ]
+    
         //populate array for occurrence
         occurrences = ["None",
                        "Biweekly",
@@ -165,7 +176,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return categories[row]
         }
         if subCategoryPickerView == pickerView {
-            return "subCategories[row]"
+            return subCategories[row]
         }
         if occurrencePickerView == pickerView {
             return occurrences[row]
@@ -176,10 +187,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if categoryPickerView == pickerView {
-            categorySubCategoryLabel.text = categories[pickerView.selectedRow(inComponent: 0)]
+            let category = categories[pickerView.selectedRow(inComponent: 0)]
+            categorySubCategoryLabels.insert(category, at: 0)
+            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if subCategoryPickerView == pickerView {
-            categorySubCategoryLabel.text = subCategories[pickerView.selectedRow(inComponent: 0)]
+            let category = subCategories[pickerView.selectedRow(inComponent: 0)]
+            categorySubCategoryLabels.insert(category, at: 1)
+            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
             occurrenceLabel.text = occurrences[pickerView.selectedRow(inComponent: 0)]
