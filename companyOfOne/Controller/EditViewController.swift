@@ -431,15 +431,37 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     func setupTrashAndSubmitButtons(){
-        trashButton.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        trashButton.alpha = labelAlpha
+        //setup the trash button look
+        trashButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        trashButton.layer.borderWidth = 0.2
+        trashButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //trashButton.alpha = labelAlpha
+        trashButton.titleLabel?.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        trashButton.layer.masksToBounds = true
+        //trashButton.layer.cornerRadius = 10
         trashButton.titleLabel?.text = "Trash"
+        //setup the constraints
         trashButton.translatesAutoresizingMaskIntoConstraints = false
         trashButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        trashButton.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
-        trashButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
+        trashButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        trashButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
         
+        //setup the submit button look
+        submitButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        submitButton.layer.borderWidth = 0.2
+        submitButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        //submitButton.alpha = labelAlpha
+        submitButton.titleLabel?.textColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
+        submitButton.layer.masksToBounds = true
+        //submitButton.layer.cornerRadius = 10
+        submitButton.titleLabel?.text = "Submit"
+        //setup the constraints
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        submitButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        submitButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
     //MARK: All Swipe Functions
