@@ -173,6 +173,22 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         return "--"
     }
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        if categoryPickerView == pickerView {
+            categorySubCategoryLabel.text = categories[pickerView.selectedRow(inComponent: 0)]
+        }
+        if subCategoryPickerView == pickerView {
+            categorySubCategoryLabel.text = subCategories[pickerView.selectedRow(inComponent: 0)]
+        }
+        if occurrencePickerView == pickerView {
+            occurrenceLabel.text = occurrences[pickerView.selectedRow(inComponent: 0)]
+        }
+        
+        // use the row to get the selected row from the picker view
+        // using the row extract the value from your datasource (array[row])
+    }
+    
     //MARK: Setup Constants
     
     func setupX_Y_W_H_Alpha_Constants(){
@@ -197,7 +213,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     //MARK: Setup Gesture Recognizers
-    
     
     func addTapGestureForHideNavBar_Labels_AndButtons(){
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.tapToShow_HideEverything(_:)))
