@@ -22,6 +22,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
+    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     
     //MARK: Global Constants
     var xPosition1 = CGFloat()
@@ -81,6 +83,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupOccurrencePicker()
         setupOccurrenceDatePicker()
         setupDocDatePicker()
+        //buttons
+        setupTrashAndSubmitButtons()
         //swipes
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategory()
@@ -94,7 +98,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func setupTempDataForTesting(){
         //populate array for category
-        categories = ["Rental Property",
+        categories = ["To Be Categorized",
+                      "Rental Property",
                       "Capital Gains",
                       "RRSPs","Dividends",
                       "Medical",
@@ -103,9 +108,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                       "Tax Payments" ]
         //populate array for subCategory
         //populate array for occurrence
-        occurrences = ["Biweekly",
-                      "Monthly",
-                      "Yearly"]
+        occurrences = ["None",
+                       "Biweekly",
+                       "Monthly",
+                       "Yearly"]
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -113,12 +119,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBAction func changedTitleTagText(_ sender: Any) {
         titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         print("hit return after titleTag text input")
-//        DispatchQueue.main.async {[unowned self] in     //do I need this?
-//        }
+        //        DispatchQueue.main.async {[unowned self] in     //do I need this?
+        //        }
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
     }
@@ -266,6 +272,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func setupDocTitleTagTextField(){
         //setup the look
+        titleTagTextField.layer.cornerRadius = 5
+        titleTagTextField.layer.masksToBounds = true
         titleTagTextField.returnKeyType = .done
         titleTagTextField.layer.borderWidth = 1
         titleTagTextField.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -338,7 +346,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         occurrenceLabel.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         occurrenceLabel.alpha = labelAlpha
-        occurrenceLabel.text = "Occurrence"
+        occurrenceLabel.text = "Occurrence : Date"
         //setup in xPosition 3, yPosition 3
         occurrenceLabel.isUserInteractionEnabled = true
         occurrenceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -420,6 +428,18 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //this is the global constraints to be animated
         docDatePickerViewLeadingAnchorToCenterX = DocDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
         docDatePickerViewLeadingAnchorToCenterX.isActive = true
+    }
+    
+    func setupTrashAndSubmitButtons(){
+        trashButton.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        trashButton.alpha = labelAlpha
+        trashButton.titleLabel?.text = "Trash"
+        trashButton.translatesAutoresizingMaskIntoConstraints = false
+        trashButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        trashButton.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        trashButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 8).isActive = true
+        
     }
     
     //MARK: All Swipe Functions
@@ -533,9 +553,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @objc func swipeOnOccurrencePickerShowsAndHidesOccurrenceDatePicker(_ sender:UISwipeGestureRecognizer){
         DispatchQueue.main.async {[unowned self] in
-
+            
             if (sender.direction == .left) {
-                print("swiped left occurrencePicker")
+                print("swiped left occurrence picker")
                 //occurrenceLabel moved to postion 1, occurrencePicker moved to postion 2, occurrenceDatePicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition1
@@ -545,7 +565,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on occurrenceDate picker")
+                print("swiped right on occurrence date picker")
                 //categorySubCategoryLabel moved to postion 2, categoryPicker moved to postion 3, subCategoryPicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition2
