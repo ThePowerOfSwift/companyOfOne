@@ -24,6 +24,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var DocDatePickerView: UIDatePicker!
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var docImageView: UIImageView!
     
     //MARK: Global Constants
     var xPosition1 = CGFloat()
@@ -85,7 +86,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupDocDatePicker()
         //buttons
         setupTrashAndSubmitButtons()
-        //swipes
+        //gestures
+        addTapGestureForHideNavBar_Labels_AndButtons()
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategory()
         addSwipeGuesturesForSubCategory()
@@ -195,6 +197,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     }
     
     //MARK: Setup Gesture Recognizers
+    
+    
+    func addTapGestureForHideNavBar_Labels_AndButtons(){
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(self.tapToShow_HideEverything(_:)))
+        imageTap.numberOfTapsRequired = 1
+        imageTap.numberOfTouchesRequired = 1
+        docImageView.addGestureRecognizer(imageTap)
+    }
     
     func addSwipeGuesturesForDocTitle(){
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_:)))
@@ -464,7 +474,21 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    //MARK: All Swipe Functions
+    //MARK: All GestureRecognizer Functions
+    
+    @objc func tapToShow_HideEverything(_ sender:UITapGestureRecognizer){
+        print("tapped on the docImage")
+        //hide nav
+        navigationController!.isNavigationBarHidden = !navigationController!.isNavigationBarHidden
+        //hide all labels
+        titleTagLabel.isHidden = !titleTagLabel.isHidden
+        categorySubCategoryLabel.isHidden = !categorySubCategoryLabel.isHidden
+        occurrenceLabel.isHidden = !occurrenceLabel.isHidden
+        docDateLabel.isHidden = !docDateLabel.isHidden
+        //hide all buttons
+        trashButton.isHidden = !trashButton.isHidden
+        submitButton.isHidden = !submitButton.isHidden
+    }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
         DispatchQueue.main.async {[unowned self] in

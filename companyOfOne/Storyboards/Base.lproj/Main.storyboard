@@ -40,7 +40,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testDoc" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-Vp-aYH" userLabel="DocImageView">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testDoc" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-Vp-aYH" userLabel="docImageView">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                             </imageView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-db-mRO" userLabel="subCategoryPickerView">
@@ -117,10 +117,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="C2r-Vp-aYH" firstAttribute="trailing" secondItem="hNH-li-JZc" secondAttribute="trailing" id="3Qw-mP-mOH"/>
+                            <constraint firstItem="C2r-Vp-aYH" firstAttribute="top" secondItem="AbT-8H-nlk" secondAttribute="topMargin" id="4br-3t-oCa"/>
                             <constraint firstItem="C2r-Vp-aYH" firstAttribute="leading" secondItem="hNH-li-JZc" secondAttribute="leading" id="A6F-j0-NTI"/>
                             <constraint firstItem="hNH-li-JZc" firstAttribute="bottom" secondItem="C2r-Vp-aYH" secondAttribute="bottom" id="CaM-bB-QDO"/>
-                            <constraint firstItem="C2r-Vp-aYH" firstAttribute="top" secondItem="hNH-li-JZc" secondAttribute="top" id="J4H-IB-hrV"/>
+                            <constraint firstItem="C2r-Vp-aYH" firstAttribute="bottom" secondItem="hNH-li-JZc" secondAttribute="bottom" id="FRe-Si-UEa"/>
                             <constraint firstItem="C2r-Vp-aYH" firstAttribute="trailing" secondItem="hNH-li-JZc" secondAttribute="trailing" id="dWO-h4-iOh"/>
+                            <constraint firstItem="C2r-Vp-aYH" firstAttribute="leading" secondItem="hNH-li-JZc" secondAttribute="leading" id="mR0-FJ-QCP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hNH-li-JZc"/>
                     </view>
@@ -129,6 +132,7 @@
                         <outlet property="categoryPickerView" destination="ruN-zk-mdA" id="wmE-zg-dUB"/>
                         <outlet property="categorySubCategoryLabel" destination="aew-XI-PVM" id="iFY-66-5aD"/>
                         <outlet property="docDateLabel" destination="YJ6-mv-087" id="uHr-hf-7Pm"/>
+                        <outlet property="docImageView" destination="C2r-Vp-aYH" id="3xU-eK-fLk"/>
                         <outlet property="occurrenceDatePickerView" destination="aUe-uL-zR6" id="cxd-4D-0wA"/>
                         <outlet property="occurrenceLabel" destination="tZc-Ed-GbI" id="2Bl-fB-Wdq"/>
                         <outlet property="occurrencePickerView" destination="kzA-AL-sLn" id="FBi-Tl-ieI"/>
