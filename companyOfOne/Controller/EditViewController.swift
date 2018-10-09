@@ -46,6 +46,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var subCategories = [String]()
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
+    var occurrenceLabels = [String]()
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -188,16 +189,23 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = categories[pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels.insert(category, at: 0)
+            categorySubCategoryLabels.insert(category, at: 0)  //first position
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if subCategoryPickerView == pickerView {
-            let category = subCategories[pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels.insert(category, at: 1)
+            let subCategory = subCategories[pickerView.selectedRow(inComponent: 0)]
+            categorySubCategoryLabels.insert(subCategory, at: 1) //last position
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
-            occurrenceLabel.text = occurrences[pickerView.selectedRow(inComponent: 0)]
+            let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
+            occurrenceLabels.insert(occurrence, at: 0) //first position
+            occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
+        }
+        if occurrenceDatePickerView == pickerView {
+            let occurrenceDate = occurrences[pickerView.selectedRow(inComponent: 0)]
+            occurrenceLabels.insert(occurrenceDate, at: 1) //last position
+            occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
         
         // use the row to get the selected row from the picker view
@@ -431,6 +439,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //this is the global constraint to be animated
         occurrenceDatePickerViewLeadingAnchorToCenterX = occurrenceDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition5)
         occurrenceDatePickerViewLeadingAnchorToCenterX.isActive = true
+        //setup the date data
+      
     }
     
     //MARK: Setup DocDate and Constraints

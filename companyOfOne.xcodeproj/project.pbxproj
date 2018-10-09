@@ -16,6 +16,7 @@
 		7D66944F216A8BE40048F4A3 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66944E216A8BE40048F4A3 /* Category.swift */; };
 		7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669450216A8BF50048F4A3 /* SubCategory.swift */; };
 		7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669455216A8DA20048F4A3 /* EditViewController.swift */; };
+		7D669458216D743C0048F4A3 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669457216D743C0048F4A3 /* CustomDatePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7D66944E216A8BE40048F4A3 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		7D669450216A8BF50048F4A3 /* SubCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategory.swift; sourceTree = "<group>"; };
 		7D669455216A8DA20048F4A3 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		7D669457216D743C0048F4A3 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
 				7D669455216A8DA20048F4A3 /* EditViewController.swift */,
+				7D669457216D743C0048F4A3 /* CustomDatePicker.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,6 +179,7 @@
 				7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66944D216A8BD50048F4A3 /* Document.swift in Sources */,
+				7D669458216D743C0048F4A3 /* CustomDatePicker.swift in Sources */,
 				7D66944F216A8BE40048F4A3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
