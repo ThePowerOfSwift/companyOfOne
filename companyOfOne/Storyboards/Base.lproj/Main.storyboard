@@ -77,7 +77,6 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <action selector="changedTitleTagText:" destination="HVc-xq-BOx" eventType="editingChanged" id="gDT-OC-eX3"/>
-                                    <action selector="startTypingTitleTag:" destination="HVc-xq-BOx" eventType="editingDidEnd" id="8PK-5z-YzZ"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="categorySubCategoryLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aew-XI-PVM" userLabel="categorySubCategoryLabel">

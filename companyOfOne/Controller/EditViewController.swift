@@ -9,7 +9,7 @@
 import UIKit
 
 
-class EditViewController: UIViewController, UITextFieldDelegate {
+class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     //MARK: Outlets
     @IBOutlet weak var titleTagLabel: UILabel!
@@ -37,6 +37,11 @@ class EditViewController: UIViewController, UITextFieldDelegate {
     var pickerHeightConstant = CGFloat()
     var labelAlpha = CGFloat()
     
+    //MARK: Global Arrays
+    var categories = [String]()
+    var subCategories = [String]()
+    var occurrences = [String]()
+    
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
     var titleTagTextFieldLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -54,7 +59,12 @@ class EditViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegates
-        self.titleTagTextField.delegate = self
+        titleTagTextField.delegate = self
+        categoryPickerView.delegate = self
+        subCategoryPickerView.delegate = self
+        occurancePickerView.delegate = self
+        //data
+        setupTempDataForTesting()
         //constants
         setupX_Y_W_H_Alpha_Constants()
         //labels
@@ -74,18 +84,61 @@ class EditViewController: UIViewController, UITextFieldDelegate {
         addSwipeGuesturesForSubCategory()
         addSwipeGuesturesForOccurance()
         addSwipeGuesturesForDocDate()
-        
     }
+    
+    //MARK: Temp Testing Data
+    
+    func setupTempDataForTesting(){
+        //populate array for category
+        //populate array for subCategory
+        //populate array for occurrence
+    }
+    
+    //MARK : Title/Tag Delegate Functions
     
     @IBAction func changedTitleTagText(_ sender: Any) {
         titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
     }
 
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        titleTagTextField.resignFirstResponder()
+        textField.resignFirstResponder()
+        print("hit return after titleTag text input")
+//        DispatchQueue.main.async {[unowned self] in     //do I need this?
+//        }
+        moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
     }
+    
+    
+    //MARK: PickerView Delegate Functions
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        if categoryPickerView == pickerView {
+            return 1
+        }
+        if subCategoryPickerView == pickerView {
+            return 1
+        }
+        if occurancePickerView == pickerView {
+            return 1
+        }
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if categoryPickerView == pickerView {
+            return 5 //categories.count
+        }
+        if subCategoryPickerView == pickerView {
+            return 5 //subCategories.count
+        }
+        if occurancePickerView == pickerView {
+            return 5 //occurances.count
+        }
+        return 5
+    }
+    
+    //MARK: Setup Constants
     
     func setupX_Y_W_H_Alpha_Constants(){
         //X
@@ -333,13 +386,23 @@ class EditViewController: UIViewController, UITextFieldDelegate {
             if (sender.direction == .right) {
                 print("swiped right on titleTag text input")
                 //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
-                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
-                    self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition3
-                    self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition4
-                    self.view.layoutIfNeeded()
-                })
+                self.moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
+//                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+//                    self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition3
+//                    self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition4
+//                    self.view.layoutIfNeeded()
+//                })
             }
         }
+    }
+    
+    func moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4(){
+        //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
+            self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition3
+            self.titleTagTextFieldLeadingAnchorToCenterX.constant = self.xPosition4
+            self.view.layoutIfNeeded()
+        })
     }
     
     @objc func swipeOnCategorySubCategoryLabelShowsAndHidesCategoryPicker(_ sender:UISwipeGestureRecognizer){
