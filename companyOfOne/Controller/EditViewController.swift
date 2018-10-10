@@ -42,11 +42,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
-    var allCategoriesSubCategories = [[String]]()
+    var allCategoriesSubCategories = [Category]()
     var categories = [String]()
     var subCategories = [String]()
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
+   // var testcategorySubCategoryLabels = [Any]()
     var occurrenceLabels = [String]()
     
     //MARK: Global Constraints
@@ -101,7 +102,26 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Temp Testing Data
     
+    func createUserCategory(name:String) -> Category{
+        let userCategory = Category(name: "\(name)")
+        allCategoriesSubCategories.append(userCategory)
+        return userCategory
+        //add to the tableView that displays the categories
+    }
+    
+    func createUserSubCategory(category: Category, name: String) -> SubCategory{
+        let userSubCategory = SubCategory(name: name)
+        category.subCategories.append(userSubCategory)
+        return userSubCategory
+        //add to the tableView that displays the subCategories
+    }
+    
     func setupTempDataForTesting(){
+    
+//        let newCategory = createUserCategory(name: "Rental")
+//        let newSubCategory = createUserSubCategory(category: newCategory, name: "Income")
+        
+        
         //populate array for category
         categories = ["To Be Categorized",
                       "Rental Property",
@@ -197,10 +217,16 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = categories[pickerView.selectedRow(inComponent: 0)]
+            //categorySubCategoryLabels[0] = category.name
+            //testcategorySubCategoryLabels[0] = category
+            //categories[pickerView.selectedRow(inComponent: 0)]
             categorySubCategoryLabels[0] = category
-            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
+            categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
+//            let category = allCategoriesSubCategories[0]//I have to have a reference to a specific category to get access to the subCategory array
+//            let subCategory = category.subCategories[pickerView.selectedRow(inComponent: 0)]
+//            categorySubCategoryLabels[1] = subCategory.name
             let subCategory = subCategories[pickerView.selectedRow(inComponent: 0)]
             categorySubCategoryLabels[1] = subCategory
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
