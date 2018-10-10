@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+
+
+class Category{
+    var name:String
+    var subCategories = [SubCategory]()
+    init(name: String) {
+        self.name = name
+    }
+}

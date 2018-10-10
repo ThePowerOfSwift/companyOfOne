@@ -42,6 +42,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
+    var allCategoriesSubCategories = [[String]]()
     var categories = [String]()
     var subCategories = [String]()
     var occurrences = [String]()
