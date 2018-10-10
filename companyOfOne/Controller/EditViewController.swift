@@ -21,7 +21,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var occurrencePickerView: UIPickerView!
     @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
     @IBOutlet weak var docDateLabel: UILabel!
-    @IBOutlet weak var DocDatePickerView: UIDatePicker!
+    @IBOutlet weak var docDatePickerView: CustomDatePicker!
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var docImageView: UIImageView!
@@ -111,7 +111,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                       "Previous Assessments",
                       "Tax Payments" ]
         //populate array for subCategory
-        subCategories = ["To Be SubCategorized",
+        subCategories = ["-",
                       "Income",
                       "Expenses",
                       "Operating Costs",
@@ -120,12 +120,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                       "Realtor Fees",
                       "Previous Assessments",
                       "Purchase Documents" ]
-    
         //populate array for occurrence
         occurrences = ["None",
                        "Biweekly",
                        "Monthly",
                        "Yearly"]
+        //populate array for occurrence dates
+        
+        //populate arrays for labels
+        categorySubCategoryLabels = [("\(categories[0])"),
+                            ("\(subCategories[0])")]
+        occurrenceLabels = [("\(occurrences[0])"),
+                            "-"]
+        print(occurrenceLabels)
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -189,22 +196,25 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = categories[pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels.insert(category, at: 0)  //first position
+            categorySubCategoryLabels[0] = category
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if subCategoryPickerView == pickerView {
             let subCategory = subCategories[pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels.insert(subCategory, at: 1) //last position
+            categorySubCategoryLabels[1] = subCategory
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
             let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
-            occurrenceLabels.insert(occurrence, at: 0) //first position
+            occurrenceLabels[0] = occurrence
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
         if occurrenceDatePickerView == pickerView {
-            let occurrenceDate = occurrences[pickerView.selectedRow(inComponent: 0)]
-            occurrenceLabels.insert(occurrenceDate, at: 1) //last position
+            print(occurrenceLabels)
+            let occurrenceMonth = occurrences[pickerView.selectedRow(inComponent: 0)]
+            let occurrenceYear = occurrences[pickerView.selectedRow(inComponent: 1)]
+            let occurenceDate = "\(occurrenceMonth), \(occurrenceYear)"
+            occurrenceLabels.insert(occurenceDate, at: 1) //last position
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
         
@@ -295,7 +305,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         docDateLabel.addGestureRecognizer(leftSwipe)
-        DocDatePickerView.addGestureRecognizer(rightSwipe) //fix this spellingocc
+        docDatePickerView.addGestureRecognizer(rightSwipe) //fix this spellingocc
     }
     
     //MARK: Setup Title and Constraints
@@ -342,7 +352,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         categorySubCategoryLabel.backgroundColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
         categorySubCategoryLabel.alpha = labelAlpha
-        categorySubCategoryLabel.text = "Category : SubCategory"
+        categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         //setup in xPosition 3, yPosition 2
         categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -394,7 +404,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         occurrenceLabel.backgroundColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
         occurrenceLabel.alpha = labelAlpha
-        occurrenceLabel.text = "Occurrence : Date"
+        occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         //setup in xPosition 3, yPosition 3
         occurrenceLabel.isUserInteractionEnabled = true
         occurrenceLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -463,20 +473,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func setupDocDatePicker(){
         //setup the look
-        DocDatePickerView.datePickerMode = .date
-        DocDatePickerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        DocDatePickerView.layer.masksToBounds = true
-        DocDatePickerView.layer.cornerRadius = 10
-        DocDatePickerView.layer.borderWidth = 1
-        DocDatePickerView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        docDatePickerView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        docDatePickerView.layer.masksToBounds = true
+        docDatePickerView.layer.cornerRadius = 10
+        docDatePickerView.layer.borderWidth = 1
+        docDatePickerView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         //setup in xPosition 4, yPosition 4
-        DocDatePickerView.isUserInteractionEnabled = true
-        DocDatePickerView.translatesAutoresizingMaskIntoConstraints = false
-        DocDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        DocDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
-        DocDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
+        docDatePickerView.isUserInteractionEnabled = true
+        docDatePickerView.translatesAutoresizingMaskIntoConstraints = false
+        docDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        docDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
+        docDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
         //this is the global constraints to be animated
-        docDatePickerViewLeadingAnchorToCenterX = DocDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
+        docDatePickerViewLeadingAnchorToCenterX = docDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
         docDatePickerViewLeadingAnchorToCenterX.isActive = true
     }
     
