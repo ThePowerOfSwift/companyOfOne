@@ -13,23 +13,28 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
+
+    
+    
     var tableViewArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewArray = ["Categories", "SubCategories"]
+        tableViewArray = ["Company Info", "Categories", "Reminders"]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return tableViewArray.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+       return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell")! as! SettingsTableViewCell
         let myItem = tableViewArray[indexPath.row]
-        cell.textLabel?.text = myItem
-        //cell!.detailTextLabel?.text = myItem.addedByUser
-        
+        cell.titleLabel.text = myItem
         return cell
     }
     
