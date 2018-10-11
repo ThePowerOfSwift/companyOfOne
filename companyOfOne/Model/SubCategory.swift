@@ -13,4 +13,6 @@ class SubCategory{
     init(name: String) {
         self.name = name
     }
+    
+
 }
