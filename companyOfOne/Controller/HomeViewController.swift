@@ -24,6 +24,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     override func viewDidLoad() {
         super.viewDidLoad()
         allCategoriesSubCategories.append(currentCategory)
+//        let categoryManager = CategoryManager()
+//        allCategoriesSubCategories = categoryManager.categoryArray
         updateArrayForCategoryViewController()
     }
     
