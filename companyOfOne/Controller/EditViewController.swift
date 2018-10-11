@@ -63,7 +63,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var docDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     
     
-    var currentCategory = Category(name: "Default")
+    var currentCategory = Category(name: "To Be Categorized")
+    //var currentSubCategory = SubCategory(name: "None")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +108,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
  
     
     func setupTempDataForTesting(){
-    
+       //sets the default labels
+      // currentCategory.subCategories.append(currentSubCategory)
+        //adds to the main array at the end
+       allCategoriesSubCategories.append(currentCategory)
+        
+       //this will be done by the user eventually
        let newCategory = Category(name: "Rental")
        let subCategory = SubCategory(name: "Income")
        newCategory.subCategories.append(subCategory)
@@ -142,8 +148,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //populate array for occurrence dates
         
         //populate arrays for labels
-        categorySubCategoryLabels = [("\(categories[0])"),
-                            ("\(subCategories[0])")]
+        categorySubCategoryLabels = [("\(currentCategory.name)"),
+                            ("\(currentCategory.subCategories[0].name)")]
         occurrenceLabels = [("\(occurrences[0])"),
                             "-"]
         print(occurrenceLabels)
@@ -182,10 +188,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return categories.count
+            return allCategoriesSubCategories.count //this should be 2, 1 default and 1 added
+            //return categories.count
         }
         if subCategoryPickerView == pickerView {
-            return 5 //subCategories.count
+           // return 5 //subCategories.count
+            return currentCategory.subCategories.count //this shoudld be 1 if current category to be categorized, 2 if current category is income
         }
         if occurrencePickerView == pickerView {
             return occurrences.count
@@ -195,10 +203,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if categoryPickerView == pickerView {
-            return categories[row]
+            return allCategoriesSubCategories[row].name
+            //return categories[row]
         }
         if subCategoryPickerView == pickerView {
-            return subCategories[row]
+            return currentCategory.subCategories[row].name
+            //return subCategories[row]
         }
         if occurrencePickerView == pickerView {
             return occurrences[row]
@@ -211,7 +221,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if categoryPickerView == pickerView {
             let category = allCategoriesSubCategories[pickerView.selectedRow(inComponent: 0)]
             currentCategory = category
-            categorySubCategoryLabels[0] = category.name
+            subCategoryPickerView.reloadAllComponents()
+            currentCategory = category
+            categorySubCategoryLabels[0] = currentCategory.name
+            categorySubCategoryLabels[1] = currentCategory.subCategories[0].name
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
