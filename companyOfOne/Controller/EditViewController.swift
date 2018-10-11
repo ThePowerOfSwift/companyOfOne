@@ -43,11 +43,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Global Arrays
     var allCategoriesSubCategories = [Category]()
-    var categories = [String]()
+    //var categories = [String]()
     var subCategories = [String]()
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
-   // var testcategorySubCategoryLabels = [Any]()
     var occurrenceLabels = [String]()
     
     //MARK: Global Constraints
@@ -103,14 +102,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Temp Testing Data
     
-  
-    
- 
-    
     func setupTempDataForTesting(){
-       //sets the default labels
-      // currentCategory.subCategories.append(currentSubCategory)
-        //adds to the main array at the end
+        //adds to the default category to the empty array
        allCategoriesSubCategories.append(currentCategory)
         
        //this will be done by the user eventually
@@ -119,17 +112,15 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
        newCategory.subCategories.append(subCategory)
        allCategoriesSubCategories.append(newCategory)
     
-        
-        
         //populate array for category
-        categories = ["To Be Categorized",
-                      "Rental Property",
-                      "Capital Gains",
-                      "RRSPs","Dividends",
-                      "Medical",
-                      "Other Income",
-                      "Previous Assessments",
-                      "Tax Payments" ]
+        //categories = ["To Be Categorized",
+//                      "Rental Property",
+//                      "Capital Gains",
+//                      "RRSPs","Dividends",
+//                      "Medical",
+//                      "Other Income",
+//                      "Previous Assessments",
+//                      "Tax Payments" ]
         //populate array for subCategory
         subCategories = ["-",
                       "Income",
@@ -164,8 +155,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         print("hit return after titleTag text input")
-        //        DispatchQueue.main.async {[unowned self] in     //do I need this?
-        //        }
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
     }
@@ -188,12 +177,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return allCategoriesSubCategories.count //this should be 2, 1 default and 1 added
-            //return categories.count
+            return allCategoriesSubCategories.count
         }
         if subCategoryPickerView == pickerView {
-           // return 5 //subCategories.count
-            return currentCategory.subCategories.count //this shoudld be 1 if current category to be categorized, 2 if current category is income
+            return currentCategory.subCategories.count
         }
         if occurrencePickerView == pickerView {
             return occurrences.count
@@ -204,11 +191,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if categoryPickerView == pickerView {
             return allCategoriesSubCategories[row].name
-            //return categories[row]
         }
         if subCategoryPickerView == pickerView {
             return currentCategory.subCategories[row].name
-            //return subCategories[row]
         }
         if occurrencePickerView == pickerView {
             return occurrences[row]
