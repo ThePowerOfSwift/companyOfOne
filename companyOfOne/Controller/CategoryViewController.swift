@@ -10,13 +10,18 @@ import Foundation
 import UIKit
 
 
-class CategoryViewController: UITableViewController{
-    
-    var tableViewArray = [String]()
+class CategoryViewController: UITableViewController, CategoryDelegate{
+
+
+    var tableViewArray = [Category]()
+    var currentCategory = Category(name: "what the heck")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewArray = ["Category 1", "Category 2", "Category 3"]
+        let delegate = HomeViewController()
+        delegate.delegate = self
+        
+        //tableViewArray = ["Category 1", "Category 2", "Category 3"]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -30,9 +35,13 @@ class CategoryViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryTableViewCell")! as! SettingsTableViewCell
         let myItem = tableViewArray[indexPath.row]
-        cell.titleLabel.text = myItem
+        cell.categoryTitleLabel.text = myItem.name
         return cell
     }
     
+    //MARK: Category Delegate Methods
     
+    func returnMainArray(array: [Category]) {
+        tableViewArray = array
+    }
 }

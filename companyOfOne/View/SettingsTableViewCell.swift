@@ -9,7 +9,10 @@
 import UIKit
 
 class SettingsTableViewCell: UITableViewCell {
+    
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var categoryTitleLabel: UILabel!
+    @IBOutlet weak var subCategoryTitleLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

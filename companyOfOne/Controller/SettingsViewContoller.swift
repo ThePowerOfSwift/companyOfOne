@@ -37,6 +37,5 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.titleLabel.text = myItem
         return cell
     }
-    
-    
+
 }

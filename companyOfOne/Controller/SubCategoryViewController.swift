@@ -30,7 +30,7 @@ class SubCategoryViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "subCategoryTableViewCell")! as! SettingsTableViewCell
         let myItem = tableViewArray[indexPath.row]
-        cell.titleLabel.text = myItem
+        cell.subCategoryTitleLabel.text = myItem
         return cell
     }
     

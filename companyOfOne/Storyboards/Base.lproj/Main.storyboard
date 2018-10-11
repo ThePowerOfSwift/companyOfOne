@@ -72,7 +72,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="titleLabel" destination="KUH-2Q-ZUY" id="oZn-uW-ajb"/>
-                                            <segue destination="3Es-ap-kOw" kind="show" id="g8J-DQ-8qM"/>
+                                            <segue destination="3Es-ap-kOw" kind="show" identifier="toCategoryViewController" id="g8J-DQ-8qM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -99,7 +99,7 @@
         <!--Categories-->
         <scene sceneID="aGg-lY-ZUe">
             <objects>
-                <tableViewController title="Categories" id="3Es-ap-kOw" sceneMemberID="viewController">
+                <tableViewController title="Categories" id="3Es-ap-kOw" customClass="CategoryViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="J3T-HM-0Jh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -122,6 +122,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="categoryTitleLabel" destination="7Rq-re-4TU" id="e0u-9p-VSe"/>
                                     <segue destination="F6T-cd-SIR" kind="show" id="f8y-uq-2mJ"/>
                                 </connections>
                             </tableViewCell>
@@ -143,17 +144,17 @@
         <!--SubCategories-->
         <scene sceneID="tj2-zD-K2P">
             <objects>
-                <tableViewController title="SubCategories" id="F6T-cd-SIR" sceneMemberID="viewController">
+                <tableViewController title="SubCategories" id="F6T-cd-SIR" customClass="SubCategoryViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MBE-fB-iqv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="subCategoryTableViewCell" rowHeight="44" id="k9z-s5-r7Q" userLabel="subCategoryTableViewCell" customClass="SettingsTableViewCell" customModule="companyOfOne" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subCategoryTableViewCell" rowHeight="44" id="k9z-s5-r7Q" userLabel="subCategoryTableViewCell" customClass="SettingsTableViewCell" customModule="companyOfOne" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k9z-s5-r7Q" id="Sig-AR-Rua">
-                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFa-d2-KsR">
@@ -165,6 +166,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="subCategoryTitleLabel" destination="hFa-d2-KsR" id="BTB-29-LIo"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

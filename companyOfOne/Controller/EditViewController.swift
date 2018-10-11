@@ -71,7 +71,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         titleTagTextField.delegate = self
         categoryPickerView.delegate = self
         subCategoryPickerView.delegate = self
-        occurrencePickerView.delegate = self //fix this spelling
+        occurrencePickerView.delegate = self
         //data
         setupTempDataForTesting()
         //constants

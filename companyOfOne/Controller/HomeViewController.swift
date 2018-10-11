@@ -8,15 +8,24 @@
 
 import UIKit
 
-var currentImage = UIImage()
+protocol CategoryDelegate {
+    //add category to array from categoryViewController, pass back updated array to HomeViewController, update editViewController
+    func returnMainArray(array:[Category])
+}
 
 class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    //MARK: Global Variables
+    var currentImage = UIImage()
+    var delegate: CategoryDelegate?
+    var allCategoriesSubCategories = [Category]()
+    var currentCategory = Category(name: "To Be Categorized")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        allCategoriesSubCategories.append(currentCategory)
+        updateArrayForCategoryViewController()
     }
-    
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         let vc = UIImagePickerController()
@@ -33,6 +42,10 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
             return
         }
         currentImage = image
+    }
+    
+    func updateArrayForCategoryViewController(){
+        delegate?.returnMainArray(array: allCategoriesSubCategories)
     }
 }
 
