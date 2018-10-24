@@ -139,7 +139,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6s-aF-MHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="931" y="786"/>
+            <point key="canvasLocation" x="893" y="777"/>
         </scene>
         <!--SubCategories-->
         <scene sceneID="tj2-zD-K2P">
@@ -179,7 +179,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpO-qC-tYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1688" y="790"/>
+            <point key="canvasLocation" x="1675" y="777"/>
         </scene>
         <!--Edit-->
         <scene sceneID="uHV-io-vYj">
