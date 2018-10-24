@@ -19,11 +19,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     var currentImage = UIImage()
     var delegate: CategoryDelegate?
     var allCategoriesSubCategories = [Category]()
-    var currentCategory = Category(name: "To Be Categorized")
+    //var currentCategory = Category(name: "To Be Categorized")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allCategoriesSubCategories.append(currentCategory)
+       // allCategoriesSubCategories.append(currentCategory)
 //        let categoryManager = CategoryManager()
 //        allCategoriesSubCategories = categoryManager.categoryArray
         updateArrayForCategoryViewController()

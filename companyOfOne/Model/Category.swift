@@ -12,12 +12,5 @@ import CoreData
 
 
 class Category: NSManagedObject{
-//    var name:String
-//    var subCategories = [SubCategory]()
-//    init(name: String) {
-//        self.name = name
-//        let subCategory = SubCategory(name: "None")
-//        self.subCategories.append(subCategory)
-//    }
-//
+
 }
