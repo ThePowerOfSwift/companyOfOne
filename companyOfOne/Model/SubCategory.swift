@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import CoreData
 
-class SubCategory{
-    var name:String
-    init(name: String) {
-        self.name = name
-    }
-    
+class SubCategory:NSManagedObject{
+//    var name:String
+//    init(name: String) {
+//        self.name = name
+//    }
+//    
 
 }

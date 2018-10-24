@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */; };
+		7D0A314321810C96007BD331 /* Occurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A314221810C96007BD331 /* Occurrence.swift */; };
 		7D66943B216A89D20048F4A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66943A216A89D20048F4A3 /* AppDelegate.swift */; };
 		7D66943D216A89D20048F4A3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66943C216A89D20048F4A3 /* HomeViewController.swift */; };
 		7D669440216A89D20048F4A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D66943E216A89D20048F4A3 /* Main.storyboard */; };
@@ -20,12 +21,13 @@
 		7D669458216D743C0048F4A3 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669457216D743C0048F4A3 /* CustomDatePicker.swift */; };
 		7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */; };
 		7D66945D216FE6610048F4A3 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66945C216FE6610048F4A3 /* SettingsTableViewCell.swift */; };
-		7D66945F216FECDE0048F4A3 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66945E216FECDE0048F4A3 /* CategoryViewController.swift */; };
-		7D669461216FECF40048F4A3 /* SubCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669460216FECF40048F4A3 /* SubCategoryViewController.swift */; };
+		7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */; };
+		7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7D0A31402181070D007BD331 /* companyOfOneModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = companyOfOneModel.xcdatamodel; sourceTree = "<group>"; };
+		7D0A314221810C96007BD331 /* Occurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Occurrence.swift; sourceTree = "<group>"; };
 		7D669437216A89D20048F4A3 /* companyOfOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = companyOfOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D66943A216A89D20048F4A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D66943C216A89D20048F4A3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -40,8 +42,8 @@
 		7D669457216D743C0048F4A3 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewContoller.swift; sourceTree = "<group>"; };
 		7D66945C216FE6610048F4A3 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		7D66945E216FECDE0048F4A3 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		7D669460216FECF40048F4A3 /* SubCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryViewController.swift; sourceTree = "<group>"; };
+		7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				7D66944C216A8BD50048F4A3 /* Document.swift */,
+				7D0A314221810C96007BD331 /* Occurrence.swift */,
 				7D66944E216A8BE40048F4A3 /* Category.swift */,
 				7D669450216A8BF50048F4A3 /* SubCategory.swift */,
 				7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */,
@@ -101,8 +104,8 @@
 			children = (
 				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
 				7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */,
-				7D66945E216FECDE0048F4A3 /* CategoryViewController.swift */,
-				7D669460216FECF40048F4A3 /* SubCategoryViewController.swift */,
+				7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */,
+				7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */,
 				7D669455216A8DA20048F4A3 /* EditViewController.swift */,
 			);
 			path = Controller;
@@ -197,12 +200,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D66945F216FECDE0048F4A3 /* CategoryViewController.swift in Sources */,
+				7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */,
 				7D66943D216A89D20048F4A3 /* HomeViewController.swift in Sources */,
 				7D66943B216A89D20048F4A3 /* AppDelegate.swift in Sources */,
 				7D66945D216FE6610048F4A3 /* SettingsTableViewCell.swift in Sources */,
 				7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */,
-				7D669461216FECF40048F4A3 /* SubCategoryViewController.swift in Sources */,
+				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
+				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,
 				7D66944D216A8BD50048F4A3 /* Document.swift in Sources */,
