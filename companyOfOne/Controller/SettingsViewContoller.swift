@@ -15,16 +15,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
 
     
-    
-    var tableViewArray = [String]()
+    @IBOutlet weak var SettingsTableView: UITableView!
+    //var selectedCategoryName = String()
+    var settings = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewArray = ["Company Info", "Categories", "Reminders"]
+        settings = ["Company Info", "Categories", "Reminders"]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewArray.count
+        return settings.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -33,9 +34,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsTableViewCell")! as! SettingsTableViewCell
-        let myItem = tableViewArray[indexPath.row]
+        let myItem = settings[indexPath.row]
         cell.titleLabel.text = myItem
         return cell
     }
-
+    
+    //MARK: - Prepare For Seque To SubCategories
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCategoryViewController" {
+            if let indexPath = SettingsTableView.indexPathForSelectedRow {
+                let controller = segue.destination as! CategoryTableViewController
+                controller.selectedSettingName = self.settings[indexPath.row] 
+                //controller.selectedSetting = self.categories[indexPath.row]
+            }
+        }
+    }
 }

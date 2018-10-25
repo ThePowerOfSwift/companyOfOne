@@ -49,7 +49,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="189"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settingsTableViewCell" rowHeight="44" id="gpF-SA-7Ve" customClass="SettingsTableViewCell" customModule="companyOfOne" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settingsTableViewCell" id="gpF-SA-7Ve" customClass="SettingsTableViewCell" customModule="companyOfOne" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gpF-SA-7Ve" id="esH-0E-5hM">
@@ -58,7 +58,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUH-2Q-ZUY">
                                                     <rect key="frame" x="20" y="11" width="348" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -91,6 +91,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="jpP-eA-b7w"/>
                     </view>
+                    <connections>
+                        <outlet property="SettingsTableView" destination="4Ko-rE-V6O" id="jSb-b8-F3b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-ig-jQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,7 +102,7 @@
         <!--Categories-->
         <scene sceneID="aGg-lY-ZUe">
             <objects>
-                <tableViewController title="Categories" id="3Es-ap-kOw" customClass="CategoryViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Categories" id="3Es-ap-kOw" customClass="CategoryTableViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="J3T-HM-0Jh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,6 +136,13 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="BmJ-8G-95B">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="DLZ-V4-Wa1">
+                            <connections>
+                                <action selector="getCategoryName:" destination="3Es-ap-kOw" id="dxc-B8-KCj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6s-aF-MHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -142,7 +152,7 @@
         <!--SubCategories-->
         <scene sceneID="tj2-zD-K2P">
             <objects>
-                <tableViewController title="SubCategories" id="F6T-cd-SIR" customClass="SubCategoryViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="SubCategories" id="F6T-cd-SIR" customClass="SubCategoryTableViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="MBE-fB-iqv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,9 +185,17 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="vNr-so-L5m">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="buA-ii-sBj">
+                            <connections>
+                                <action selector="getSubCategoryName:" destination="F6T-cd-SIR" id="cfH-b2-nxe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpO-qC-tYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Item" id="h7a-uT-fqI"/>
             </objects>
             <point key="canvasLocation" x="1675" y="777"/>
         </scene>

@@ -12,10 +12,12 @@ import CoreData
 class CategoryTableViewController: UITableViewController {
     
     var categories: [Category] = []
+    var selectedSettingName = String()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Categories"
+        self.title = selectedSettingName
         //this updates the local array
         retrieveAllCategories()
     }
