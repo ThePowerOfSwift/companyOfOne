@@ -16,12 +16,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     @IBOutlet weak var SettingsTableView: UITableView!
-    //var selectedCategoryName = String()
+  
     var settings = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        settings = ["Company Info", "Categories", "Reminders"]
+        settings = ["User Categories"]
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
