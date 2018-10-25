@@ -19,7 +19,7 @@ class SubCategoryTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = selectedCategoryName
         //this updates the local array
-        retrieveAllSubCategories()
+        //retrieveAllSubCategories()
     }
     
     // MARK: - TableView Functions
@@ -63,7 +63,7 @@ class SubCategoryTableViewController: UITableViewController {
                     return
             }
             self.createSubCategory(subCategoryName: subCategoryName)
-            self.retrieveAllSubCategories()
+            //self.retrieveAllSubCategories()
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -87,10 +87,10 @@ class SubCategoryTableViewController: UITableViewController {
         }
     }
     
-    func retrieveAllSubCategories(){
-        let subSet = selectedCategory.child
-        subCategories = subSet?.allObjects as! [SubCategory]
-    }
+//    func retrieveAllSubCategories(){
+//        let subSet = selectedCategory.child
+//        subCategories = subSet?.allObjects as! [SubCategory]
+//    }
     
     func deleteSubCategory(subCategory: SubCategory){
         let context = AppDelegate.viewContext
@@ -101,7 +101,7 @@ class SubCategoryTableViewController: UITableViewController {
             print("Could not save deletion. \(error), \(error.userInfo)")
         }
         //this updates the local array
-        retrieveAllSubCategories()
+        //retrieveAllSubCategories()
     }
 }
 

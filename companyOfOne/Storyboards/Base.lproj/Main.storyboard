@@ -123,7 +123,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="categoryTitleLabel" destination="7Rq-re-4TU" id="e0u-9p-VSe"/>
-                                    <segue destination="F6T-cd-SIR" kind="show" id="f8y-uq-2mJ"/>
+                                    <segue destination="F6T-cd-SIR" kind="show" identifier="toSubCategories" id="f8y-uq-2mJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -132,9 +132,7 @@
                             <outlet property="delegate" destination="3Es-ap-kOw" id="iJC-rc-kdA"/>
                         </connections>
                     </tableView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="Fs8-ba-BDd"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6s-aF-MHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -176,6 +174,8 @@
                             <outlet property="delegate" destination="F6T-cd-SIR" id="12t-TU-Unb"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpO-qC-tYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

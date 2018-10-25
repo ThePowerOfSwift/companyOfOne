@@ -74,7 +74,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         subCategoryPickerView.delegate = self
         occurrencePickerView.delegate = self
         //data
-        
+        retrieveAllCategories()
         //setupTempDataForTesting()
         //constants
         setupX_Y_W_H_Alpha_Constants()
@@ -224,11 +224,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             //categorySubCategoryLabels[1] = currentCategory.[0].name
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
-        if subCategoryPickerView == pickerView {
-            let subCategory = currentCategory.child![pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels[1] = subCategory.name
-            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
-        }
+//        if subCategoryPickerView == pickerView {
+//            let subCategory = currentCategory.child![pickerView.selectedRow(inComponent: 0)]
+//            categorySubCategoryLabels[1] = subCategory.name
+//            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
+//        }
         if occurrencePickerView == pickerView {
             let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
             occurrenceLabels[0] = occurrence
