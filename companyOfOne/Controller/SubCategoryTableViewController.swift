@@ -90,8 +90,6 @@ class SubCategoryTableViewController: UITableViewController {
     func retrieveAllSubCategories(){
         let subSet = selectedCategory.child
         subCategories = subSet?.allObjects as! [SubCategory]
-        
-        
     }
     
     func deleteSubCategory(subCategory: SubCategory){

@@ -27,8 +27,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="IXH-Gy-ezl">
                             <connections>
-                                <action selector="takePhotoPressed:" destination="BYZ-38-t0r" id="K9c-PH-D6h"/>
-                                <segue destination="HVc-xq-BOx" kind="show" id="BvX-wN-gPZ"/>
+                                <segue destination="HVc-xq-BOx" kind="show" id="tid-iJ-BBO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -43,8 +43,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
-    var allCategoriesSubCategories = [Category]()
-    //var categories = [String]()
+    var categories = [Category]()
     var subCategories = [String]()
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
@@ -63,8 +62,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var docDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     
     
-    var currentCategory = Category()
-    //var currentSubCategory = SubCategory(name: "None")
+    var currentCategory = [Category]()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,7 +74,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrencePickerView.delegate = self
         //data
         retrieveAllCategories()
-        //setupTempDataForTesting()
+        setupTempDataForTesting()
         //constants
         setupX_Y_W_H_Alpha_Constants()
         //labels
@@ -104,40 +103,13 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Temp Testing Data
     
-//    func setupTempDataForTesting(){
-//        //adds to the default category to the empty array
-//       allCategoriesSubCategories.append(currentCategory)
-//
-//       //this will be done by the user eventually
-//       let newCategory = Category(name: "Rental")
-//       let subCategory = SubCategory(name: "Income")
-//       newCategory.subCategories.append(subCategory)
-//       allCategoriesSubCategories.append(newCategory)
-//
-//        //populate array for category
-//        //categories = ["To Be Categorized",
-////                      "Rental Property",
-////                      "Capital Gains",
-////                      "RRSPs","Dividends",
-////                      "Medical",
-////                      "Other Income",
-////                      "Previous Assessments",
-////                      "Tax Payments" ]
-//        //populate array for subCategory
-//        subCategories = ["-",
-//                      "Income",
-//                      "Expenses",
-//                      "Operating Costs",
-//                      "Renovation Expenses",
-//                      "Special Assessments",
-//                      "Realtor Fees",
-//                      "Previous Assessments",
-//                      "Purchase Documents" ]
+    func setupTempDataForTesting(){
+
 //        //populate array for occurrence
-//        occurrences = ["None",
-//                       "Biweekly",
-//                       "Monthly",
-//                       "Yearly"]
+        occurrences = ["None",
+                       "Biweekly",
+                       "Monthly",
+                       "Yearly"]
 //        //populate array for occurrence dates
 //
 //        //populate arrays for labels
@@ -145,15 +117,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
 //                            ("\(currentCategory.subCategories[0].name)")]
 //        occurrenceLabels = [("\(occurrences[0])"),
 //                            "-"]
-//        print(occurrenceLabels)
-//    }
+    }
     
     func retrieveAllCategories(){
         let context = AppDelegate.viewContext
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        allCategoriesSubCategories = try! context.fetch(request) as! [Category]
+        categories = try! context.fetch(request) as! [Category]
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -187,11 +158,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return allCategoriesSubCategories.count
+            return categories.count
         }
         if subCategoryPickerView == pickerView {
-           // return currentCategory.child.count
+//            return currentCategory[0].child?.count ?? 1
             return 1
+
         }
         if occurrencePickerView == pickerView {
             return occurrences.count
@@ -201,11 +173,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if categoryPickerView == pickerView {
-            return allCategoriesSubCategories[row].name
+            return categories[row].name
         }
         if subCategoryPickerView == pickerView {
-           // return currentCategory.child![row].name
-            return "nothing yey"
+            let subSet = currentCategory[0].child
+            let subArray = subSet?.allObjects as! [SubCategory]
+            return subArray[row].name
         }
         if occurrencePickerView == pickerView {
             return occurrences[row]
@@ -216,19 +189,21 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if categoryPickerView == pickerView {
-            let category = allCategoriesSubCategories[pickerView.selectedRow(inComponent: 0)]
-            currentCategory = category
+            let category = categories[pickerView.selectedRow(inComponent: 0)]
+          currentCategory.append(category)
             subCategoryPickerView.reloadAllComponents()
-            currentCategory = category
-            categorySubCategoryLabels[0] = currentCategory.name!
-            //categorySubCategoryLabels[1] = currentCategory.[0].name
+//            currentCategory = category
+            categorySubCategoryLabels[0] = currentCategory[0].name!
+//            //categorySubCategoryLabels[1] = currentCategory.[0].name
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
-//        if subCategoryPickerView == pickerView {
-//            let subCategory = currentCategory.child![pickerView.selectedRow(inComponent: 0)]
-//            categorySubCategoryLabels[1] = subCategory.name
-//            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
-//        }
+        if subCategoryPickerView == pickerView {
+            let subSet =  currentCategory[0].child
+            let subArray = subSet?.allObjects as! [SubCategory]
+            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
+            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
+            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
+        }
         if occurrencePickerView == pickerView {
             let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
             occurrenceLabels[0] = occurrence
