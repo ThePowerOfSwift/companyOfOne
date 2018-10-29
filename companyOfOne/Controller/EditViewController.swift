@@ -104,7 +104,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Temp Testing Data
     
     func setupData(){
+        
         docImageView.contentMode = .scaleAspectFit
+        docImageView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         docImageView.image = currentImage
 
 //        //populate array for occurrence

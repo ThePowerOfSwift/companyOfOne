@@ -32,14 +32,15 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     func takeAPhoto(){
         print("took a photo")
         imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
+        //imagePicker.allowsEditing = true
+        //imagePicker.showsCameraControls = true
         present(imagePicker, animated: true)
         
     }
     func pickFromLibrary(){
         print("pick from library")
        imagePicker.sourceType = .photoLibrary
-       imagePicker.allowsEditing = true
+       //imagePicker.allowsEditing = true
        present(imagePicker, animated: true)
     }
     
@@ -65,7 +66,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             print("No image found")
             return
         }
