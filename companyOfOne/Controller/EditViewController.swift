@@ -25,7 +25,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var docDatePickerView: CustomDatePicker!
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var docImageView: UIImageView!
+    @IBOutlet var docImageView: UIImageView!
     
     //MARK: Global Constants
     var xPosition1 = CGFloat()
@@ -61,6 +61,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var docDateLabelViewLeadingAnchorToCenterX = NSLayoutConstraint()
     var docDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     
+    //MARK: Global Image
+    
+    var currentImage = UIImage()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //delegates
@@ -70,7 +74,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrencePickerView.delegate = self
         //data
         retrieveAllCategories()
-        setupTempDataForTesting()
+        setupData()
         //constants
         setupX_Y_W_H_Alpha_Constants()
         //labels
@@ -99,7 +103,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Temp Testing Data
     
-    func setupTempDataForTesting(){
+    func setupData(){
+        docImageView.contentMode = .scaleAspectFit
+        docImageView.image = currentImage
 
 //        //populate array for occurrence
         occurrences = ["None",

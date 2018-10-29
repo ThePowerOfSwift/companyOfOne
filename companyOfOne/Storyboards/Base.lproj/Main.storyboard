@@ -209,7 +209,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testDoc" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-Vp-aYH" userLabel="docImageView">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-Vp-aYH" userLabel="docImageView">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                             </imageView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-db-mRO" userLabel="subCategoryPickerView">
@@ -332,7 +332,4 @@
             <point key="canvasLocation" x="870" y="-703"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="testDoc" width="1832" height="4032"/>
-    </resources>
 </document>
