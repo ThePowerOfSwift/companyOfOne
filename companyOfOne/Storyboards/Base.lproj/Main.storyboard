@@ -27,14 +27,17 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="IXH-Gy-ezl">
                             <connections>
-                                <segue destination="HVc-xq-BOx" kind="show" id="tid-iJ-BBO"/>
+                                <action selector="takePhotoPressed:" destination="BYZ-38-t0r" id="fAO-fn-Mbb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewController" id="MO5-Gq-5lc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="871" y="20"/>
+            <point key="canvasLocation" x="806" y="20"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tf5-XK-YJR">

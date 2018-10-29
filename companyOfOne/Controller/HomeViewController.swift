@@ -22,11 +22,13 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
-        let vc = UIImagePickerController()
-        vc.sourceType = .camera
-        vc.allowsEditing = true
-        vc.delegate = self
-        present(vc, animated: true)
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true
+            present(imagePicker, animated: true)
+        }
     }
     
     private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -38,8 +40,10 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         currentImage = image
     }
     
-//    func updateArrayForCategoryViewController(){
-//        delegate?.returnMainArray(array: allCategoriesSubCategories)
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toEditViewController" {
+                let controller = segue.destination as! EditViewController
+                controller.docImageView = self.currentImage
+    }
 }
-
+}
