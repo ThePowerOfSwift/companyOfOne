@@ -58,11 +58,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="c1A-zL-zrg"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="hnH-ww-00M" userLabel="Receipts"/>
+                    <tabBarItem key="tabBarItem" title="Receipts" image="receipts" landscapeImage="receipts" selectedImage="receipts" id="hnH-ww-00M" userLabel="Receipts"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hwh-Pt-n0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="435"/>
+            <point key="canvasLocation" x="-49" y="1325"/>
         </scene>
         <!--Mail-->
         <scene sceneID="HiG-bP-5vR">
@@ -83,11 +83,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="jgr-nE-hKZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="T2o-b7-Avq" userLabel="Mail"/>
+                    <tabBarItem key="tabBarItem" title="Mail" image="mail" landscapeImage="mail" selectedImage="mail" id="T2o-b7-Avq" userLabel="Mail"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yqF-GJ-kTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="-368"/>
+            <point key="canvasLocation" x="-49" y="435"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="I8a-aU-OXi">
@@ -100,9 +100,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="sX0-QU-RdC" kind="relationship" relationship="viewControllers" id="bMn-tQ-t28"/>
+                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="viewControllers" id="nBD-P7-xFR"/>
                         <segue destination="APY-M9-ugG" kind="relationship" relationship="viewControllers" id="nb6-K8-Z7Y"/>
                         <segue destination="RLM-lx-zwL" kind="relationship" relationship="viewControllers" id="54L-js-LhQ"/>
-                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="viewControllers" id="nBD-P7-xFR"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HmS-cf-MH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -384,7 +384,9 @@
         <scene sceneID="5fc-On-7ay">
             <objects>
                 <navigationController title="To Home" automaticallyAdjustsScrollViewInsets="NO" id="sX0-QU-RdC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="N22-se-vOl"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" landscapeImage="home" selectedImage="home" id="N22-se-vOl">
+                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VG4-DS-xeN">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -418,12 +420,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xkd-cG-3W5"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="2Cm-ze-4DP"/>
+                    <tabBarItem key="tabBarItem" title="Docs" image="document" landscapeImage="document" selectedImage="document" id="2Cm-ze-4DP"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="1235"/>
+            <point key="canvasLocation" x="-49" y="-368"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="document" width="30" height="30"/>
+        <image name="home" width="30" height="30"/>
+        <image name="mail" width="30" height="30"/>
+        <image name="receipts" width="30" height="30"/>
+    </resources>
 </document>
