@@ -16,11 +16,20 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Future Alerts View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ5-Sb-1kl">
+                                <rect key="frame" x="100" y="358" width="220" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="RF5-hV-srE">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="wKW-xR-NHy" userLabel="settingsButton">
+                        <barButtonItem key="leftBarButtonItem" title="Settings" image="menu" id="wKW-xR-NHy" userLabel="settingsButton">
                             <connections>
                                 <segue destination="1fU-H1-geW" kind="show" id="VH7-h3-thS"/>
                             </connections>
@@ -37,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920" y="-1216"/>
+            <point key="canvasLocation" x="-49" y="-1216"/>
         </scene>
         <!--Receipts-->
         <scene sceneID="SO9-Zg-p70">
@@ -169,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-ig-jQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="-368"/>
+            <point key="canvasLocation" x="919" y="-1553"/>
         </scene>
         <!--Categories-->
         <scene sceneID="aGg-lY-ZUe">
@@ -219,7 +228,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6s-aF-MHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="436"/>
+            <point key="canvasLocation" x="1891" y="-1554"/>
         </scene>
         <!--SubCategories-->
         <scene sceneID="tj2-zD-K2P">
@@ -269,7 +278,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpO-qC-tYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Item" id="h7a-uT-fqI"/>
             </objects>
-            <point key="canvasLocation" x="2199" y="435"/>
+            <point key="canvasLocation" x="2883" y="-1554"/>
         </scene>
         <!--Add Details-->
         <scene sceneID="uHV-io-vYj">
@@ -378,7 +387,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2199" y="-368"/>
+            <point key="canvasLocation" x="919" y="-871"/>
         </scene>
         <!--To Home-->
         <scene sceneID="5fc-On-7ay">
@@ -399,7 +408,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPq-5J-9dJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="-1216"/>
+            <point key="canvasLocation" x="-948" y="-1216"/>
         </scene>
         <!--Docs-->
         <scene sceneID="uIG-b1-6vF">
@@ -432,6 +441,7 @@
         <image name="document" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="mail" width="30" height="30"/>
+        <image name="menu" width="30" height="30"/>
         <image name="receipts" width="30" height="30"/>
     </resources>
 </document>
