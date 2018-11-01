@@ -121,8 +121,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
 //        //populate arrays for labels
 //        categorySubCategoryLabels = [("\(currentCategory.name)"),
 //                            ("\(currentCategory.subCategories[0].name)")]
-//        occurrenceLabels = [("\(occurrences[0])"),
-//                            "-"]
+        occurrenceLabels = [("\(occurrences[0])"),
+                            "-"]
     }
     
     func retrieveAllCategories(){

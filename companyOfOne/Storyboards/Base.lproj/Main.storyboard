@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sX0-QU-RdC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZgC-ow-uaD">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,7 +37,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="20"/>
+            <point key="canvasLocation" x="920" y="-1216"/>
+        </scene>
+        <!--Receipts-->
+        <scene sceneID="SO9-Zg-p70">
+            <objects>
+                <viewController title="Receipts" id="RLM-lx-zwL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mKW-Bk-nw4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Future Receipts View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1eZ-lh-u0J">
+                                <rect key="frame" x="86" y="358" width="242" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="c1A-zL-zrg"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 2" id="hnH-ww-00M" userLabel="Receipts"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hwh-Pt-n0t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="435"/>
+        </scene>
+        <!--Mail-->
+        <scene sceneID="HiG-bP-5vR">
+            <objects>
+                <viewController title="Mail" id="APY-M9-ugG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7Le-6O-5mL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Future Mail View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uAh-oY-KHK">
+                                <rect key="frame" x="104" y="358" width="207" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="jgr-nE-hKZ"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item 1" id="T2o-b7-Avq" userLabel="Mail"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqF-GJ-kTk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="-368"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="I8a-aU-OXi">
+            <objects>
+                <tabBarController id="ZgC-ow-uaD" customClass="TabBarController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="86u-Sh-K2n">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="sX0-QU-RdC" kind="relationship" relationship="viewControllers" id="bMn-tQ-t28"/>
+                        <segue destination="APY-M9-ugG" kind="relationship" relationship="viewControllers" id="nb6-K8-Z7Y"/>
+                        <segue destination="RLM-lx-zwL" kind="relationship" relationship="viewControllers" id="54L-js-LhQ"/>
+                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="viewControllers" id="nBD-P7-xFR"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HmS-cf-MH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1710" y="39"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tf5-XK-YJR">
@@ -48,7 +118,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Ko-rE-V6O">
-                                <rect key="frame" x="0.0" y="64" width="414" height="189"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="140"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settingsTableViewCell" id="gpF-SA-7Ve" customClass="SettingsTableViewCell" customModule="companyOfOne" customModuleProvider="target">
@@ -99,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-ig-jQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="777"/>
+            <point key="canvasLocation" x="919" y="-368"/>
         </scene>
         <!--Categories-->
         <scene sceneID="aGg-lY-ZUe">
@@ -149,7 +219,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6s-aF-MHf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893" y="777"/>
+            <point key="canvasLocation" x="919" y="436"/>
         </scene>
         <!--SubCategories-->
         <scene sceneID="tj2-zD-K2P">
@@ -199,18 +269,18 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpO-qC-tYC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Item" id="h7a-uT-fqI"/>
             </objects>
-            <point key="canvasLocation" x="1675" y="777"/>
+            <point key="canvasLocation" x="2199" y="435"/>
         </scene>
-        <!--Edit-->
+        <!--Add Details-->
         <scene sceneID="uHV-io-vYj">
             <objects>
-                <viewController title="Edit" id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add Details" id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AbT-8H-nlk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-Vp-aYH" userLabel="docImageView">
-                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                             </imageView>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-db-mRO" userLabel="subCategoryPickerView">
                                 <rect key="frame" x="317" y="233" width="211" height="162"/>
@@ -308,12 +378,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1707" y="20"/>
+            <point key="canvasLocation" x="2199" y="-368"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--To Home-->
         <scene sceneID="5fc-On-7ay">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sX0-QU-RdC" sceneMemberID="viewController">
+                <navigationController title="To Home" automaticallyAdjustsScrollViewInsets="NO" id="sX0-QU-RdC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="N22-se-vOl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VG4-DS-xeN">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
@@ -326,7 +397,33 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPq-5J-9dJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="870" y="-703"/>
+            <point key="canvasLocation" x="-49" y="-1216"/>
+        </scene>
+        <!--Docs-->
+        <scene sceneID="uIG-b1-6vF">
+            <objects>
+                <viewController title="Docs" id="Lgp-y5-6ek" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XXO-Yw-SZi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Future Docs View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpJ-cu-Jvp">
+                                <rect key="frame" x="100" y="358" width="215" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xkd-cG-3W5"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="2Cm-ze-4DP"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="1235"/>
         </scene>
     </scenes>
 </document>
