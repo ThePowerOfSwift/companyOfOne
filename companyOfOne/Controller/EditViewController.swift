@@ -90,7 +90,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupOccurrenceDatePicker()
         setupDocDatePicker()
         //buttons
-        setupTrashAndSubmitButtons()
+        //setupTrashAndSubmitButtons()
         //gestures
         addTapGestureForHideNavBar_Labels_AndButtons()
         addSwipeGuesturesForDocTitle()
@@ -508,39 +508,39 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docDatePickerViewLeadingAnchorToCenterX.isActive = true
     }
     
-    func setupTrashAndSubmitButtons(){
-        //setup the trash button look
-        trashButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        trashButton.layer.borderWidth = 0.2
-        trashButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        //trashButton.alpha = labelAlpha
-        trashButton.titleLabel?.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        trashButton.layer.masksToBounds = true
-        //trashButton.layer.cornerRadius = 10
-        trashButton.titleLabel?.text = "Trash"
-        //setup the constraints
-        trashButton.translatesAutoresizingMaskIntoConstraints = false
-        trashButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        trashButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        trashButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-        
-        //setup the submit button look
-        submitButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        submitButton.layer.borderWidth = 0.2
-        submitButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        //submitButton.alpha = labelAlpha
-        submitButton.titleLabel?.textColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
-        submitButton.layer.masksToBounds = true
-        //submitButton.layer.cornerRadius = 10
-        submitButton.titleLabel?.text = "Submit"
-        //setup the constraints
-        submitButton.translatesAutoresizingMaskIntoConstraints = false
-        submitButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-        submitButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        submitButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-    }
+//    func setupTrashAndSubmitButtons(){
+//        //setup the trash button look
+//        trashButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        trashButton.layer.borderWidth = 0.2
+//        trashButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        //trashButton.alpha = labelAlpha
+//        trashButton.titleLabel?.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+//        trashButton.layer.masksToBounds = true
+//        //trashButton.layer.cornerRadius = 10
+//        trashButton.titleLabel?.text = "Trash"
+//        //setup the constraints
+//        trashButton.translatesAutoresizingMaskIntoConstraints = false
+//        trashButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+//        trashButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+//        trashButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+//
+//        //setup the submit button look
+//        submitButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//        submitButton.layer.borderWidth = 0.2
+//        submitButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        //submitButton.alpha = labelAlpha
+//        submitButton.titleLabel?.textColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
+//        submitButton.layer.masksToBounds = true
+//        //submitButton.layer.cornerRadius = 10
+//        submitButton.titleLabel?.text = "Submit"
+//        //setup the constraints
+//        submitButton.translatesAutoresizingMaskIntoConstraints = false
+//        submitButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+//        submitButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+//        submitButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
+//    }
     
     //MARK: All GestureRecognizer Functions
     
@@ -548,14 +548,15 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         print("tapped on the docImage")
         //hide nav
         navigationController!.isNavigationBarHidden = !navigationController!.isNavigationBarHidden
+        tabBarController!.tabBar.isHidden = !tabBarController!.tabBar.isHidden
         //hide all labels
         titleTagLabel.isHidden = !titleTagLabel.isHidden
         categorySubCategoryLabel.isHidden = !categorySubCategoryLabel.isHidden
         occurrenceLabel.isHidden = !occurrenceLabel.isHidden
         docDateLabel.isHidden = !docDateLabel.isHidden
         //hide all buttons
-        trashButton.isHidden = !trashButton.isHidden
-        submitButton.isHidden = !submitButton.isHidden
+//        trashButton.isHidden = !trashButton.isHidden
+//        submitButton.isHidden = !submitButton.isHidden
     }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){

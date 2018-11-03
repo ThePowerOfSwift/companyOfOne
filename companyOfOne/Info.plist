@@ -38,6 +38,8 @@
 	<string></string>
 	<key>NSCameraUsageDescription</key>
 	<string>companyOfOne uses your camera to capture your documents digitally.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>companyOfOne uses your photo library to load your documents digitally.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
