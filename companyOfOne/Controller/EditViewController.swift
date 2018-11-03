@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import PDFKit
 
 
 class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -25,7 +26,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var docDatePickerView: CustomDatePicker!
     @IBOutlet weak var trashButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet var docImageView: UIImageView!
+    @IBOutlet weak var docImageView: UIImageView!
     
     //MARK: Global Constants
     var xPosition1 = CGFloat()
@@ -100,7 +101,59 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         addSwipeGuesturesForDocDate()
     }
     
-    //MARK: Temp Testing Data
+    //MARK: Create PDF
+    
+    
+    @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
+        
+        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
+    }
+    
+//    func createPDF(){
+//        // Create an empty PDF document
+//        let pdfDocument = PDFDocument()
+//
+//        // Load or create your UIImage
+//        let image = docImageView.image
+//
+//        // Create a PDF page instance from your image
+//        let pdfPage = PDFPage(image: image!)
+//
+//        // Insert the PDF page into your document
+//        pdfDocument.insert(pdfPage!, at: 0)
+//
+//        // Get the raw data of your PDF document
+//        let data = pdfDocument.dataRepresentation()
+//
+//        // The url to save the data to
+//
+//        let url = URL(fileURLWithPath: "/Users/Jamie/Desktop/")
+//        let docURL = url.appendingPathComponent("myFileName.pdf")
+//
+//        // Save the data to the url
+//        try! data!.write(to: docURL)
+
+//    }
+    
+    func createPDF(image: UIImage) -> NSData? {
+        
+        let pdfData = NSMutableData()
+        let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
+        
+        var mediaBox = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        
+        let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
+        
+        pdfContext.beginPage(mediaBox: &mediaBox)
+        pdfContext.draw(image.cgImage!, in: mediaBox)
+        pdfContext.endPage()
+        
+        return pdfData
+    }
+    
+     //MARK: Temp Testing Data
     
     func setupData(){
         
