@@ -275,7 +275,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="vNr-so-L5m">
+                    <navigationItem key="navigationItem" id="vNr-so-L5m">
                         <barButtonItem key="rightBarButtonItem" image="plus" id="buA-ii-sBj">
                             <connections>
                                 <action selector="getSubCategoryName:" destination="F6T-cd-SIR" id="cfH-b2-nxe"/>
@@ -292,7 +292,7 @@
         <!--Add Details-->
         <scene sceneID="uHV-io-vYj">
             <objects>
-                <viewController title="Add Details" id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AbT-8H-nlk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -368,6 +368,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hNH-li-JZc"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Details" id="7RF-GC-33E">
+                        <barButtonItem key="rightBarButtonItem" title="Save" image="save" id="jxc-7n-e9t"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="categoryPickerView" destination="ruN-zk-mdA" id="wmE-zg-dUB"/>
                         <outlet property="categorySubCategoryLabel" destination="aew-XI-PVM" id="iFY-66-5aD"/>
@@ -410,7 +413,7 @@
         <!--Docs-->
         <scene sceneID="uIG-b1-6vF">
             <objects>
-                <viewController title="Docs" id="Lgp-y5-6ek" sceneMemberID="viewController">
+                <viewController title="Docs" id="Lgp-y5-6ek" customClass="DocsViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XXO-Yw-SZi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -438,7 +441,7 @@
                                 <rect key="frame" x="20" y="120" width="374" height="511"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DisplayTableViewCell" rowHeight="56" id="Wb3-JV-t93" customClass="DisplayTableViewCell" customModule="companyOfOne" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="displayTableViewCell" rowHeight="56" id="Wb3-JV-t93" customClass="DisplayTableViewCell" customModule="companyOfOne" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wb3-JV-t93" id="HEQ-ZF-NZ2" customClass="DisplayTableViewCell" customModule="companyOfOne" customModuleProvider="target">
@@ -505,6 +508,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Lgp-y5-6ek" id="425-VL-tVD"/>
+                                    <outlet property="delegate" destination="Lgp-y5-6ek" id="WHQ-Tb-Gsc"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Potential calculation area" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKU-1z-yCh">
                                 <rect key="frame" x="0.0" y="631" width="414" height="56"/>
@@ -553,6 +560,7 @@
         <image name="menu" width="30" height="30"/>
         <image name="plus" width="30" height="30"/>
         <image name="receipts" width="30" height="30"/>
+        <image name="save" width="30" height="30"/>
         <image name="upload" width="30" height="30"/>
     </resources>
 </document>

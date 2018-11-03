@@ -20,11 +20,7 @@ class DisplayTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleTagLabel.text = "Rent Cheque"
-        categoryLabel.text = "Rental"
-        subCategoryLabel.text = "Income"
-        dateLabel.text = "Dec 21, 2018"
-        docImageView.image = #imageLiteral(resourceName: "testDoc")
+     
         // Initialization code
     }
 

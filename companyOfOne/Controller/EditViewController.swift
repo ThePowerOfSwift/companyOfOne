@@ -89,8 +89,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupOccurrencePicker()
         setupOccurrenceDatePicker()
         setupDocDatePicker()
-        //buttons
-        //setupTrashAndSubmitButtons()
         //gestures
         addTapGestureForHideNavBar_Labels_AndButtons()
         addSwipeGuesturesForDocTitle()
@@ -108,21 +106,24 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docImageView.contentMode = .scaleAspectFit
         docImageView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         docImageView.image = currentImage
-
-//        //populate array for occurrence
+        
+        //        //populate array for occurrences
         occurrences = ["None",
                        "Biweekly",
                        "Monthly",
                        "Yearly"]
-//        //populate array for occurrence dates
-//
+        //        //populate array for occurrence dates bassed on todays date with an option to pick the last year?
+
+        //        //populate initial labels
         
+        categorySubCategoryLabels = ["Category", "SubCategory"]
+        occurrenceLabels = ["Occurrence", "-"]
         
-//        //populate arrays for labels
-//        categorySubCategoryLabels = [("\(currentCategory.name)"),
-//                            ("\(currentCategory.subCategories[0].name)")]
-        occurrenceLabels = [("\(occurrences[0])"),
-                            "-"]
+        //populate user labels
+        //        categorySubCategoryLabels = [("\(currentCategory.name)"),
+        //                ("\(currentCategory.subCategories[0].name)")]
+        // occurrenceLabels = [("\(occurrences[0])"),
+        //                            "-"]
     }
     
     func retrieveAllCategories(){
@@ -133,16 +134,16 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categories = try! context.fetch(request) as! [Category]
     }
     
-//    func retrieveSubCategories(){
-//        let context = AppDelegate.viewContext
-//        let request =
-//            NSFetchRequest<NSManagedObject>(entityName: "Category")
-//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-//        //predicate here to narrow down the name
-//        let subSet = selectedCategory.child
-//        subCategories = subSet?.allObjects as! [SubCategory]
-//        //categories = try! context.fetch(request) as! [Category]
-//    }
+    //    func retrieveSubCategories(){
+    //        let context = AppDelegate.viewContext
+    //        let request =
+    //            NSFetchRequest<NSManagedObject>(entityName: "Category")
+    //        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+    //        //predicate here to narrow down the name
+    //        let subSet = selectedCategory.child
+    //        subCategories = subSet?.allObjects as! [SubCategory]
+    //        //categories = try! context.fetch(request) as! [Category]
+    //    }
     
     
     //MARK: Title/Tag Delegate Functions
@@ -181,7 +182,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if subCategoryPickerView == pickerView {
             //return currentCategory.child?.count ?? 1
             return 1
-
+            
         }
         if occurrencePickerView == pickerView {
             return occurrences.count
@@ -194,9 +195,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return categories[row].name
         }
         if subCategoryPickerView == pickerView {
-//            let subSet = currentCategory.child
-//            let subArray = subSet?.allObjects as! [SubCategory]
-//            return subArray[row].name
+            //            let subSet = currentCategory.child
+            //            let subArray = subSet?.allObjects as! [SubCategory]
+            //            return subArray[row].name
             return "not working subCat"
         }
         if occurrencePickerView == pickerView {
@@ -209,19 +210,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = categories[pickerView.selectedRow(inComponent: 0)]
-          //  currentCategory = category
+            //  currentCategory = category
             subCategoryPickerView.reloadAllComponents()
             //currentCategory = category
-           // categorySubCategoryLabels[0] = currentCategory.name!
+            // categorySubCategoryLabels[0] = currentCategory.name!
             //categorySubCategoryLabels[1] = currentCategory.child.name
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
-//            let subSet =  currentCategory.child
-//            let subArray = subSet?.allObjects as! [SubCategory]
-//            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
-//            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
-//            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
+            //            let subSet =  currentCategory.child
+            //            let subArray = subSet?.allObjects as! [SubCategory]
+            //            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
+            //            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
+            //            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
             let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
@@ -236,9 +237,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             occurrenceLabels.insert(occurenceDate, at: 1) //last position
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
-        
-        // use the row to get the selected row from the picker view
-        // using the row extract the value from your datasource (array[row])
     }
     
     //MARK: Setup Constants
@@ -469,7 +467,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrenceDatePickerViewLeadingAnchorToCenterX = occurrenceDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition5)
         occurrenceDatePickerViewLeadingAnchorToCenterX.isActive = true
         //setup the date data
-      
+        
     }
     
     //MARK: Setup DocDate and Constraints
@@ -508,39 +506,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docDatePickerViewLeadingAnchorToCenterX.isActive = true
     }
     
-//    func setupTrashAndSubmitButtons(){
-//        //setup the trash button look
-//        trashButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//        trashButton.layer.borderWidth = 0.2
-//        trashButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        //trashButton.alpha = labelAlpha
-//        trashButton.titleLabel?.textColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-//        trashButton.layer.masksToBounds = true
-//        //trashButton.layer.cornerRadius = 10
-//        trashButton.titleLabel?.text = "Trash"
-//        //setup the constraints
-//        trashButton.translatesAutoresizingMaskIntoConstraints = false
-//        trashButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-//        trashButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
-//        trashButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        trashButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-//
-//        //setup the submit button look
-//        submitButton.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//        submitButton.layer.borderWidth = 0.2
-//        submitButton.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        //submitButton.alpha = labelAlpha
-//        submitButton.titleLabel?.textColor = #colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1)
-//        submitButton.layer.masksToBounds = true
-//        //submitButton.layer.cornerRadius = 10
-//        submitButton.titleLabel?.text = "Submit"
-//        //setup the constraints
-//        submitButton.translatesAutoresizingMaskIntoConstraints = false
-//        submitButton.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
-//        submitButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
-//        submitButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0).isActive = true
-//    }
     
     //MARK: All GestureRecognizer Functions
     
@@ -554,9 +519,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.isHidden = !categorySubCategoryLabel.isHidden
         occurrenceLabel.isHidden = !occurrenceLabel.isHidden
         docDateLabel.isHidden = !docDateLabel.isHidden
-        //hide all buttons
-//        trashButton.isHidden = !trashButton.isHidden
-//        submitButton.isHidden = !submitButton.isHidden
+        
     }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
