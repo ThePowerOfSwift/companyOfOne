@@ -29,6 +29,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.categoryLabel.text = "Rental"
         cell.subCategoryLabel.text = "Income"
         cell.dateLabel.text = "Dec 21, 2018"
+        cell.docImageView.clipsToBounds = true
         cell.docImageView.image = #imageLiteral(resourceName: "testDoc")
         return cell
     }
