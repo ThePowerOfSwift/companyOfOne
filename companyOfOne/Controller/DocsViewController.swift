@@ -13,13 +13,18 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController!.isNavigationBarHidden = true
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -29,20 +34,19 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.categoryLabel.text = "Rental"
         cell.subCategoryLabel.text = "Income"
         cell.dateLabel.text = "Dec 21, 2018"
-        cell.docImageView.clipsToBounds = true
+        cell.occurenceLabel.text = "Monthly"
+       
+        //cell.docImageView.clipsToBounds = true
         cell.docImageView.image = #imageLiteral(resourceName: "testDoc")
         return cell
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toEditViewControllerFromDocs" {
+            let nextController = segue.destination as! EditViewController
+            
+        }
     }
-    */
 
 }

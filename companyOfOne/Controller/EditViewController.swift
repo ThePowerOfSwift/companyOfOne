@@ -67,6 +67,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.isNavigationBarHidden = false
         //delegates
         titleTagTextField.delegate = self
         categoryPickerView.delegate = self
