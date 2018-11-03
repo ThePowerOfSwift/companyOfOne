@@ -13,8 +13,13 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.items?[0].title = "Home"
-        tabBar.items?[1].title = "Mail"
-        tabBar.items?[2].title = "Receipts"
+       
+        tabBar.items?[1].title = "Docs"
+       
+        tabBar.items?[2].title = "Mail"
+       
+        tabBar.items?[3].title = "Receipts"
+        
 
         // Do any additional setup after loading the view.
     }

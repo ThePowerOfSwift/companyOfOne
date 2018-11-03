@@ -19,12 +19,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+        imagePicker.delegate = self
     }
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
-            imagePicker.delegate = self
             showAlertForPhotoOrLibrary()
         }
     }
@@ -64,7 +63,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         present(alert, animated: true)
     }
     
-   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             print("No image found")
