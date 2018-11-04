@@ -433,7 +433,11 @@
                                 <items>
                                     <navigationItem title="Docs" id="956-r8-QJV">
                                         <barButtonItem key="leftBarButtonItem" image="filter" landscapeImage="filter" id="5c9-kA-xgB"/>
-                                        <barButtonItem key="rightBarButtonItem" image="upload" id="TI9-Wc-7hy"/>
+                                        <barButtonItem key="rightBarButtonItem" image="upload" id="TI9-Wc-7hy">
+                                            <connections>
+                                                <action selector="shareButton:" destination="Lgp-y5-6ek" id="3bl-AC-s76"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

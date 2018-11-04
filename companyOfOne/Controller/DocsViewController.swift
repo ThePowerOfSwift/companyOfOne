@@ -41,6 +41,22 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
+    @IBAction func shareButton(_ sender: UIBarButtonItem) {
+        
+        guard let image = UIImage(named: "testDoc") else { return }
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        
+        activityController.completionWithItemsHandler = { (nil, completed, _, error) in
+            if completed {
+                print("completed")
+            } else {
+                print("cancelled")
+            }
+        }
+        present(activityController, animated: true) {
+            print("presented")
+        }
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewControllerFromDocs" {
