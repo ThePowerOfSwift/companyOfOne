@@ -105,10 +105,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
-        
-        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
+//        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+//        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
+//        
+//        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
     }
     
 //    func createPDF(){
