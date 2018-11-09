@@ -371,7 +371,7 @@
                     <navigationItem key="navigationItem" title="Add Details" id="7RF-GC-33E">
                         <barButtonItem key="rightBarButtonItem" title="Save" image="save" id="jxc-7n-e9t">
                             <connections>
-                                <action selector="pressSaveToPDFButton:" destination="HVc-xq-BOx" id="amr-g4-zvE"/>
+                                <action selector="pressSaveToPDFButton:" destination="HVc-xq-BOx" id="XWL-Lz-WHM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

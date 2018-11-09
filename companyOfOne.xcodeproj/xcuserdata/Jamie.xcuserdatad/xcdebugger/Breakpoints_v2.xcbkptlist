@@ -9,14 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "companyOfOne/Model/Document.swift"
-            timestampString = "562188745.023402"
+            filePath = "companyOfOne/Controller/EditViewController.swift"
+            timestampString = "563421714.841705"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "Document"
-            landmarkType = "3">
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "createDocument()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

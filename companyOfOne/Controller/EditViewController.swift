@@ -50,6 +50,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
     var currentCategory: Category?
+    var currentSubCategory: SubCategory?
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -106,6 +107,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
+        createDocument()
+        print("It didn't crash")
+        
         //        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         //        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
         //
@@ -137,6 +141,23 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //        try! data!.write(to: docURL)
     
     //    }
+    
+    func createDocument(){
+        let context = AppDelegate.viewContext
+        let document = Document(context:context)
+        document.titleTag = titleTagLabel.text ?? "stupid"
+        if let category = currentCategory{
+             document.category = category
+        }
+        if let  subCategory = currentSubCategory{
+            document.subCategory = subCategory
+        }
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
     
     func createPDF(image: UIImage) -> NSData? {
         
@@ -277,8 +298,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if subCategoryPickerView == pickerView {
             let subSet =  currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
-            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
-            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
+            currentSubCategory = subArray[pickerView.selectedRow(inComponent: 0)]
+            
+            categorySubCategoryLabels[1] = currentSubCategory!.name ?? "SubLabel Didn't Work"
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {

@@ -10,13 +10,13 @@ import Foundation
 import CoreData
 
 class Document:NSManagedObject{
-//    var titleTag:String
-//    var category:Category
-//    var subCategory:SubCategory
-//    var occurrence:String
-//    var occurrenceDate:Date
-//    var docDate:Date
-//    
+    @NSManaged var titleTag:String
+    @NSManaged var category:Category
+    @NSManaged var subCategory:SubCategory
+    @NSManaged var occurrence:String
+    @NSManaged var occurrenceDate:Date
+    @NSManaged var docDate:Date
+//
 //    init(titleTag: String, category: Category, subCategory: SubCategory, occurrence: String, occurrenceDate:Date, docDate:Date) {
 //        self.titleTag = titleTag
 //        self.category = category
