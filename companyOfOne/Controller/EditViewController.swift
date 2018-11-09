@@ -45,7 +45,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Global Arrays
     var categories = [Category]()
-    var subCategories = [String]()
+    var subCategories = [SubCategory]()
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
@@ -106,37 +106,37 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-//        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-//        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
-//        
-//        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
+        //        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        //        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
+        //
+        //        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
     }
     
-//    func createPDF(){
-//        // Create an empty PDF document
-//        let pdfDocument = PDFDocument()
-//
-//        // Load or create your UIImage
-//        let image = docImageView.image
-//
-//        // Create a PDF page instance from your image
-//        let pdfPage = PDFPage(image: image!)
-//
-//        // Insert the PDF page into your document
-//        pdfDocument.insert(pdfPage!, at: 0)
-//
-//        // Get the raw data of your PDF document
-//        let data = pdfDocument.dataRepresentation()
-//
-//        // The url to save the data to
-//
-//        let url = URL(fileURLWithPath: "/Users/Jamie/Desktop/")
-//        let docURL = url.appendingPathComponent("myFileName.pdf")
-//
-//        // Save the data to the url
-//        try! data!.write(to: docURL)
-
-//    }
+    //    func createPDF(){
+    //        // Create an empty PDF document
+    //        let pdfDocument = PDFDocument()
+    //
+    //        // Load or create your UIImage
+    //        let image = docImageView.image
+    //
+    //        // Create a PDF page instance from your image
+    //        let pdfPage = PDFPage(image: image!)
+    //
+    //        // Insert the PDF page into your document
+    //        pdfDocument.insert(pdfPage!, at: 0)
+    //
+    //        // Get the raw data of your PDF document
+    //        let data = pdfDocument.dataRepresentation()
+    //
+    //        // The url to save the data to
+    //
+    //        let url = URL(fileURLWithPath: "/Users/Jamie/Desktop/")
+    //        let docURL = url.appendingPathComponent("myFileName.pdf")
+    //
+    //        // Save the data to the url
+    //        try! data!.write(to: docURL)
+    
+    //    }
     
     func createPDF(image: UIImage) -> NSData? {
         
@@ -154,7 +154,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         return pdfData
     }
     
-     //MARK: Temp Testing Data
+    //MARK: Temp Testing Data
     
     func setupData(){
         
@@ -168,7 +168,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                        "Monthly",
                        "Yearly"]
         //        //populate array for occurrence dates bassed on todays date with an option to pick the last year?
-
+        
         //        //populate initial labels
         
         categorySubCategoryLabels = ["Category", "SubCategory"]
@@ -187,18 +187,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         categories = try! context.fetch(request) as! [Category]
+        currentCategory = categories[0]
     }
     
-    //    func retrieveSubCategories(){
-    //        let context = AppDelegate.viewContext
-    //        let request =
-    //            NSFetchRequest<NSManagedObject>(entityName: "Category")
-    //        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-    //        //predicate here to narrow down the name
-    //        let subSet = selectedCategory.child
-    //        subCategories = subSet?.allObjects as! [SubCategory]
-    //        //categories = try! context.fetch(request) as! [Category]
-    //    }
+    func retrieveSubCategories(){
+        let context = AppDelegate.viewContext
+        let request =
+            NSFetchRequest<NSManagedObject>(entityName: "Category")
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        //predicate here to narrow down the name
+        let subSet = currentCategory?.child
+        subCategories = subSet?.allObjects as! [SubCategory]
+        categories = try! context.fetch(request) as! [Category]
+    }
     
     
     //MARK: Title/Tag Delegate Functions
@@ -235,8 +236,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return categories.count
         }
         if subCategoryPickerView == pickerView {
-            //return currentCategory.child?.count ?? 1
-            return 1
+            return currentCategory?.child?.count ?? 1
             
         }
         if occurrencePickerView == pickerView {
@@ -250,10 +250,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return categories[row].name
         }
         if subCategoryPickerView == pickerView {
-            //            let subSet = currentCategory.child
-            //            let subArray = subSet?.allObjects as! [SubCategory]
-            //            return subArray[row].name
-            return "not working subCat"
+            let subSet = currentCategory?.child
+            let subArray = subSet?.allObjects as! [SubCategory]
+            return subArray[row].name
+//            return "WTF"
         }
         if occurrencePickerView == pickerView {
             return occurrences[row]
@@ -268,16 +268,18 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             currentCategory = category
             subCategoryPickerView.reloadAllComponents()
             //currentCategory = category
-            // categorySubCategoryLabels[0] = currentCategory.name!
-            //categorySubCategoryLabels[1] = currentCategory.child.name
+            let subSet = currentCategory?.child
+            let subArray = subSet?.allObjects as! [SubCategory]
+            categorySubCategoryLabels[0] = currentCategory?.name! ?? "No Name in current category"
+            categorySubCategoryLabels[1] = subArray[0].name ?? "No name in subCategory"
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
-            //            let subSet =  currentCategory.child
-            //            let subArray = subSet?.allObjects as! [SubCategory]
-            //            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
-            //            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
-            //            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
+            let subSet =  currentCategory?.child
+            let subArray = subSet?.allObjects as! [SubCategory]
+            let subCategory = subArray[pickerView.selectedRow(inComponent: 0)]
+            categorySubCategoryLabels[1] = subCategory.name ?? "SubLabel Didn't Work"
+            categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
             let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
