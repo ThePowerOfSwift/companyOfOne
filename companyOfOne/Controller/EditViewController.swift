@@ -49,6 +49,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
+    var currentCategory: Category?
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -264,7 +265,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = categories[pickerView.selectedRow(inComponent: 0)]
-            //  currentCategory = category
+            currentCategory = category
             subCategoryPickerView.reloadAllComponents()
             //currentCategory = category
             // categorySubCategoryLabels[0] = currentCategory.name!
