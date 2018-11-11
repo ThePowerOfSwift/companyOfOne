@@ -24,8 +24,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var docDatePickerView: CustomDatePicker!
-    @IBOutlet weak var trashButton: UIButton!
-    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var docImageView: UIImageView!
     
     //MARK: Global Constants
@@ -146,6 +144,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         let context = AppDelegate.viewContext
         let document = Document(context:context)
         document.titleTag = titleTagLabel.text ?? "stupid"
+        print("\(document.titleTag ?? "WTF")")
         if let category = currentCategory{
              document.category = category
         }
@@ -157,7 +156,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
-    }
+    
+  }
     
     func createPDF(image: UIImage) -> NSData? {
         

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 class Document:NSManagedObject{
-    @NSManaged var titleTag:String
+   // @NSManaged var titleTag:String?
     @NSManaged var category:Category
     @NSManaged var subCategory:SubCategory
     @NSManaged var occurrence:String
