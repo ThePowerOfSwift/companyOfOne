@@ -8,14 +8,16 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Document:NSManagedObject{
    // @NSManaged var titleTag:String?
-    @NSManaged var category:Category
-    @NSManaged var subCategory:SubCategory
+    //@NSManaged var category:Category?
+    //@NSManaged var subCategory:SubCategory
     @NSManaged var occurrence:String
     @NSManaged var occurrenceDate:Date
     @NSManaged var docDate:Date
+    @NSManaged var docImage:UIImage
 //
 //    init(titleTag: String, category: Category, subCategory: SubCategory, occurrence: String, occurrenceDate:Date, docDate:Date) {
 //        self.titleTag = titleTag

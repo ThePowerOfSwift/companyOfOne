@@ -5,6 +5,8 @@
         <relationship name="child" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubCategory" inverseName="parent" inverseEntity="SubCategory" syncable="YES"/>
     </entity>
     <entity name="Document" representedClassName=".Document" syncable="YES" codeGenerationType="category">
+        <attribute name="category" optional="YES" attributeType="Transformable" customClassName=".Category" syncable="YES"/>
+        <attribute name="subCategory" optional="YES" attributeType="Transformable" customClassName=".SubCategory" syncable="YES"/>
         <attribute name="titleTag" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Occurrence" representedClassName=".Occurrence" syncable="YES" codeGenerationType="category">
@@ -16,7 +18,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="75"/>
-        <element name="Document" positionX="-265.7265625" positionY="-50.01953125" width="128" height="60"/>
+        <element name="Document" positionX="-265.7265625" positionY="-50.01953125" width="128" height="90"/>
         <element name="Occurrence" positionX="-97.375" positionY="86.51953125" width="128" height="60"/>
         <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="75"/>
     </elements>

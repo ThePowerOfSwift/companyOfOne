@@ -17,7 +17,7 @@ class CategoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createCategory(categoryName: "Mail")
+       // createCategory(categoryName: "Mail")
         self.title = selectedSettingName
         //this updates the local array
         retrieveAllCategories()

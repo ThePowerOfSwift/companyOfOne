@@ -17,8 +17,8 @@ class SubCategoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createSubCategory(subCategoryName: "Personal")
-        createSubCategory(subCategoryName: "Business")
+//        createSubCategory(subCategoryName: "Personal")
+//        createSubCategory(subCategoryName: "Business")
         self.title = selectedCategoryName
         //this updates the local array
         retrieveAllSubCategories()
