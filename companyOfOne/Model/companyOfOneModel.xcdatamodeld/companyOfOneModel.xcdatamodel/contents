@@ -18,7 +18,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="75"/>
-        <element name="Document" positionX="-265.7265625" positionY="-50.01953125" width="128" height="90"/>
+        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="88"/>
         <element name="Occurrence" positionX="-97.375" positionY="86.51953125" width="128" height="60"/>
         <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="75"/>
     </elements>
