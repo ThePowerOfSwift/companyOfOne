@@ -44,8 +44,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Global Arrays
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
-    var currentCategory: Category?
-    var currentSubCategory: SubCategory?
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -107,7 +105,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Save Document Action
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-        document.createDoc(titleTag: titleTagLabel.text, currentCategory: currentCategory, currentSubCategory: currentSubCategory)
+        document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence)
     }
     
     //MARK: Temp Testing Data
@@ -124,27 +122,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
     }
     
-//    func retrieveAllCategories(){
-//        let context = AppDelegate.viewContext
-//        let request =
-//            NSFetchRequest<NSManagedObject>(entityName: "Category")
-//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-//        category.categories = try! context.fetch(request) as! [Category]
-//        currentCategory = category.categories[0]
-//    }
-//    
-//    func retrieveSubCategories(){
-//        let context = AppDelegate.viewContext
-//        let request =
-//            NSFetchRequest<NSManagedObject>(entityName: "Category")
-//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-//        //predicate here to narrow down the name
-//        let subSet = currentCategory?.child
-//        subCategory.subCategories = subSet?.allObjects as! [SubCategory]
-//        category.categories = try! context.fetch(request) as! [Category]
-//    }
-    
-    
     //MARK: Title/Tag Delegate Functions
     
     @IBAction func changedTitleTagText(_ sender: Any) {
@@ -157,7 +134,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
     }
-    
     
     //MARK: PickerView Delegate Functions
     
@@ -179,7 +155,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return category.categories.count
         }
         if subCategoryPickerView == pickerView {
-            return currentCategory?.child?.count ?? 1
+            return category.currentCategory?.child?.count ?? 1
             
         }
         if occurrencePickerView == pickerView {
@@ -193,7 +169,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             return category.categories[row].name
         }
         if subCategoryPickerView == pickerView {
-            let subSet = currentCategory?.child
+            let subSet = category.currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
             return subArray[row].name
 //            return "WTF"
@@ -208,25 +184,26 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     {
         if categoryPickerView == pickerView {
             let category = self.category.categories[pickerView.selectedRow(inComponent: 0)]
-            currentCategory = category
+            self.category.currentCategory = category
             subCategoryPickerView.reloadAllComponents()
-            //currentCategory = category
-            let subSet = currentCategory?.child
+            let subSet =  self.category.currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
-            categorySubCategoryLabels[0] = currentCategory?.name! ?? "No Name in current category"
+            subCategory.currentSubCategory = subArray[0]
+            categorySubCategoryLabels[0] =  self.category.currentCategory?.name! ?? "No Name in current category"
             categorySubCategoryLabels[1] = subArray[0].name ?? "No name in subCategory"
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
-            let subSet =  currentCategory?.child
+            let subSet = category.currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
-            currentSubCategory = subArray[pickerView.selectedRow(inComponent: 0)]
+            subCategory.currentSubCategory = subArray[pickerView.selectedRow(inComponent: 0)]
             
-            categorySubCategoryLabels[1] = currentSubCategory!.name ?? "SubLabel Didn't Work"
+            categorySubCategoryLabels[1] = subCategory.currentSubCategory!.name ?? "SubLabel Didn't Work"
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
             let occurrence = self.occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
+           // self.occurrence.currentOccurrence = occurrence
             occurrenceLabels[0] = occurrence
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
@@ -506,7 +483,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docDatePickerViewLeadingAnchorToCenterX = docDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
         docDatePickerViewLeadingAnchorToCenterX.isActive = true
     }
-    
     
     //MARK: All GestureRecognizer Functions
     

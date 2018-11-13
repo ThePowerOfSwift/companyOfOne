@@ -14,7 +14,7 @@ import CoreData
 class Category: NSManagedObject{
     
     var categories:[Category] = []
-    var selectedCategory = Category()
+    var currentCategory:Category?
     
     func createCategory(categoryName: String){
         let context = AppDelegate.viewContext
@@ -33,6 +33,7 @@ class Category: NSManagedObject{
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         categories = try! context.fetch(request) as! [Category]
+        currentCategory = categories[0]
     }
     
     func deleteCategory(category: Category){

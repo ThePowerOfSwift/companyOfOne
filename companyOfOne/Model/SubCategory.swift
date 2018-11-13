@@ -12,6 +12,7 @@ import CoreData
 class SubCategory:NSManagedObject{
     
      var subCategories:[SubCategory] = []
+    var currentSubCategory:SubCategory?
 
     func createSubCategory(subCategoryName: String, selectedCategory:Category){
         let context = AppDelegate.viewContext

@@ -6,6 +6,7 @@
     </entity>
     <entity name="Document" representedClassName=".Document" syncable="YES" codeGenerationType="category">
         <attribute name="category" optional="YES" attributeType="Transformable" customClassName=".Category" syncable="YES"/>
+        <attribute name="occurrence" optional="YES" attributeType="Transformable" customClassName=".Occurrence" syncable="YES"/>
         <attribute name="subCategory" optional="YES" attributeType="Transformable" customClassName=".SubCategory" syncable="YES"/>
         <attribute name="titleTag" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -18,7 +19,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="75"/>
-        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="88"/>
+        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="103"/>
         <element name="Occurrence" positionX="-97.375" positionY="86.51953125" width="128" height="60"/>
         <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="75"/>
     </elements>

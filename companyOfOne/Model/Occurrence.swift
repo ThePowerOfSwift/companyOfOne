@@ -15,4 +15,5 @@ class Occurrence:NSManagedObject{
                                "Biweekly",
                                "Monthly",
                                "Yearly"]
+    var currentOccurrence:Occurrence?
 }
