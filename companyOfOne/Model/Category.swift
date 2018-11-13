@@ -14,6 +14,7 @@ import CoreData
 class Category: NSManagedObject{
     
     var categories:[Category] = []
+    var selectedCategory = Category()
     
     func createCategory(categoryName: String){
         let context = AppDelegate.viewContext

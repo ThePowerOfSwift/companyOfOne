@@ -11,9 +11,9 @@ import CoreData
 
 class SubCategoryTableViewController: UITableViewController {
     
-    var subCategories: [SubCategory] = []
     var selectedCategoryName = String()
     var selectedCategory = Category()
+    var subCategory = SubCategory()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class SubCategoryTableViewController: UITableViewController {
 //        createSubCategory(subCategoryName: "Business")
         self.title = selectedCategoryName
         //this updates the local array
-        retrieveAllSubCategories()
+        subCategory.retrieveAllSubCategories(selectedCategory: selectedCategory)
     }
     
     // MARK: - TableView Functions
@@ -31,27 +31,27 @@ class SubCategoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subCategories.count
+        return subCategory.subCategories.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "subCategoryTableViewCell", for: indexPath)
-        let subCategory = subCategories[indexPath.row]
+        let subCategory = self.subCategory.subCategories[indexPath.row]
         cell.textLabel!.text = subCategory.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let subCategoryToDelete = subCategories[indexPath.row]
-            deleteSubCategory(subCategory: subCategoryToDelete)
+            let subCategoryToDelete = subCategory.subCategories[indexPath.row]
+            subCategory.deleteSubCategory(subCategory: subCategoryToDelete, selectedCategory: selectedCategory)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
-    //MARK:- Create / Retrieve / Delete CoreData
+    //MARK:- Get SubCategory Name and call createSubCategory
     
     @IBAction func getSubCategoryName(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New SubCategory",
@@ -64,8 +64,8 @@ class SubCategoryTableViewController: UITableViewController {
                 let subCategoryName = textField.text else {
                     return
             }
-            self.createSubCategory(subCategoryName: subCategoryName)
-            self.retrieveAllSubCategories()
+            self.subCategory.createSubCategory(subCategoryName: subCategoryName, selectedCategory: self.selectedCategory)
+            self.subCategory.retrieveAllSubCategories(selectedCategory: self.selectedCategory)
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -74,36 +74,6 @@ class SubCategoryTableViewController: UITableViewController {
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
         present(alert, animated: true)
-    }
-    
-    func createSubCategory(subCategoryName: String){
-        let context = AppDelegate.viewContext
-        let subCategory = SubCategory(context:context)
-        subCategory.name = subCategoryName
-        subCategory.parent = selectedCategory
-        
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save subCategory. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func retrieveAllSubCategories(){
-        let subSet = selectedCategory.child
-        subCategories = subSet?.allObjects as! [SubCategory]
-    }
-    
-    func deleteSubCategory(subCategory: SubCategory){
-        let context = AppDelegate.viewContext
-        context.delete(subCategory)
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save deletion. \(error), \(error.userInfo)")
-        }
-        //this updates the local array
-        retrieveAllSubCategories()
     }
 }
 

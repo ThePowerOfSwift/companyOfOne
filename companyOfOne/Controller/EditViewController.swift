@@ -42,9 +42,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
-    //var categories = [Category]()
-    var subCategories = [SubCategory]()
-    //var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
     var currentCategory: Category?
@@ -69,6 +66,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Custom Class Instance Variables
     var document = Document()
     var category = Category()
+    var subCategory = SubCategory()
     var occurrence = Occurrence()
     
     override func viewDidLoad() {
@@ -80,7 +78,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         subCategoryPickerView.delegate = self
         occurrencePickerView.delegate = self
         //data
-        retrieveAllCategories()
+        category.retrieveAllCategories()
         setupData()
         //constants
         setupX_Y_W_H_Alpha_Constants()
@@ -106,28 +104,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         addSwipeGuesturesForDocDate()
     }
     
-    //MARK: Create PDF
-    
+    //MARK: Save Document Action
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-       document.createDoc(titleTag: titleTagLabel.text, currentCategory: currentCategory, currentSubCategory: currentSubCategory)
-    }
-
-    
-    func createPDF(image: UIImage) -> NSData? {
-        
-        let pdfData = NSMutableData()
-        let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-        
-        var mediaBox = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        
-        let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-        
-        pdfContext.beginPage(mediaBox: &mediaBox)
-        pdfContext.draw(image.cgImage!, in: mediaBox)
-        pdfContext.endPage()
-        
-        return pdfData
+        document.createDoc(titleTag: titleTagLabel.text, currentCategory: currentCategory, currentSubCategory: currentSubCategory)
     }
     
     //MARK: Temp Testing Data
@@ -144,25 +124,25 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
     }
     
-    func retrieveAllCategories(){
-        let context = AppDelegate.viewContext
-        let request =
-            NSFetchRequest<NSManagedObject>(entityName: "Category")
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        category.categories = try! context.fetch(request) as! [Category]
-        currentCategory = category.categories[0]
-    }
-    
-    func retrieveSubCategories(){
-        let context = AppDelegate.viewContext
-        let request =
-            NSFetchRequest<NSManagedObject>(entityName: "Category")
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        //predicate here to narrow down the name
-        let subSet = currentCategory?.child
-        subCategories = subSet?.allObjects as! [SubCategory]
-        category.categories = try! context.fetch(request) as! [Category]
-    }
+//    func retrieveAllCategories(){
+//        let context = AppDelegate.viewContext
+//        let request =
+//            NSFetchRequest<NSManagedObject>(entityName: "Category")
+//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+//        category.categories = try! context.fetch(request) as! [Category]
+//        currentCategory = category.categories[0]
+//    }
+//    
+//    func retrieveSubCategories(){
+//        let context = AppDelegate.viewContext
+//        let request =
+//            NSFetchRequest<NSManagedObject>(entityName: "Category")
+//        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+//        //predicate here to narrow down the name
+//        let subSet = currentCategory?.child
+//        subCategory.subCategories = subSet?.allObjects as! [SubCategory]
+//        category.categories = try! context.fetch(request) as! [Category]
+//    }
     
     
     //MARK: Title/Tag Delegate Functions
