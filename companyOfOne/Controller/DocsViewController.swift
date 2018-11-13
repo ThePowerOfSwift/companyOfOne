@@ -22,10 +22,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let document = self.document{
-             return document.documents.count
-        }
-        return 1
+
+        return document?.documents.count ?? 2
+      
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
