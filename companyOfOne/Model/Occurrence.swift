@@ -11,4 +11,8 @@ import CoreData
 
 class Occurrence:NSManagedObject{
     
+    var occurrences:[String] = ["None",
+                               "Biweekly",
+                               "Monthly",
+                               "Yearly"]
 }

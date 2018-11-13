@@ -42,9 +42,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
-    var categories = [Category]()
+    //var categories = [Category]()
     var subCategories = [SubCategory]()
-    var occurrences = [String]()
+    //var occurrences = [String]()
     var categorySubCategoryLabels = [String]()
     var occurrenceLabels = [String]()
     var currentCategory: Category?
@@ -65,7 +65,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Global Image
     
     var currentImage = UIImage()
+    
+    //MARK: Custom Class Instance Variables
     var document = Document()
+    var category = Category()
+    var occurrence = Occurrence()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,51 +112,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
        document.createDoc(titleTag: titleTagLabel.text, currentCategory: currentCategory, currentSubCategory: currentSubCategory)
     }
-    
-    //    func createPDF(){
-    //        // Create an empty PDF document
-    //        let pdfDocument = PDFDocument()
-    //
-    //        // Load or create your UIImage
-    //        let image = docImageView.image
-    //
-    //        // Create a PDF page instance from your image
-    //        let pdfPage = PDFPage(image: image!)
-    //
-    //        // Insert the PDF page into your document
-    //        pdfDocument.insert(pdfPage!, at: 0)
-    //
-    //        // Get the raw data of your PDF document
-    //        let data = pdfDocument.dataRepresentation()
-    //
-    //        // The url to save the data to
-    //
-    //        let url = URL(fileURLWithPath: "/Users/Jamie/Desktop/")
-    //        let docURL = url.appendingPathComponent("myFileName.pdf")
-    //
-    //        // Save the data to the url
-    //        try! data!.write(to: docURL)
-    
-    //    }
-    
-    func createDocument(){
-        let context = AppDelegate.viewContext
-        let document = Document(context:context)
-        document.titleTag = titleTagLabel.text ?? "stupid"
-        print("\(document.titleTag ?? "WTF")")
-        if let category = currentCategory{
-             document.category = category
-        }
-        if let  subCategory = currentSubCategory{
-            document.subCategory = subCategory
-        }
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    
-  }
+
     
     func createPDF(image: UIImage) -> NSData? {
         
@@ -177,24 +137,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docImageView.contentMode = .scaleAspectFit
         docImageView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         docImageView.image = currentImage
-        
-        //        //populate array for occurrences
-        occurrences = ["None",
-                       "Biweekly",
-                       "Monthly",
-                       "Yearly"]
-        //        //populate array for occurrence dates bassed on todays date with an option to pick the last year?
-        
-        //        //populate initial labels
-        
+
+        //        populate initial labels
         categorySubCategoryLabels = ["Category", "SubCategory"]
         occurrenceLabels = ["Occurrence", "-"]
         
-        //populate user labels
-        //        categorySubCategoryLabels = [("\(currentCategory.name)"),
-        //                ("\(currentCategory.subCategories[0].name)")]
-        // occurrenceLabels = [("\(occurrences[0])"),
-        //                            "-"]
     }
     
     func retrieveAllCategories(){
@@ -202,8 +149,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        categories = try! context.fetch(request) as! [Category]
-        currentCategory = categories[0]
+        category.categories = try! context.fetch(request) as! [Category]
+        currentCategory = category.categories[0]
     }
     
     func retrieveSubCategories(){
@@ -214,7 +161,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //predicate here to narrow down the name
         let subSet = currentCategory?.child
         subCategories = subSet?.allObjects as! [SubCategory]
-        categories = try! context.fetch(request) as! [Category]
+        category.categories = try! context.fetch(request) as! [Category]
     }
     
     
@@ -249,21 +196,21 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return categories.count
+            return category.categories.count
         }
         if subCategoryPickerView == pickerView {
             return currentCategory?.child?.count ?? 1
             
         }
         if occurrencePickerView == pickerView {
-            return occurrences.count
+            return occurrence.occurrences.count
         }
         return 5
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if categoryPickerView == pickerView {
-            return categories[row].name
+            return category.categories[row].name
         }
         if subCategoryPickerView == pickerView {
             let subSet = currentCategory?.child
@@ -272,7 +219,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
 //            return "WTF"
         }
         if occurrencePickerView == pickerView {
-            return occurrences[row]
+            return occurrence.occurrences[row]
         }
         return "--"
     }
@@ -280,7 +227,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if categoryPickerView == pickerView {
-            let category = categories[pickerView.selectedRow(inComponent: 0)]
+            let category = self.category.categories[pickerView.selectedRow(inComponent: 0)]
             currentCategory = category
             subCategoryPickerView.reloadAllComponents()
             //currentCategory = category
@@ -299,14 +246,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }
         if occurrencePickerView == pickerView {
-            let occurrence = occurrences[pickerView.selectedRow(inComponent: 0)]
+            let occurrence = self.occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
             occurrenceLabels[0] = occurrence
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
         if occurrenceDatePickerView == pickerView {
             print(occurrenceLabels)
-            let occurrenceMonth = occurrences[pickerView.selectedRow(inComponent: 0)]
-            let occurrenceYear = occurrences[pickerView.selectedRow(inComponent: 1)]
+            let occurrenceMonth = occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
+            let occurrenceYear = occurrence.occurrences[pickerView.selectedRow(inComponent: 1)]
             let occurenceDate = "\(occurrenceMonth), \(occurrenceYear)"
             occurrenceLabels.insert(occurenceDate, at: 1) //last position
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
@@ -751,7 +698,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
         }
-    }
-    
+    }    
 }
 

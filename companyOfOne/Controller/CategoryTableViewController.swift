@@ -11,16 +11,16 @@ import CoreData
 
 class CategoryTableViewController: UITableViewController {
     
-    var categories: [Category] = []
+    var category = Category()
+    //var categories: [Category] = []
     var selectedSettingName = String()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // createCategory(categoryName: "Mail")
         self.title = selectedSettingName
         //this updates the local array
-        retrieveAllCategories()
+        category.retrieveAllCategories()
     }
     
     // MARK: - TableView Functions
@@ -30,27 +30,27 @@ class CategoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return category.categories.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryTableViewCell", for: indexPath)
-        let category = categories[indexPath.row]
+        let category = self.category.categories[indexPath.row]
         cell.textLabel!.text = category.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let categoryToDelete = categories[indexPath.row]
-            deleteCategory(category: categoryToDelete)
+            let categoryToDelete = category.categories[indexPath.row]
+            category.deleteCategory(category: categoryToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
-    //MARK:- Create / Retrieve / Delete CoreData
+    //MARK:- Get Category Name and call createCategory
     
     @IBAction func getCategoryName(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "New Category",
@@ -63,8 +63,8 @@ class CategoryTableViewController: UITableViewController {
                 let categoryName = textField.text else {
                     return
             }
-            self.createCategory(categoryName: categoryName)
-            self.retrieveAllCategories()
+            self.category.createCategory(categoryName: categoryName)
+            self.category.retrieveAllCategories()
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -75,45 +75,14 @@ class CategoryTableViewController: UITableViewController {
         present(alert, animated: true)
     }
     
-    func createCategory(categoryName: String){
-        let context = AppDelegate.viewContext
-        let category = Category(context:context)
-        category.name = categoryName
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-    
-    func retrieveAllCategories(){
-        let context = AppDelegate.viewContext
-        let request =
-            NSFetchRequest<NSManagedObject>(entityName: "Category")
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        categories = try! context.fetch(request) as! [Category]
-    }
-    
-    func deleteCategory(category: Category){
-        let context = AppDelegate.viewContext
-        context.delete(category)
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save deletion. \(error), \(error.userInfo)")
-        }
-        //this updates the local array
-        retrieveAllCategories()
-    }
-    
     //MARK: - Prepare For Seque To SubCategories
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSubCategories" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! SubCategoryTableViewController
-                controller.selectedCategoryName = self.categories[indexPath.row].name ?? "Default"
-                controller.selectedCategory = self.categories[indexPath.row]
+                controller.selectedCategoryName = self.category.categories[indexPath.row].name ?? "Default"
+                controller.selectedCategory = self.category.categories[indexPath.row]
             }
         }
     }
