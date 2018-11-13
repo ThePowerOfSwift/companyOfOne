@@ -13,6 +13,7 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
     
     var months: [String]!
     var years: [Int]!
+    var days: [Int]!
     
     var month = Calendar.current.component(.month, from: Date()) {
         didSet {
@@ -20,9 +21,15 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
         }
     }
     
+    var day = Calendar.current.component(.day, from: Date()) {
+        didSet {
+            selectRow(days.index(of: day)!, inComponent: 1, animated: false)
+        }
+    }
+    
     var year = Calendar.current.component(.year, from: Date()) {
         didSet {
-            selectRow(years.index(of: year)!, inComponent: 1, animated: true)
+            selectRow(years.index(of: year)!, inComponent: 2, animated: true)
         }
     }
     
@@ -50,6 +57,18 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
         }
         self.years = years
         
+        //population with days
+        
+        var days: [Int] = []
+        if days.count == 0 {
+            var day = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!.component(.day, from: NSDate() as Date)
+            for _ in 1...30 {
+                days.append(day)
+                day += 1
+            }
+        }
+        self.days = days
+        
         // population months with localized names
         var months: [String] = []
         var month = 0
@@ -69,7 +88,7 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
     // Mark: UIPicker Delegate / Data Source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return 3
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -77,6 +96,8 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
         case 0:
             return months[row]
         case 1:
+            return "\(days[row])"
+        case 2:
             return "\(years[row])"
         default:
             return nil
@@ -88,6 +109,8 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
         case 0:
             return months.count
         case 1:
+            return days.count
+        case 2:
             return years.count
         default:
             return 0

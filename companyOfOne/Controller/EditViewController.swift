@@ -23,7 +23,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var occurrencePickerView: UIPickerView!
     @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
     @IBOutlet weak var docDateLabel: UILabel!
-    @IBOutlet weak var docDatePickerView: CustomDatePicker!
+    @IBOutlet weak var docDatePickerView: UIDatePicker!
     @IBOutlet weak var docImageView: UIImageView!
     
     //MARK: Global Constants
@@ -65,6 +65,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Global Image
     
     var currentImage = UIImage()
+    var document = Document()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,13 +106,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-        createDocument()
-        print("It didn't crash")
-        
-        //        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        //        let docURL = documentDirectory.appendingPathComponent("myFileName.pdf")
-        //
-        //        createPDF(image: docImageView.image!)?.write(to: docURL, atomically: true)
+       document.createDoc(titleTag: titleTagLabel.text, currentCategory: currentCategory, currentSubCategory: currentSubCategory)
     }
     
     //    func createPDF(){
