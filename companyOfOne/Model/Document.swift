@@ -47,7 +47,7 @@ class Document:NSManagedObject{
         let context = AppDelegate.viewContext
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
-        request.sortDescriptors = [NSSortDescriptor(key: "category", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "category.name", ascending: true)]
         documents = try! context.fetch(request) as! [Document]
         //currentCategory = categories[0]
     }
