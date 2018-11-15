@@ -46,9 +46,9 @@ class Document:NSManagedObject{
     func retrieveAllDocuments(){
         let context = AppDelegate.viewContext
         let request =
-            NSFetchRequest<NSManagedObject>(entityName: "Document")
-        request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
-        documents = try! context.fetch(request) as! [Document]
+            NSFetchRequest<Document>(entityName: "Document")
+//        request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
+        documents = try! context.fetch(request)
         //currentCategory = categories[0]
     }
     
