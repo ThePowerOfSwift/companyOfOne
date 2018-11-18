@@ -10,17 +10,23 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    
+    @IBOutlet weak var docTableView: UITableView!
+    
     let document = Document(context:AppDelegate.viewContext)
-     //This generates an error but var document:Document? gets rid of the error, doesn not call the function.
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         document.retrieveAllDocuments()
+        docTableView.reloadData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController!.isNavigationBarHidden = true
         document.retrieveAllDocuments()
+        docTableView.reloadData()
         
     }
     
