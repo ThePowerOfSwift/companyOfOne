@@ -22,22 +22,22 @@ class Document:NSManagedObject{
         if let titleTag = titleTag{
              document.titleTag = titleTag
         }
-        if let category = currentCategory{
-            document.category = category
-        }
-        if let subCategory = currentSubCategory{
-            document.subCategory = subCategory
-        }
-        if let occurrence = currentOccurrence{
-            document.occurrence = occurrence
-        }
+//        if let category = currentCategory{
+//            document.category = category
+//        }
+//        if let subCategory = currentSubCategory{
+//            document.subCategory = subCategory
+//        }
+//        if let occurrence = currentOccurrence{
+//            document.occurrence = occurrence
+//        }
         
         do {
             try context.save()
             print("Saved succesfully")
             print("\(document.titleTag ?? "No title or tag")")
-            print("\(document.category?.name ?? "To be categorized")")
-            print("\(document.subCategory?.name ?? "To be sub categorized")")
+//            print("\(document.category?.name ?? "To be categorized")")
+//            print("\(document.subCategory?.name ?? "To be sub categorized")")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
@@ -47,7 +47,7 @@ class Document:NSManagedObject{
         let context = AppDelegate.viewContext
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
-        request.sortDescriptors = [NSSortDescriptor(key: "category", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
         documents = try! context.fetch(request) as! [Document]
         //currentCategory = categories[0]
     }
