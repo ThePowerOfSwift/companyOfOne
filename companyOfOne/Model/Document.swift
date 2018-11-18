@@ -25,9 +25,10 @@ class Document:NSManagedObject{
         if let titleTag = titleTag{
              document.titleTag = titleTag
         }
-//        if let category = currentCategory{
-//            document.category = category
-//        }
+        if let category = currentCategory{
+           // category.toDocument? = document
+            document.toCategory? = category
+        }
 //        if let subCategory = currentSubCategory{
 //            document.subCategory = subCategory
 //        }
@@ -39,7 +40,7 @@ class Document:NSManagedObject{
             try context.save()
             print("Saved succesfully")
             print("\(document.titleTag ?? "No title or tag")")
-//            print("\(document.category?.name ?? "To be categorized")")
+            print("\(document.toCategory?.name ?? "To be categorized")")
 //            print("\(document.subCategory?.name ?? "To be sub categorized")")
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")

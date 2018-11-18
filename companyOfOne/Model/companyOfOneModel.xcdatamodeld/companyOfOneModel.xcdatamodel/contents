@@ -3,9 +3,12 @@
     <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="child" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SubCategory" inverseName="parent" inverseEntity="SubCategory" syncable="YES"/>
+        <relationship name="toDocument" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="toCategory" inverseEntity="Document" syncable="YES"/>
     </entity>
     <entity name="Document" representedClassName=".Document" syncable="YES" codeGenerationType="category">
         <attribute name="titleTag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="toCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="toDocument" inverseEntity="Category" syncable="YES"/>
+        <relationship name="toSubCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubCategory" inverseName="toDocument" inverseEntity="SubCategory" syncable="YES"/>
     </entity>
     <entity name="Occurrence" representedClassName=".Occurrence" syncable="YES" codeGenerationType="category">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -13,11 +16,12 @@
     <entity name="SubCategory" representedClassName=".SubCategory" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="child" inverseEntity="Category" syncable="YES"/>
+        <relationship name="toDocument" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Document" inverseName="toSubCategory" inverseEntity="Document" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="75"/>
-        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="58"/>
+        <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="88"/>
+        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="88"/>
         <element name="Occurrence" positionX="-72.4375" positionY="-10.76171875" width="128" height="58"/>
-        <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="75"/>
+        <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="88"/>
     </elements>
 </model>

@@ -39,7 +39,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
-        //cell.categoryLabel.text = document.documents[indexPath.row].category?.name
+        cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         //cell.subCategoryLabel.text = document.documents[indexPath.row].subCategory?.name
         cell.dateLabel.text = "Dec 21, 2018"
         //cell.occurenceLabel.text = document?.occurrence?
