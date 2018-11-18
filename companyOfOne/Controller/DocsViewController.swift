@@ -32,13 +32,13 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return ArrayHandler.sharedInstance.docArray.count//?? 2
+        return ArrayHandler.sharedInstance.documentArray.count//?? 2
       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
-        cell.titleTagLabel.text = ArrayHandler.sharedInstance.docArray[indexPath.row].titleTag
+        cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         //cell.categoryLabel.text = document.documents[indexPath.row].category?.name
         //cell.subCategoryLabel.text = document.documents[indexPath.row].subCategory?.name
         cell.dateLabel.text = "Dec 21, 2018"
@@ -49,13 +49,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let documentToDelete = ArrayHandler.sharedInstance.docArray[indexPath.row]
+            let documentToDelete = ArrayHandler.sharedInstance.documentArray[indexPath.row]
             document.deleteDocument(document: documentToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
+    
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         guard let image = UIImage(named: "testDoc") else { return }
@@ -74,7 +75,13 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewControllerFromDocs" {
-            let nextController = segue.destination as! EditViewController
+            if let indexPath = self.docTableView.indexPathForSelectedRow {
+                let nextController = segue.destination as! EditViewController
+                let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
+                nextController.titleTagLabel?.text = titleTag
+            }
+            
         }
     }
 }
+

@@ -51,7 +51,7 @@ class Document:NSManagedObject{
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
-        ArrayHandler.sharedInstance.docArray = try! context.fetch(request) as! [Document]
+        ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
         //currentCategory = categories[0]
     }
     

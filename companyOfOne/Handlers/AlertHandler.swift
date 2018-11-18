@@ -9,29 +9,21 @@
 import UIKit
 
 class AlertHandler: NSObject {
-//  static let sharedInstance = AlertHandler()
-//    func subCategoryAlert() -> String {
-//        let subCategoryName = String()
-//        let alert = UIAlertController(title: "New SubCategory",
-//                                      message: "Add a new sub category",
-//                                      preferredStyle: .alert)
-//        
-//        let saveAction = UIAlertAction(title: "Save", style: .default) {
-//            [unowned self] action in
-//            guard let textField = alert.textFields?.first,
-//                subCategoryName = textField.text else {
-//                    return
-//            }
-//    }
-//        
-//        let cancelAction = UIAlertAction(title: "Cancel",
-//                                         style: .cancel)
-//        
-//        alert.addTextField()
-//        alert.addAction(saveAction)
-//        alert.addAction(cancelAction)
-//        //present(alert, animated: true)
-//        return subCategoryName
-//}
-//    
+  static let sharedInstance = AlertHandler()
+    func getNameAlert(title: String, message: String, viewController: UIViewController) -> String {
+        var name = String()
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default)
+        guard let textField = alert.textFields?.first else {return "No name"}
+           name = textField.text ?? "default name (alert)"
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .cancel)
+        alert.addTextField()
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        viewController.present(alert, animated: true)
+        return name
+}
 }
