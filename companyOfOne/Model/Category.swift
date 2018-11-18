@@ -33,7 +33,9 @@ class Category: NSManagedObject{
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         categories = try! context.fetch(request) as! [Category]
-        currentCategory = categories[0]
+        if self.categories.count != 0{
+            currentCategory = categories[0]
+        }
     }
     
     func deleteCategory(category: Category){
