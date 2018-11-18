@@ -152,7 +152,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if categoryPickerView == pickerView {
-            return category.categories.count
+            return ArrayHandler.sharedInstance.categoryArray.count
         }
         if subCategoryPickerView == pickerView {
             return category.currentCategory?.child?.count ?? 1
@@ -166,7 +166,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if categoryPickerView == pickerView {
-            return category.categories[row].name
+            return ArrayHandler.sharedInstance.categoryArray[row].name
         }
         if subCategoryPickerView == pickerView {
             let subSet = category.currentCategory?.child
@@ -183,7 +183,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
         if categoryPickerView == pickerView {
-            let category = self.category.categories[pickerView.selectedRow(inComponent: 0)]
+            let category = ArrayHandler.sharedInstance.categoryArray[pickerView.selectedRow(inComponent: 0)]
             self.category.currentCategory = category
             subCategoryPickerView.reloadAllComponents()
             let subSet =  self.category.currentCategory?.child

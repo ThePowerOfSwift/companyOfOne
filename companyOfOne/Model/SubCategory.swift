@@ -11,7 +11,6 @@ import CoreData
 
 class SubCategory:NSManagedObject{
     
-     var subCategories:[SubCategory] = []
     var currentSubCategory:SubCategory?
 
     func createSubCategory(subCategoryName: String, selectedCategory:Category){
@@ -29,7 +28,8 @@ class SubCategory:NSManagedObject{
     
     func retrieveAllSubCategories(selectedCategory:Category){
         let subSet = selectedCategory.child
-        subCategories = subSet?.allObjects as! [SubCategory]
+        //subCategories = subSet?.allObjects as! [SubCategory]
+        ArrayHandler.sharedInstance.subCategoryArray = subSet?.allObjects as! [SubCategory]
     }
     
     func deleteSubCategory(subCategory: SubCategory, selectedCategory:Category){

@@ -13,7 +13,6 @@ import CoreData
 
 class Category: NSManagedObject{
     
-    var categories:[Category] = []
     var currentCategory:Category?
     
     func createCategory(categoryName: String){
@@ -32,9 +31,9 @@ class Category: NSManagedObject{
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Category")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        categories = try! context.fetch(request) as! [Category]
-        if self.categories.count != 0{
-            currentCategory = categories[0]
+        ArrayHandler.sharedInstance.categoryArray = try! context.fetch(request) as! [Category]
+        if ArrayHandler.sharedInstance.categoryArray.count != 0{
+            currentCategory = ArrayHandler.sharedInstance.categoryArray[0]
         }
     }
     

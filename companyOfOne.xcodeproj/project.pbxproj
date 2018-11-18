@@ -27,6 +27,7 @@
 		7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */; };
 		7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */; };
 		7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC93942218E163F001F05DE /* DocsViewController.swift */; };
+		7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewController.swift; sourceTree = "<group>"; };
 		7DC93942218E163F001F05DE /* DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController.swift; sourceTree = "<group>"; };
+		7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				7D66944E216A8BE40048F4A3 /* Category.swift */,
 				7D669450216A8BF50048F4A3 /* SubCategory.swift */,
 				7D14333E219B85C6006C20EC /* Image.swift */,
+				7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */,
 				7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -218,6 +221,7 @@
 				7D66945D216FE6610048F4A3 /* SettingsTableViewCell.swift in Sources */,
 				7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */,
 				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
+				7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */,
 				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D469631218BD6BA00C36AD3 /* DisplayTableViewCell.swift in Sources */,

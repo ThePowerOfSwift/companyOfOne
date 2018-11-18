@@ -30,19 +30,19 @@ class CategoryTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return category.categories.count
+        return ArrayHandler.sharedInstance.categoryArray.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoryTableViewCell", for: indexPath)
-        let category = self.category.categories[indexPath.row]
+        let category = ArrayHandler.sharedInstance.categoryArray[indexPath.row]
         cell.textLabel!.text = category.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let categoryToDelete = category.categories[indexPath.row]
+            let categoryToDelete = ArrayHandler.sharedInstance.categoryArray[indexPath.row]
             category.deleteCategory(category: categoryToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
@@ -81,8 +81,8 @@ class CategoryTableViewController: UITableViewController {
         if segue.identifier == "toSubCategories" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let controller = segue.destination as! SubCategoryTableViewController
-                controller.selectedCategoryName = self.category.categories[indexPath.row].name ?? "Default"
-                controller.selectedCategory = self.category.categories[indexPath.row]
+                controller.selectedCategoryName = ArrayHandler.sharedInstance.categoryArray[indexPath.row].name ?? "Default"
+                controller.selectedCategory = ArrayHandler.sharedInstance.categoryArray[indexPath.row]
             }
         }
     }

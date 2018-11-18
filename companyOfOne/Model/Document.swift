@@ -10,9 +10,12 @@ import Foundation
 import CoreData
 import UIKit
 
+
+
 class Document:NSManagedObject{
+ 
+    //var documents:[Document] = []
     
-    var documents:[Document] = []
     
     func createDocument(titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?){
         
@@ -48,7 +51,7 @@ class Document:NSManagedObject{
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
-        documents = try! context.fetch(request) as! [Document]
+        ArrayHandler.sharedInstance.docArray = try! context.fetch(request) as! [Document]
         //currentCategory = categories[0]
     }
     
