@@ -28,6 +28,7 @@
 		7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */; };
 		7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC93942218E163F001F05DE /* DocsViewController.swift */; };
 		7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */; };
+		7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67921A1040800C047E3 /* AlertHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewController.swift; sourceTree = "<group>"; };
 		7DC93942218E163F001F05DE /* DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController.swift; sourceTree = "<group>"; };
 		7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHandler.swift; sourceTree = "<group>"; };
+		7DDAA67921A1040800C047E3 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				7D669452216A8C040048F4A3 /* Model */,
+				7DDAA67B21A1043500C047E3 /* Handlers */,
 				7D66945B216EA8120048F4A3 /* View */,
 				7D669453216A8C100048F4A3 /* Controller */,
 				7D669454216A8C210048F4A3 /* Storyboards */,
@@ -105,7 +108,6 @@
 				7D66944E216A8BE40048F4A3 /* Category.swift */,
 				7D669450216A8BF50048F4A3 /* SubCategory.swift */,
 				7D14333E219B85C6006C20EC /* Image.swift */,
-				7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */,
 				7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -142,6 +144,15 @@
 				7D669457216D743C0048F4A3 /* CustomDatePicker.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7DDAA67B21A1043500C047E3 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */,
+				7DDAA67921A1040800C047E3 /* AlertHandler.swift */,
+			);
+			path = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +242,7 @@
 				7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */,
 				7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */,
 				7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */,
+				7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */,
 				7D669458216D743C0048F4A3 /* CustomDatePicker.swift in Sources */,
 				7D66944F216A8BE40048F4A3 /* Category.swift in Sources */,
 			);
