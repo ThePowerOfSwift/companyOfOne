@@ -27,11 +27,13 @@ class Document:NSManagedObject{
         }
         if let category = currentCategory{
            // category.toDocument? = document
-            document.toCategory? = category
+//            category.toDocument = document
+            category.addToToDocument(document)
+            
         }
-//        if let subCategory = currentSubCategory{
-//            document.subCategory = subCategory
-//        }
+        if let subCategory = currentSubCategory{
+            subCategory.addToToDocument(document)
+        }
 //        if let occurrence = currentOccurrence{
 //            document.occurrence = occurrence
 //        }
@@ -39,7 +41,7 @@ class Document:NSManagedObject{
         do {
             try context.save()
             print("Saved succesfully")
-            print("\(document.titleTag ?? "No title or tag")")
+            print("\(document.toSubCategory?.name ?? "No title or tag")")
             print("\(document.toCategory?.name ?? "To be categorized")")
 //            print("\(document.subCategory?.name ?? "To be sub categorized")")
         } catch let error as NSError {
