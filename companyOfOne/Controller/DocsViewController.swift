@@ -40,7 +40,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
-        //cell.subCategoryLabel.text = document.documents[indexPath.row].subCategory?.name
+        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
         cell.dateLabel.text = "Dec 21, 2018"
         //cell.occurenceLabel.text = document?.occurrence?
         cell.docImageView.image = #imageLiteral(resourceName: "testDoc")

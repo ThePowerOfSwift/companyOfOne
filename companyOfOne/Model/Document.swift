@@ -26,10 +26,7 @@ class Document:NSManagedObject{
              document.titleTag = titleTag
         }
         if let category = currentCategory{
-           // category.toDocument? = document
-//            category.toDocument = document
             category.addToToDocument(document)
-            
         }
         if let subCategory = currentSubCategory{
             subCategory.addToToDocument(document)
