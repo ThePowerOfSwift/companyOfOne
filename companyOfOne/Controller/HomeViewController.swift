@@ -78,6 +78,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewController" {
                 let nextController = segue.destination as! EditViewController
+                nextController.fromDocsViewController = false
                 nextController.currentImage = currentImage
     }
 }

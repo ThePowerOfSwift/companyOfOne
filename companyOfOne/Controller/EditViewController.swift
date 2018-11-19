@@ -61,6 +61,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     var currentImage = UIImage()
     
+    //MARK: ViewController Boolean
+    
+    var fromDocsViewController:Bool = false
+    
     //MARK: Custom Class Instance Variables
     var document = Document()
     var category = Category()
@@ -117,7 +121,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docImageView.image = currentImage
 
         //        populate initial labels
-        categorySubCategoryLabels = ["Category", "SubCategory"]
+        if fromDocsViewController == false {
+            categorySubCategoryLabels = ["Category", "SubCategory"]
+        }else{
+            categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
+        }
         occurrenceLabels = ["Occurrence", "-"]
         
     }

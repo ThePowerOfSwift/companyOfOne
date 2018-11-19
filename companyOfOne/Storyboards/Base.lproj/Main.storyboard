@@ -567,7 +567,7 @@
                     <navigationItem key="navigationItem" id="5p9-eW-jDR"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="docTableView" destination="HOG-ec-3jD" id="0mg-g7-VhP"/>
+                        <outlet property="docTableView" destination="HOG-ec-3jD" id="16L-wM-qzw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -77,11 +77,20 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         if segue.identifier == "toEditViewControllerFromDocs" {
             if let indexPath = self.docTableView.indexPathForSelectedRow {
                 let nextController = segue.destination as! EditViewController
-                let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
-                nextController.titleTagLabel?.text = titleTag
+                nextController.fromDocsViewController = true
+//                if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag,
+//                    let unWrappedTitleTag = nextController.titleTagLabel.text {
+//                         titleTag = unWrappedTitleTag
+//                        }
+                if let categoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name {
+                    nextController.categorySubCategoryLabels.insert(categoryName, at: 0)
+                }
+                if let subCategoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name {
+                    nextController.categorySubCategoryLabels.insert(subCategoryName, at: 1)
+                }
             }
-            
         }
     }
 }
+
 
