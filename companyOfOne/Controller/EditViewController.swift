@@ -60,6 +60,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Global Image
     
     var currentImage = UIImage()
+    var currentTitleTag = String()
     
     //MARK: ViewController Boolean
     
@@ -123,8 +124,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //        populate initial labels
         if fromDocsViewController == false {
             categorySubCategoryLabels = ["Category", "SubCategory"]
+            titleTagLabel.text = "Title / Tag"
+            
         }else{
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
+            titleTagLabel.text = currentTitleTag
         }
         occurrenceLabels = ["Occurrence", "-"]
         
@@ -317,8 +321,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         titleTagLabel.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         titleTagLabel.alpha = labelAlpha
-        titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
-        titleTagLabel.text = "Title / Tag"
+        //titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
+        //titleTagLabel.text = "Title / Tag"
         //setup in xPosition 3, yPositon 1
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false

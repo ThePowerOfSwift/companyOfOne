@@ -12,28 +12,22 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBOutlet weak var docTableView: UITableView!
-    
     let document = Document(context:AppDelegate.viewContext)
    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         document.retrieveAllDocuments()
         docTableView.reloadData()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController!.isNavigationBarHidden = true
         document.retrieveAllDocuments()
         docTableView.reloadData()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
         return ArrayHandler.sharedInstance.documentArray.count//?? 2
-      
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -78,10 +72,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let indexPath = self.docTableView.indexPathForSelectedRow {
                 let nextController = segue.destination as! EditViewController
                 nextController.fromDocsViewController = true
-//                if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag,
-//                    let unWrappedTitleTag = nextController.titleTagLabel.text {
-//                         titleTag = unWrappedTitleTag
-//                        }
+                if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag {
+                    nextController.currentTitleTag = titleTag
+                }
+               // nextController.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
                 if let categoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name {
                     nextController.categorySubCategoryLabels.insert(categoryName, at: 0)
                 }

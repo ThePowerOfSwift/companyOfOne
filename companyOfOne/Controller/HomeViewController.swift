@@ -15,7 +15,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     //MARK: Global Variables
     var currentImage = UIImage()
     var imagePicker = UIImagePickerController()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +23,10 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
-       // if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
-//        {
-            showAlertForPhotoOrLibrary()
-//        }
+        // if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
+        //        {
+        showAlertForPhotoOrLibrary()
+        //        }
     }
     
     func takeAPhoto(){
@@ -39,9 +39,9 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
     func pickFromLibrary(){
         print("pick from library")
-       imagePicker.sourceType = .photoLibrary
-       //imagePicker.allowsEditing = true
-       present(imagePicker, animated: true)
+        imagePicker.sourceType = .photoLibrary
+        //imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
     
     func showAlertForPhotoOrLibrary(){
@@ -54,7 +54,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         
         let pickFromLibraryAction = UIAlertAction(title: "Pick From Library", style: .default, handler: { action in
             self.pickFromLibrary()
-            
         })
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .cancel)
@@ -72,14 +71,13 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
         currentImage = image
         performSegue(withIdentifier: "toEditViewController", sender: nil)
-
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewController" {
-                let nextController = segue.destination as! EditViewController
-                nextController.fromDocsViewController = false
-                nextController.currentImage = currentImage
+            let nextController = segue.destination as! EditViewController
+            nextController.fromDocsViewController = false
+            nextController.currentImage = currentImage
+        }
     }
-}
 }
