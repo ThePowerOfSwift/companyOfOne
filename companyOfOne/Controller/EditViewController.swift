@@ -126,6 +126,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if fromDocsViewController == false {
             categorySubCategoryLabels = ["Category", "SubCategory"]
             titleTagLabel.text = "Title / Tag"
+            docDateLabel.text = "Document Date"
             
         }else{
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
@@ -477,7 +478,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         docDateLabel.backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
         docDateLabel.alpha = labelAlpha
-        docDateLabel.text = "Document Date"
+        //docDateLabel.text = "Document Date"
         //setup in xPosition 3, yPosition 4
         docDateLabel.isUserInteractionEnabled = true
         docDateLabel.translatesAutoresizingMaskIntoConstraints = false
