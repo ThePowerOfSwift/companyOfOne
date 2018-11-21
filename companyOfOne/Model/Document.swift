@@ -13,10 +13,7 @@ import UIKit
 
 
 class Document:NSManagedObject{
- 
-    //var documents:[Document] = []
-    
-    
+
     func createDocument(titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?){
         
         let context = AppDelegate.viewContext
@@ -34,8 +31,6 @@ class Document:NSManagedObject{
         if let documentDate = currentDate{
             document.documentDate = documentDate
         }
-           // document.documentDate = Date()
-        
 //        if let occurrence = currentOccurrence{
 //            document.occurrence = occurrence
 //        }
@@ -43,9 +38,11 @@ class Document:NSManagedObject{
         do {
             try context.save()
             print("Saved succesfully")
-            print("\(document.toSubCategory?.name ?? "No title or tag")")
-            print("\(document.toCategory?.name ?? "To be categorized")")
-//            print("\(document.subCategory?.name ?? "To be sub categorized")")
+            print("\(document.titleTag ?? "No date")")
+            print("\(document.toCategory?.name ?? "No category")")
+            print("\(document.toSubCategory?.name ?? "No subCategory")")
+            print("\(document.documentDate?.format() ?? "No date")")
+//
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }

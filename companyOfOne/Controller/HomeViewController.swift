@@ -16,7 +16,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     var currentImage = UIImage()
     var imagePicker = UIImagePickerController()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self

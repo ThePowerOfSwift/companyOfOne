@@ -57,7 +57,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var docDateLabelViewLeadingAnchorToCenterX = NSLayoutConstraint()
     var docDatePickerViewLeadingAnchorToCenterX = NSLayoutConstraint()
     
-    //MARK: Global Image
+    //MARK: Current Instance Variables
     
     var currentImage = UIImage()
     var currentTitleTag = String()
@@ -68,6 +68,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var fromDocsViewController:Bool = false
     
     //MARK: Custom Class Instance Variables
+    
     var document = Document()
     var category = Category()
     var subCategory = SubCategory()
@@ -112,6 +113,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
         document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: Temp Testing Data
@@ -121,20 +123,19 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         docImageView.contentMode = .scaleAspectFit
         docImageView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         docImageView.image = currentImage
-
+        
         //        populate initial labels
         if fromDocsViewController == false {
             categorySubCategoryLabels = ["Category", "SubCategory"]
             titleTagLabel.text = "Title / Tag"
             docDateLabel.text = "Document Date"
+            occurrenceLabels = ["Occurrence", "-"]
             
         }else{
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
             titleTagLabel.text = currentTitleTag
             docDateLabel.text = currentDate?.format()
         }
-        occurrenceLabels = ["Occurrence", "-"]
-        
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -148,6 +149,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         print("hit return after titleTag text input")
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
+    }
+    
+    //MARK: DatePicker Delegate Functions
+    
+    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+        let documentDate = docDatePickerView.date
+        currentDate = documentDate
+        docDateLabel.text = documentDate.format()
     }
     
     //MARK: PickerView Delegate Functions
@@ -187,7 +196,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let subSet = category.currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
             return subArray[row].name
-//            return "WTF"
         }
         if occurrencePickerView == pickerView {
             return occurrence.occurrences[row]
@@ -218,7 +226,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
         if occurrencePickerView == pickerView {
             let occurrence = self.occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
-           // self.occurrence.currentOccurrence = occurrence
+            // self.occurrence.currentOccurrence = occurrence
             occurrenceLabels[0] = occurrence
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
@@ -231,15 +239,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
     }
-    
-    //MARK: DatePicker Delegates
-    
-    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-        let documentDate = docDatePickerView.date
-        currentDate = documentDate
-        docDateLabel.text = documentDate.format()
-    }
- 
     
     //MARK: Setup Constants
     
@@ -333,8 +332,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         titleTagLabel.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         titleTagLabel.alpha = labelAlpha
-        //titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
-        //titleTagLabel.text = "Title / Tag"
         //setup in xPosition 3, yPositon 1
         titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -448,7 +445,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrencePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
         occurrencePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition3).isActive = true
         //this is the global constraints to be animated
-        
         occurrencePickerViewLeadingAnchorToCenterX = occurrencePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition4)
         occurrencePickerViewLeadingAnchorToCenterX.isActive = true
     }
@@ -469,7 +465,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrenceDatePickerViewLeadingAnchorToCenterX = occurrenceDatePickerView.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition5)
         occurrenceDatePickerViewLeadingAnchorToCenterX.isActive = true
         //setup the date data
-        
     }
     
     //MARK: Setup DocDate and Constraints
@@ -520,7 +515,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.isHidden = !categorySubCategoryLabel.isHidden
         occurrenceLabel.isHidden = !occurrenceLabel.isHidden
         docDateLabel.isHidden = !docDateLabel.isHidden
-        
     }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){

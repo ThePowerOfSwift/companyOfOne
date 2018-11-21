@@ -12,9 +12,7 @@ import CoreData
 class CategoryTableViewController: UITableViewController {
     
     var category = Category()
-    //var categories: [Category] = []
     var selectedSettingName = String()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +56,12 @@ class CategoryTableViewController: UITableViewController {
                                       preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Add", style: .default) {
             [unowned self] action in
-
+            
             guard let textField = alert.textFields?.first,
                 let categoryName = textField.text else {
                     return
             }
-//        let categoryName = AlertHandler.sharedInstance.getNameAlert(title: "New Category", message:"Add a new category", viewController: self)
+            //        let categoryName = AlertHandler.sharedInstance.getNameAlert(title: "New Category", message:"Add a new category", viewController: self)
             self.category.createCategory(categoryName: categoryName)
             self.category.retrieveAllCategories()
             self.tableView.reloadData()

@@ -12,11 +12,8 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    
-
-    
     @IBOutlet weak var SettingsTableView: UITableView!
-  
+    
     var settings = [String]()
     
     override func viewDidLoad() {
@@ -29,7 +26,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-       return 1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

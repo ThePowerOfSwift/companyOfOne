@@ -17,8 +17,6 @@ class SubCategoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        createSubCategory(subCategoryName: "Personal")
-//        createSubCategory(subCategoryName: "Business")
         self.title = selectedCategoryName
         //this updates the local array
         subCategory.retrieveAllSubCategories(selectedCategory: selectedCategory)
@@ -32,21 +30,18 @@ class SubCategoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArrayHandler.sharedInstance.subCategoryArray.count
-        //return subCategory.subCategories.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "subCategoryTableViewCell", for: indexPath)
-         let subCategory = ArrayHandler.sharedInstance.subCategoryArray[indexPath.row]
-        //let subCategory = self.subCategory.subCategories[indexPath.row]
+        let subCategory = ArrayHandler.sharedInstance.subCategoryArray[indexPath.row]
         cell.textLabel!.text = subCategory.name
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-             let subCategoryToDelete = ArrayHandler.sharedInstance.subCategoryArray[indexPath.row]
-           // let subCategoryToDelete = subCategory.subCategories[indexPath.row]
+            let subCategoryToDelete = ArrayHandler.sharedInstance.subCategoryArray[indexPath.row]
             subCategory.deleteSubCategory(subCategory: subCategoryToDelete, selectedCategory: selectedCategory)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {

@@ -10,10 +10,9 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var docTableView: UITableView!
     let document = Document(context:AppDelegate.viewContext)
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         document.retrieveAllDocuments()
@@ -50,7 +49,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         guard let image = UIImage(named: "testDoc") else { return }
