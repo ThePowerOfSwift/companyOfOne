@@ -61,6 +61,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     var currentImage = UIImage()
     var currentTitleTag = String()
+    var currentDate:Date?
     
     //MARK: ViewController Boolean
     
@@ -110,7 +111,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Save Document Action
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-        document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence)
+        document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
     }
     
     //MARK: Temp Testing Data
@@ -129,6 +130,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }else{
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
             titleTagLabel.text = currentTitleTag
+            docDateLabel.text = currentDate?.format()
         }
         occurrenceLabels = ["Occurrence", "-"]
         
@@ -233,6 +235,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         let documentDate = docDatePickerView.date
+        currentDate = documentDate
         docDateLabel.text = documentDate.format()
     }
  

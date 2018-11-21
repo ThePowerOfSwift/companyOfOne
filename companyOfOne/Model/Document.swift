@@ -17,7 +17,7 @@ class Document:NSManagedObject{
     //var documents:[Document] = []
     
     
-    func createDocument(titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?){
+    func createDocument(titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?){
         
         let context = AppDelegate.viewContext
         let document = Document(context:context)
@@ -30,6 +30,9 @@ class Document:NSManagedObject{
         }
         if let subCategory = currentSubCategory{
             subCategory.addToToDocument(document)
+        }
+        if let documentDate = currentDate{
+            document.documentDate = documentDate
         }
            // document.documentDate = Date()
         

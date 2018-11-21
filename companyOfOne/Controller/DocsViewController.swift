@@ -35,7 +35,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
-        cell.dateLabel.text = "Dec 21, 2018"
+        cell.dateLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate?.format()
         //cell.occurenceLabel.text = document?.occurrence?
         cell.docImageView.image = #imageLiteral(resourceName: "testDoc")
         return cell
@@ -75,12 +75,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag {
                     nextController.currentTitleTag = titleTag
                 }
-               // nextController.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
                 if let categoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name {
                     nextController.categorySubCategoryLabels.insert(categoryName, at: 0)
                 }
                 if let subCategoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name {
                     nextController.categorySubCategoryLabels.insert(subCategoryName, at: 1)
+                }
+                if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
+                    nextController.currentDate = documentDate
                 }
             }
         }
