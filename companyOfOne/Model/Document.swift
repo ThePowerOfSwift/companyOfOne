@@ -31,6 +31,8 @@ class Document:NSManagedObject{
         if let subCategory = currentSubCategory{
             subCategory.addToToDocument(document)
         }
+           // document.documentDate = Date()
+        
 //        if let occurrence = currentOccurrence{
 //            document.occurrence = occurrence
 //        }

@@ -229,6 +229,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
     }
     
+    //MARK: DatePicker Delegates
+    
+    @IBAction func datePickerChanged(_ sender: UIDatePicker) {
+        let documentDate = docDatePickerView.date
+        docDateLabel.text = documentDate.format()
+    }
+ 
+    
     //MARK: Setup Constants
     
     func setupX_Y_W_H_Alpha_Constants(){

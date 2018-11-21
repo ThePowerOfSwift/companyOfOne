@@ -364,6 +364,9 @@
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="504961200">
                                     <!--2017-01-01 11:00:00 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="datePickerChanged:" destination="HVc-xq-BOx" eventType="valueChanged" id="iNt-22-r0O"/>
+                                </connections>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
