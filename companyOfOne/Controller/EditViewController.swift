@@ -115,46 +115,55 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
         if isInEditMode == true {
-//                    document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
-            editViewModeButton.title = "Edit"
-            self.title = "View Details"
-             isInEditMode = !isInEditMode
+            //                    document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
+            turnOnViewMode()
         }else{
-           
-            self.title = "Add Details"
-            editViewModeButton.image = #imageLiteral(resourceName: "save")
-             isInEditMode = !isInEditMode
+            turnOnEditMode()
         }
-        
-
         //self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: Temp Testing Data
     
     func setupData(){
-        
         docImageView.contentMode = .scaleAspectFit
         docImageView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         docImageView.image = currentImage
         
-        //        populate initial labels
-        if fromDocsViewController == false {
-            editViewModeButton.image = #imageLiteral(resourceName: "save")
-            self.title = "Add Details"
+        //        populate initial labels and mode
+        if fromDocsViewController == true {
+            turnOnViewMode()
+            categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
+            titleTagLabel.text = currentTitleTag
+            docDateLabel.text = currentDate?.format()
+        }else{
+            turnOnEditMode()
             categorySubCategoryLabels = ["Category", "SubCategory"]
             titleTagLabel.text = "Title / Tag"
             docDateLabel.text = "Document Date"
             occurrenceLabels = ["Occurrence", "-"]
-            
-        }else{
-            editViewModeButton.title = "Edit"
-            self.title = "View Details"
-            categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
-            titleTagLabel.text = currentTitleTag
-            docDateLabel.text = currentDate?.format()
-            //self.isInEditMode = false
         }
+    }
+    
+    func turnOnViewMode(){
+        editViewModeButton.image = nil
+        editViewModeButton.title = "Edit"
+        self.title = "View Details"
+        isInEditMode = false
+        titleTagLabel.isUserInteractionEnabled = false
+        categorySubCategoryLabel.isUserInteractionEnabled = false
+        occurrenceLabel.isUserInteractionEnabled = false
+        docDateLabel.isUserInteractionEnabled = false
+        
+    }
+    func turnOnEditMode(){
+        editViewModeButton.image = #imageLiteral(resourceName: "save")
+        self.title = "Add Details"
+        isInEditMode = true
+        titleTagLabel.isUserInteractionEnabled = true
+        categorySubCategoryLabel.isUserInteractionEnabled = true
+        occurrenceLabel.isUserInteractionEnabled = true
+        docDateLabel.isUserInteractionEnabled = true
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -245,7 +254,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
         if occurrencePickerView == pickerView {
             let occurrence = self.occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
-            // self.occurrence.currentOccurrence = occurrence
+            //self.occurrence.currentOccurrence = occurrence
             occurrenceLabels[0] = occurrence
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
@@ -342,7 +351,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         docDateLabel.addGestureRecognizer(leftSwipe)
-        docDatePickerView.addGestureRecognizer(rightSwipe) //fix this spellingocc
+        docDatePickerView.addGestureRecognizer(rightSwipe)
     }
     
     //MARK: Setup Title and Constraints
@@ -352,12 +361,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         titleTagLabel.backgroundColor = #colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1)
         titleTagLabel.alpha = labelAlpha
         //setup in xPosition 3, yPositon 1
-        titleTagLabel.isUserInteractionEnabled = true
         titleTagLabel.translatesAutoresizingMaskIntoConstraints = false
         titleTagLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         titleTagLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
         titleTagLabel.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition1).isActive = true
-        
         //this the global constraint to be animated
         titleTagLabelLeadingAnchorToCenterX = titleTagLabel.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: xPosition3)
         titleTagLabelLeadingAnchorToCenterX.isActive = true
@@ -389,7 +396,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.alpha = labelAlpha
         categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         //setup in xPosition 3, yPosition 2
-        categorySubCategoryLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categorySubCategoryLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         categorySubCategoryLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
@@ -441,7 +447,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrenceLabel.alpha = labelAlpha
         occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         //setup in xPosition 3, yPosition 3
-        occurrenceLabel.isUserInteractionEnabled = true
         occurrenceLabel.translatesAutoresizingMaskIntoConstraints = false
         occurrenceLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         occurrenceLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
@@ -492,9 +497,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup the look
         docDateLabel.backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
         docDateLabel.alpha = labelAlpha
-        //docDateLabel.text = "Document Date"
         //setup in xPosition 3, yPosition 4
-        docDateLabel.isUserInteractionEnabled = true
         docDateLabel.translatesAutoresizingMaskIntoConstraints = false
         docDateLabel.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         docDateLabel.heightAnchor.constraint(equalToConstant: labelHeightConstant).isActive = true
