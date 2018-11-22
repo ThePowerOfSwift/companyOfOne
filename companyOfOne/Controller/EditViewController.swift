@@ -25,6 +25,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var docDatePickerView: UIDatePicker!
     @IBOutlet weak var docImageView: UIImageView!
+    @IBOutlet weak var editViewModeButton: UIBarButtonItem!
     
     //MARK: Global Constants
     var xPosition1 = CGFloat()
@@ -63,9 +64,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var currentTitleTag = String()
     var currentDate:Date?
     
-    //MARK: ViewController Boolean
+    //MARK: ViewController Booleans
     
     var fromDocsViewController:Bool = false
+    var isInEditMode:Bool = true
     
     //MARK: Custom Class Instance Variables
     
@@ -112,8 +114,20 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Save Document Action
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
-        document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
-        self.navigationController?.popViewController(animated: true)
+        if isInEditMode == true {
+//                    document.createDocument(titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
+            editViewModeButton.title = "Edit"
+            self.title = "View Details"
+             isInEditMode = !isInEditMode
+        }else{
+           
+            self.title = "Add Details"
+            editViewModeButton.image = #imageLiteral(resourceName: "save")
+             isInEditMode = !isInEditMode
+        }
+        
+
+        //self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: Temp Testing Data
@@ -126,15 +140,20 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         
         //        populate initial labels
         if fromDocsViewController == false {
+            editViewModeButton.image = #imageLiteral(resourceName: "save")
+            self.title = "Add Details"
             categorySubCategoryLabels = ["Category", "SubCategory"]
             titleTagLabel.text = "Title / Tag"
             docDateLabel.text = "Document Date"
             occurrenceLabels = ["Occurrence", "-"]
             
         }else{
+            editViewModeButton.title = "Edit"
+            self.title = "View Details"
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
             titleTagLabel.text = currentTitleTag
             docDateLabel.text = currentDate?.format()
+            //self.isInEditMode = false
         }
     }
     

@@ -373,7 +373,7 @@
                         <viewLayoutGuide key="safeArea" id="hNH-li-JZc"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Details" id="7RF-GC-33E">
-                        <barButtonItem key="rightBarButtonItem" title="Save" image="save" id="jxc-7n-e9t">
+                        <barButtonItem key="rightBarButtonItem" id="jxc-7n-e9t">
                             <connections>
                                 <action selector="pressSaveToPDFButton:" destination="HVc-xq-BOx" id="XWL-Lz-WHM"/>
                             </connections>
@@ -385,6 +385,7 @@
                         <outlet property="docDateLabel" destination="YJ6-mv-087" id="uHr-hf-7Pm"/>
                         <outlet property="docDatePickerView" destination="csz-yd-zh9" id="a4r-62-hjI"/>
                         <outlet property="docImageView" destination="C2r-Vp-aYH" id="3xU-eK-fLk"/>
+                        <outlet property="editViewModeButton" destination="jxc-7n-e9t" id="fxU-nh-H4K"/>
                         <outlet property="occurrenceDatePickerView" destination="aUe-uL-zR6" id="cxd-4D-0wA"/>
                         <outlet property="occurrenceLabel" destination="tZc-Ed-GbI" id="2Bl-fB-Wdq"/>
                         <outlet property="occurrencePickerView" destination="kzA-AL-sLn" id="FBi-Tl-ieI"/>
@@ -395,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2389.8550724637685" y="-390.48913043478262"/>
+            <point key="canvasLocation" x="2632" y="-390"/>
         </scene>
         <!--To Home-->
         <scene sceneID="5fc-On-7ay">
@@ -605,7 +606,6 @@
         <image name="menu" width="30" height="30"/>
         <image name="plus" width="30" height="30"/>
         <image name="receipts" width="30" height="30"/>
-        <image name="save" width="30" height="30"/>
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
