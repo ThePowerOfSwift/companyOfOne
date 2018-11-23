@@ -70,6 +70,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let indexPath = self.docTableView.indexPathForSelectedRow {
                 let nextController = segue.destination as! EditViewController
                 nextController.fromDocsViewController = true
+                nextController.currentTableViewIndexPathRow = indexPath.row
                 if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag {
                     nextController.currentTitleTag = titleTag
                 }
@@ -82,6 +83,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
                     nextController.currentDate = documentDate
                 }
+               
             }
         }
     }

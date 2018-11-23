@@ -63,6 +63,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var currentImage = UIImage()
     var currentTitleTag = String()
     var currentDate:Date?
+    var currentTableViewIndexPathRow:Int?
     
     //MARK: ViewController Booleans
     
@@ -103,6 +104,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         setupDocDatePicker()
         //gestures
         addTapGestureForHideNavBar_Labels_AndButtons()
+        addSwipeGuesturesForDocumentNavigationInViewMode()
         addSwipeGuesturesForDocTitle()
         addSwipeGuesturesForCategory()
         addSwipeGuesturesForSubCategory()
@@ -133,9 +135,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //        populate initial labels and mode
         if fromDocsViewController == true {
             turnOnViewMode()
-            categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
-            titleTagLabel.text = currentTitleTag
-            docDateLabel.text = currentDate?.format()
+            updateDocumentView()
         }else{
             turnOnEditMode()
             categorySubCategoryLabels = ["Category", "SubCategory"]
@@ -143,6 +143,12 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             docDateLabel.text = "Document Date"
             occurrenceLabels = ["Occurrence", "-"]
         }
+    }
+    
+    func updateDocumentView(){
+        categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
+        titleTagLabel.text = currentTitleTag
+        docDateLabel.text = currentDate?.format()
     }
     
     func turnOnViewMode(){
@@ -154,7 +160,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.isUserInteractionEnabled = false
         occurrenceLabel.isUserInteractionEnabled = false
         docDateLabel.isUserInteractionEnabled = false
-        
+        docImageView.isUserInteractionEnabled = true
+    
     }
     func turnOnEditMode(){
         editViewModeButton.image = #imageLiteral(resourceName: "save")
@@ -164,6 +171,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.isUserInteractionEnabled = true
         occurrenceLabel.isUserInteractionEnabled = true
         docDateLabel.isUserInteractionEnabled = true
+        docImageView.isUserInteractionEnabled = false
     }
     
     //MARK: Title/Tag Delegate Functions
@@ -298,6 +306,15 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         imageTap.numberOfTapsRequired = 1
         imageTap.numberOfTouchesRequired = 1
         docImageView.addGestureRecognizer(imageTap)
+    }
+    
+    func addSwipeGuesturesForDocumentNavigationInViewMode(){
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocImageViewToSeeNextOrPreviousDoc(_:)))
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeOnDocImageViewToSeeNextOrPreviousDoc(_:)))
+        leftSwipe.direction = .left
+        rightSwipe.direction = .right
+        docImageView.addGestureRecognizer(leftSwipe)
+        docImageView.addGestureRecognizer(rightSwipe)
     }
     
     func addSwipeGuesturesForDocTitle(){
@@ -537,6 +554,45 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.isHidden = !categorySubCategoryLabel.isHidden
         occurrenceLabel.isHidden = !occurrenceLabel.isHidden
         docDateLabel.isHidden = !docDateLabel.isHidden
+    }
+    
+    @objc func swipeOnDocImageViewToSeeNextOrPreviousDoc(_ sender:UISwipeGestureRecognizer){
+        if (sender.direction == .left) {
+            print("swiped left on doc ImageView, up one spot")
+            if let indexPathRow = currentTableViewIndexPathRow{
+                let nextDocIndexPathRow = indexPathRow + 1
+                print("\(indexPathRow)")
+                currentTableViewIndexPathRow = nextDocIndexPathRow
+                let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
+                unwrapAndUpdateDocument(document: document)
+            }
+        }
+            if (sender.direction == .right) {
+                print("swiped right on on doc ImageView, down one spot")
+                if let indexPathRow = currentTableViewIndexPathRow{
+                    let previousDocIndexPathRow = indexPathRow - 1
+                    print("\(indexPathRow)")
+                    currentTableViewIndexPathRow = previousDocIndexPathRow
+                    let document = ArrayHandler.sharedInstance.documentArray[previousDocIndexPathRow]
+                    unwrapAndUpdateDocument(document: document)
+                }
+        }
+    }
+    
+    func unwrapAndUpdateDocument(document:Document){
+        if let titleTag = document.titleTag{
+            currentTitleTag = titleTag
+        }
+        if let categoryName = document.toCategory?.name{
+            categorySubCategoryLabels[0] = categoryName
+        }
+        if let subCategoryName = document.toSubCategory?.name{
+            categorySubCategoryLabels[1] = subCategoryName
+        }
+        if let docDate = document.documentDate{
+            currentDate = docDate
+        }
+        updateDocumentView()
     }
     
     @objc func swipeOnDocTitleTagShowsAndHidesTitleTagTextField(_ sender:UISwipeGestureRecognizer){
