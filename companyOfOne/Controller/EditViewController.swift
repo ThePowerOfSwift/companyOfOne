@@ -560,8 +560,13 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         if (sender.direction == .left) {
             print("swiped left on doc ImageView, up one spot")
             if let indexPathRow = currentTableViewIndexPathRow{
-                let nextDocIndexPathRow = indexPathRow + 1
-                print("\(indexPathRow)")
+                var nextDocIndexPathRow = 0
+                if indexPathRow == ArrayHandler.sharedInstance.documentArray.count - 1 {
+                    nextDocIndexPathRow = 0
+                }else{
+                    nextDocIndexPathRow = indexPathRow + 1
+                }
+                print("\(nextDocIndexPathRow)")
                 currentTableViewIndexPathRow = nextDocIndexPathRow
                 let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
                 unwrapAndUpdateDocument(document: document)
@@ -570,10 +575,15 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             if (sender.direction == .right) {
                 print("swiped right on on doc ImageView, down one spot")
                 if let indexPathRow = currentTableViewIndexPathRow{
-                    let previousDocIndexPathRow = indexPathRow - 1
-                    print("\(indexPathRow)")
-                    currentTableViewIndexPathRow = previousDocIndexPathRow
-                    let document = ArrayHandler.sharedInstance.documentArray[previousDocIndexPathRow]
+                    var nextDocIndexPathRow = 0
+                    if indexPathRow == 0 {
+                        nextDocIndexPathRow = ArrayHandler.sharedInstance.documentArray.count - 1
+                    }else{
+                        nextDocIndexPathRow = indexPathRow - 1
+                    }
+                    print("\(nextDocIndexPathRow)")
+                    currentTableViewIndexPathRow = nextDocIndexPathRow
+                    let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
                     unwrapAndUpdateDocument(document: document)
                 }
         }
