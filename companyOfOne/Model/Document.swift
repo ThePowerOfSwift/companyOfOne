@@ -14,7 +14,7 @@ import UIKit
 
 class Document:NSManagedObject{
 
-    func createDocument(titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?){
+    func createDocument(currentDocImage:DocImage?, titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?){
         
         let context = AppDelegate.viewContext
         let document = Document(context:context)
@@ -31,6 +31,16 @@ class Document:NSManagedObject{
         if let documentDate = currentDate{
             document.documentDate = documentDate
         }
+//        if let docImage = currentDocImage {
+//            let docUIImage = docImage as! UIImage
+//           docImage.imageData = UIImageJPEGRepresentation(docImage as! UIImage, 1) else {
+//                // handle failed conversion
+//                print("jpg error")
+//                return
+//            }
+//
+//            document.toDocImage?.imageData = docImage
+//        }
 //        if let occurrence = currentOccurrence{
 //            document.occurrence = occurrence
 //        }

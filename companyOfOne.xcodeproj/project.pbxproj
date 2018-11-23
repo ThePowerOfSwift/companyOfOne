@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */; };
 		7D0A314321810C96007BD331 /* Occurrence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0A314221810C96007BD331 /* Occurrence.swift */; };
-		7D14333F219B85C6006C20EC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D14333E219B85C6006C20EC /* Image.swift */; };
+		7D14333F219B85C6006C20EC /* DocImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D14333E219B85C6006C20EC /* DocImage.swift */; };
 		7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46962E218B792D00C36AD3 /* TabBarController.swift */; };
 		7D469631218BD6BA00C36AD3 /* DisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D469630218BD6BA00C36AD3 /* DisplayTableViewCell.swift */; };
 		7D66943B216A89D20048F4A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66943A216A89D20048F4A3 /* AppDelegate.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		7D0A31402181070D007BD331 /* companyOfOneModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = companyOfOneModel.xcdatamodel; sourceTree = "<group>"; };
 		7D0A314221810C96007BD331 /* Occurrence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Occurrence.swift; sourceTree = "<group>"; };
-		7D14333E219B85C6006C20EC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		7D14333E219B85C6006C20EC /* DocImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocImage.swift; sourceTree = "<group>"; };
 		7D46962E218B792D00C36AD3 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7D469630218BD6BA00C36AD3 /* DisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayTableViewCell.swift; sourceTree = "<group>"; };
 		7D669437216A89D20048F4A3 /* companyOfOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = companyOfOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +111,7 @@
 				7D66944E216A8BE40048F4A3 /* Category.swift */,
 				7D669450216A8BF50048F4A3 /* SubCategory.swift */,
 				7D0A314221810C96007BD331 /* Occurrence.swift */,
-				7D14333E219B85C6006C20EC /* Image.swift */,
+				7D14333E219B85C6006C20EC /* DocImage.swift */,
 				7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */,
 			);
 			path = Model;
@@ -246,7 +246,7 @@
 				7D469631218BD6BA00C36AD3 /* DisplayTableViewCell.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,
 				7D66944D216A8BD50048F4A3 /* Document.swift in Sources */,
-				7D14333F219B85C6006C20EC /* Image.swift in Sources */,
+				7D14333F219B85C6006C20EC /* DocImage.swift in Sources */,
 				7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */,
 				7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */,
 				7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */,
