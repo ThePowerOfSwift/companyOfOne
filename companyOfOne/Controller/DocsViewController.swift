@@ -86,6 +86,11 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
                     nextController.currentDate = documentDate
                 }
+                if let imageData = ArrayHandler.sharedInstance.documentArray[indexPath.row].pictureData {
+                    if let image = UIImage(data: imageData) {
+                        nextController.currentImage = image
+                    }
+                }
             }
         }
     }
