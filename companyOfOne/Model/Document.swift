@@ -55,9 +55,11 @@ class Document:NSManagedObject{
     
     func retrieveAllDocuments(){
         let context = AppDelegate.viewContext
+       // context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
+
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
-        request.sortDescriptors = [NSSortDescriptor(key: "titleTag", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
         ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
         //currentCategory = categories[0]
     }
