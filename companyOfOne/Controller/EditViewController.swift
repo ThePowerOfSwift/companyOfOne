@@ -161,11 +161,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         occurrenceLabel.isUserInteractionEnabled = false
         docDateLabel.isUserInteractionEnabled = false
         docImageView.isUserInteractionEnabled = true
-    
+        
     }
     func turnOnEditMode(){
         editViewModeButton.image = #imageLiteral(resourceName: "save")
-        self.title = "Add Details"
+        self.title = "Edit Details + Save"
         isInEditMode = true
         titleTagLabel.isUserInteractionEnabled = true
         categorySubCategoryLabel.isUserInteractionEnabled = true
@@ -572,20 +572,20 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 unwrapAndUpdateDocument(document: document)
             }
         }
-            if (sender.direction == .right) {
-                print("swiped right on on doc ImageView, down one spot")
-                if let indexPathRow = currentTableViewIndexPathRow{
-                    var nextDocIndexPathRow = 0
-                    if indexPathRow == 0 {
-                        nextDocIndexPathRow = ArrayHandler.sharedInstance.documentArray.count - 1
-                    }else{
-                        nextDocIndexPathRow = indexPathRow - 1
-                    }
-                    print("\(nextDocIndexPathRow)")
-                    currentTableViewIndexPathRow = nextDocIndexPathRow
-                    let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
-                    unwrapAndUpdateDocument(document: document)
+        if (sender.direction == .right) {
+            print("swiped right on on doc ImageView, down one spot")
+            if let indexPathRow = currentTableViewIndexPathRow{
+                var nextDocIndexPathRow = 0
+                if indexPathRow == 0 {
+                    nextDocIndexPathRow = ArrayHandler.sharedInstance.documentArray.count - 1
+                }else{
+                    nextDocIndexPathRow = indexPathRow - 1
                 }
+                print("\(nextDocIndexPathRow)")
+                currentTableViewIndexPathRow = nextDocIndexPathRow
+                let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
+                unwrapAndUpdateDocument(document: document)
+            }
         }
     }
     

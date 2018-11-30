@@ -22,10 +22,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     }
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
-        // if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera)
-        //        {
         showAlertForPhotoOrLibrary()
-        //        }
     }
     
     func takeAPhoto(){

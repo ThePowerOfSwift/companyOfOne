@@ -83,7 +83,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
                     nextController.currentDate = documentDate
                 }
-               
             }
         }
     }

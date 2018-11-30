@@ -14,10 +14,10 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.items?[0].title = "Home"
        
-        tabBar.items?[1].title = "Docs"
+        tabBar.items?[1].title = "Documents"
        
-        tabBar.items?[2].title = "Mail"
+        tabBar.items?[2].title = "Snail Mail"
        
-        tabBar.items?[3].title = "Receipts"
+        tabBar.items?[3].title = "Personal Receipts"
     }
 }
