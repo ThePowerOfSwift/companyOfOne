@@ -11,6 +11,7 @@
     </entity>
     <entity name="Document" representedClassName=".Document" syncable="YES" codeGenerationType="category">
         <attribute name="documentDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="pictureData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="titleTag" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="toCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="toDocument" inverseEntity="Category" syncable="YES"/>
         <relationship name="toDocImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DocImage" inverseName="toDocument" inverseEntity="DocImage" syncable="YES"/>
@@ -26,9 +27,9 @@
     </entity>
     <elements>
         <element name="Category" positionX="-425.74609375" positionY="86.37109375" width="128" height="88"/>
-        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="120"/>
+        <element name="DocImage" positionX="-243" positionY="0" width="128" height="75"/>
+        <element name="Document" positionX="-245.70703125" positionY="-160.60546875" width="128" height="135"/>
         <element name="Occurrence" positionX="-72.4375" positionY="-10.76171875" width="128" height="58"/>
         <element name="SubCategory" positionX="-259.45703125" positionY="87.5703125" width="128" height="88"/>
-        <element name="DocImage" positionX="-243" positionY="0" width="128" height="75"/>
     </elements>
 </model>

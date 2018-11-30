@@ -36,7 +36,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
         cell.dateLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate?.format()
         //cell.occurenceLabel.text = document?.occurrence?
-        cell.docImageView.image = #imageLiteral(resourceName: "testDoc")
+        if let imageData = ArrayHandler.sharedInstance.documentArray[indexPath.row].pictureData {
+            cell.docImageView.image = UIImage(data: imageData)
+        }
+        
         return cell
     }
     
