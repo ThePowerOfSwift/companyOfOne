@@ -11,7 +11,8 @@ import UIKit
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var docTableView: UITableView!
-    let document = Document(context:AppDelegate.viewContext)
+    //let document = Document(context:AppDelegate.viewContext) <-- this adds a space to the tableView each time the app loads
+    let document = Document()
     
     override func viewDidLoad() {
         super.viewDidLoad()

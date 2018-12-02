@@ -149,6 +149,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         titleTagLabel.text = currentTitleTag
         docDateLabel.text = currentDate?.format()
+        docImageView.image = currentImage
     }
     
     func turnOnViewMode(){
@@ -601,6 +602,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
         if let docDate = document.documentDate{
             currentDate = docDate
+        }
+        if let imageData = document.pictureData {
+            if let image = UIImage(data: imageData) {
+                currentImage = image
+            }
         }
         updateDocumentView()
     }
