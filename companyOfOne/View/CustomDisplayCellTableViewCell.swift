@@ -9,6 +9,13 @@
 import UIKit
 
 class CustomDisplayCellTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var occurenceLabel: UILabel!
+    @IBOutlet weak var docImageView: UIImageView!
+    @IBOutlet weak var subCategoryLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var titleTagLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

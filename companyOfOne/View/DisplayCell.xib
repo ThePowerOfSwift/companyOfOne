@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisplayTableViewCell" customModule="companyOfOne" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DisplayTableViewCell" customModule="companyOfOne" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomDisplayCellTableViewCell" customModule="companyOfOne" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -76,6 +76,14 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="categoryLabel" destination="y26-bQ-S2s" id="8pu-yU-bcU"/>
+                <outlet property="dateLabel" destination="aA3-VO-xMw" id="dcU-yO-PyA"/>
+                <outlet property="docImageView" destination="70g-dC-gN1" id="nmZ-ca-EoR"/>
+                <outlet property="occurenceLabel" destination="cgx-FQ-eTe" id="vfn-Hz-stg"/>
+                <outlet property="subCategoryLabel" destination="zOn-uF-hIF" id="rOV-CW-UD8"/>
+                <outlet property="titleTagLabel" destination="KXC-Wc-pJA" id="MUn-At-gnc"/>
+            </connections>
             <point key="canvasLocation" x="28" y="48.575712143928037"/>
         </view>
     </objects>

@@ -31,6 +31,7 @@
 		7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67921A1040800C047E3 /* AlertHandler.swift */; };
 		7DDAA67F21A5DB2F00C047E3 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */; };
 		7DDAA68121A6360400C047E3 /* DisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68021A6360400C047E3 /* DisplayCell.xib */; };
+		7DDAA68521B3758300C047E3 /* CustomDisplayCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68421B3758300C047E3 /* CustomDisplayCellTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		7DDAA67921A1040800C047E3 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
 		7DDAA68021A6360400C047E3 /* DisplayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayCell.xib; sourceTree = "<group>"; };
+		7DDAA68421B3758300C047E3 /* CustomDisplayCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDisplayCellTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				7D469630218BD6BA00C36AD3 /* DisplayTableViewCell.swift */,
+				7DDAA68421B3758300C047E3 /* CustomDisplayCellTableViewCell.swift */,
 				7DDAA68021A6360400C047E3 /* DisplayCell.xib */,
 				7D66945C216FE6610048F4A3 /* SettingsTableViewCell.swift */,
 				7D669457216D743C0048F4A3 /* CustomDatePicker.swift */,
@@ -252,6 +255,7 @@
 				7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */,
 				7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */,
 				7D669458216D743C0048F4A3 /* CustomDatePicker.swift in Sources */,
+				7DDAA68521B3758300C047E3 /* CustomDisplayCellTableViewCell.swift in Sources */,
 				7D66944F216A8BE40048F4A3 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
