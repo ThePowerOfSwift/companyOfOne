@@ -15,7 +15,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     let document = Document()
     
     override func viewDidLoad() {
-        docTableView.register(UINib(nibName: "DocViewTableViewCell", bundle: nil), forCellReuseIdentifier: "customTableViewCell")
+        docTableView.register(UINib(nibName: "DocViewTableViewCell", bundle: nil), forCellReuseIdentifier: "DocViewTableViewCell")
         super.viewDidLoad()
         document.retrieveAllDocuments()
         docTableView.reloadData()
@@ -32,9 +32,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = Bundle.main.loadNibNamed("DisplayCell", owner: self, options: nil)?.first as! CustomDisplayCellTableViewCell
+      let cell = Bundle.main.loadNibNamed("DocViewTableViewCell", owner: self, options: nil)?.first as! DocViewTableViewCell
        // let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
-          let cell = tableView.dequeueReusableCell(withIdentifier: "customTableViewCell")! as! DocViewTableViewCell
+//          let cell = tableView.dequeueReusableCell(withIdentifier: "DocViewTableViewCell")! as! DocViewTableViewCell
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
@@ -55,6 +55,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
