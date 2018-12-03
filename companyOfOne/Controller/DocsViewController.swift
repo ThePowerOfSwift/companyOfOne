@@ -15,7 +15,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     let document = Document()
     
     override func viewDidLoad() {
-        docTableView.register(UINib(nibName: "DocViewTableViewCell", bundle: nil), forCellReuseIdentifier: "DocViewTableViewCell")
+        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
+        docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         super.viewDidLoad()
         document.retrieveAllDocuments()
         docTableView.reloadData()
@@ -34,7 +35,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       let cell = Bundle.main.loadNibNamed("DocViewTableViewCell", owner: self, options: nil)?.first as! DocViewTableViewCell
        // let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
-//          let cell = tableView.dequeueReusableCell(withIdentifier: "DocViewTableViewCell")! as! DocViewTableViewCell
+        // let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
