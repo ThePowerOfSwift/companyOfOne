@@ -453,16 +453,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-ec-3jD">
                                 <rect key="frame" x="20" y="164" width="394" height="467"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="NWk-Th-WVz">
-                                        <rect key="frame" x="0.0" y="28" width="394" height="56"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NWk-Th-WVz" id="Ibh-dp-YrG" customClass="DocViewTableViewCell" customModule="companyOfOne">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="55.666666666666664"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Lgp-y5-6ek" id="425-VL-tVD"/>
                                     <outlet property="delegate" destination="Lgp-y5-6ek" id="WHQ-Tb-Gsc"/>
@@ -503,6 +493,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="docTableView" destination="HOG-ec-3jD" id="16L-wM-qzw"/>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromDocs" id="rdm-6b-dxS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -539,4 +530,7 @@
         <image name="receipts" width="30" height="30"/>
         <image name="upload" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="rdm-6b-dxS"/>
+    </inferredMetricsTieBreakers>
 </document>
