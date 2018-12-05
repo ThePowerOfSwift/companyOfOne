@@ -451,7 +451,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-ec-3jD">
-                                <rect key="frame" x="20" y="164" width="394" height="467"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="467"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Lgp-y5-6ek" id="425-VL-tVD"/>
@@ -477,7 +477,7 @@
                             <constraint firstItem="dYL-YX-39P" firstAttribute="top" secondItem="ZoW-2d-JNY" secondAttribute="bottom" id="ETA-EV-Hxh"/>
                             <constraint firstItem="ZoW-2d-JNY" firstAttribute="trailing" secondItem="xkd-cG-3W5" secondAttribute="trailing" id="KSl-hK-bjT"/>
                             <constraint firstItem="dYL-YX-39P" firstAttribute="trailing" secondItem="xkd-cG-3W5" secondAttribute="trailing" id="Qbx-as-hjN"/>
-                            <constraint firstItem="HOG-ec-3jD" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" constant="20" id="RWO-IQ-8rB"/>
+                            <constraint firstItem="HOG-ec-3jD" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="RWO-IQ-8rB"/>
                             <constraint firstItem="dYL-YX-39P" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="gVF-br-kby"/>
                             <constraint firstItem="SKU-1z-yCh" firstAttribute="top" secondItem="HOG-ec-3jD" secondAttribute="bottom" id="hjc-oI-ZdG"/>
                             <constraint firstItem="HOG-ec-3jD" firstAttribute="top" secondItem="dYL-YX-39P" secondAttribute="bottom" id="osl-Dc-bck"/>
