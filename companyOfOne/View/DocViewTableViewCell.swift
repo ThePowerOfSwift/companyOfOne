@@ -18,7 +18,8 @@ class DocViewTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     
     
-
+   // @IBOutlet var docViewTableViewCell: DocViewTableViewCell!
+    
     
     
     override func awakeFromNib() {
