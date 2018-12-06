@@ -25,12 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Future Docs View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlo-jy-bAW">
-                    <rect key="frame" x="80" y="323" width="215" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-9d-KsO">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <items>
@@ -62,7 +56,6 @@
             <constraints>
                 <constraint firstItem="8dt-KL-UaZ" firstAttribute="trailing" secondItem="OlQ-Ey-MDm" secondAttribute="trailing" id="3sj-65-XKC"/>
                 <constraint firstItem="iaJ-9d-KsO" firstAttribute="trailing" secondItem="OlQ-Ey-MDm" secondAttribute="trailing" id="CrA-71-Ax6"/>
-                <constraint firstItem="rlo-jy-bAW" firstAttribute="centerY" secondItem="tEI-OV-Qor" secondAttribute="centerY" id="F8S-DQ-kum"/>
                 <constraint firstItem="8dt-KL-UaZ" firstAttribute="leading" secondItem="OlQ-Ey-MDm" secondAttribute="leading" id="R6C-bm-hGr"/>
                 <constraint firstItem="8dt-KL-UaZ" firstAttribute="bottom" secondItem="OlQ-Ey-MDm" secondAttribute="bottom" id="Sd9-sB-Eq4"/>
                 <constraint firstItem="iaJ-9d-KsO" firstAttribute="leading" secondItem="OlQ-Ey-MDm" secondAttribute="leading" id="VT5-GU-fHz"/>
@@ -74,7 +67,6 @@
                 <constraint firstItem="OlQ-Ey-MDm" firstAttribute="trailing" secondItem="RAy-HR-cXf" secondAttribute="trailing" id="gjv-an-Hzq"/>
                 <constraint firstItem="pOX-Qu-FG3" firstAttribute="leading" secondItem="OlQ-Ey-MDm" secondAttribute="leading" id="osi-yG-zuk"/>
                 <constraint firstItem="8dt-KL-UaZ" firstAttribute="top" secondItem="RAy-HR-cXf" secondAttribute="bottom" id="sLz-6O-Pxz"/>
-                <constraint firstItem="rlo-jy-bAW" firstAttribute="centerX" secondItem="tEI-OV-Qor" secondAttribute="centerX" id="toc-fE-NP0"/>
                 <constraint firstItem="pOX-Qu-FG3" firstAttribute="top" secondItem="iaJ-9d-KsO" secondAttribute="bottom" id="wFh-r5-lu6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="OlQ-Ey-MDm"/>
