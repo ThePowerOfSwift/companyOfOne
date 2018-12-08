@@ -24,6 +24,15 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     let document = Document()
     
     override func viewDidLoad() {
+        if let selectedTabIndex = tabBarController?.selectedIndex {
+            switch selectedTabIndex {
+            case 1: self.title = "Documents" // Customize ViewController for tab 2 Docs
+            case 2:  self.title = "Mail"// Customize ViewController for tab 3 Mail
+            case 3:  self.title = "Receipts"// Customize ViewController for tab 4 Receipts
+            default: break
+            }
+            
+        }
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
        // commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")

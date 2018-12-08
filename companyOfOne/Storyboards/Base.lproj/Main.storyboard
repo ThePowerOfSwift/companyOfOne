@@ -372,7 +372,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoW-2d-JNY">
-                                <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Docs" id="956-r8-QJV">
                                         <barButtonItem key="leftBarButtonItem" image="filter" landscapeImage="filter" id="5c9-kA-xgB"/>
@@ -385,11 +385,11 @@
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-YX-39P">
-                                <rect key="frame" x="0.0" y="64" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-ec-3jD">
-                                <rect key="frame" x="0.0" y="120" width="414" height="511"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="467"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Lgp-y5-6ek" id="425-VL-tVD"/>
@@ -467,7 +467,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lgp-y5-6ek" kind="show" id="UQi-rw-IhQ"/>
+                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="rootViewController" id="G7N-yx-gnS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVl-7T-Lqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -486,7 +486,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lgp-y5-6ek" kind="show" id="8GR-iG-70F"/>
+                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="rootViewController" id="QNp-ux-7ZX"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kn-6a-cY1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -505,7 +505,7 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UQi-rw-IhQ"/>
+        <segue reference="QNp-ux-7ZX"/>
         <segue reference="rdm-6b-dxS"/>
     </inferredMetricsTieBreakers>
 </document>

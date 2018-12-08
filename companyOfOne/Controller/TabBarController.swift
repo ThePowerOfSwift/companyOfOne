@@ -20,4 +20,16 @@ class TabBarController: UITabBarController {
        
         tabBar.items?[3].title = "Personal Receipts"
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      if segue.identifier == "toCommonViewControllerFromReceipts" {
+        let nextController = segue.destination as! DocsViewController
+        nextController.title = "Receipts"
+        }
+        
+      if segue.identifier == "toCommonViewControllerFromMail" {
+        let nextController = segue.destination as! DocsViewController
+        nextController.title = "Mail"
+        }
+    }
 }
