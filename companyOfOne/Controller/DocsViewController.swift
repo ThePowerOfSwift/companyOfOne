@@ -10,12 +10,22 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+   // @IBOutlet var commonView: UIView!
+   // @IBOutlet weak var commonTableView: UITableView!
     @IBOutlet weak var docTableView: UITableView!
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        UINib(nibName: "CommonDisplayView", bundle: nil).instantiate(withOwner: self, options: nil)
+//        view.addSubview(commonView)
+//        commonView.frame = self.view.bounds
+//    }
     //let document = Document(context:AppDelegate.viewContext) <-- this adds a space to the tableView each time the app loads
     let document = Document()
     
     override func viewDidLoad() {
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
+       // commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         super.viewDidLoad()
         document.retrieveAllDocuments()
