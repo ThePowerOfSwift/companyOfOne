@@ -374,7 +374,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoW-2d-JNY">
                                 <rect key="frame" x="0.0" y="64" width="414" height="44"/>
                                 <items>
-                                    <navigationItem title="Docs" id="956-r8-QJV">
+                                    <navigationItem id="956-r8-QJV">
                                         <barButtonItem key="leftBarButtonItem" image="filter" landscapeImage="filter" id="5c9-kA-xgB"/>
                                         <barButtonItem key="rightBarButtonItem" image="upload" id="TI9-Wc-7hy">
                                             <connections>
@@ -429,6 +429,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="docTableView" destination="HOG-ec-3jD" id="16L-wM-qzw"/>
+                        <outlet property="navBar" destination="ZoW-2d-JNY" id="heM-dI-2Pa"/>
+                        <outlet property="pressedShareButton" destination="TI9-Wc-7hy" id="USz-jp-f3L"/>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromDocs" id="rdm-6b-dxS"/>
                     </connections>
                 </viewController>

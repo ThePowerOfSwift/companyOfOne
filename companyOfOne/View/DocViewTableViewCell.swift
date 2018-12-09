@@ -24,12 +24,12 @@ class DocViewTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        //selectionStyle = .none
         // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
+        super.setSelected(selected, animated: animated)        
         // Configure the view for the selected state
     }
     

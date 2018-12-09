@@ -257,7 +257,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let subSet = category.currentCategory?.child
             let subArray = subSet?.allObjects as! [SubCategory]
             subCategory.currentSubCategory = subArray[pickerView.selectedRow(inComponent: 0)]
-            
             categorySubCategoryLabels[1] = subCategory.currentSubCategory!.name ?? "SubLabel Didn't Work"
             categorySubCategoryLabel.text = (categorySubCategoryLabels.joined(separator: ": "))
         }

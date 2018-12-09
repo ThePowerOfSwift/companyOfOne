@@ -10,31 +10,24 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-   // @IBOutlet var commonView: UIView!
-   // @IBOutlet weak var commonTableView: UITableView!
+    @IBOutlet weak var pressedShareButton: UIBarButtonItem!
     @IBOutlet weak var docTableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        UINib(nibName: "CommonDisplayView", bundle: nil).instantiate(withOwner: self, options: nil)
-//        view.addSubview(commonView)
-//        commonView.frame = self.view.bounds
-//    }
-    //let document = Document(context:AppDelegate.viewContext) <-- this adds a space to the tableView each time the app loads
     let document = Document()
+    var selectModeIsOn:Bool = false
     
     override func viewDidLoad() {
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
-            case 1: self.title = "Documents" // Customize ViewController for tab 2 Docs
-            case 2:  self.title = "Mail"// Customize ViewController for tab 3 Mail
-            case 3:  self.title = "Receipts"// Customize ViewController for tab 4 Receipts
+            case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
+            case 2:  self.navBar.topItem?.title = "Snail Mail"// Customize ViewController for tab 3 Mail
+            case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4 Receipts
             default: break
             }
             
         }
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-       // commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         super.viewDidLoad()
         document.retrieveAllDocuments()
@@ -52,9 +45,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     // let cell = Bundle.main.loadNibNamed("DocViewTableViewCell", owner: self, options: nil)?.first as! DocViewTableViewCell
-       // docTableView.addSubview(cell)
-       // let cell = tableView.dequeueReusableCell(withIdentifier: "displayTableViewCell")! as! DisplayTableViewCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
@@ -64,7 +54,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let imageData = ArrayHandler.sharedInstance.documentArray[indexPath.row].pictureData {
             cell.docImageView.image = UIImage(data: imageData)
         }
-        
         return cell
     }
     
@@ -83,22 +72,53 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
+        if selectModeIsOn {
+            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+            let selectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
+            ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
+            if ArrayHandler.sharedInstance.outputArray.count > 0 {
+            pressedShareButton.image = nil
+            pressedShareButton.title = "Export"
+            pressedShareButton.tintColor = nil
+                
+        }
+            
+        }else{
+            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
+        }
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
-        guard let image = UIImage(named: "testDoc") else { return }
-        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        activityController.completionWithItemsHandler = { (nil, completed, _, error) in
-            if completed {
-                print("completed")
-            } else {
-                print("cancelled")
+        selectModeIsOn = !selectModeIsOn
+        if selectModeIsOn {
+            print("select mode is on")
+            pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+            docTableView?.allowsMultipleSelection = true
+            
+        }else{
+            print("select mode is off")
+            let allCells = docTableView.visibleCells
+            for cell in allCells {
+                cell.accessoryType = .disclosureIndicator
             }
+            pressedShareButton.tintColor = nil
+            docTableView?.allowsMultipleSelection = false
         }
-        present(activityController, animated: true) {
-            print("presented")
-        }
+        //        guard let image = UIImage(named: "testDoc") else { return }
+        //        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        //        activityController.completionWithItemsHandler = { (nil, completed, _, error) in
+        //            if completed {
+        //                print("completed")
+        //            } else {
+        //                print("cancelled")
+        //            }
+        //        }
+        //        present(activityController, animated: true) {
+        //            print("presented")
+        //        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
