@@ -19,6 +19,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectModeIsOn:Bool = false
     
     override func viewDidLoad() {
+//        ArrayHandler.sharedInstance.checked = Array(repeating: false, count: ArrayHandler.sharedInstance.documentArray.count)
         ArrayHandler.sharedInstance.outputArray.removeAll()
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
@@ -75,14 +76,16 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectModeIsOn {
-            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
             let selectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
+            selectedDocument.isSelectedForExport = true
+            if selectedDocument.isSelectedForExport == true {
+                  docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+            }
             ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
             if ArrayHandler.sharedInstance.outputArray.count > 0 {
             pressedShareButton.image = nil
             pressedShareButton.title = "Export"
             pressedShareButton.tintColor = nil
-                
         }
             
         }else{
@@ -90,8 +93,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
         ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
+        let deSelectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
+        deSelectedDocument.isSelectedForExport = false
+        if deSelectedDocument.isSelectedForExport == true {
+            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
+        }
         if ArrayHandler.sharedInstance.outputArray.count == 0 {
             pressedShareButton.title = nil
             pressedShareButton.image = #imageLiteral(resourceName: "upload")

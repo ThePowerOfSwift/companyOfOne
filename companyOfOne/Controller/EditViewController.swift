@@ -117,7 +117,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
         if isInEditMode == true {
-            document.createDocument(currentDocImage: currentImage, titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate)
+            document.createDocument(currentDocImage: currentImage, titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate,isSelectedForExport: false)
             turnOnViewMode()
         }else{
             turnOnEditMode()

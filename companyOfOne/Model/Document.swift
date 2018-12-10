@@ -14,7 +14,7 @@ import UIKit
 
 class Document:NSManagedObject{
 
-    func createDocument(currentDocImage:UIImage?, titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?){
+    func createDocument(currentDocImage:UIImage?, titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?, isSelectedForExport:Bool?){
         
         let context = AppDelegate.viewContext
         let document = Document(context:context)
@@ -35,6 +35,9 @@ class Document:NSManagedObject{
         if let docImage = currentDocImage {
             let imageData = docImage.jpegData(compressionQuality: 1)
             document.pictureData = imageData
+        }
+        if let isSelectedForExport = isSelectedForExport{
+            document.isSelectedForExport = isSelectedForExport
         }
 //        if let occurrence = currentOccurrence{
 //            document.occurrence = occurrence
