@@ -49,6 +49,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        print("This is the row we are using to retreive from the documentArray : \(indexPath.row)")
+        print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
@@ -76,7 +78,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectModeIsOn {
+            print("This is the row we are using for selectedDocument : \(indexPath.row)")
             let selectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
+            print("docArray = \(indexPath.row)")
             selectedDocument.isSelectedForExport = true
             if selectedDocument.isSelectedForExport == true {
                   docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
@@ -96,7 +100,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
         let deSelectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
         deSelectedDocument.isSelectedForExport = false
-        if deSelectedDocument.isSelectedForExport == true {
+        if deSelectedDocument.isSelectedForExport == false {
             docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
         }
         if ArrayHandler.sharedInstance.outputArray.count == 0 {
