@@ -10,6 +10,7 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var pressedShareButton: UIBarButtonItem!
     @IBOutlet weak var docTableView: UITableView!
     @IBOutlet weak var navBar: UINavigationBar!
@@ -18,6 +19,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectModeIsOn:Bool = false
     
     override func viewDidLoad() {
+        ArrayHandler.sharedInstance.outputArray.removeAll()
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
             case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
@@ -89,6 +91,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
+        ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
+        if ArrayHandler.sharedInstance.outputArray.count == 0 {
+            pressedShareButton.title = nil
+            pressedShareButton.image = #imageLiteral(resourceName: "upload")
+           pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+        }
     }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
@@ -96,6 +104,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         if selectModeIsOn {
             print("select mode is on")
             pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+            filterButton.image = nil
+            filterButton.title = "Select All"
             docTableView?.allowsMultipleSelection = true
             
         }else{
@@ -105,6 +115,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.accessoryType = .disclosureIndicator
             }
             pressedShareButton.tintColor = nil
+            filterButton.title = nil
+            filterButton.image = #imageLiteral(resourceName: "filter")
             docTableView?.allowsMultipleSelection = false
         }
         //        guard let image = UIImage(named: "testDoc") else { return }

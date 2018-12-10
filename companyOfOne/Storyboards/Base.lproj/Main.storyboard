@@ -429,6 +429,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="docTableView" destination="HOG-ec-3jD" id="16L-wM-qzw"/>
+                        <outlet property="filterButton" destination="5c9-kA-xgB" id="yZ7-bT-yoR"/>
                         <outlet property="navBar" destination="ZoW-2d-JNY" id="heM-dI-2Pa"/>
                         <outlet property="pressedShareButton" destination="TI9-Wc-7hy" id="USz-jp-f3L"/>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromDocs" id="rdm-6b-dxS"/>
@@ -436,7 +437,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="324"/>
+            <point key="canvasLocation" x="464" y="307"/>
         </scene>
         <!--Docs-->
         <scene sceneID="mhy-qd-rHW">
