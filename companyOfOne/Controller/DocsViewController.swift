@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate{
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var pressedShareButton: UIBarButtonItem!
@@ -19,28 +19,56 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectModeIsOn:Bool = false
     
     override func viewDidLoad() {
-//        ArrayHandler.sharedInstance.checked = Array(repeating: false, count: ArrayHandler.sharedInstance.documentArray.count)
         ArrayHandler.sharedInstance.outputArray.removeAll()
+        self.tabBarController?.delegate = self
+        
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
             case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
+            FetchHandler.sharedInstance.currentFilter = ""
+                print("didLoad\(selectedTabIndex)")
             case 2:  self.navBar.topItem?.title = "Snail Mail"// Customize ViewController for tab 3 Mail
-            case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4 Receipts
+            FetchHandler.sharedInstance.currentFilter = "Mail"
+                print("didLoad\(selectedTabIndex)")
+            case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4
+            FetchHandler.sharedInstance.currentFilter = "Receipts"
+                print("didLoad\(selectedTabIndex)")
             default: break
             }
-            
         }
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
         super.viewDidLoad()
-        document.retrieveAllDocuments()
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         docTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController!.isNavigationBarHidden = true
-        document.retrieveAllDocuments()
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         docTableView.reloadData()
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let selectedTabIndex = tabBarController.selectedIndex
+        switch selectedTabIndex {
+        case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
+        FetchHandler.sharedInstance.currentFilter = ""
+        print("tabBarDelegate\(selectedTabIndex)")
+        case 2:  self.navBar.topItem?.title = "Snail Mail"// Customize ViewController for tab 3 Mail
+        FetchHandler.sharedInstance.currentFilter = "Mail"
+        print("tabBarDelegate\(selectedTabIndex)")
+        case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4
+        FetchHandler.sharedInstance.currentFilter = "Receipts"
+        print("tabBarDelegate\(selectedTabIndex)")
+        default: break
+        }
+    }
+    
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let title = item.title{
+            print("\(title)")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,8 +77,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
-        print("This is the row we are using to retreive from the documentArray : \(indexPath.row)")
-        print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
+        //print("This is the row we are using to retreive from the documentArray : \(indexPath.row)")
+        //print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
@@ -78,7 +106,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectModeIsOn {
-            print("This is the row we are using for selectedDocument : \(indexPath.row)")
+            //print("This is the row we are using for selectedDocument : \(indexPath.row)")
             let selectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
             print("docArray = \(indexPath.row)")
             selectedDocument.isSelectedForExport = true

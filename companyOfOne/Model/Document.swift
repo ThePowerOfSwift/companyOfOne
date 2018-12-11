@@ -56,25 +56,28 @@ class Document:NSManagedObject{
         }
     }
     
-    func retrieveAllDocuments(){
-        let searchTerm = "Mail"
-        let context = AppDelegate.viewContext
-        let request =
-            NSFetchRequest<NSManagedObject>(entityName: "Document")
-        request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
-        request.predicate = NSPredicate(format: "toCategory.name == %@", searchTerm)
-        ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
+    func retrieveAllDocuments(filteredBy: String){
+        FetchHandler.sharedInstance.fetchFilteredDocuments()
+        FetchHandler.sharedInstance.currentFilter = filteredBy
+//        let searchTerm = "Mail"
+//        let context = AppDelegate.viewContext
+//        let request =
+//            NSFetchRequest<NSManagedObject>(entityName: "Document")
+//        request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
+//        request.predicate = NSPredicate(format: "toCategory.name == %@", searchTerm)
+//        ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
     }
     
-    func deleteDocument(document: Document){
-        let context = AppDelegate.viewContext
-        context.delete(document)
-        do {
-            try context.save()
-        } catch let error as NSError {
-            print("Could not save deletion. \(error), \(error.userInfo)")
-        }
-        //this updates the local array
-        retrieveAllDocuments()
+    func deleteDocument(document: Document){ //deleteAndFetchFilteredDocuments
+        FetchHandler.sharedInstance.deleteDocumentAndFetchFilteredDocuments(document: document)
+//        let context = AppDelegate.viewContext
+//        context.delete(document)
+//        do {
+//            try context.save()
+//        } catch let error as NSError {
+//            print("Could not save deletion. \(error), \(error.userInfo)")
+//        }
+//        //this updates the local array
+//        retrieveAllDocuments()
     }
 }

@@ -32,6 +32,7 @@
 		7DDAA67F21A5DB2F00C047E3 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */; };
 		7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */; };
 		7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */; };
+		7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA724F21C0164C0062D49F /* FetchHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
 		7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewTableViewCell.swift; sourceTree = "<group>"; };
 		7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocViewTableViewCell.xib; sourceTree = "<group>"; };
+		7DEA724F21C0164C0062D49F /* FetchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */,
+				7DEA724F21C0164C0062D49F /* FetchHandler.swift */,
 				7DDAA67921A1040800C047E3 /* AlertHandler.swift */,
 				7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */,
 			);
@@ -246,6 +249,7 @@
 				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
 				7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */,
 				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
+				7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */,
 				7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,

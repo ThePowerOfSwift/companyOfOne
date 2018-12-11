@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate, UITabBarDelegate {
     
     //MARK: Global Variables
     var currentImage = UIImage()
@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         currentImage = image
         performSegue(withIdentifier: "toEditViewController", sender: nil)
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewController" {
             let nextController = segue.destination as! EditViewController
