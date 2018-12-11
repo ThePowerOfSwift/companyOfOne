@@ -57,14 +57,13 @@ class Document:NSManagedObject{
     }
     
     func retrieveAllDocuments(){
+        let searchTerm = "Mail"
         let context = AppDelegate.viewContext
-       // context.mergePolicy = NSMergePolicy(merge: NSMergePolicyType.mergeByPropertyObjectTrumpMergePolicyType)
-
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
+        request.predicate = NSPredicate(format: "toCategory.name == %@", searchTerm)
         ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
-        //currentCategory = categories[0]
     }
     
     func deleteDocument(document: Document){
