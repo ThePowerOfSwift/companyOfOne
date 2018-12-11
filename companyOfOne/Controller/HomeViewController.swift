@@ -69,7 +69,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         currentImage = image
         performSegue(withIdentifier: "toEditViewController", sender: nil)
     }
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewController" {
             let nextController = segue.destination as! EditViewController

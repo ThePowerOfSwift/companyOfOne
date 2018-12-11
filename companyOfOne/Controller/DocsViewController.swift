@@ -21,18 +21,11 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         ArrayHandler.sharedInstance.outputArray.removeAll()
         self.tabBarController?.delegate = self
-        
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
-            case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
-            FetchHandler.sharedInstance.currentFilter = ""
-                print("didLoad\(selectedTabIndex)")
-            case 2:  self.navBar.topItem?.title = "Snail Mail"// Customize ViewController for tab 3 Mail
-            FetchHandler.sharedInstance.currentFilter = "Mail"
-                print("didLoad\(selectedTabIndex)")
-            case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4
-            FetchHandler.sharedInstance.currentFilter = "Receipts"
-                print("didLoad\(selectedTabIndex)")
+            case 1: self.navBar.topItem?.title = "Documents"
+            case 2:  self.navBar.topItem?.title = "Snail Mail"
+            case 3:  self.navBar.topItem?.title = "Personal Receipts"
             default: break
             }
         }
@@ -47,28 +40,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController!.isNavigationBarHidden = true
         document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         docTableView.reloadData()
-    }
-    
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let selectedTabIndex = tabBarController.selectedIndex
-        switch selectedTabIndex {
-        case 1: self.navBar.topItem?.title = "Documents" // Customize ViewController for tab 2 Docs
-        FetchHandler.sharedInstance.currentFilter = ""
-        print("tabBarDelegate\(selectedTabIndex)")
-        case 2:  self.navBar.topItem?.title = "Snail Mail"// Customize ViewController for tab 3 Mail
-        FetchHandler.sharedInstance.currentFilter = "Mail"
-        print("tabBarDelegate\(selectedTabIndex)")
-        case 3:  self.navBar.topItem?.title = "Personal Receipts"// Customize ViewController for tab 4
-        FetchHandler.sharedInstance.currentFilter = "Receipts"
-        print("tabBarDelegate\(selectedTabIndex)")
-        default: break
-        }
-    }
-    
-    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if let title = item.title{
-            print("\(title)")
-        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -111,14 +82,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("docArray = \(indexPath.row)")
             selectedDocument.isSelectedForExport = true
             if selectedDocument.isSelectedForExport == true {
-                  docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+                docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
             }
             ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
             if ArrayHandler.sharedInstance.outputArray.count > 0 {
-            pressedShareButton.image = nil
-            pressedShareButton.title = "Export"
-            pressedShareButton.tintColor = nil
-        }
+                pressedShareButton.image = nil
+                pressedShareButton.title = "Export"
+                pressedShareButton.tintColor = nil
+            }
             
         }else{
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
@@ -134,7 +105,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         if ArrayHandler.sharedInstance.outputArray.count == 0 {
             pressedShareButton.title = nil
             pressedShareButton.image = #imageLiteral(resourceName: "upload")
-           pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+            pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
         }
     }
     
