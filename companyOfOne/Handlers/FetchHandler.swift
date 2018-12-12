@@ -13,7 +13,6 @@ class FetchHandler: NSObject {
     static let sharedInstance = FetchHandler()
     var currentFilter:String = ""
     
-    
     func fetchFilteredDocuments(){
         let context = AppDelegate.viewContext
         let request =

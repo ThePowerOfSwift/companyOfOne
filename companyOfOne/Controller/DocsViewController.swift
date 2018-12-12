@@ -48,6 +48,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
+//        ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == true{
+//            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+//        }else{
+//            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
+//        }
         //print("This is the row we are using to retreive from the documentArray : \(indexPath.row)")
         //print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
@@ -76,38 +82,41 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selectModeIsOn {
-            //print("This is the row we are using for selectedDocument : \(indexPath.row)")
-            let selectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
-            print("docArray = \(indexPath.row)")
-            selectedDocument.isSelectedForExport = true
-            if selectedDocument.isSelectedForExport == true {
-                docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+        
+//        if selectModeIsOn {
+//            //print("This is the row we are using for selectedDocument : \(indexPath.row)")
+           ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
+        print("\( ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name ?? "selected")")
+        print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
+            if ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == true {
+               docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
             }
-            ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
-            if ArrayHandler.sharedInstance.outputArray.count > 0 {
-                pressedShareButton.image = nil
-                pressedShareButton.title = "Export"
-                pressedShareButton.tintColor = nil
-            }
-            
-        }else{
-            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
-        }
+//            ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
+//            if ArrayHandler.sharedInstance.outputArray.count > 0 {
+//                pressedShareButton.image = nil
+//                pressedShareButton.title = "Export"
+//                pressedShareButton.tintColor = nil
+//            }
+//
+//        }else{
+//            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
+//        }
     }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
-        let deSelectedDocument = ArrayHandler.sharedInstance.documentArray[indexPath.row]
-        deSelectedDocument.isSelectedForExport = false
-        if deSelectedDocument.isSelectedForExport == false {
+//        ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
+        ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
+        print("\( ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name ?? "Deselected")")
+         print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
+        if ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == false {
             docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
         }
-        if ArrayHandler.sharedInstance.outputArray.count == 0 {
-            pressedShareButton.title = nil
-            pressedShareButton.image = #imageLiteral(resourceName: "upload")
-            pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
-        }
-    }
+//        if ArrayHandler.sharedInstance.outputArray.count == 0 {
+//            pressedShareButton.title = nil
+//            pressedShareButton.image = #imageLiteral(resourceName: "upload")
+//            pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+//        }
+   }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         selectModeIsOn = !selectModeIsOn
