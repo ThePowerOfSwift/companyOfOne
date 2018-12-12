@@ -19,7 +19,9 @@ class FetchHandler: NSObject {
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
-        request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+        if currentFilter != ""{
+            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+        }
         ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
     }
     
