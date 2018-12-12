@@ -17,6 +17,8 @@ class DocViewTableViewCell: UITableViewCell {
     @IBOutlet weak var titleTagLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var isSelectedForExport:Bool = false
+    
     
    // @IBOutlet var docViewTableViewCell: DocViewTableViewCell!
     

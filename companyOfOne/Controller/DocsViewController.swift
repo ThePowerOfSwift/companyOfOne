@@ -48,14 +48,15 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
-        docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
-//        ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == true{
-//            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
-//        }else{
-//            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
-//        }
-        //print("This is the row we are using to retreive from the documentArray : \(indexPath.row)")
-        //print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
+        cell.isSelectedForExport = ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport
+        if cell.isSelectedForExport{
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            print("in cellForRow checkmark\(cell.isSelectedForExport )")
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+            print("in cellForRow Disclosure\(cell.isSelectedForExport )")
+        }
+        
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
         cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
         cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
@@ -82,41 +83,25 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        if selectModeIsOn {
-//            //print("This is the row we are using for selectedDocument : \(indexPath.row)")
-           ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
-        print("\( ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name ?? "selected")")
-        print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
-            if ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == true {
-               docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .checkmark
+        if selectModeIsOn == true {
+            if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+                cell.accessoryType = .checkmark
+                ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
+                print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
             }
-//            ArrayHandler.sharedInstance.outputArray.append(selectedDocument)
-//            if ArrayHandler.sharedInstance.outputArray.count > 0 {
-//                pressedShareButton.image = nil
-//                pressedShareButton.title = "Export"
-//                pressedShareButton.tintColor = nil
-//            }
-//
-//        }else{
-//            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: nil)
-//        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        ArrayHandler.sharedInstance.outputArray.remove(at: indexPath.row)
-        ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
-        print("\( ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name ?? "Deselected")")
-         print("\(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport)")
-        if ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport == false {
-            docTableView.cellForRow(at: indexPath as IndexPath)?.accessoryType = .disclosureIndicator
+        }else{
+            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
         }
-//        if ArrayHandler.sharedInstance.outputArray.count == 0 {
-//            pressedShareButton.title = nil
-//            pressedShareButton.image = #imageLiteral(resourceName: "upload")
-//            pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
-//        }
-   }
+    }
+        
+        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+            
+            if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+                cell.accessoryType = .disclosureIndicator
+                ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
+                print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
+            }
+        }
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         selectModeIsOn = !selectModeIsOn
@@ -150,6 +135,23 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        present(activityController, animated: true) {
         //            print("presented")
         //        }
+    }
+    
+    
+    @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+        if selectModeIsOn { //this button is Select All
+            let totalRows = docTableView.numberOfRows(inSection: 0)
+          
+            for item in ArrayHandler.sharedInstance.documentArray {
+                item.isSelectedForExport = true
+                docTableView.reloadData()
+            }
+            for row in 0..<totalRows {
+                docTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+            }
+        }else{
+            // this is for the date filter code
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

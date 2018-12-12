@@ -26,6 +26,7 @@ class TabBarController: UITabBarController {
             switch title {
             case "Documents":print("\(title)")
                 FetchHandler.sharedInstance.currentFilter = ""
+                
             case "Snail Mail":print("\(title)")
                 FetchHandler.sharedInstance.currentFilter = "Mail"
             case "Personal Receipts":print("\(title)")
