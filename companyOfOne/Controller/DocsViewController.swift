@@ -10,6 +10,22 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate{
     
+    enum edit_View_State {
+        case edit
+        case view
+    }
+    
+    enum dateFilter_SelectAll_DeSelectAll_State {
+        case dateFilter
+        case selectAll
+        case deSelectAll
+    }
+    
+    enum selectForExport_Normal_State {
+        case select
+        case normal
+    }
+    
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var pressedShareButton: UIBarButtonItem!
     @IBOutlet weak var docTableView: UITableView!
@@ -19,8 +35,20 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     var selectModeIsOn:Bool = false
     
     override func viewDidLoad() {
-        ArrayHandler.sharedInstance.outputArray.removeAll()
-        self.tabBarController?.delegate = self
+        super.viewDidLoad()
+        updateViewControllerForSelectedTab()
+        registerNibs()
+        setupTableViewForPopulation()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController!.isNavigationBarHidden = true
+        setupTableViewForPopulation()
+    }
+    
+    //MARK: - Custom Functions
+    
+    func updateViewControllerForSelectedTab(){
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
             case 1: self.navBar.topItem?.title = "Documents"
@@ -29,18 +57,20 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             default: break
             }
         }
-        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-        docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
-        super.viewDidLoad()
+    }
+    
+    func setupTableViewForPopulation(){
+        ArrayHandler.sharedInstance.outputArray.removeAll()
         document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         docTableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController!.isNavigationBarHidden = true
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
-        docTableView.reloadData()
+    func registerNibs(){
+        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
+        docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
+    
+    //MARK: - TableView Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArrayHandler.sharedInstance.documentArray.count//?? 2
@@ -93,15 +123,17 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-            
-            if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
-                cell.accessoryType = .disclosureIndicator
-                ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
-                print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
-            }
+        if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
+            cell.accessoryType = .disclosureIndicator
+            ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
+            print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
         }
+    }
+    
+    //MARK: - Actions
     
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         selectModeIsOn = !selectModeIsOn
@@ -141,7 +173,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
         if selectModeIsOn { //this button is Select All
             let totalRows = docTableView.numberOfRows(inSection: 0)
-          
             for item in ArrayHandler.sharedInstance.documentArray {
                 item.isSelectedForExport = true
                 docTableView.reloadData()
@@ -153,6 +184,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             // this is for the date filter code
         }
     }
+    
+    //MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewControllerFromDocs" {
