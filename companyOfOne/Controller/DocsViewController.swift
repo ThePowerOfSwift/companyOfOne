@@ -10,21 +10,19 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate{
     
-    enum edit_View_State {
-        case edit
-        case view
+    enum ExportMode {
+        case on
+        case off
     }
     
-    enum dateFilter_SelectAll_DeSelectAll_State {
-        case dateFilter
-        case selectAll
-        case deSelectAll
+    enum SelectedMode {
+        case noneSelected
+        case oneSelected
+        case allSelected
     }
     
-    enum selectForExport_Normal_State {
-        case select
-        case normal
-    }
+    var exportMode:ExportMode = .off
+    var selectedMode:SelectedMode = .noneSelected
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var pressedShareButton: UIBarButtonItem!
@@ -33,6 +31,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     let document = Document()
     var selectModeIsOn:Bool = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +112,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if selectModeIsOn == true {
+        if selectModeIsOn {
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
                 cell.accessoryType = .checkmark
                 ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
@@ -171,6 +170,15 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+        //filter, selectAll, DeSelectAll
+        //case exportMode.on
+        // button function is selectAll
+        //change button function to deselect all but this should be elsewhere so it refreshes if all checkmarks are removed
+        
+        //case exportMode.off
+        //button function is dateFilter code
+        
+        
         if selectModeIsOn { //this button is Select All
             let totalRows = docTableView.numberOfRows(inSection: 0)
             for item in ArrayHandler.sharedInstance.documentArray {
@@ -183,6 +191,22 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         }else{
             // this is for the date filter code
         }
+    }
+    
+    func setupNoneSelected(){
+        filterButton.title = "Select All"
+        selectedMode = .noneSelected
+    }
+    
+    func setupOneSelected(){
+        selectedMode = .oneSelected
+        pressedShareButton.title = "Export"
+    }
+    
+    func setupAllSelected(){
+        selectedMode = .allSelected
+        pressedShareButton.title = "Export"
+        filterButton.title = "DeSelect All"
     }
     
     //MARK: - Segue
