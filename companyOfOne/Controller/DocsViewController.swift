@@ -119,10 +119,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             //update UI, update model and add to exportArray
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
                 cell.accessoryType = .checkmark
-                ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
-                ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.documentArray[indexPath.row])
-                 print("count for export Array \(ArrayHandler.sharedInstance.exportArray.count )")
-                print("\(indexPath.row)")
+                let document = ArrayHandler.sharedInstance.documentArray[indexPath.row]
+                document.isSelectedForExport = true
+                ArrayHandler.sharedInstance.exportArray.append(document)
             }
         case .off:
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
@@ -133,10 +132,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         //update UI, update model and remove from exportArray
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .disclosureIndicator
-            ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
-            ArrayHandler.sharedInstance.exportArray.remove(at: indexPath.row)
-            print("count for export Array \(ArrayHandler.sharedInstance.exportArray.count )")
-            print("\(indexPath.row)")
+            let documents = ArrayHandler.sharedInstance.documentArray//[
+            documents[indexPath.row].isSelectedForExport = false
+            var exportArray = ArrayHandler.sharedInstance.exportArray
+            if let index = exportArray.index(of: documents[indexPath.row]) {
+                exportArray.remove(at: index)
+            }
         }
     }
     
