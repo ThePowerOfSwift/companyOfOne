@@ -17,7 +17,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     enum SelectedMode {
         case noneSelected
-        case oneSelected
+//        case oneSelected
         case allSelected
     }
     
@@ -30,9 +30,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var navBar: UINavigationBar!
     
     let document = Document()
-    var selectModeIsOn:Bool = false
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewControllerForSelectedTab()
@@ -59,10 +57,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func setupTableViewForPopulation(){
-        ArrayHandler.sharedInstance.outputArray.removeAll()
+        ArrayHandler.sharedInstance.exportArray.removeAll()
         document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         deSelectAllForExport()
-        //setupForExportMode
+        //setupForExportMode?
         exportMode = .off
         selectedMode = .noneSelected
         docTableView.reloadData()
@@ -118,10 +116,13 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch exportMode {
         case .on:
+            //update UI, update model and add to exportArray
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
                 cell.accessoryType = .checkmark
                 ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
-                print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
+                ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.documentArray[indexPath.row])
+                 print("count for export Array \(ArrayHandler.sharedInstance.exportArray.count )")
+                print("\(indexPath.row)")
             }
         case .off:
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
@@ -129,11 +130,13 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
+        //update UI, update model and remove from exportArray
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .disclosureIndicator
             ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
-            print("in didSelect disclosure \(ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport )")
+            ArrayHandler.sharedInstance.exportArray.remove(at: indexPath.row)
+            print("count for export Array \(ArrayHandler.sharedInstance.exportArray.count )")
+            print("\(indexPath.row)")
         }
     }
     
@@ -144,34 +147,44 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         case .off:
             exportMode = .on
             print("exportMode is off, changed to on")
-   
+            pressedShareButton.image = nil
+            pressedShareButton.title = "Export"
             filterButton.image = nil
             docTableView?.allowsMultipleSelection = true
             
             switch selectedMode {
             case .noneSelected:
-                print("export mode on, none selected : grey out export graphic but do nothing, change filter graphic to select all")
-                pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
-                filterButton.title = "Select All"
-            case .oneSelected:
-                print("export mode on, one selected :  run the export function ")
+             updateUIForNoneSelected()
+//            case .oneSelected:
+//                print("export mode on, one selected :  run the export function ")
             case .allSelected:
                 print("export mode on, all selected :  run the export function ")
             }
         case .on:
             print("exportMode is on when tapped")
-            pressedShareButton.title = "Export"
- 
-            //this is for export mode when it is changed to off after export
-            let allCells = docTableView.visibleCells
-            for cell in allCells {
-                cell.accessoryType = .disclosureIndicator
+            switch selectedMode {
+            case .noneSelected:
+                updateUIForNoneSelected()
+//            case .oneSelected:
+//                print("export mode on, one selected :  run the export function ")
+            case .allSelected:
+                print("export mode on, all selected :  run the export function ")
             }
-            pressedShareButton.tintColor = nil
-            filterButton.title = nil
-            filterButton.image = #imageLiteral(resourceName: "filter")
-            docTableView?.allowsMultipleSelection = false
+            //this is for export mode when it is changed to off after export
+//            let allCells = docTableView.visibleCells
+//            for cell in allCells {
+//                cell.accessoryType = .disclosureIndicator
+//            }
+//            pressedShareButton.tintColor = nil
+//            filterButton.title = nil
+//            filterButton.image = #imageLiteral(resourceName: "filter")
+//            docTableView?.allowsMultipleSelection = false
         }
+    }
+    
+    func updateUIForNoneSelected(){
+        pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+        filterButton.title = "Select All"
     }
     
     @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
@@ -182,9 +195,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .noneSelected:
                 print("none selected, this press selects all")
                 selectAllForExport()
-            case .oneSelected:
-                print("one selected, this press selects all")
-                selectAllForExport()
+                //                case .oneSelected:
+                //                print("one selected, this press selects all")
+                //                selectAllForExport()
             case.allSelected:
                 deSelectAllForExport()
                 print("all selected, this press deselects all")
@@ -196,27 +209,36 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func selectAllForExport(){
+        //this sets the model objects isSelectedForExport bool and adds to the exportArray
         let totalRows = docTableView.numberOfRows(inSection: 0)
         for item in ArrayHandler.sharedInstance.documentArray {
             item.isSelectedForExport = true
-            docTableView.reloadData()
+            ArrayHandler.sharedInstance.exportArray.append(item)
         }
+        docTableView.reloadData()
+         //this selects all of the cells in the current display
         for row in 0..<totalRows {
             docTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
         }
+        //this updates state and UI
         selectedMode = .allSelected
         filterButton.title = "Deselect All"
     }
     
     func deSelectAllForExport(){
+        //this clears the model objects isSelectedForExport bool and removes the exportArray
         let totalRows = docTableView.numberOfRows(inSection: 0)
         for item in ArrayHandler.sharedInstance.documentArray {
             item.isSelectedForExport = false
-            docTableView.reloadData()
         }
+        ArrayHandler.sharedInstance.exportArray.removeAll()
+        docTableView.reloadData()
+        
+        //this deselects all of the cells in the current display
         for row in 0..<totalRows {
             docTableView.deselectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated:false)
         }
+        //this updates state and UI
         selectedMode = .noneSelected
         filterButton.title = "Select All"
     }

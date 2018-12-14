@@ -13,5 +13,5 @@ class ArrayHandler: NSObject {
     var documentArray:[Document] = []
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
-    var outputArray:[Document] = []
+    var exportArray:[Document] = []
 }
