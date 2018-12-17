@@ -23,9 +23,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
-    var exportCountForObservation: Int = 0 {
+    var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
-            switch exportCountForObservation {
+            switch exportCountObserverForUIUpdates {
             case 0 :
                 print("0 selected")
                 filterButton.title = "Select All"
@@ -35,13 +35,11 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }else{
                     pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
                 }
-                
             case 1...(ArrayHandler.sharedInstance.documentArray.count-1):
                 print("some selected")
                 filterButton.title = "Select All"
                 pressedShareButton.tintColor = nil
                 selectedMode = .someSelected
-                
             case ArrayHandler.sharedInstance.documentArray.count:
                 print("all selected")
                 pressedShareButton.tintColor = nil
@@ -58,7 +56,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var navBar: UINavigationBar!
     
     let document = Document()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViewControllerForSelectedTab()
@@ -110,11 +108,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.isSelectedForExport = ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-            //            print("in cellForRow Disclosure\(cell.isSelectedForExport )")
-            
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            //            print("in cellForRow Disclosure\(cell.isSelectedForExport )")
         }
         
         cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
@@ -150,9 +145,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.accessoryType = .checkmark
                 ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
                 ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.documentArray[indexPath.row])
-                exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-//                print("(from select) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-//                print("(from select) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
+                //this propery observer updates state and UI
+                exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
             }
         case .off:
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
@@ -167,10 +161,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             if let index = ArrayHandler.sharedInstance.exportArray.index(of: ArrayHandler.sharedInstance.documentArray[indexPath.row]) {
                 ArrayHandler.sharedInstance.exportArray.remove(at: index)
             }
-            exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-//            print("(from deSelect) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-//            print("(from deSelect) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
-            
+            //this propery observer updates state and UI
+            exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
         }
     }
     
@@ -180,15 +172,11 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         switch exportMode {
         case .off:
             exportMode = .on
-
             pressedShareButton.image = nil
             pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
             pressedShareButton.title = "Export"
             filterButton.image = nil
-            
-            
             docTableView?.allowsMultipleSelection = true
-
         case .on:
             switch selectedMode {
             case .noneSelected:
@@ -198,41 +186,22 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             case .allSelected:
                 print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
             }
-            //this is for export mode when it is changed to off after export
-//            let allCells = docTableView.visibleCells
-//            for cell in allCells {
-//                cell.accessoryType = .disclosureIndicator
-//            }
-//            pressedShareButton.tintColor = nil
-//            filterButton.title = nil
-//            filterButton.image = #imageLiteral(resourceName: "filter")
-//            docTableView?.allowsMultipleSelection = false
         }
-    }
-    
-    func updateUIForNoneSelected(){
-        pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
-        filterButton.title = "Select All"
     }
     
     @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
         switch exportMode {
         case .on:
-            print("exportMode is on, in filterButtonPressed")
             switch selectedMode {
             case .noneSelected:
-                print("none selected, this press selects all")
                 selectAllForExport()
             case .someSelected:
-                print("some selected, this press selects all")
                 selectAllForExport()
             case.allSelected:
                 deSelectAllForExport()
-                print("all selected, this press deselects all")
             }
         case .off:
-            print("exportMode is off, in filterButtonPressed")
-            print("date filter code would run now")
+            print("run the date filter function here")
         }
     }
     
@@ -246,16 +215,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
         docTableView.reloadData()
-         //this selects all of the cells in the current display
+        //this selects all of the cells in the current display
         for row in 0..<totalRows {
             docTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
         }
-        //this updates state and UI
-//        selectedMode = .allSelected
-        exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-//        filterButton.title = "Deselect All"
-//        print("(from select all) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-//        print("(from select all) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
+        //this propery observer updates state and UI
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
     
     func deSelectAllForExport(){
@@ -271,12 +236,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         for row in 0..<totalRows {
             docTableView.deselectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated:false)
         }
-        //this updates state and UI
-       // selectedMode = .noneSelected
-        exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-        //filterButton.title = "Select All"
-//        print("(from deSelect all) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-//        print("(from deSelect all) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
+        ///this propery observer updates state and UI
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
     
     func createPDFFromSelected(){
