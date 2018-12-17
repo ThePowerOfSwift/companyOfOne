@@ -24,15 +24,20 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var exportCountForObservation: Int = 0 {
-        willSet(newExportCount) {
-            print("About to set export count to \(newExportCount)")
-        }
         didSet {
             if exportCountForObservation > 0  {
-                print("Update export title and function for next step in export workflow")
+                pressedShareButton.tintColor = nil
+                selectedMode = .allSelected
             }else{
-                updateUIForNoneSelected()
-                print("grey out the export button, no function")
+                pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+                selectedMode = .noneSelected
+            }
+            if exportCountForObservation < ArrayHandler.sharedInstance.documentArray.count{
+                filterButton.title = "Select All"
+                selectedMode = .noneSelected
+            }else{
+                filterButton.title = "Deselect All"
+                selectedMode = .allSelected
             }
         }
     }
@@ -136,8 +141,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
                 ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.documentArray[indexPath.row])
                 exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-                print("(from select) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-                print("(from select) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
+//                print("(from select) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
+//                print("(from select) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
             }
         case .off:
             performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
@@ -153,8 +158,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 ArrayHandler.sharedInstance.exportArray.remove(at: index)
             }
             exportCountForObservation = ArrayHandler.sharedInstance.exportArray.count
-            print("(from deSelect) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
-            print("(from deSelect) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
+//            print("(from deSelect) documentArray count: \(ArrayHandler.sharedInstance.documentArray.count)")
+//            print("(from deSelect) exportArray count: \(ArrayHandler.sharedInstance.exportArray.count)")
             
         }
     }
