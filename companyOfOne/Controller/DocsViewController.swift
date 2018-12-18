@@ -103,18 +103,27 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         searchBar.showsCancelButton = true
-        if searchText == "" {
-        
-        }
-        
+        FetchHandler.sharedInstance.currentFilter = searchText
+       // document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        docTableView.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        resignFirstResponder()
+        resetSearchBar(searchBar: searchBar)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resetSearchBar(searchBar: searchBar)
+    }
+    
+    func resetSearchBar(searchBar: UISearchBar){
         resignFirstResponder()
+        searchBar.endEditing(true)
+        searchBar.showsCancelButton = false
     }
     
     //MARK: - TableView Delegates
