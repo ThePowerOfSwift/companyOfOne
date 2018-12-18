@@ -11,6 +11,7 @@ import CoreData
 
 class FetchHandler: NSObject {
     static let sharedInstance = FetchHandler()
+    override private init() {}
     var currentFilter:String = ""
     
     func fetchFilteredDocuments(){

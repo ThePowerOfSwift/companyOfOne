@@ -10,6 +10,7 @@ import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate, UISearchBarDelegate {
     
+    //MARK: - Enums
     enum ExportMode {
         case on
         case off
@@ -21,8 +22,12 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         case allSelected
     }
     
+    //MARK: - Instance Variables
+    
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
+    
+    //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
             switch exportCountObserverForUIUpdates {
@@ -35,7 +40,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }else{
                     pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
                 }
-            // TODO:- FIX THIS: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
+            // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
             case 1...(ArrayHandler.sharedInstance.documentArray.count-1):
                 print("some selected")
                 filterButton.title = "Select All"
@@ -51,6 +56,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //MARK: - Outlets
+    
+    @IBOutlet weak var documentSearchBar: UISearchBar!
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet weak var pressedShareButton: UIBarButtonItem!
     @IBOutlet weak var docTableView: UITableView!
@@ -70,7 +78,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         setupTableViewForPopulation()
     }
     
-    //MARK: - Custom Functions
+    //MARK: - Custom Functions For Loading View
     
     func updateViewControllerForSelectedTab(){
         if let selectedTabIndex = tabBarController?.selectedIndex {
@@ -100,30 +108,52 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: - Seach Bar Delegates
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        documentSearchBar.showsCancelButton = true
+        documentSearchBar.showsScopeBar = true
+        documentSearchBar.scopeButtonTitles = ["Title/Tag", "Category", "Subcategory"]
+        documentSearchBar.selectedScopeButtonIndex = 0
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        searchBar.showsCancelButton = true
+        guard !searchText.isEmpty else{
+            print("Search text is empty")
+            return
+        }
         FetchHandler.sharedInstance.currentFilter = searchText
-       // document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        searchBar.endEditing(true)
         docTableView.reloadData()
     }
     
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        resetSearchBar()
+        return true
+    }
+    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        resetSearchBar(searchBar: searchBar)
+        resetSearchBar()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetSearchBar(searchBar: searchBar)
+        resetSearchBar()
     }
     
-    func resetSearchBar(searchBar: UISearchBar){
+    //MARK: - Search Bar Custom Functions
+    
+    func resetSearchBar(){
+        self.documentSearchBar.endEditing(true)
+        documentSearchBar.showsCancelButton = false
+        documentSearchBar.showsScopeBar = false
         resignFirstResponder()
-        searchBar.endEditing(true)
-        searchBar.showsCancelButton = false
+        //TODO: - TO FIX: This needs to repopulate based on tab
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        
+        docTableView.reloadData()
     }
     
     //MARK: - TableView Delegates
@@ -234,6 +264,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //MARK: - Export Functions
+    
     func selectAllForExport(){
         //this sets the model objects isSelectedForExport bool and adds to the exportArray
         let totalRows = docTableView.numberOfRows(inSection: 0)
@@ -284,7 +316,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        }
     }
     
-    //MARK: - Segue
+    //MARK: - Segue Functions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toEditViewControllerFromDocs" {

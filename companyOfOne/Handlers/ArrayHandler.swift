@@ -10,6 +10,7 @@ import UIKit
 
 class ArrayHandler: NSObject {
     static let sharedInstance = ArrayHandler()
+    override private init() {}
     var documentArray:[Document] = []
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
