@@ -388,9 +388,12 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-YX-39P">
+                            <searchBar contentMode="redraw" placeholder="Type your seach here ..." translatesAutoresizingMaskIntoConstraints="NO" id="dYL-YX-39P">
                                 <rect key="frame" x="0.0" y="108" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Lgp-y5-6ek" id="Hvn-aT-kie"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-ec-3jD">
                                 <rect key="frame" x="0.0" y="164" width="414" height="467"/>

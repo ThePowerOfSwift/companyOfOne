@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate{
+class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate, UISearchBarDelegate {
     
     enum ExportMode {
         case on
@@ -35,6 +35,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }else{
                     pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
                 }
+            // TODO:- FIX THIS: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
             case 1...(ArrayHandler.sharedInstance.documentArray.count-1):
                 print("some selected")
                 filterButton.title = "Select All"
@@ -95,6 +96,25 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func registerNibs(){
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+    }
+    
+    //MARK: - Seach Bar Delegates
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchBar.showsCancelButton = true
+        if searchText == "" {
+        
+        }
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        resignFirstResponder()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resignFirstResponder()
     }
     
     //MARK: - TableView Delegates
