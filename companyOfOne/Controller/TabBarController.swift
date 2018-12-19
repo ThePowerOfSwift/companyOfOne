@@ -24,13 +24,15 @@ class TabBarController: UITabBarController {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if let title = item.title{
             switch title {
-            case "Documents":print("\(title)")
-                FetchHandler.sharedInstance.currentFilter = ""
-                
-            case "Snail Mail":print("\(title)")
-                FetchHandler.sharedInstance.currentFilter = "Mail"
-            case "Personal Receipts":print("\(title)")
-                FetchHandler.sharedInstance.currentFilter = "Receipts"
+            case "Documents":
+                print("Title in tab bar for didSelect tabBar item:\(title)")
+                FetchHandler.currentFilter = ""
+            case "Snail Mail":
+                print("Title in tab bar for didSelect tabBar item:\(title)")
+                FetchHandler.currentFilter = "Mail"
+            case "Personal Receipts":
+                print("Title in tab bar for didSelect tabBar item:\(title)")
+                FetchHandler.currentFilter = "Receipts"
             default: break
             }
         }

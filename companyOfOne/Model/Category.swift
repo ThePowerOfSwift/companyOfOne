@@ -33,6 +33,7 @@ class Category: NSManagedObject{
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         ArrayHandler.sharedInstance.categoryArray = try! context.fetch(request) as! [Category]
         if ArrayHandler.sharedInstance.categoryArray.count != 0{
+            //this sets the current category for default labels etc
             currentCategory = ArrayHandler.sharedInstance.categoryArray[0]
         }
     }

@@ -32,7 +32,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         didSet {
             switch exportCountObserverForUIUpdates {
             case 0 :
-                print("0 selected")
+                if exportMode == .on{
+                    print("0 selected for export")
+                }
                 filterButton.title = "Select All"
                 selectedMode = .noneSelected
                 if exportMode == .off {
@@ -42,12 +44,16 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 }
             // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
             case 1...(ArrayHandler.sharedInstance.documentArray.count-1):
-                print("some selected")
+                if exportMode == .on{
+                    print("some selected for export")
+                }
                 filterButton.title = "Select All"
                 pressedShareButton.tintColor = nil
                 selectedMode = .someSelected
             case ArrayHandler.sharedInstance.documentArray.count:
-                print("all selected")
+                if exportMode == .on{
+                    print("all selected for export")
+                }
                 pressedShareButton.tintColor = nil
                 filterButton.title = "Deselect All"
                 selectedMode = .allSelected
@@ -68,13 +74,16 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateViewControllerForSelectedTab()
+        //print("from viewDidLoad:")
         registerNibs()
+        updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //print("from viewWillAppear:")
         navigationController!.isNavigationBarHidden = true
+        updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
     
@@ -84,21 +93,24 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         if let selectedTabIndex = tabBarController?.selectedIndex {
             switch selectedTabIndex {
             case 1: self.navBar.topItem?.title = "Documents"
+            document.retrieveAllDocuments(filteredBy: "")
             case 2:  self.navBar.topItem?.title = "Snail Mail"
+            document.retrieveAllDocuments(filteredBy: "Mail")
             case 3:  self.navBar.topItem?.title = "Personal Receipts"
+            document.retrieveAllDocuments(filteredBy: "Receipts")
             default: break
             }
+            docTableView.reloadData()
         }
     }
     
     func setupTableViewForPopulation(){
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
         //clear the export Array and deselect all items/cells
         deSelectAllForExport()
         ArrayHandler.sharedInstance.exportArray.removeAll()
         exportMode = .off
         selectedMode = .noneSelected
-        docTableView.reloadData()
+        // docTableView.reloadData()
     }
     
     func registerNibs(){
@@ -116,43 +128,44 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard !searchText.isEmpty else{
-            print("Search text is empty")
-            return
-        }
-        FetchHandler.sharedInstance.currentFilter = searchText
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        FetchHandler.currentFilter = searchText
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
+        docTableView.reloadData()
+        //print("current filter in textDidChange: \(FetchHandler.currentFilter)")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
-        searchBar.endEditing(true)
-        docTableView.reloadData()
+        //print("Beginning complete search from SearchButtonClicked")
+        completeSearch()
+        //print("Ending complete search from SearchButtonClicked")
+        
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        resetSearchBar()
+        //resetSearchBar()
         return true
     }
     
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        resetSearchBar()
-    }
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        resetSearchBar()
+        //print("Beginning reset search from CancelButtonClicked")
+        resetSearch()
+        //print("Ending reset search from CancelButtonClicked")
     }
     
     //MARK: - Search Bar Custom Functions
     
-    func resetSearchBar(){
-        self.documentSearchBar.endEditing(true)
+    func resetSearch(){
+        documentSearchBar.endEditing(true)
         documentSearchBar.showsCancelButton = false
         documentSearchBar.showsScopeBar = false
         resignFirstResponder()
-        //TODO: - TO FIX: This needs to repopulate based on tab
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.sharedInstance.currentFilter)")
+        updateViewControllerForSelectedTab()
         
+    }
+    
+    func completeSearch(){
+        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
+        documentSearchBar.endEditing(true)
         docTableView.reloadData()
     }
     
