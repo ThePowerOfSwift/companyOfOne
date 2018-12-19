@@ -56,13 +56,14 @@ class Document:NSManagedObject{
         }
     }
     
-    func retrieveAllDocuments(filteredBy: String){
-        FetchHandler.fetchFilteredDocuments()
-        print("current filter in retrieveAllDocuments: \(FetchHandler.currentFilter)")
-        FetchHandler.currentFilter = filteredBy
-    }
+//    func retrieveAllDocuments(searchTerm: String){
+//        //FetchHandler.currentFilter = filteredBy
+//        FetchHandler.fetchFilteredDocuments(searchTerm: searchTerm)
+//        //print("current filter in retrieveAllDocuments: \(FetchHandler.currentFilter)")
+//
+//    }
     
-    func deleteDocument(document: Document){  
-        FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: document)
-    }
+//    func deleteDocument(document: Document){  
+//        FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: document)
+//    }
 }

@@ -26,13 +26,16 @@ class TabBarController: UITabBarController {
             switch title {
             case "Documents":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
-                FetchHandler.currentFilter = ""
+                //FetchHandler.currentFilter = ""
+                FetchHandler.fetchFilteredDocuments(searchTerm: "")
             case "Snail Mail":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
-                FetchHandler.currentFilter = "Mail"
+                //FetchHandler.currentFilter = "Mail"
+                FetchHandler.fetchFilteredDocuments(searchTerm: "Mail")
             case "Personal Receipts":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
-                FetchHandler.currentFilter = "Receipts"
+                //FetchHandler.currentFilter = "Receipts"
+                FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
             default: break
             }
         }

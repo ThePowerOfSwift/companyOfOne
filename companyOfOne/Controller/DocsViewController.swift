@@ -74,14 +74,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("from viewDidLoad:")
+        print("from viewDidLoad:")
         registerNibs()
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //print("from viewWillAppear:")
+        print("from viewWillAppear:")
         navigationController!.isNavigationBarHidden = true
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
@@ -91,13 +91,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func updateViewControllerForSelectedTab(){
         if let selectedTabIndex = tabBarController?.selectedIndex {
+            print("selected tab index: \(selectedTabIndex)")
             switch selectedTabIndex {
             case 1: self.navBar.topItem?.title = "Documents"
-            document.retrieveAllDocuments(filteredBy: "")
+            //document.retrieveAllDocuments(filteredBy: "")
             case 2:  self.navBar.topItem?.title = "Snail Mail"
-            document.retrieveAllDocuments(filteredBy: "Mail")
+            //document.retrieveAllDocuments(filteredBy: "Mail")
             case 3:  self.navBar.topItem?.title = "Personal Receipts"
-            document.retrieveAllDocuments(filteredBy: "Receipts")
+            //document.retrieveAllDocuments(filteredBy: "Receipts")
             default: break
             }
             docTableView.reloadData()
@@ -128,8 +129,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        FetchHandler.currentFilter = searchText
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
+        FetchHandler.fetchFilteredDocuments(searchTerm: searchText)
+        //FetchHandler.currentFilter = searchText
+       // document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
         docTableView.reloadData()
         //print("current filter in textDidChange: \(FetchHandler.currentFilter)")
     }
@@ -164,7 +166,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func completeSearch(){
-        document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
+        //document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
         documentSearchBar.endEditing(true)
         docTableView.reloadData()
     }
@@ -197,8 +199,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let documentToDelete = ArrayHandler.sharedInstance.documentArray[indexPath.row]
-            document.deleteDocument(document: documentToDelete)
+            FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: ArrayHandler.sharedInstance.documentArray[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
