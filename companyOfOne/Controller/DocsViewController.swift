@@ -71,11 +71,15 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var navBar: UINavigationBar!
     
     let document = Document()
+    var tabIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("from viewDidLoad:")
         registerNibs()
+        if let selectedTabIndex = tabBarController?.selectedIndex {
+        self.tabIndex = selectedTabIndex
+        }
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
@@ -83,6 +87,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         print("from viewWillAppear:")
         navigationController!.isNavigationBarHidden = true
+        if let selectedTabIndex = tabBarController?.selectedIndex {
+            self.tabIndex = selectedTabIndex
+        }
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
@@ -90,9 +97,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Custom Functions For Loading View
     
     func updateViewControllerForSelectedTab(){
-        if let selectedTabIndex = tabBarController?.selectedIndex {
-            print("selected tab index: \(selectedTabIndex)")
-            switch selectedTabIndex {
+//        if let selectedTabIndex = tabBarController?.selectedIndex {
+            print("selected tab index: \(tabIndex)")
+            switch tabIndex {
+            case 0: self.navBar.topItem?.title = "Home"
             case 1: self.navBar.topItem?.title = "Documents"
             //document.retrieveAllDocuments(filteredBy: "")
             case 2:  self.navBar.topItem?.title = "Snail Mail"
@@ -101,9 +109,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             //document.retrieveAllDocuments(filteredBy: "Receipts")
             default: break
             }
-            docTableView.reloadData()
+            //docTableView.reloadData()
         }
-    }
     
     func setupTableViewForPopulation(){
         //clear the export Array and deselect all items/cells
