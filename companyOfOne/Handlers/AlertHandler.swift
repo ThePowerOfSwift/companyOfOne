@@ -8,6 +8,8 @@
 
 import UIKit
 
+//TODO: - I think I can use class functions instead of singleton for this
+
 class AlertHandler: NSObject {
     static let sharedInstance = AlertHandler()
     override private init() {}

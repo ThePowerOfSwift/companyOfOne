@@ -10,11 +10,12 @@ import UIKit
 import CoreData
 
 class FetchHandler: NSObject {
+    //TODO: - I think I can use class functions instead of singleton for this
     static let sharedInstance = FetchHandler()
     override private init() {}
     var currentFilter:String = ""
     
-    func fetchFilteredDocuments(){
+    func fetchFilteredDocuments(){ //class func?
         let context = AppDelegate.viewContext
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
@@ -27,7 +28,7 @@ class FetchHandler: NSObject {
         ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
     }
     
-    func deleteDocumentAndFetchFilteredDocuments(document: Document){ 
+    func deleteDocumentAndFetchFilteredDocuments(document: Document){  //class func?
         let context = AppDelegate.viewContext
         context.delete(document)
         do {
