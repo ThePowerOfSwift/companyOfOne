@@ -31,8 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-        // Override point for customization after application launch.
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if error != nil{
+                print("Authorization unsuccessful")
+            }else{
+                print("Authorization successful")
+            }
         }
         return true
     }

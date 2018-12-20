@@ -19,7 +19,7 @@ class NotificationHandler: NSObject {
 //        date.day = 12
 //        date.hour = 22
 //        date.minute = 39
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 300, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
        // let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
         let content = UNMutableNotificationContent()
         content.title = "Schedule Notification"
@@ -27,11 +27,12 @@ class NotificationHandler: NSObject {
         content.sound = UNNotificationSound.default
         content.badge = 1
         let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().add(request) {(error) in
             if let error = error {
                 print("error: \(error)")
             }
         }
+        print("5 seconds from now")
 }
 }

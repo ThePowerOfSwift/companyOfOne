@@ -21,7 +21,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         super.viewDidLoad()
     
         NotificationHandler.scheduleNotification()
-        print("5 minutes from now")
+        
         imagePicker.delegate = self
     }
     
