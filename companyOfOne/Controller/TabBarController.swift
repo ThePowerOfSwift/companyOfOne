@@ -26,7 +26,7 @@ class TabBarController: UITabBarController {
             switch title {
             case "Documents":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
-                //FetchHandler.currentFilter = ""
+                
                 FetchHandler.fetchFilteredDocuments(searchTerm: "")
             case "Snail Mail":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
@@ -39,5 +39,8 @@ class TabBarController: UITabBarController {
             default: break
             }
         }
+    }
+    override func performSegue(withIdentifier identifier: String, sender: Any?) {
+        <#code#>
     }
 }

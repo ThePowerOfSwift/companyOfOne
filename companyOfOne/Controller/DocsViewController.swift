@@ -77,9 +77,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         print("from viewDidLoad:")
         registerNibs()
-        if let selectedTabIndex = tabBarController?.selectedIndex {
-        self.tabIndex = selectedTabIndex
-        }
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
@@ -87,9 +84,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         print("from viewWillAppear:")
         navigationController!.isNavigationBarHidden = true
-        if let selectedTabIndex = tabBarController?.selectedIndex {
-            self.tabIndex = selectedTabIndex
-        }
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
     }
@@ -97,9 +91,9 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - Custom Functions For Loading View
     
     func updateViewControllerForSelectedTab(){
-//        if let selectedTabIndex = tabBarController?.selectedIndex {
-            print("selected tab index: \(tabIndex)")
-            switch tabIndex {
+       if let selectedTabIndex = tabBarController?.selectedIndex {
+            print("selected tab index: \(selectedTabIndex )")
+            switch selectedTabIndex  {
             case 0: self.navBar.topItem?.title = "Home"
             case 1: self.navBar.topItem?.title = "Documents"
             //document.retrieveAllDocuments(filteredBy: "")
@@ -109,6 +103,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             //document.retrieveAllDocuments(filteredBy: "Receipts")
             default: break
             }
+        }
             //docTableView.reloadData()
         }
     
