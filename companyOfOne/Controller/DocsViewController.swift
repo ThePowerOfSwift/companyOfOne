@@ -71,7 +71,6 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var navBar: UINavigationBar!
     
     let document = Document()
-    var tabIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,15 +91,13 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func updateViewControllerForSelectedTab(){
        if let selectedTabIndex = tabBarController?.selectedIndex {
+        //TODO: - TO FIX: This index is not working correctly
             print("selected tab index: \(selectedTabIndex )")
             switch selectedTabIndex  {
             case 0: self.navBar.topItem?.title = "Home"
             case 1: self.navBar.topItem?.title = "Documents"
-            //document.retrieveAllDocuments(filteredBy: "")
             case 2:  self.navBar.topItem?.title = "Snail Mail"
-            //document.retrieveAllDocuments(filteredBy: "Mail")
             case 3:  self.navBar.topItem?.title = "Personal Receipts"
-            //document.retrieveAllDocuments(filteredBy: "Receipts")
             default: break
             }
         }
