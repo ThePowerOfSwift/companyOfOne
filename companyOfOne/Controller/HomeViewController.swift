@@ -19,6 +19,9 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     override func viewDidLoad() {
         navigationController?.title = "Home"
         super.viewDidLoad()
+    
+        NotificationHandler.scheduleNotification()
+        print("5 minutes from now")
         imagePicker.delegate = self
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 
 class DocsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate , UITabBarDelegate, UISearchBarDelegate {
-    
+
     //MARK: - Enums
     enum ExportMode {
         case on
@@ -26,7 +26,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
-    
+ 
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
@@ -92,7 +92,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func updateViewControllerForSelectedTab(){
        if let selectedTabIndex = tabBarController?.selectedIndex {
         //TODO: - TO FIX: This index is not working correctly
-            print("selected tab index: \(selectedTabIndex )")
+            print("selected tab index: \(selectedTabIndex)")
             switch selectedTabIndex  {
             case 0: self.navBar.topItem?.title = "Home"
             case 1: self.navBar.topItem?.title = "Documents"

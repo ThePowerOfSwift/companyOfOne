@@ -8,8 +8,11 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
 
+
+class TabBarController: UITabBarController{
+    var updatedTabBarIndex: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.items?[0].title = "Home"
@@ -26,17 +29,26 @@ class TabBarController: UITabBarController {
             switch title {
             case "Home":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
-                if let nextViewController = self.navigationController?.visibleViewController {
-                    nextViewController.title = "home"
-                }
+//                if let index = tabBarController?.selectedIndex{
+//                  self.myDelegate?.updatedTabBarIndex = index
+//                }
             case "Documents":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
+//                if let index = tabBarController?.selectedIndex{
+//                   self.myDelegate?.updatedTabBarIndex = index
+//                }
                 FetchHandler.fetchFilteredDocuments(searchTerm: "")
             case "Snail Mail":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
+//                if let index = tabBarController?.selectedIndex{
+//                   self.myDelegate?.updatedTabBarIndex = index
+//                }
                 FetchHandler.fetchFilteredDocuments(searchTerm: "Mail")
             case "Personal Receipts":
                 print("Title in tab bar for didSelect tabBar item:\(title)")
+//                if let index = tabBarController?.selectedIndex{
+//                self.myDelegate?.updatedTabBarIndex = index
+//                }
                 FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
             default: break
             }
