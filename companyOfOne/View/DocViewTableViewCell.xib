@@ -49,29 +49,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="YOa-hq-dqr">
-                        <rect key="frame" x="88" y="66.5" width="243" height="16"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="YOa-hq-dqr">
+                        <rect key="frame" x="88" y="83" width="243" height="13.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Repeat:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQK-dq-loO">
-                                <rect key="frame" x="0.0" y="0.0" width="40.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Remind me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQK-dq-loO">
+                                <rect key="frame" x="0.0" y="0.0" width="58.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Every 2 weeks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjV-DR-Z2E">
-                                <rect key="frame" x="50.5" y="0.0" width="86.5" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" red="0.1773889844" green="1" blue="0.14560643910000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="monthly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vjV-DR-Z2E">
+                                <rect key="frame" x="61.5" y="0.0" width="42.5" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="on:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODM-hU-DF6">
-                                <rect key="frame" x="147" y="0.0" width="16.5" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="starting on:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ODM-hU-DF6">
+                                <rect key="frame" x="107" y="0.0" width="60.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dec 25, 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDX-zJ-BLa">
-                                <rect key="frame" x="173.5" y="0.0" width="69.5" height="16"/>
+                                <rect key="frame" x="170.5" y="0.0" width="72.5" height="13.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -88,7 +87,7 @@
                     <constraint firstItem="0cd-xD-3i7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2GO-KQ-baF"/>
                     <constraint firstItem="7Mz-kk-xvQ" firstAttribute="leading" secondItem="BrR-ED-wIa" secondAttribute="trailing" constant="3" id="3Wk-kj-w88"/>
                     <constraint firstItem="XJA-iO-Zt0" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="0.5" id="5Cg-2U-qVa"/>
-                    <constraint firstItem="YOa-hq-dqr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.5" id="8gR-bl-9I2"/>
+                    <constraint firstItem="YOa-hq-dqr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" multiplier="1.8" id="8gR-bl-9I2"/>
                     <constraint firstItem="YOa-hq-dqr" firstAttribute="leading" secondItem="0cd-xD-3i7" secondAttribute="trailing" constant="2.5" id="BV6-EJ-L0v"/>
                     <constraint firstItem="0cd-xD-3i7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="1" id="CWr-HN-PKi"/>
                     <constraint firstAttribute="bottom" secondItem="0cd-xD-3i7" secondAttribute="bottom" constant="1" id="EIh-n6-WIZ"/>
