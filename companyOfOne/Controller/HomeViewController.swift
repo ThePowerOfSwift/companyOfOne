@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         navigationController?.title = "Home"
         super.viewDidLoad()
     
-        NotificationHandler.scheduleNotification()
+//        NotificationHandler.scheduleNotification()
         
         imagePicker.delegate = self
     }

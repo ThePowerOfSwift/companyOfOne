@@ -534,7 +534,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup in xPosition 4, yPosition 4
         docDatePickerView.isUserInteractionEnabled = true
         docDatePickerView.translatesAutoresizingMaskIntoConstraints = false
-        docDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
+        docDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant+100).isActive = true
         docDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
         docDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
         //this is the global constraints to be animated
