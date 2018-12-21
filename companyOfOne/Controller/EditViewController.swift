@@ -62,8 +62,11 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     var currentImage = UIImage()
     var currentTitleTag = String()
+    var currentOccurrence:Occurrence?
+    var currentOccurrenceDate:Date?
     var currentDate:Date?
     var currentTableViewIndexPathRow:Int?
+    
     
     //MARK: ViewController Booleans
     
@@ -72,7 +75,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     //MARK: Custom Class Instance Variables
     
-    var document = Document()
+    //var document = Document()
     var category = Category()
     var subCategory = SubCategory()
     var occurrence = Occurrence()
@@ -117,7 +120,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
         if isInEditMode == true {
-            document.createDocument(currentDocImage: currentImage, titleTag: titleTagLabel.text, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: occurrence.currentOccurrence, currentDate: currentDate,isSelectedForExport: false)
+            Document.createDocument(currentDocImage: currentImage, currentTitleTag:currentTitleTag, currentCategory: category, currentSubCategory: subCategory, currentOccurrence: currentOccurrence, currentOccurrenceDate: currentOccurrenceDate, currentDocumentDate: currentDate, isSelectedForExport: false)
             turnOnViewMode()
         }else{
             turnOnEditMode()
@@ -148,8 +151,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     func updateDocumentView(){
         categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         titleTagLabel.text = currentTitleTag
+        occurrenceLabel.text = occurrenceLabels.joined(separator: ": ")
         docDateLabel.text = currentDate?.format()
         docImageView.image = currentImage
+        
     }
     
     func turnOnViewMode(){
@@ -534,7 +539,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         //setup in xPosition 4, yPosition 4
         docDatePickerView.isUserInteractionEnabled = true
         docDatePickerView.translatesAutoresizingMaskIntoConstraints = false
-        docDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant+100).isActive = true
+        docDatePickerView.widthAnchor.constraint(equalToConstant: allWidthConstant).isActive = true
         docDatePickerView.heightAnchor.constraint(equalToConstant: pickerHeightConstant).isActive = true
         docDatePickerView.centerYAnchor.constraint(equalTo: self.view.topAnchor, constant: yPosition4).isActive = true
         //this is the global constraints to be animated

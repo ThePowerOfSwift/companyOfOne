@@ -354,7 +354,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                         nextController.currentImage = image
                     }
                 }
-            }
+//                if let occurrence = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence{
+//                    nextController.occurrenceLabels.insert(occurrence, at: 0)
+//                }
+//                if let occurrenceDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence.occurrenceDate{
+//                    let formattedOccurrenceDate = occurrenceDate?.format()
+//                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)
+//                }
+           }
         }
     }
 }

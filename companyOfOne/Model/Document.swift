@@ -14,35 +14,37 @@ import UIKit
 
 class Document:NSManagedObject{
 
-    func createDocument(currentDocImage:UIImage?, titleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentDate:Date?, isSelectedForExport:Bool?){
+   class func createDocument(currentDocImage:UIImage?, currentTitleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentOccurrenceDate:Date?, currentDocumentDate:Date?, isSelectedForExport:Bool?){
         
-        let context = AppDelegate.viewContext
-        let document = Document(context:context)
-        
-        if let titleTag = titleTag{
-             document.titleTag = titleTag
-        }
-        if let category = currentCategory{
-            category.addToToDocument(document)
-        }
-        if let subCategory = currentSubCategory{
-            subCategory.addToToDocument(document)
-        }
-        if let documentDate = currentDate{
-            document.documentDate = documentDate
-        }
-        
-        if let docImage = currentDocImage {
-            let imageData = docImage.jpegData(compressionQuality: 1)
-            document.pictureData = imageData
-        }
-        if let isSelectedForExport = isSelectedForExport{
-            document.isSelectedForExport = isSelectedForExport
-        }
-//        if let occurrence = currentOccurrence{
-//            document.occurrence = occurrence
-//        }
-        
+    let context = AppDelegate.viewContext
+    let document = Document(context:context)
+    
+    if let titleTag = currentTitleTag{
+        document.titleTag = titleTag
+    }
+    if let category = currentCategory{
+        category.addToToDocument(document)
+    }
+    if let subCategory = currentSubCategory{
+        subCategory.addToToDocument(document)
+    }
+    if let occurrence = currentOccurrence{
+        occurrence.addToToDocument(document)
+    }
+    if let occurrenceDate = currentOccurrenceDate{
+        document.toOccurrence.
+    }
+    if let documentDate = currentDocumentDate{
+        document.documentDate = documentDate
+    }
+    
+    if let docImage = currentDocImage {
+        let imageData = docImage.jpegData(compressionQuality: 1)
+        document.pictureData = imageData
+    }
+    if let isSelectedForExport = isSelectedForExport{
+        document.isSelectedForExport = isSelectedForExport
+    }
         do {
             try context.save()
             print("Saved succesfully")
