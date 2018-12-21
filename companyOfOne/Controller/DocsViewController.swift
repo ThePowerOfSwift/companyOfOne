@@ -341,10 +341,10 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                     nextController.currentTitleTag = titleTag
                 }
                 if let categoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name {
-                    nextController.categorySubCategoryLabels.insert(categoryName, at: 0)
+                    nextController.categorySubCategoryLabels[0] = categoryName
                 }
                 if let subCategoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name {
-                    nextController.categorySubCategoryLabels.insert(subCategoryName, at: 1)
+                    nextController.categorySubCategoryLabels[1] = subCategoryName
                 }
                 if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
                     nextController.currentDate = documentDate
@@ -354,9 +354,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                         nextController.currentImage = image
                     }
                 }
-//                if let occurrence = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence{
-//                    nextController.occurrenceLabels.insert(occurrence, at: 0)
-//                }
+                if let occurrence = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence{
+                    if let title = occurrence.title {
+                         nextController.occurrenceLabels[0] = title
+                    }
+                    if let formattedOccurrenceDate = occurrence.occurrenceDate?.format() {
+                         nextController.occurrenceLabels[1] = formattedOccurrenceDate
+                    }
+                }
 //                if let occurrenceDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence.occurrenceDate{
 //                    let formattedOccurrenceDate = occurrenceDate?.format()
 //                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)

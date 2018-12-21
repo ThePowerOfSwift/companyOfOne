@@ -14,7 +14,7 @@ import UIKit
 
 class Document:NSManagedObject{
 
-   class func createDocument(currentDocImage:UIImage?, currentTitleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentOccurrenceDate:Date?, currentDocumentDate:Date?, isSelectedForExport:Bool?){
+    class func createDocument(currentDocImage:UIImage?, currentTitleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentOccurrenceDate:Date?, currentDocumentDate:Date?, isSelectedForExport:Bool?){
         
     let context = AppDelegate.viewContext
     let document = Document(context:context)
@@ -31,9 +31,7 @@ class Document:NSManagedObject{
     if let occurrence = currentOccurrence{
         occurrence.addToToDocument(document)
     }
-    if let occurrenceDate = currentOccurrenceDate{
-        document.toOccurrence.
-    }
+   //pretty sure the above adds the date with it
     if let documentDate = currentDocumentDate{
         document.documentDate = documentDate
     }
@@ -48,10 +46,12 @@ class Document:NSManagedObject{
         do {
             try context.save()
             print("Saved succesfully")
-            print("\(document.titleTag ?? "No date")")
+            print("\(document.titleTag ?? "title Tag")")
             print("\(document.toCategory?.name ?? "No category")")
             print("\(document.toSubCategory?.name ?? "No subCategory")")
-            print("\(document.documentDate?.format() ?? "No date")")
+            print("\(document.toOccurrence?.title ?? "No occurrenct title")")
+            print("\(document.toOccurrence?.occurrenceDate?.format() ?? "No occurrence date")")
+            print("\(document.documentDate?.format() ?? "No document date")")
 //
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")

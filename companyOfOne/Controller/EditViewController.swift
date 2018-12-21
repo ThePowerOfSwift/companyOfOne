@@ -21,7 +21,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     @IBOutlet weak var subCategoryPickerView: UIPickerView!
     @IBOutlet weak var occurrenceLabel: UILabel!
     @IBOutlet weak var occurrencePickerView: UIPickerView!
-    @IBOutlet weak var occurrenceDatePickerView: UIPickerView!
+    @IBOutlet weak var occurrenceDatePickerView: UIDatePicker!
     @IBOutlet weak var docDateLabel: UILabel!
     @IBOutlet weak var docDatePickerView: UIDatePicker!
     @IBOutlet weak var docImageView: UIImageView!
@@ -43,8 +43,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     var labelAlpha = CGFloat()
     
     //MARK: Global Arrays
-    var categorySubCategoryLabels = [String]()
-    var occurrenceLabels = [String]()
+    var categorySubCategoryLabels:[String] = ["Category", "SubCategory"]
+    var occurrenceLabels:[String] = ["Occurrence", "-"]
     
     //MARK: Global Constraints
     var titleTagLabelLeadingAnchorToCenterX = NSLayoutConstraint()
@@ -120,7 +120,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @IBAction func pressSaveToPDFButton(_ sender: UIBarButtonItem) {
         if isInEditMode == true {
-            Document.createDocument(currentDocImage: currentImage, currentTitleTag:currentTitleTag, currentCategory: category, currentSubCategory: subCategory, currentOccurrence: currentOccurrence, currentOccurrenceDate: currentOccurrenceDate, currentDocumentDate: currentDate, isSelectedForExport: false)
+            Document.createDocument(currentDocImage: currentImage, currentTitleTag:currentTitleTag, currentCategory: category.currentCategory, currentSubCategory: subCategory.currentSubCategory, currentOccurrence: currentOccurrence, currentOccurrenceDate: currentOccurrenceDate, currentDocumentDate: currentDate, isSelectedForExport: false)
             turnOnViewMode()
         }else{
             turnOnEditMode()
@@ -141,10 +141,10 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             updateDocumentView()
         }else{
             turnOnEditMode()
-            categorySubCategoryLabels = ["Category", "SubCategory"]
+            //categorySubCategoryLabels = ["Category", "SubCategory"]
             titleTagLabel.text = "Title / Tag"
             docDateLabel.text = "Document Date"
-            occurrenceLabels = ["Occurrence", "-"]
+           // occurrenceLabels = ["Occurrence", "-"]
         }
     }
     
@@ -183,12 +183,13 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: Title/Tag Delegate Functions
     
     @IBAction func changedTitleTagText(_ sender: Any) {
-        titleTagLabel.text = titleTagTextField.text ?? "Title / Tag"
+        titleTagLabel.text = titleTagTextField.text ?? "titleTag textField is equal to nil"
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         print("hit return after titleTag text input")
+        currentTitleTag = titleTagLabel.text ?? "titleTag label is equal to nil"
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
     }
@@ -196,9 +197,17 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: DatePicker Delegate Functions
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-        let documentDate = docDatePickerView.date
-        currentDate = documentDate
-        docDateLabel.text = documentDate.format()
+        if docDatePickerView == sender{
+            let documentDate = docDatePickerView.date
+            currentDate = documentDate
+            docDateLabel.text = documentDate.format()
+        }
+        if occurrenceDatePickerView == sender{
+            let occurrenceDate = occurrenceDatePickerView.date
+            currentOccurrenceDate = occurrenceDate
+            occurrenceLabels[1] = occurrenceDate.format() //last position
+            occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
+        }
     }
     
     //MARK: PickerView Delegate Functions
@@ -255,7 +264,7 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             let subArray = subSet?.allObjects as! [SubCategory]
             subCategory.currentSubCategory = subArray[0]
             categorySubCategoryLabels[0] =  self.category.currentCategory?.name! ?? "No Name in current category"
-            categorySubCategoryLabels[1] = subArray[0].name ?? "No name in subCategory"
+            categorySubCategoryLabels[1] = self.subCategory.currentSubCategory?.name! ?? "No name in subCategory"
             categorySubCategoryLabel.text = categorySubCategoryLabels.joined(separator: ": ")
         }
         if subCategoryPickerView == pickerView {
@@ -267,16 +276,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         }
         if occurrencePickerView == pickerView {
             let occurrence = self.occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
-            //self.occurrence.currentOccurrence = occurrence
+            //this is where I would format the occurrence to the interval?
+            self.currentOccurrence?.title = occurrence
             occurrenceLabels[0] = occurrence
-            occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
-        }
-        if occurrenceDatePickerView == pickerView {
-            print(occurrenceLabels)
-            let occurrenceMonth = occurrence.occurrences[pickerView.selectedRow(inComponent: 0)]
-            let occurrenceYear = occurrence.occurrences[pickerView.selectedRow(inComponent: 1)]
-            let occurenceDate = "\(occurrenceMonth), \(occurrenceYear)"
-            occurrenceLabels.insert(occurenceDate, at: 1) //last position
             occurrenceLabel.text = (occurrenceLabels.joined(separator: ": "))
         }
     }
