@@ -12,6 +12,12 @@ import UIKit
 
 class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate, UITabBarDelegate {
     
+    //MARK: - Outlets
+    
+    
+    @IBOutlet weak var notificationCountLabel: UILabel!
+    @IBOutlet weak var notificationIdentifierLabel: UILabel!
+    
     //MARK: Global Variables
     var currentImage = UIImage()
     var imagePicker = UIImagePickerController()
@@ -20,10 +26,33 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         navigationController?.title = "Home"
         super.viewDidLoad()
     
-//        NotificationHandler.scheduleNotification()
         
         imagePicker.delegate = self
     }
+    
+    //MARk: - Actions
+    
+    @IBAction func pressedUpdateNumberOfNotifications(_ sender: UIButton) {
+        print("update button pressed")
+//        notificationCountLabel.text = ("\(NotificationHandler.updatePendingNotificationInfo().count)")
+//        notificationIdentifierLabel.text = ("\(NotificationHandler.updatePendingNotificationInfo().identifiers)")
+    }
+    @IBAction func pressedClearAllNotifications(_ sender: UIButton) {
+        //clear pending notifications
+        NotificationHandler.clearAllPendingNotifications()
+        //update UI 
+        notificationCountLabel.text = "0"
+        notificationIdentifierLabel.text = ""
+    }
+    
+    @IBAction func pressedScheduleNotification(_ sender: UIButton) {
+        print("schedule notification button pressed")
+        NotificationHandler.scheduleNotification()
+        let countString = ("\(NotificationHandler.updatePendingNotificationInfo().count)")
+        notificationCountLabel.text = countString
+        notificationIdentifierLabel.text = NotificationHandler.updatePendingNotificationInfo().identifiers.joined(separator: ", ")
+    }
+    
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         showAlertForPhotoOrLibrary()

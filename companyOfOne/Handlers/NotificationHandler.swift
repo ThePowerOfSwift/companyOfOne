@@ -11,6 +11,9 @@ import UserNotifications
 
 class NotificationHandler: NSObject {
     
+    private static var pendingNotificationCount:Int = 0
+    private static var noticationIdentifiers:[String] = []
+    
     class func scheduleNotification() {
         
 //        func createDate(weekday: Int, hour: Int, minute: Int, year: Int)->Date{
@@ -72,17 +75,42 @@ class NotificationHandler: NSObject {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false)
        
         let content = UNMutableNotificationContent()
-        content.title = "Schedule Notification"
-        content.body = "Today is my Birthday"
+        content.title = "Title/Tag"
+        content.body = "Category:SubCategory"
         content.sound = UNNotificationSound.default
         content.badge = 1
-        let request = UNNotificationRequest(identifier: "textNotification", content: content, trigger: trigger)
-        //UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        let request = UNNotificationRequest(identifier: "Rent Cheque", content: content, trigger: trigger)
+       
         UNUserNotificationCenter.current().add(request) {(error) in
             if let error = error {
                 print("error: \(error)")
             }
-        }
         print("5 seconds from now")
 }
+    }
+    
+    class func updatePendingNotificationInfo() -> (count: Int, identifiers:[String]) {
+        UNUserNotificationCenter.current().getPendingNotificationRequests {
+            (requests) in
+            pendingNotificationCount = requests.count
+            for request in requests{
+            noticationIdentifiers.append(request.identifier)
+            }
+        }
+    return (pendingNotificationCount, noticationIdentifiers)
+        //I don't think this will work.  Asychronous, takes some time to come back and the UI variables don't catch it...
+        
+    }
+    
+    class func clearAllPendingNotifications(){
+        //testing purposes only?
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        pendingNotificationCount = 0
+        noticationIdentifiers.removeAll()
+    }
+    
+    class func clearSpecificNotifications(){
+        //use this when a specific notification(reminder) is fullfilled...then remove
+    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: noticationIdentifiers)
+    }
 }

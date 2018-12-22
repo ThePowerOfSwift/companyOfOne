@@ -18,16 +18,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Future Alerts View Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IJ5-Sb-1kl">
-                                <rect key="frame" x="97" y="357.66666666666669" width="220" height="21"/>
+                                <rect key="frame" x="97" y="358" width="220" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="WGB-qN-7Te">
+                                <rect key="frame" x="100.66666666666669" y="73.333333333333329" width="213" height="221.33333333333337"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptq-Ye-4na">
+                                        <rect key="frame" x="0.0" y="0.0" width="213" height="30"/>
+                                        <state key="normal" title="Update number of notifications"/>
+                                        <connections>
+                                            <action selector="pressedUpdateNumberOfNotifications:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4di-aC-g2v"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNW-Bh-EOS">
+                                        <rect key="frame" x="29.999999999999986" y="49" width="153" height="30"/>
+                                        <state key="normal" title="Schedule a notifcation"/>
+                                        <connections>
+                                            <action selector="pressedScheduleNotification:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bR4-Gc-fg6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prB-3y-pvw">
+                                        <rect key="frame" x="34.333333333333329" y="98.000000000000014" width="144" height="29.999999999999986"/>
+                                        <state key="normal" title="Clear all notifications"/>
+                                        <connections>
+                                            <action selector="pressedClearAllNotifications:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wDp-34-Ayg"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-Bh-vi6">
+                                        <rect key="frame" x="42.333333333333329" y="152" width="128.33333333333337" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj1-W5-cXE">
+                                        <rect key="frame" x="72.666666666666686" y="201" width="67.333333333333314" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="WGB-qN-7Te" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1ZK-Fp-ElY"/>
                             <constraint firstItem="IJ5-Sb-1kl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Vkr-KB-UaR"/>
                             <constraint firstItem="IJ5-Sb-1kl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ngC-o1-yum"/>
+                            <constraint firstItem="WGB-qN-7Te" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.5" id="pul-KO-UMq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -44,12 +84,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="notificationCountLabel" destination="2Bi-Bh-vi6" id="88q-kk-paS"/>
+                        <outlet property="notificationIdentifierLabel" destination="cj1-W5-cXE" id="D75-8C-4oG"/>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewController" id="MO5-Gq-5lc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="-1216"/>
+            <point key="canvasLocation" x="-49.275362318840585" y="-1216.304347826087"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="I8a-aU-OXi">
@@ -526,6 +568,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="QNp-ux-7ZX"/>
-        <segue reference="rdm-6b-dxS"/>
+        <segue reference="MO5-Gq-5lc"/>
     </inferredMetricsTieBreakers>
 </document>
