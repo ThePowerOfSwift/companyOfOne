@@ -33,11 +33,6 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     //MARk: - Actions
     
-    @IBAction func pressedUpdateNumberOfNotifications(_ sender: UIButton) {
-        print("update button pressed")
-//        notificationCountLabel.text = ("\(NotificationHandler.updatePendingNotificationInfo().count)")
-//        notificationIdentifierLabel.text = ("\(NotificationHandler.updatePendingNotificationInfo().identifiers)")
-    }
     @IBAction func pressedClearAllNotifications(_ sender: UIButton) {
         //clear pending notifications
         NotificationHandler.clearAllPendingNotifications()
@@ -51,11 +46,11 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         NotificationHandler.scheduleNotification()
         NotificationHandler.updatePendingNotificationInfo { (count, identifiers) in
             let countString = ("\(count)")
-            self.notificationCountLabel.text = countString
-            self.notificationIdentifierLabel.text = identifiers.joined(separator: ", ")
+            DispatchQueue.main.async {
+                self.notificationCountLabel.text = countString
+                self.notificationIdentifierLabel.text = identifiers.joined(separator: ", ")
+            }
         }
-        
-        
     }
     
 

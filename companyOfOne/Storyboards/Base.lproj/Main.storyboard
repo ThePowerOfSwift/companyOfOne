@@ -24,37 +24,55 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="WGB-qN-7Te">
-                                <rect key="frame" x="100.66666666666669" y="73.333333333333329" width="213" height="221.33333333333337"/>
+                                <rect key="frame" x="100" y="98" width="214" height="172"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptq-Ye-4na">
-                                        <rect key="frame" x="0.0" y="0.0" width="213" height="30"/>
-                                        <state key="normal" title="Update number of notifications"/>
-                                        <connections>
-                                            <action selector="pressedUpdateNumberOfNotifications:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4di-aC-g2v"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNW-Bh-EOS">
-                                        <rect key="frame" x="29.999999999999986" y="49" width="153" height="30"/>
+                                        <rect key="frame" x="30.666666666666657" y="0.0" width="153" height="30"/>
                                         <state key="normal" title="Schedule a notifcation"/>
                                         <connections>
                                             <action selector="pressedScheduleNotification:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bR4-Gc-fg6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prB-3y-pvw">
-                                        <rect key="frame" x="34.333333333333329" y="98.000000000000014" width="144" height="29.999999999999986"/>
-                                        <state key="normal" title="Clear all notifications"/>
+                                        <rect key="frame" x="0.0" y="49" width="214" height="30"/>
+                                        <state key="normal" title="Clear all notifications (pending)"/>
                                         <connections>
                                             <action selector="pressedClearAllNotifications:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wDp-34-Ayg"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-Bh-vi6">
-                                        <rect key="frame" x="42.333333333333329" y="152" width="128.33333333333337" height="20.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of notifications (pending)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bi-Bh-vi6">
+                                        <rect key="frame" x="3.3333333333333286" y="102.66666666666666" width="207.33333333333337" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cj1-W5-cXE">
-                                        <rect key="frame" x="72.666666666666686" y="201" width="67.333333333333314" height="20.333333333333343"/>
+                                        <rect key="frame" x="73.333333333333343" y="151.66666666666666" width="67.333333333333343" height="20.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" alignment="center" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="O3A-3v-9GF">
+                                <rect key="frame" x="81.666666666666686" y="466" width="251" height="172"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCI-Mx-pfP">
+                                        <rect key="frame" x="0.0" y="0.0" width="251" height="30"/>
+                                        <state key="normal" title="Clear a single notification (delivered)"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atx-Pk-4jZ">
+                                        <rect key="frame" x="15" y="49" width="221" height="30"/>
+                                        <state key="normal" title="Clear all notifications (delivered)"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# of notifications (delivered)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDL-sV-aea">
+                                        <rect key="frame" x="18" y="102.66666666666663" width="215" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="identifier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smG-A4-t46">
+                                        <rect key="frame" x="91.666666666666686" y="151.66666666666663" width="67.333333333333314" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -66,6 +84,8 @@
                         <constraints>
                             <constraint firstItem="WGB-qN-7Te" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1ZK-Fp-ElY"/>
                             <constraint firstItem="IJ5-Sb-1kl" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Vkr-KB-UaR"/>
+                            <constraint firstItem="O3A-3v-9GF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bqH-Kv-vy4"/>
+                            <constraint firstItem="O3A-3v-9GF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="ccV-Fo-xrJ"/>
                             <constraint firstItem="IJ5-Sb-1kl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ngC-o1-yum"/>
                             <constraint firstItem="WGB-qN-7Te" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.5" id="pul-KO-UMq"/>
                         </constraints>

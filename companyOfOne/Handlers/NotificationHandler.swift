@@ -112,4 +112,15 @@ class NotificationHandler: NSObject {
         //use this when a specific notification(reminder) is fullfilled...then remove
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: notificationIdentifiers)
     }
+    
+    class func updateDeliveredNotificationInfo(completionHandler: @escaping (_ count: Int, _ descript: [String]) -> Void){
+        UNUserNotificationCenter.current().getDeliveredNotifications {
+            (deliveries) in
+            var descripts:[String] = []
+            for delivery in deliveries{
+                descripts.append(delivery.description)
+            }
+            completionHandler(deliveries.count, [deliveries.description])
+        }
+    }
 }
