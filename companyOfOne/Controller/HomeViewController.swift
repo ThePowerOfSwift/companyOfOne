@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     //MARK: Global Variables
     var currentImage = UIImage()
     var imagePicker = UIImagePickerController()
+   
     
     override func viewDidLoad() {
         navigationController?.title = "Home"
@@ -40,19 +41,24 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     @IBAction func pressedClearAllNotifications(_ sender: UIButton) {
         //clear pending notifications
         NotificationHandler.clearAllPendingNotifications()
-        //update UI 
+        //update UI
         notificationCountLabel.text = "0"
         notificationIdentifierLabel.text = ""
     }
     
-    @IBAction func pressedScheduleNotification(_ sender: UIButton) {
+    @IBAction func pressedScheduleNotification(_ sender: UIButton){
         print("schedule notification button pressed")
         NotificationHandler.scheduleNotification()
-        let countString = ("\(NotificationHandler.updatePendingNotificationInfo().count)")
-        notificationCountLabel.text = countString
-        notificationIdentifierLabel.text = NotificationHandler.updatePendingNotificationInfo().identifiers.joined(separator: ", ")
+        NotificationHandler.updatePendingNotificationInfo { (count, identifiers) in
+            let countString = ("\(count)")
+            self.notificationCountLabel.text = countString
+            self.notificationIdentifierLabel.text = identifiers.joined(separator: ", ")
+        }
+        
+        
     }
     
+
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         showAlertForPhotoOrLibrary()

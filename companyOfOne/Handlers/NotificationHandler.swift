@@ -11,8 +11,8 @@ import UserNotifications
 
 class NotificationHandler: NSObject {
     
-    private static var pendingNotificationCount:Int = 0
-    private static var noticationIdentifiers:[String] = []
+    static var pendingNotificationCount:Int = 0
+    static var notificationIdentifiers:[String] = []
     
     class func scheduleNotification() {
         
@@ -89,28 +89,27 @@ class NotificationHandler: NSObject {
 }
     }
     
-    class func updatePendingNotificationInfo() -> (count: Int, identifiers:[String]) {
+    
+    class func updatePendingNotificationInfo(completionHandler: @escaping (_ count: Int, _ identifier: [String]) -> Void){
         UNUserNotificationCenter.current().getPendingNotificationRequests {
             (requests) in
-            pendingNotificationCount = requests.count
+            var identifiers:[String] = []
             for request in requests{
-            noticationIdentifiers.append(request.identifier)
+            identifiers.append(request.identifier)
             }
+            completionHandler(requests.count, identifiers)
         }
-    return (pendingNotificationCount, noticationIdentifiers)
-        //I don't think this will work.  Asychronous, takes some time to come back and the UI variables don't catch it...
-        
     }
     
     class func clearAllPendingNotifications(){
         //testing purposes only?
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         pendingNotificationCount = 0
-        noticationIdentifiers.removeAll()
+        notificationIdentifiers.removeAll()
     }
     
     class func clearSpecificNotifications(){
         //use this when a specific notification(reminder) is fullfilled...then remove
-    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: noticationIdentifiers)
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: notificationIdentifiers)
     }
 }
