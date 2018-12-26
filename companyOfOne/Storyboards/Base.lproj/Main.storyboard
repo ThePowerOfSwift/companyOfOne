@@ -80,8 +80,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reminders:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VA2-0N-QFe">
-                                <rect key="frame" x="112.33333333333331" y="74" width="86" height="20.333333333333329"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incomplete:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VA2-0N-QFe">
+                                <rect key="frame" x="110.33333333333331" y="74" width="90" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -455,7 +455,7 @@
         <scene sceneID="5fc-On-7ay">
             <objects>
                 <navigationController title="To Home" automaticallyAdjustsScrollViewInsets="NO" id="sX0-QU-RdC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" image="home" landscapeImage="home" selectedImage="home" id="N22-se-vOl">
+                    <tabBarItem key="tabBarItem" title="Fucking Banana" image="home" landscapeImage="home" selectedImage="home" id="N22-se-vOl">
                         <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBarItem>
                     <toolbarItems/>

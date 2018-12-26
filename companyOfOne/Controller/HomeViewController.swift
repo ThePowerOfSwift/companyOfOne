@@ -29,12 +29,25 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     
     override func viewDidLoad() {
-        
+        if let tabItems = tabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            tabItems[0].badgeValue = "1"
+        }
         registerNibs()
         navigationController?.title = "Home"
         super.viewDidLoad()
         imagePicker.delegate = self
         FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
+     
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if let tabItems = tabBarController?.tabBar.items {
+            // In this case we want to modify the badge number of the third tab:
+            tabItems[0].badgeValue = "1"
+        }
     }
     
     func registerNibs(){

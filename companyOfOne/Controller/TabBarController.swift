@@ -24,7 +24,19 @@ class TabBarController: UITabBarController{
         tabBar.items?[3].title = "Personal Receipts"
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.tabBar.items?[0].title = "Home"
+//        self.tabBar.items?[0].badgeValue = "1"
+//
+//        tabBar.items?[1].title = "Documents"
+//
+//        tabBar.items?[2].title = "Snail Mail"
+//
+//        tabBar.items?[3].title = "Personal Receipts"
+//    }
+//
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+       
         if let title = item.title{
             switch title {
             case "Home":
