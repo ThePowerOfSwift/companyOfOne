@@ -1,5 +1,5 @@
 //
-//  NotificationHandler.swift
+//  LocalNotificationHandler.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-20.
@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class NotificationHandler: NSObject {
+class LocalNotificationHandler: NSObject {
     
     static var pendingNotificationCount:Int = 0
     static var notificationIdentifiers:[String] = []

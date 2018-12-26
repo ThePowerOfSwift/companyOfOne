@@ -17,25 +17,43 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     @IBOutlet weak var notificationCountLabel: UILabel!
     @IBOutlet weak var notificationIdentifierLabel: UILabel!
+    @IBOutlet weak var deliveredNotificationsCountLabel: UILabel!
+    @IBOutlet weak var deliveredNotificationDescriptionLabel: UILabel!
     
     //MARK: Global Variables
     var currentImage = UIImage()
     var imagePicker = UIImagePickerController()
-   
+    
     
     override func viewDidLoad() {
         navigationController?.title = "Home"
         super.viewDidLoad()
-    
-        
         imagePicker.delegate = self
     }
     
-    //MARk: - Actions
+    //MARK: - Actions
+    
+    @IBAction func pressedGetDeliveredNotificationsButton(_ sender: UIButton) {
+        LocalNotificationHandler.updateDeliveredNotificationInfo { (count
+            , descripts) in
+            DispatchQueue.main.async {
+                self.updateUIForDeliveredNotifications(count: count, descripts: descripts)
+            }
+        }
+    }
+    
+    @IBAction func pressedClearSpecificDeliveredNotificationButton(_ sender: UIButton) {
+        print("clear specific delivered notification")
+    }
+    
+    @IBAction func pressedClearAllDeliveredNotificationsButton(_ sender: UIButton) {
+        print("clear all delivered notification")
+    }
+    
     
     @IBAction func pressedClearAllNotifications(_ sender: UIButton) {
         //clear pending notifications
-        NotificationHandler.clearAllPendingNotifications()
+        LocalNotificationHandler.clearAllPendingNotifications()
         //update UI
         notificationCountLabel.text = "0"
         notificationIdentifierLabel.text = ""
@@ -43,8 +61,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     @IBAction func pressedScheduleNotification(_ sender: UIButton){
         print("schedule notification button pressed")
-        NotificationHandler.scheduleNotification()
-        NotificationHandler.updatePendingNotificationInfo { (count, identifiers) in
+        LocalNotificationHandler.scheduleNotification()
+        LocalNotificationHandler.updatePendingNotificationInfo { (count, identifiers) in
             let countString = ("\(count)")
             DispatchQueue.main.async {
                 self.notificationCountLabel.text = countString
@@ -53,10 +71,15 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
     }
     
-
-    
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         showAlertForPhotoOrLibrary()
+    }
+    
+    //this function can be used by the LocalNotifcationHandler or a future PushNotificationHandler
+    func updateUIForDeliveredNotifications(count: Int, descripts: [String]){
+        let countString = ("\(count)")
+        self.deliveredNotificationsCountLabel.text = countString
+        self.deliveredNotificationDescriptionLabel.text = descripts.joined(separator: ", ")
     }
     
     func takeAPhoto(){
