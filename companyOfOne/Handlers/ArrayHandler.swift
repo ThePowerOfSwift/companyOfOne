@@ -11,7 +11,8 @@ import UIKit
 class ArrayHandler: NSObject {
     static let sharedInstance = ArrayHandler()
     override private init() {}
-    var documentArray:[Document] = []
+    var incompleteDocumentArray:[Document] = []
+    var completeDocumentArray:[Document] = []
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
     var exportArray:[Document] = []

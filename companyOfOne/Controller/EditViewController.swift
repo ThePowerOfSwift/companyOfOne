@@ -568,14 +568,14 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             print("swiped left on doc ImageView, up one spot")
             if let indexPathRow = currentTableViewIndexPathRow{
                 var nextDocIndexPathRow = 0
-                if indexPathRow == ArrayHandler.sharedInstance.documentArray.count - 1 {
+                if indexPathRow == ArrayHandler.sharedInstance.completeDocumentArray.count - 1 {
                     nextDocIndexPathRow = 0
                 }else{
                     nextDocIndexPathRow = indexPathRow + 1
                 }
                 print("\(nextDocIndexPathRow)")
                 currentTableViewIndexPathRow = nextDocIndexPathRow
-                let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
+                let document = ArrayHandler.sharedInstance.completeDocumentArray[nextDocIndexPathRow]
                 unwrapAndUpdateDocument(document: document)
             }
         }
@@ -584,13 +584,13 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
             if let indexPathRow = currentTableViewIndexPathRow{
                 var nextDocIndexPathRow = 0
                 if indexPathRow == 0 {
-                    nextDocIndexPathRow = ArrayHandler.sharedInstance.documentArray.count - 1
+                    nextDocIndexPathRow = ArrayHandler.sharedInstance.completeDocumentArray.count - 1
                 }else{
                     nextDocIndexPathRow = indexPathRow - 1
                 }
                 print("\(nextDocIndexPathRow)")
                 currentTableViewIndexPathRow = nextDocIndexPathRow
-                let document = ArrayHandler.sharedInstance.documentArray[nextDocIndexPathRow]
+                let document = ArrayHandler.sharedInstance.completeDocumentArray[nextDocIndexPathRow]
                 unwrapAndUpdateDocument(document: document)
             }
         }

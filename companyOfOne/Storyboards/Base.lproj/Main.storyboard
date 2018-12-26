@@ -91,11 +91,15 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3kb-Zh-6TK">
-                                <rect key="frame" x="20" y="160.33333333333331" width="374" height="207.33333333333331"/>
+                                <rect key="frame" x="20" y="160.33333333333337" width="374" height="207.66666666666663"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Wh9-ym-8ln"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="opv-4D-KDz"/>
+                                </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDL-sV-aea">
-                                <rect key="frame" x="255" y="74" width="23" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDL-sV-aea">
+                                <rect key="frame" x="262.66666666666669" y="74" width="7.6666666666666856" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -104,9 +108,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="WGB-qN-7Te" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1ZK-Fp-ElY"/>
-                            <constraint firstItem="jDL-sV-aea" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="1.25" id="99o-Pl-n2b"/>
+                            <constraint firstItem="jDL-sV-aea" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="1.25" constant="7.75" id="99o-Pl-n2b"/>
                             <constraint firstItem="VA2-0N-QFe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" multiplier="0.75" id="Fka-iB-wYn"/>
-                            <constraint firstItem="3kb-Zh-6TK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-104" id="GjE-Wd-bhR"/>
+                            <constraint firstItem="3kb-Zh-6TK" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="GjE-Wd-bhR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dGr-Xk-kat" secondAttribute="trailing" constant="20" id="IA3-Xv-t92"/>
                             <constraint firstItem="3kb-Zh-6TK" firstAttribute="top" secondItem="dGr-Xk-kat" secondAttribute="bottom" id="ISA-M5-3QN"/>
                             <constraint firstItem="VA2-0N-QFe" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Jwc-s2-6SD"/>
@@ -139,6 +143,7 @@
                         <outlet property="deliveredNotificationsCountLabel" destination="jDL-sV-aea" id="62w-YU-EBF"/>
                         <outlet property="notificationCountLabel" destination="2Bi-Bh-vi6" id="88q-kk-paS"/>
                         <outlet property="notificationIdentifierLabel" destination="cj1-W5-cXE" id="D75-8C-4oG"/>
+                        <outlet property="reminderTableView" destination="3kb-Zh-6TK" id="F1X-ff-TSx"/>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewController" id="MO5-Gq-5lc"/>
                     </connections>
                 </viewController>
@@ -620,7 +625,7 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QNp-ux-7ZX"/>
+        <segue reference="7eX-nz-D8C"/>
         <segue reference="MO5-Gq-5lc"/>
     </inferredMetricsTieBreakers>
 </document>

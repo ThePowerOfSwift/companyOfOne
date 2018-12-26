@@ -43,14 +43,14 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                     pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
                 }
             // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
-            case 1...(ArrayHandler.sharedInstance.documentArray.count-1):
+            case 1...(ArrayHandler.sharedInstance.completeDocumentArray.count-1):
                 if exportMode == .on{
                     print("some selected for export")
                 }
                 filterButton.title = "Select All"
                 pressedShareButton.tintColor = nil
                 selectedMode = .someSelected
-            case ArrayHandler.sharedInstance.documentArray.count:
+            case ArrayHandler.sharedInstance.completeDocumentArray.count:
                 if exportMode == .on{
                     print("all selected for export")
                 }
@@ -173,24 +173,24 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: - TableView Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ArrayHandler.sharedInstance.documentArray.count//?? 2
+        return ArrayHandler.sharedInstance.completeDocumentArray.count//?? 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
-        cell.isSelectedForExport = ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport
+        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         } else {
             cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         
-        cell.titleTagLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag
-        cell.categoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name
-        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name
-        cell.dateLabel.text = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate?.format()
+        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
+        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
+        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
+        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
         //cell.occurenceLabel.text = document?.occurrence?
-        if let imageData = ArrayHandler.sharedInstance.documentArray[indexPath.row].pictureData {
+        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
             cell.docImageView.image = UIImage(data: imageData)
         }
         return cell
@@ -198,7 +198,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: ArrayHandler.sharedInstance.documentArray[indexPath.row])
+            FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -215,8 +215,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
             //update UI, update model and add to exportArray
             if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
                 cell.accessoryType = .checkmark
-                ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = true
-                ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.documentArray[indexPath.row])
+                ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport = true
+                ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row])
                 //this propery observer updates state and UI
                 exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
             }
@@ -229,8 +229,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         //update UI, update model and remove from exportArray
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .disclosureIndicator
-            ArrayHandler.sharedInstance.documentArray[indexPath.row].isSelectedForExport = false
-            if let index = ArrayHandler.sharedInstance.exportArray.index(of: ArrayHandler.sharedInstance.documentArray[indexPath.row]) {
+            ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport = false
+            if let index = ArrayHandler.sharedInstance.exportArray.index(of: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row]) {
                 ArrayHandler.sharedInstance.exportArray.remove(at: index)
             }
             //this propery observer updates state and UI
@@ -282,7 +282,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func selectAllForExport(){
         //this sets the model objects isSelectedForExport bool and adds to the exportArray
         let totalRows = docTableView.numberOfRows(inSection: 0)
-        for item in ArrayHandler.sharedInstance.documentArray {
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
             if item.isSelectedForExport == false {
                 item.isSelectedForExport = true
                 ArrayHandler.sharedInstance.exportArray.append(item)
@@ -300,7 +300,7 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
     func deSelectAllForExport(){
         //this clears the model objects isSelectedForExport bool and removes the exportArray
         let totalRows = docTableView.numberOfRows(inSection: 0)
-        for item in ArrayHandler.sharedInstance.documentArray {
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
             item.isSelectedForExport = false
         }
         ArrayHandler.sharedInstance.exportArray.removeAll()
@@ -337,24 +337,24 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
                 let nextController = segue.destination as! EditViewController
                 nextController.fromDocsViewController = true
                 nextController.currentTableViewIndexPathRow = indexPath.row
-                if let titleTag = ArrayHandler.sharedInstance.documentArray[indexPath.row].titleTag {
+                if let titleTag = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag {
                     nextController.currentTitleTag = titleTag
                 }
-                if let categoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toCategory?.name {
+                if let categoryName = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name {
                     nextController.categorySubCategoryLabels[0] = categoryName
                 }
-                if let subCategoryName = ArrayHandler.sharedInstance.documentArray[indexPath.row].toSubCategory?.name {
+                if let subCategoryName = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name {
                     nextController.categorySubCategoryLabels[1] = subCategoryName
                 }
-                if let documentDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].documentDate{
+                if let documentDate = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate{
                     nextController.currentDate = documentDate
                 }
-                if let imageData = ArrayHandler.sharedInstance.documentArray[indexPath.row].pictureData {
+                if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
                     if let image = UIImage(data: imageData) {
                         nextController.currentImage = image
                     }
                 }
-                if let occurrence = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence{
+                if let occurrence = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toOccurrence{
                     if let title = occurrence.title {
                          nextController.occurrenceLabels[0] = title
                     }

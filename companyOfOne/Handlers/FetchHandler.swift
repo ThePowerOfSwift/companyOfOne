@@ -27,7 +27,7 @@ class FetchHandler: NSObject {
         }else{
             request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
         }
-        ArrayHandler.sharedInstance.documentArray = try! context.fetch(request) as! [Document]
+        ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
     }
     
     class func deleteDocumentAndFetchFilteredDocuments(document: Document){  //class func?

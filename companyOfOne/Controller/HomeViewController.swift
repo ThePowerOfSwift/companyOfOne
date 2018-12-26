@@ -10,11 +10,14 @@ import UIKit
 
 
 
-class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate, UITabBarDelegate {
+class HomeViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITabBarControllerDelegate, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    
     
     //MARK: - Outlets
     
     
+    @IBOutlet weak var reminderTableView: UITableView!
     @IBOutlet weak var notificationCountLabel: UILabel!
     @IBOutlet weak var notificationIdentifierLabel: UILabel!
     @IBOutlet weak var deliveredNotificationsCountLabel: UILabel!
@@ -26,9 +29,17 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     
     override func viewDidLoad() {
+        
+        registerNibs()
         navigationController?.title = "Home"
         super.viewDidLoad()
         imagePicker.delegate = self
+        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
+    }
+    
+    func registerNibs(){
+        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
+        reminderTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
     
     //MARK: - Actions
@@ -73,6 +84,39 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         showAlertForPhotoOrLibrary()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if ArrayHandler.sharedInstance.completeDocumentArray.count != 0{
+            return ArrayHandler.sharedInstance.completeDocumentArray.count
+        }else{
+            return 5
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
+        if cell.isSelectedForExport{
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        }
+        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
+        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
+        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
+        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
+        //cell.occurenceLabel.text = document?.occurrence?
+//        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
+//            cell.docImageView.image = UIImage(data: imageData)
+//        }
+        return cell
     }
     
     //this function can be used by the LocalNotifcationHandler or a future PushNotificationHandler
