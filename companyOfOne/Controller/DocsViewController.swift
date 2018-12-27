@@ -94,19 +94,19 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         let application = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = application.window?.rootViewController as! UITabBarController
         selectedTabIndex = tabbarController.selectedIndex
-//       if let selectedTabIndex = tabBarController?.selectedIndex {
-        //TODO: - TO FIX: This index is not working correctly
-//            print("selected tab index: \(selectedTabIndex)")
-//            switch selectedTabIndex  {
-//            case 0: self.navBar.topItem?.title = "Home"
-//            case 1: self.navBar.topItem?.title = "Documents"
-//            case 2:  self.navBar.topItem?.title = "Snail Mail"
-//            case 3:  self.navBar.topItem?.title = "Personal Receipts"
-//            default: break
-////            }
-//        }
-            //docTableView.reloadData()
+       if let selectedTabIndex = tabBarController?.selectedIndex {
+   //     TODO: - TO FIX: This index is not working correctly
+            print("selected tab index: \(selectedTabIndex)")
+            switch selectedTabIndex  {
+            case 1: self.navBar.topItem?.title = "Documents"
+            case 2:  self.navBar.topItem?.title = "Snail Mail"
+            case 3:  self.navBar.topItem?.title = "Personal Receipts"
+            default: break
+//            }
         }
+//            docTableView.reloadData()
+        }
+    }
     
     func setupTableViewForPopulation(){
         //clear the export Array and deselect all items/cells

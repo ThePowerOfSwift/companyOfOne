@@ -11,30 +11,66 @@ import UIKit
 
 
 class TabBarController: UITabBarController{
-    var updatedTabBarIndex: Int = 0
+    var updatedTabBarIndex:Int?
+    var homeViewController:HomeViewController?
+    var docViewController:DocsViewController?
+    var maiViewController:DocsViewController?
+    var receiptsViewController:DocsViewController?
+    
+    @IBOutlet weak var homeTabBar: UITabBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
+        if let home = homeViewController{
+            home.tabBarItem.badgeValue = "4"
+        }
+//        homeTabBar.items!.first!.badgeValue = "4"//("\(ArrayHandler.sharedInstance.incompleteDocumentArray.count)")
         tabBar.items?[0].title = "Home"
-
+    
         tabBar.items?[1].title = "Documents"
        
         tabBar.items?[2].title = "Snail Mail"
         
         tabBar.items?[3].title = "Personal Receipts"
+        
+        self.viewControllers![0].children[0].title = "Home1"
+        
+//        self.viewControllers![2].children[0].title = "Mail1"
+//        self.viewControllers![3].children[0].title = "Receipts1"
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        self.tabBar.items?[0].title = "Home"
-//        self.tabBar.items?[0].badgeValue = "1"
-//
-//        tabBar.items?[1].title = "Documents"
-//
-//        tabBar.items?[2].title = "Snail Mail"
-//
-//        tabBar.items?[3].title = "Personal Receipts"
-//    }
-//
+    override func viewDidAppear(_ animated: Bool) {
+        tabBar.items?[0].title = "Home"
+        if let home = homeViewController{
+            home.tabBarItem.badgeValue = "4"
+        }
+//         homeTabBar.items!.first!.badgeValue = "4"//("\(ArrayHandler.sharedInstance.incompleteDocumentArray.count)")
+
+        tabBar.items?[1].title = "Documents"
+
+        tabBar.items?[2].title = "Snail Mail"
+
+        tabBar.items?[3].title = "Personal Receipts"
+        self.viewControllers![1].children[0].navigationController?.title = "Doc1"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBar.items?[0].title = "Home"
+        if let home = homeViewController{
+            home.tabBarItem.badgeValue = "4"
+        }
+//         homeTabBar.items!.first!.badgeValue = "4"//("\(ArrayHandler.sharedInstance.incompleteDocumentArray.count)")
+        
+        tabBar.items?[1].title = "Documents"
+        
+        tabBar.items?[2].title = "Snail Mail"
+        
+        tabBar.items?[3].title = "Personal Receipts"
+    }
+    
+
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
        
         if let title = item.title{

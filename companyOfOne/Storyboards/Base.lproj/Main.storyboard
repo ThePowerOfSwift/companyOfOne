@@ -161,6 +161,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="homeTabBar" destination="86u-Sh-K2n" id="q6b-6Q-aTb"/>
                         <segue destination="sX0-QU-RdC" kind="relationship" relationship="viewControllers" id="bMn-tQ-t28"/>
                         <segue destination="GyL-rT-xSt" kind="relationship" relationship="viewControllers" id="nBD-P7-xFR"/>
                         <segue destination="2R2-Ad-zb8" kind="relationship" relationship="viewControllers" id="nb6-K8-Z7Y"/>
@@ -455,8 +456,8 @@
         <scene sceneID="5fc-On-7ay">
             <objects>
                 <navigationController title="To Home" automaticallyAdjustsScrollViewInsets="NO" id="sX0-QU-RdC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Fucking Banana" image="home" landscapeImage="home" selectedImage="home" id="N22-se-vOl">
-                        <color key="badgeColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" landscapeImage="home" selectedImage="home" id="N22-se-vOl">
+                        <color key="badgeColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VG4-DS-xeN">
@@ -575,6 +576,21 @@
             </objects>
             <point key="canvasLocation" x="-949" y="-408"/>
         </scene>
+        <!--Docs View Controller-->
+        <scene sceneID="ndL-0x-Is3">
+            <objects>
+                <viewController id="Gwh-p3-XAQ" customClass="DocsViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9ru-nG-uG2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="JfY-fb-y4k"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gk7-wP-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="1070"/>
+        </scene>
         <!--Mail-->
         <scene sceneID="NTL-Gr-XW7">
             <objects>
@@ -606,7 +622,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="rootViewController" id="QNp-ux-7ZX"/>
+                        <segue destination="Gwh-p3-XAQ" kind="show" identifier="toReceiptsViewController" id="JaX-qs-UYN"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kn-6a-cY1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -626,6 +642,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="7eX-nz-D8C"/>
-        <segue reference="MO5-Gq-5lc"/>
+        <segue reference="rdm-6b-dxS"/>
     </inferredMetricsTieBreakers>
 </document>
