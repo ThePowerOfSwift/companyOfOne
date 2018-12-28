@@ -9,8 +9,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TestViewController" customModule="companyOfOne">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonDisplayView" customModule="companyOfOne" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="tEI-OV-Qor" id="t2r-21-OLr"/>
+                <outlet property="exportButtonPressed" destination="wh1-0A-i9E" id="9On-uu-vA8"/>
+                <outlet property="filterButtonPressed" destination="GE7-8u-K6I" id="1oV-zY-fm5"/>
                 <outlet property="view" destination="tEI-OV-Qor" id="Epj-J0-Pkh"/>
             </connections>
         </placeholder>

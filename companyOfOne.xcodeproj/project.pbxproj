@@ -26,6 +26,8 @@
 		7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */; };
 		7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */; };
 		7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */; };
+		7D84BD1821D6758000EE3480 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1721D6758000EE3480 /* TestViewController.swift */; };
+		7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */; };
 		7D94F74F21CC052800D62C8A /* MySelectedIndexDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */; };
 		7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */; };
 		7D9C731121B70C2200179C06 /* CommonDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */; };
@@ -60,6 +62,8 @@
 		7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryTableViewController.swift; sourceTree = "<group>"; };
 		7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableView.swift; sourceTree = "<group>"; };
+		7D84BD1721D6758000EE3480 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDisplayView.swift; sourceTree = "<group>"; };
 		7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySelectedIndexDelegate.swift; sourceTree = "<group>"; };
 		7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CommonDisplayView.xib; path = companyOfOne/View/CommonDisplayView.xib; sourceTree = SOURCE_ROOT; };
@@ -131,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				7DC93942218E163F001F05DE /* DocsViewController.swift */,
+				7D84BD1721D6758000EE3480 /* TestViewController.swift */,
 				7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */,
 				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
 				7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */,
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */,
+				7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */,
 				7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */,
 				7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */,
 				7D66945C216FE6610048F4A3 /* SettingsTableViewCell.swift */,
@@ -259,7 +265,9 @@
 				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
 				7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */,
 				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
+				7D84BD1821D6758000EE3480 /* TestViewController.swift in Sources */,
 				7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */,
+				7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */,
 				7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */,
 				7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,

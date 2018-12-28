@@ -576,10 +576,10 @@
             </objects>
             <point key="canvasLocation" x="-949" y="-408"/>
         </scene>
-        <!--Docs View Controller-->
+        <!--Test View Controller-->
         <scene sceneID="ndL-0x-Is3">
             <objects>
-                <viewController id="Gwh-p3-XAQ" customClass="DocsViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Gwh-p3-XAQ" customClass="TestViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ru-nG-uG2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
