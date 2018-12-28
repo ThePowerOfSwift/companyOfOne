@@ -307,6 +307,8 @@ class DocsViewController: UIViewController, UITableViewDelegate, UITableViewData
         for item in ArrayHandler.sharedInstance.completeDocumentArray {
             item.isSelectedForExport = false
         }
+        
+        //model updates should happen in the model but ... how?
         ArrayHandler.sharedInstance.exportArray.removeAll()
         docTableView.reloadData()
         

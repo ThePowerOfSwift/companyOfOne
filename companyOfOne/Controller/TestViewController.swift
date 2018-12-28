@@ -23,7 +23,6 @@ class TestViewController: UIViewController {
     }
     
     func createView(){
-        //let customView = CommonDisplayView()
         if let bounds = parent?.view.bounds {
              customView.frame = bounds
         }
