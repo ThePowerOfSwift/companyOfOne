@@ -8,20 +8,36 @@
 
 import UIKit
 
-class TestViewController: DocsViewController {
+class TestViewController: UIViewController {
+   
 
+    
+    let customView = CommonDisplayView()
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
+        createView()
         registerNibs()
         // Do any additional setup after loading the view.
     }
     
-    override func registerNibs(){
-        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-        docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
-        let myViewController = TestViewController(nibName: "CommonDisplayView", bundle: nil)
-        self.present(myViewController, animated: true, completion: nil)
+    func createView(){
+        //let customView = CommonDisplayView()
+        if let bounds = parent?.view.bounds {
+             customView.frame = bounds
+        }
+        self.view.addSubview(customView)
     }
+    
+    func registerNibs(){
+        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
+        customView.commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+    }
+    
+
+    
+
     /*
     // MARK: - Navigation
 

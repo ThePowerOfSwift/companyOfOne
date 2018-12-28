@@ -586,10 +586,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="JfY-fb-y4k"/>
                     </view>
+                    <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gk7-wP-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="1070"/>
+            <point key="canvasLocation" x="-49.275362318840585" y="1069.5652173913045"/>
         </scene>
         <!--Mail-->
         <scene sceneID="NTL-Gr-XW7">
@@ -622,7 +623,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Gwh-p3-XAQ" kind="show" identifier="toReceiptsViewController" id="JaX-qs-UYN"/>
+                        <segue destination="Gwh-p3-XAQ" kind="relationship" relationship="rootViewController" id="e4F-Jt-iFV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kn-6a-cY1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -641,7 +642,7 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7eX-nz-D8C"/>
+        <segue reference="G7N-yx-gnS"/>
         <segue reference="rdm-6b-dxS"/>
     </inferredMetricsTieBreakers>
 </document>

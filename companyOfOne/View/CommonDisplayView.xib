@@ -11,10 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonDisplayView" customModule="companyOfOne" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="tEI-OV-Qor" id="t2r-21-OLr"/>
-                <outlet property="exportButtonPressed" destination="wh1-0A-i9E" id="9On-uu-vA8"/>
-                <outlet property="filterButtonPressed" destination="GE7-8u-K6I" id="1oV-zY-fm5"/>
-                <outlet property="view" destination="tEI-OV-Qor" id="Epj-J0-Pkh"/>
+                <outlet property="commonTableView" destination="RAy-HR-cXf" id="M4E-gK-FVa"/>
+                <outlet property="contentView" destination="tEI-OV-Qor" id="pm1-Dg-6CK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,6 +36,10 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RAy-HR-cXf">
                     <rect key="frame" x="0.0" y="120" width="375" height="491"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="TiT-CV-wGe"/>
+                        <outlet property="delegate" destination="-1" id="xzs-bE-cAm"/>
+                    </connections>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Potential calculation area" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8dt-KL-UaZ">
                     <rect key="frame" x="0.0" y="611" width="375" height="56"/>

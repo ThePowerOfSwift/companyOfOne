@@ -8,13 +8,39 @@
 
 import UIKit
 
-class CommonDisplayView: UIView {
-    let kCONTENT_XIB_NAME = "CommonDisplayView"
-    @IBOutlet weak var filterButtonPressed: UIBarButtonItem!
-    @IBOutlet weak var exportButtonPressed: UIBarButtonItem!
-    @IBOutlet var contentView: UIView!
+class CommonDisplayView: UIView, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return ArrayHandler.sharedInstance.completeDocumentArray.count
+    }
     
-        override init(frame: CGRect) {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
+        if cell.isSelectedForExport{
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        }
+        
+        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
+        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
+        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
+        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
+        //cell.occurenceLabel.text = document?.occurrence?
+        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
+            cell.docImageView.image = UIImage(data: imageData)
+        }
+        return cell
+    }
+    
+
+    
+    let kCONTENT_XIB_NAME = "CommonDisplayView"
+ 
+    @IBOutlet var contentView: UIView!
+    @IBOutlet weak var commonTableView: UITableView!
+    
+    override init(frame: CGRect) {
             super.init(frame: frame)
             commonInit()
         }
