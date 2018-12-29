@@ -9,7 +9,7 @@
 import UIKit
 
 class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBarDelegate  {
-
+    
     //MARK: - Enums
     enum ExportMode {
         case on
@@ -27,7 +27,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
- 
+    
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
@@ -94,17 +94,17 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         let application = UIApplication.shared.delegate as! AppDelegate
         let tabbarController = application.window?.rootViewController as! UITabBarController
         selectedTabIndex = tabbarController.selectedIndex
-       if let selectedTabIndex = tabBarController?.selectedIndex {
-   //     TODO: - TO FIX: This index is not working correctly
+        if let selectedTabIndex = tabBarController?.selectedIndex {
+            //     TODO: - TO FIX: This index is not working correctly
             print("selected tab index: \(selectedTabIndex)")
             switch selectedTabIndex  {
             case 1: self.navBar.topItem?.title = "Documents"
             case 2:  self.navBar.topItem?.title = "Snail Mail"
             case 3:  self.navBar.topItem?.title = "Personal Receipts"
             default: break
-//            }
-        }
-//            docTableView.reloadData()
+                //            }
+            }
+            //            docTableView.reloadData()
         }
     }
     
@@ -121,41 +121,6 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
-    
-//    //MARK: - Seach Bar Delegates
-//
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        documentSearchBar.showsCancelButton = true
-//        documentSearchBar.showsScopeBar = true
-//        documentSearchBar.scopeButtonTitles = ["Title/Tag", "Category", "Subcategory"]
-//        documentSearchBar.selectedScopeButtonIndex = 0
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        FetchHandler.fetchFilteredDocuments(searchTerm: searchText)
-//        //FetchHandler.currentFilter = searchText
-//       // document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
-//        docTableView.reloadData()
-//        //print("current filter in textDidChange: \(FetchHandler.currentFilter)")
-//    }
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        //print("Beginning complete search from SearchButtonClicked")
-//        completeSearch()
-//        //print("Ending complete search from SearchButtonClicked")
-//
-//    }
-//
-//    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-//        //resetSearchBar()
-//        return true
-//    }
-//
-//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-//        //print("Beginning reset search from CancelButtonClicked")
-//        resetSearch()
-//        //print("Ending reset search from CancelButtonClicked")
-//    }
     
     //MARK: - Search Bar Custom Functions
     
@@ -174,73 +139,6 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         docTableView.reloadData()
     }
     
-//    //MARK: - TableView Delegates
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return ArrayHandler.sharedInstance.completeDocumentArray.count//?? 2
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
-//        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
-//        if cell.isSelectedForExport{
-//            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-//        } else {
-//            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-//        }
-//
-//        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
-//        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
-//        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
-//        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
-//        //cell.occurenceLabel.text = document?.occurrence?
-//        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
-//            cell.docImageView.image = UIImage(data: imageData)
-//        }
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row])
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        switch exportMode {
-//        case .on:
-//            //update UI, update model and add to exportArray
-//            if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
-//                cell.accessoryType = .checkmark
-//                ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport = true
-//                ArrayHandler.sharedInstance.exportArray.append(ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row])
-//                //this propery observer updates state and UI
-//                exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
-//            }
-//        case .off:
-//            performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
-//        }
-//    }
-//
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        //update UI, update model and remove from exportArray
-//        if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
-//            cell.accessoryType = .disclosureIndicator
-//            ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport = false
-//            if let index = ArrayHandler.sharedInstance.exportArray.index(of: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row]) {
-//                ArrayHandler.sharedInstance.exportArray.remove(at: index)
-//            }
-//            //this propery observer updates state and UI
-//            exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
-//        }
-//    }
     
     //MARK: - Actions
     
@@ -362,23 +260,28 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
                 }
                 if let occurrence = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toOccurrence{
                     if let title = occurrence.title {
-                         nextController.occurrenceLabels[0] = title
+                        nextController.occurrenceLabels[0] = title
                     }
                     if let formattedOccurrenceDate = occurrence.occurrenceDate?.format() {
-                         nextController.occurrenceLabels[1] = formattedOccurrenceDate
+                        nextController.occurrenceLabels[1] = formattedOccurrenceDate
                     }
                 }
-//                if let occurrenceDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence.occurrenceDate{
-//                    let formattedOccurrenceDate = occurrenceDate?.format()
-//                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)
-//                }
-           }
+                //                if let occurrenceDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence.occurrenceDate{
+                //                    let formattedOccurrenceDate = occurrenceDate?.format()
+                //                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)
+                //                }
+            }
         }
     }
 }
 
+
+
+//-----------------------------------------------------------
+
+//MARK: - TableView Delegates
+
 extension DocsViewController: UITableViewDelegate,UITableViewDataSource {
-    //MARK: - TableView Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArrayHandler.sharedInstance.completeDocumentArray.count//?? 2
@@ -447,8 +350,9 @@ extension DocsViewController: UITableViewDelegate,UITableViewDataSource {
     }
 }
 
+//MARK: - Seach Bar Delegates
+
 extension DocsViewController: UISearchBarDelegate {
-    //MARK: - Seach Bar Delegates
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         documentSearchBar.showsCancelButton = true
