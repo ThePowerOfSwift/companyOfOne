@@ -9,6 +9,7 @@
 import UIKit
 
 class CommonDisplayView: UIView, UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
          return ArrayHandler.sharedInstance.completeDocumentArray.count
     }
