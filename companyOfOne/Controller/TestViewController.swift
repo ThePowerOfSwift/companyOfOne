@@ -10,8 +10,6 @@ import UIKit
 
 class TestViewController: UIViewController {
    
-
-    
     let customView = CommonDisplayView()
     override func viewDidLoad() {
         
@@ -19,6 +17,8 @@ class TestViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         createView()
         registerNibs()
+        updateTitle()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -32,6 +32,21 @@ class TestViewController: UIViewController {
     func registerNibs(){
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         customView.commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+    }
+    
+    func updateTitle(){
+        if let selectedTabIndex = tabBarController?.selectedIndex {
+            //     TODO: - TO FIX: This index is not working correctly
+            print("selected tab index: \(selectedTabIndex)")
+            
+            switch selectedTabIndex  {
+            case 1: customView.commonNavBar.topItem?.title = "Documents"
+            case 2: customView.commonNavBar.topItem?.title = "Snail Mail"
+            case 3: customView.commonNavBar.topItem?.title = "Personal Receipts"
+            default: break
+                //            }
+            }            //            docTableView.reloadData()
+        }
     }
     
 

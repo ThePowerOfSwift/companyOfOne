@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommonDisplayView" customModule="companyOfOne" customModuleProvider="target">
             <connections>
+                <outlet property="commonNavBar" destination="iaJ-9d-KsO" id="Odr-cy-L4g"/>
+                <outlet property="commonSearchBar" destination="pOX-Qu-FG3" id="wa8-c3-Taz"/>
                 <outlet property="commonTableView" destination="RAy-HR-cXf" id="M4E-gK-FVa"/>
                 <outlet property="contentView" destination="tEI-OV-Qor" id="pm1-Dg-6CK"/>
             </connections>
@@ -29,11 +31,11 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pOX-Qu-FG3" customClass="DocumentSearchBar" customModule="companyOfOne" customModuleProvider="target">
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pOX-Qu-FG3">
                     <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                     <connections>
-                        <outlet property="delegate" destination="-1" id="j3h-eG-WS4"/>
+                        <outlet property="delegate" destination="-1" id="a6Y-8r-O1V"/>
                     </connections>
                 </searchBar>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RAy-HR-cXf">
