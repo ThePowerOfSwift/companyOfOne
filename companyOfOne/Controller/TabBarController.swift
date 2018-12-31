@@ -53,7 +53,7 @@ class TabBarController: UITabBarController{
         tabBar.items?[2].title = "Snail Mail"
 
         tabBar.items?[3].title = "Personal Receipts"
-        self.viewControllers![1].children[0].navigationController?.title = "Doc1"
+       // self.viewControllers![1].children[0].navigationController?.title = "Doc1"
     }
     
     override func viewWillAppear(_ animated: Bool) {

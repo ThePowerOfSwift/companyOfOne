@@ -28,7 +28,9 @@
 		7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */; };
 		7D84BD1821D6758000EE3480 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1721D6758000EE3480 /* TestViewController.swift */; };
 		7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */; };
-		7D94F74F21CC052800D62C8A /* MySelectedIndexDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */; };
+		7D84BD1E21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */; };
+		7D84BD2021D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */; };
+		7D84BD2321DA65B900EE3480 /* DocumentSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD2221DA65B900EE3480 /* DocumentSearchBar.swift */; };
 		7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */; };
 		7D9C731121B70C2200179C06 /* CommonDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */; };
 		7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC93942218E163F001F05DE /* DocsViewController.swift */; };
@@ -64,7 +66,9 @@
 		7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableView.swift; sourceTree = "<group>"; };
 		7D84BD1721D6758000EE3480 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDisplayView.swift; sourceTree = "<group>"; };
-		7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySelectedIndexDelegate.swift; sourceTree = "<group>"; };
+		7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarExtenstion_DocsViewController.swift; sourceTree = "<group>"; };
+		7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtension_DocsViewController.swift; sourceTree = "<group>"; };
+		7D84BD2221DA65B900EE3480 /* DocumentSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentSearchBar.swift; sourceTree = "<group>"; };
 		7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CommonDisplayView.xib; path = companyOfOne/View/CommonDisplayView.xib; sourceTree = SOURCE_ROOT; };
 		7DC93942218E163F001F05DE /* DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				7DDAA67B21A1043500C047E3 /* Handlers */,
 				7D66945B216EA8120048F4A3 /* View */,
 				7D669453216A8C100048F4A3 /* Controller */,
+				7D84BD2121D7DC8700EE3480 /* Extensions */,
 				7D669454216A8C210048F4A3 /* Storyboards */,
 				7D669441216A89D50048F4A3 /* Assets.xcassets */,
 				7D66943A216A89D20048F4A3 /* AppDelegate.swift */,
@@ -136,7 +141,6 @@
 			children = (
 				7DC93942218E163F001F05DE /* DocsViewController.swift */,
 				7D84BD1721D6758000EE3480 /* TestViewController.swift */,
-				7D94F74E21CC052800D62C8A /* MySelectedIndexDelegate.swift */,
 				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
 				7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */,
 				7D669455216A8DA20048F4A3 /* EditViewController.swift */,
@@ -168,6 +172,16 @@
 				7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7D84BD2121D7DC8700EE3480 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */,
+				7D84BD2221DA65B900EE3480 /* DocumentSearchBar.swift */,
+				7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		7DDAA67B21A1043500C047E3 /* Handlers */ = {
@@ -264,18 +278,20 @@
 				7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */,
 				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
 				7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */,
+				7D84BD2021D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift in Sources */,
 				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
 				7D84BD1821D6758000EE3480 /* TestViewController.swift in Sources */,
 				7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */,
 				7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */,
 				7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */,
 				7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */,
+				7D84BD2321DA65B900EE3480 /* DocumentSearchBar.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,
 				7D66944D216A8BD50048F4A3 /* Document.swift in Sources */,
-				7D94F74F21CC052800D62C8A /* MySelectedIndexDelegate.swift in Sources */,
 				7D14333F219B85C6006C20EC /* DocImage.swift in Sources */,
 				7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */,
+				7D84BD1E21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift in Sources */,
 				7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */,
 				7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */,
 				7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */,
