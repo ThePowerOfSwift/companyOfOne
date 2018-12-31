@@ -1,5 +1,5 @@
 //
-//  TestViewController.swift
+//  ReceiptsViewController.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-28.
@@ -8,33 +8,33 @@
 
 import UIKit
 
-class TestViewController: UIViewController {
+class ReceiptsViewController: UIViewController {
    
     let customView = CommonDisplayView()
     override func viewDidLoad() {
         
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        createView()
-        registerNibs()
-        updateTitle()
+        createTotalView()
+        registerTableViewNibs()
+        updateNavBarTitle()
         
         // Do any additional setup after loading the view.
     }
     
-    func createView(){
+    func createTotalView(){
         if let bounds = parent?.view.bounds {
              customView.frame = bounds
         }
         self.view.addSubview(customView)
     }
     
-    func registerNibs(){
+    func registerTableViewNibs(){
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         customView.commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
     
-    func updateTitle(){
+    func updateNavBarTitle(){
         if let selectedTabIndex = tabBarController?.selectedIndex {
             //     TODO: - TO FIX: This index is not working correctly
             print("selected tab index: \(selectedTabIndex)")
