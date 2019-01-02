@@ -35,7 +35,7 @@ class TabBarController: UITabBarController{
         
         tabBar.items?[3].title = "Personal Receipts"
         
-        self.viewControllers![0].children[0].title = "Home1"
+        //self.viewControllers![0].children[0].title = "Home1"
         
 //        self.viewControllers![2].children[0].title = "Mail1"
 //        self.viewControllers![3].children[0].title = "Receipts1"
