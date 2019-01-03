@@ -16,6 +16,8 @@ class Document:NSManagedObject{
 
     class func createDocument(currentDocImage:UIImage?, currentTitleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentOccurrenceDate:Date?, currentDocumentDate:Date?, isSelectedForExport:Bool?){
         
+    let generator = UINotificationFeedbackGenerator()
+        
     let context = AppDelegate.viewContext
     let document = Document(context:context)
     
@@ -56,7 +58,9 @@ class Document:NSManagedObject{
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
+        generator.notificationOccurred(.success)
     }
+    
     
 //    func retrieveAllDocuments(searchTerm: String){
 //        //FetchHandler.currentFilter = filteredBy

@@ -39,7 +39,10 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
                 filterButton.title = "Select All"
                 selectedMode = .noneSelected
                 if exportMode == .off {
+                    pressedShareButton.image = #imageLiteral(resourceName: "upload")
                     pressedShareButton.tintColor = nil
+                    filterButton.image = #imageLiteral(resourceName: "filter")
+                    filterButton.tintColor = nil
                 }else{
                     pressedShareButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
                 }
@@ -76,6 +79,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     override func viewDidLoad() {
         super.viewDidLoad()
         print("from viewDidLoad:")
+        //self.tabBarController?.tabBar.isHidden = false
         registerNibs()
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
@@ -84,8 +88,10 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     override func viewWillAppear(_ animated: Bool) {
         print("from viewWillAppear:")
         navigationController!.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = false
         updateViewControllerForSelectedTab()
         setupTableViewForPopulation()
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
     
     //MARK: - Custom Functions For Loading View
@@ -297,14 +303,7 @@ func createPDF(image: UIImage) -> NSData? {
             }
         if segue.identifier == "toPDFViewControllerFromDocsExportButton" {
             let nextController = segue.destination as! PDFViewController
-            //map the export array to the local array and clear the export array
             nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
-            ArrayHandler.sharedInstance.exportArray.removeAll()
-            print("export array count after remove all:\(ArrayHandler.sharedInstance.exportArray.count)")
-            //TODO: FIX THIS: exportCountObserver doesn't update during the segue, put it in the unwind?
-            exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
-            // I think in the unwind we have to clear the documentsToDisplay array ...
-            //reset the UI and state of the docViewController to view mode... this should happen with the property observer when I clear the array!!
         }
     }
 }
