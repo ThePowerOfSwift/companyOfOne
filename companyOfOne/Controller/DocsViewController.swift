@@ -95,7 +95,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         let tabbarController = application.window?.rootViewController as! UITabBarController
         selectedTabIndex = tabbarController.selectedIndex
         if let selectedTabIndex = tabBarController?.selectedIndex {
-            //     TODO: - TO FIX: This index is not working correctly
+            //     TODO: - TO FIX: This index is not working correctly --> this should be solved when I have a viewController for each tab
             print("selected tab index: \(selectedTabIndex)")
         
             switch selectedTabIndex  {
@@ -157,8 +157,10 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
                 print("export mode on, none selected :  run the alert function ")
             case .someSelected:
                 print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function ")
+                performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             case .allSelected:
                 print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
+                performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             }
         }
     }
@@ -230,9 +232,29 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         //        }
         //        present(activityController, animated: true) {
         //            print("presented")
-        //        }
+        //
     }
+
+func createPDF(image: UIImage) -> NSData? {
     
+    let pdfData = NSMutableData()
+    let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
+    
+    var mediaBox = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
+    
+    let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
+    
+    pdfContext.beginPage(mediaBox: &mediaBox)
+    pdfContext.draw(image.cgImage!, in: mediaBox)
+    pdfContext.endPage()
+    
+    return pdfData
+}
+    
+    
+    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
+        print("Unwind to Root View Controller")
+    }
     //MARK: - Segue Functions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -271,6 +293,18 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
                 //                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)
                 //                }
             }
+         
+            }
+        if segue.identifier == "toPDFViewControllerFromDocsExportButton" {
+            let nextController = segue.destination as! PDFViewController
+            //map the export array to the local array and clear the export array
+            nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
+            ArrayHandler.sharedInstance.exportArray.removeAll()
+            print("export array count after remove all:\(ArrayHandler.sharedInstance.exportArray.count)")
+            //TODO: FIX THIS: exportCountObserver doesn't update during the segue, put it in the unwind?
+            exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
+            // I think in the unwind we have to clear the documentsToDisplay array ...
+            //reset the UI and state of the docViewController to view mode... this should happen with the property observer when I clear the array!!
         }
     }
 }

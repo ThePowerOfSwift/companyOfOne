@@ -551,6 +551,7 @@
                         <outlet property="navBar" destination="ZoW-2d-JNY" id="heM-dI-2Pa"/>
                         <outlet property="pressedShareButton" destination="TI9-Wc-7hy" id="USz-jp-f3L"/>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromDocs" id="rdm-6b-dxS"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromDocsExportButton" id="SyU-3f-8WO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -575,6 +576,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cud-Eb-2wE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-949" y="-408"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vsN-BF-j41">
+            <objects>
+                <viewController id="3EQ-bs-0kq" customClass="PDFViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2S2-zv-r7W">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="DM7-Pd-j0b"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="919" y="-408"/>
         </scene>
         <!--Receipts View Controller-->
         <scene sceneID="ndL-0x-Is3">
