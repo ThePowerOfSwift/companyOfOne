@@ -226,41 +226,6 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
     
-    func createPDFFromSelected(){
-        //        guard let image = UIImage(named: "testDoc") else { return }
-        //        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        //        activityController.completionWithItemsHandler = { (nil, completed, _, error) in
-        //            if completed {
-        //                print("completed")
-        //            } else {
-        //                print("cancelled")
-        //            }
-        //        }
-        //        present(activityController, animated: true) {
-        //            print("presented")
-        //
-    }
-
-func createPDF(image: UIImage) -> NSData? {
-    
-    let pdfData = NSMutableData()
-    let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-    
-    var mediaBox = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
-    
-    let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-    
-    pdfContext.beginPage(mediaBox: &mediaBox)
-    pdfContext.draw(image.cgImage!, in: mediaBox)
-    pdfContext.endPage()
-    
-    return pdfData
-}
-    
-    
-    @IBAction func unwindToRootViewController(segue: UIStoryboardSegue) {
-        print("Unwind to Root View Controller")
-    }
     //MARK: - Segue Functions
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

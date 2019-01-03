@@ -599,7 +599,19 @@
                     <view key="view" contentMode="scaleToFill" id="9ru-nG-uG2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peU-lA-gvE">
+                                <rect key="frame" x="25" y="74" width="364" height="588"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="peU-lA-gvE" firstAttribute="centerY" secondItem="9ru-nG-uG2" secondAttribute="centerY" id="Aho-ek-Tr4"/>
+                            <constraint firstItem="peU-lA-gvE" firstAttribute="top" secondItem="JfY-fb-y4k" secondAttribute="top" constant="10" id="NZD-kd-Tt9"/>
+                            <constraint firstItem="peU-lA-gvE" firstAttribute="leading" secondItem="JfY-fb-y4k" secondAttribute="leading" constant="25" id="gMQ-qq-l2u"/>
+                            <constraint firstItem="peU-lA-gvE" firstAttribute="centerX" secondItem="9ru-nG-uG2" secondAttribute="centerX" id="nca-2a-MLv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JfY-fb-y4k"/>
                     </view>
                     <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
