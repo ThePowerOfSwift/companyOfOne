@@ -31,6 +31,7 @@
 		7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */; };
 		7D84BD1E21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */; };
 		7D84BD2021D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */; };
+		7D87889321DFCCDA0071794B /* 45975.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7D87889221DFCCDA0071794B /* 45975.pdf */; };
 		7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */; };
 		7D9C731121B70C2200179C06 /* CommonDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */; };
 		7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC93942218E163F001F05DE /* DocsViewController.swift */; };
@@ -69,6 +70,7 @@
 		7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDisplayView.swift; sourceTree = "<group>"; };
 		7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarExtenstion_DocsViewController.swift; sourceTree = "<group>"; };
 		7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtension_DocsViewController.swift; sourceTree = "<group>"; };
+		7D87889221DFCCDA0071794B /* 45975.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 45975.pdf; sourceTree = "<group>"; };
 		7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CommonDisplayView.xib; path = companyOfOne/View/CommonDisplayView.xib; sourceTree = SOURCE_ROOT; };
 		7DC93942218E163F001F05DE /* DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				7D0A314221810C96007BD331 /* Occurrence.swift */,
 				7D14333E219B85C6006C20EC /* DocImage.swift */,
 				7D0A313F2181070D007BD331 /* companyOfOneModel.xcdatamodeld */,
+				7D87889221DFCCDA0071794B /* 45975.pdf */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */,
 				7D669445216A89D50048F4A3 /* LaunchScreen.storyboard in Resources */,
 				7D669442216A89D50048F4A3 /* Assets.xcassets in Resources */,
+				7D87889321DFCCDA0071794B /* 45975.pdf in Resources */,
 				7D9C731121B70C2200179C06 /* CommonDisplayView.xib in Resources */,
 				7D669440216A89D20048F4A3 /* Main.storyboard in Resources */,
 			);

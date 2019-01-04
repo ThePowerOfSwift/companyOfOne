@@ -93,21 +93,30 @@ class PDFViewController: UIViewController {
         return pdfData
     }
     
-    func createPDF3(){
+    func createPDF3(){ //this works loading a PDF from the bundle, doesn't work loading PDF from the picture data
         let pdfView = PDFView()
         pdfView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pdfView)
-        
+        pdfView.autoScales = true
         pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        guard let path = Bundle.main.url(forResource: "45975", withExtension: "pdf") else { return }
-        
-        if let document = PDFDocument(url: path) {
-            pdfView.document = document
+//        guard let path = Bundle.main.url(forResource: "45975", withExtension: "pdf") else { return }
+        if let imageData = documentsToDisplay[0].pictureData{
+            print("found picture binary data successfully")
+            if let pdfData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters){
+                print("converted picture binary data successfully")
+                let document  = PDFDocument(data: pdfData)
+                    print("created document from converted data successfully")
+                    pdfView.document = document
+                
+            }
         }
+//        if let document = PDFDocument(url: path) {
+//            pdfView.document = document
+//        }
     }
     
     func viewAllPDF(){
