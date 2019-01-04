@@ -12,6 +12,9 @@ import PDFKit
 class PDFViewController: UIViewController {
 
     
+    @IBOutlet weak var viewForImageTest: UIImageView!
+    @IBOutlet weak var viewForPDF: UIView!
+    
     var documentsToDisplay:[Document] = []
     
     
@@ -61,12 +64,13 @@ class PDFViewController: UIViewController {
         let document = documentsToDisplay[0]
             if let imageData = document.pictureData{
                 if let image = UIImage(data: imageData){
+                    viewForImageTest.image = image
                      let PDFData = createPDF(image: image)
                     pdfView.document = PDFDocument(data: PDFData! as Data)
 //                }
             }
         }
-    view.addSubview(pdfView)
+    viewForPDF.addSubview(pdfView)
     }
 
     /*

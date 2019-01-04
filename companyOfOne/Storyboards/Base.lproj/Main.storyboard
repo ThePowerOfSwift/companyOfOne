@@ -584,13 +584,40 @@
                     <view key="view" contentMode="scaleToFill" id="2S2-zv-r7W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DmG-Sx-Jem">
+                                <rect key="frame" x="20" y="84" width="374" height="265"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="265" id="qFQ-8d-tnT"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPX-IJ-No6">
+                                <rect key="frame" x="20" y="376" width="374" height="294"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="DmG-Sx-Jem" firstAttribute="centerX" secondItem="2S2-zv-r7W" secondAttribute="centerX" id="0HD-zC-RyN"/>
+                            <constraint firstItem="DM7-Pd-j0b" firstAttribute="trailing" secondItem="KPX-IJ-No6" secondAttribute="trailing" constant="20" id="3Of-FW-8n5"/>
+                            <constraint firstItem="KPX-IJ-No6" firstAttribute="centerX" secondItem="2S2-zv-r7W" secondAttribute="centerX" id="7aL-bd-YES"/>
+                            <constraint firstItem="DM7-Pd-j0b" firstAttribute="bottom" secondItem="KPX-IJ-No6" secondAttribute="bottom" constant="17" id="Gb4-NS-gAg"/>
+                            <constraint firstItem="DM7-Pd-j0b" firstAttribute="trailing" secondItem="DmG-Sx-Jem" secondAttribute="trailing" constant="20" id="Swk-Yc-IcC"/>
+                            <constraint firstItem="KPX-IJ-No6" firstAttribute="top" secondItem="DmG-Sx-Jem" secondAttribute="bottom" constant="27" id="bVH-by-Qdn"/>
+                            <constraint firstItem="DmG-Sx-Jem" firstAttribute="leading" secondItem="DM7-Pd-j0b" secondAttribute="leading" constant="20" id="fIY-iT-P0O"/>
+                            <constraint firstItem="KPX-IJ-No6" firstAttribute="leading" secondItem="DM7-Pd-j0b" secondAttribute="leading" constant="20" id="twG-94-EWl"/>
+                            <constraint firstItem="DmG-Sx-Jem" firstAttribute="top" secondItem="DM7-Pd-j0b" secondAttribute="top" constant="20" id="wvb-fb-6vN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="DM7-Pd-j0b"/>
                     </view>
+                    <connections>
+                        <outlet property="viewForImageTest" destination="DmG-Sx-Jem" id="zLc-UG-qey"/>
+                        <outlet property="viewForPDF" destination="KPX-IJ-No6" id="msc-WC-aG7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="-408"/>
+            <point key="canvasLocation" x="918.84057971014499" y="-408.42391304347831"/>
         </scene>
         <!--Receipts View Controller-->
         <scene sceneID="ndL-0x-Is3">
@@ -599,19 +626,7 @@
                     <view key="view" contentMode="scaleToFill" id="9ru-nG-uG2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peU-lA-gvE">
-                                <rect key="frame" x="25" y="74" width="364" height="588"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="peU-lA-gvE" firstAttribute="centerY" secondItem="9ru-nG-uG2" secondAttribute="centerY" id="Aho-ek-Tr4"/>
-                            <constraint firstItem="peU-lA-gvE" firstAttribute="top" secondItem="JfY-fb-y4k" secondAttribute="top" constant="10" id="NZD-kd-Tt9"/>
-                            <constraint firstItem="peU-lA-gvE" firstAttribute="leading" secondItem="JfY-fb-y4k" secondAttribute="leading" constant="25" id="gMQ-qq-l2u"/>
-                            <constraint firstItem="peU-lA-gvE" firstAttribute="centerX" secondItem="9ru-nG-uG2" secondAttribute="centerX" id="nca-2a-MLv"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JfY-fb-y4k"/>
                     </view>
                     <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
