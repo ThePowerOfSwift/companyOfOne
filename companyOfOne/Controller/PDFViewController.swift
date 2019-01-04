@@ -10,10 +10,6 @@ import UIKit
 import PDFKit
 
 class PDFViewController: UIViewController {
-
-    
-    @IBOutlet weak var viewForImageTest: UIImageView!
-    @IBOutlet weak var viewForPDF: UIView!
     
     var documentsToDisplay:[Document] = []
     
@@ -23,7 +19,8 @@ class PDFViewController: UIViewController {
          navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
         print(documentsToDisplay.count)
-        viewAllPDF()
+        //viewAllPDF()
+        createPDF3()
 
         // Do any additional setup after loading the view.
     }
@@ -42,7 +39,7 @@ class PDFViewController: UIViewController {
         //
     }
     
-    func createPDF(image: UIImage) -> NSData? {
+    func createPDFDataFromImage(image: UIImage) -> NSData? {
         
         let pdfData = NSMutableData()
         let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
@@ -55,7 +52,62 @@ class PDFViewController: UIViewController {
         pdfContext.draw(image.cgImage!, in: mediaBox)
         pdfContext.endPage()
         
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let filePath = "\(documentsPath)/myCoolPDF.pdf"
+        pdfData.write(toFile: filePath, atomically: true)
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        print(documentsDirectory)
+        
         return pdfData
+    }
+    
+    func createPDFDataFromImage2(image: UIImage) -> NSMutableData {
+        let pdfData = NSMutableData()
+        let imgView = UIImageView.init(image: image)
+        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
+        UIGraphicsBeginPDFPage()
+        let context = UIGraphicsGetCurrentContext()
+        imgView.layer.render(in: context!)
+        UIGraphicsEndPDFContext()
+        
+        //try saving in doc dir to confirm:
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        
+        let fileURL:URL = documentsURL.appendingPathComponent("note.pdf")
+        
+        do {
+            try FileManager.default.createDirectory(atPath: fileURL.path, withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            NSLog("Unable to create directory \(error.debugDescription)")
+        }
+        
+        UIGraphicsBeginPDFContextToFile(fileURL.appendingPathComponent("note.pdf").path, CGRect.zero, nil);
+
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        print(documentsDirectory)
+        
+        return pdfData
+    }
+    
+    func createPDF3(){
+        let pdfView = PDFView()
+        pdfView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(pdfView)
+        
+        pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        guard let path = Bundle.main.url(forResource: "45975", withExtension: "pdf") else { return }
+        
+        if let document = PDFDocument(url: path) {
+            pdfView.document = document
+        }
     }
     
     func viewAllPDF(){
@@ -63,14 +115,17 @@ class PDFViewController: UIViewController {
 //        for document in documentsToDisplay{
         let document = documentsToDisplay[0]
             if let imageData = document.pictureData{
+                print("imageData created successfully")
                 if let image = UIImage(data: imageData){
-                    viewForImageTest.image = image
-                     let PDFData = createPDF(image: image)
-                    pdfView.document = PDFDocument(data: PDFData! as Data)
-//                }
+                    print("image created successfully")
+                    
+                     let PDFData = createPDFDataFromImage2(image: image)
+                    pdfView.document = PDFDocument(data: PDFData as Data)
             }
         }
-    viewForPDF.addSubview(pdfView)
+        pdfView.translatesAutoresizingMaskIntoConstraints = false
+        pdfView.autoScales = true
+        self.view.addSubview(pdfView)
     }
 
     /*
