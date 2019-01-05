@@ -115,6 +115,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        //TODO: FIX THIS: With no items in the array, new installs crash
         cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark

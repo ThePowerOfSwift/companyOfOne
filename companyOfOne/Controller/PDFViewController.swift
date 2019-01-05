@@ -19,8 +19,9 @@ class PDFViewController: UIViewController {
          navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
         print(documentsToDisplay.count)
-        //viewAllPDF()
-        createPDF3()
+       displayPDFFromDocument()
+//        let newPDF = createPDFFileAndReturnPath()
+//        print(newPDF)
 
         // Do any additional setup after loading the view.
     }
@@ -93,30 +94,71 @@ class PDFViewController: UIViewController {
         return pdfData
     }
     
-    func createPDF3(){ //this works loading a PDF from the bundle, doesn't work loading PDF from the picture data
+    func displayPDFFromDocument(){ //this works loading a PDF from the bundle, doesn't work loading PDF from the picture data
         let pdfView = PDFView()
         pdfView.translatesAutoresizingMaskIntoConstraints = false
+        //add PDFView to view
         view.addSubview(pdfView)
         pdfView.autoScales = true
+        //set constraints
         pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-//        guard let path = Bundle.main.url(forResource: "45975", withExtension: "pdf") else { return }
+        //get image data (in binary)
         if let imageData = documentsToDisplay[0].pictureData{
             print("found picture binary data successfully")
-            if let pdfData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters){
-                print("converted picture binary data successfully")
-                let document  = PDFDocument(data: pdfData)
+            //create image from image data
+            if let image = UIImage(data: imageData){
+                print("image created successfully")
+                let pdfData = NSMutableData()
+                //create UIImageView from image
+                let imgView = UIImageView.init(image: image)
+                //draw a rectangle at 0,0 and match the width and height of the image
+                let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+                
+                
+                
+                //begin create PDF
+                UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
+                UIGraphicsBeginPDFPage()
+               // UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: 50, height: 50), nil)
+                
+                
+                let font = UIFont.systemFont(ofSize: 14.0)
+                
+                let textRect = CGRect(x: 5, y: 3, width: 125, height: 18)
+                let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+                paragraphStyle.alignment = NSTextAlignment.left
+                paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
+                
+                let textColor = UIColor.black
+                
+                let textFontAttributes = [
+                    NSAttributedString.Key.font: font,
+                    NSAttributedString.Key.foregroundColor: textColor,
+                    NSAttributedString.Key.paragraphStyle: paragraphStyle
+                ]
+                
+                let text:NSString = "Hello world"
+                
+                text.draw(in: textRect, withAttributes: textFontAttributes)
+                
+                
+                let context = UIGraphicsGetCurrentContext()
+                imgView.layer.render(in: context!)
+                UIGraphicsEndPDFContext()
+                //end create PDF
+                
+                
+                
+                
+                let document  = PDFDocument(data: pdfData as Data)
                     print("created document from converted data successfully")
                     pdfView.document = document
-                
             }
         }
-//        if let document = PDFDocument(url: path) {
-//            pdfView.document = document
-//        }
     }
     
     func viewAllPDF(){
@@ -135,6 +177,41 @@ class PDFViewController: UIViewController {
         pdfView.translatesAutoresizingMaskIntoConstraints = false
         pdfView.autoScales = true
         self.view.addSubview(pdfView)
+    }
+    
+    func createPDFFileAndReturnPath() -> String {
+        
+        let fileName = "pdffilename.pdf"
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0] as NSString
+        let pathForPDF = documentsDirectory.appending("/" + fileName)
+        
+        UIGraphicsBeginPDFContextToFile(pathForPDF, CGRect.zero, nil)
+        
+        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: 100, height: 400), nil)
+        //let font = UIFont(name: "System", size: 14.0)
+        let font = UIFont.systemFont(ofSize: 14.0)
+        
+        let textRect = CGRect(x: 5, y: 3, width: 125, height: 18)
+        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
+        paragraphStyle.alignment = NSTextAlignment.left
+        paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
+        
+        let textColor = UIColor.black
+        
+        let textFontAttributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: textColor,
+            NSAttributedString.Key.paragraphStyle: paragraphStyle
+        ]
+        
+        let text:NSString = "Hello world"
+        
+        text.draw(in: textRect, withAttributes: textFontAttributes)
+        
+        UIGraphicsEndPDFContext()
+        
+        return pathForPDF
     }
 
     /*
