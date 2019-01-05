@@ -12,90 +12,23 @@ import PDFKit
 class PDFViewController: UIViewController {
     
     var documentsToDisplay:[Document] = []
-    
+    let pdfView = PDFView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
          navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
         print(documentsToDisplay.count)
+       
+        pdfView?.document = document
        displayPDFFromDocument()
 //        let newPDF = createPDFFileAndReturnPath()
 //        print(newPDF)
 
         // Do any additional setup after loading the view.
     }
-    func createPDFFromSelected(){
-        //        guard let image = UIImage(named: "testDoc") else { return }
-        //        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-        //        activityController.completionWithItemsHandler = { (nil, completed, _, error) in
-        //            if completed {
-        //                print("completed")
-        //            } else {
-        //                print("cancelled")
-        //            }
-        //        }
-        //        present(activityController, animated: true) {
-        //            print("presented")
-        //
-    }
-    
-    func createPDFDataFromImage(image: UIImage) -> NSData? {
-        
-        let pdfData = NSMutableData()
-        let pdfConsumer = CGDataConsumer(data: pdfData as CFMutableData)!
-        
-        var mediaBox = CGRect.init(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        
-        let pdfContext = CGContext(consumer: pdfConsumer, mediaBox: &mediaBox, nil)!
-        
-        pdfContext.beginPage(mediaBox: &mediaBox)
-        pdfContext.draw(image.cgImage!, in: mediaBox)
-        pdfContext.endPage()
-        
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let filePath = "\(documentsPath)/myCoolPDF.pdf"
-        pdfData.write(toFile: filePath, atomically: true)
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        print(documentsDirectory)
-        
-        return pdfData
-    }
-    
-    func createPDFDataFromImage2(image: UIImage) -> NSMutableData {
-        let pdfData = NSMutableData()
-        let imgView = UIImageView.init(image: image)
-        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-        UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
-        UIGraphicsBeginPDFPage()
-        let context = UIGraphicsGetCurrentContext()
-        imgView.layer.render(in: context!)
-        UIGraphicsEndPDFContext()
-        
-        //try saving in doc dir to confirm:
-        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
-        let fileURL:URL = documentsURL.appendingPathComponent("note.pdf")
-        
-        do {
-            try FileManager.default.createDirectory(atPath: fileURL.path, withIntermediateDirectories: true, attributes: nil)
-        } catch let error as NSError {
-            NSLog("Unable to create directory \(error.debugDescription)")
-        }
-        
-        UIGraphicsBeginPDFContextToFile(fileURL.appendingPathComponent("note.pdf").path, CGRect.zero, nil);
 
-        
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        print(documentsDirectory)
-        
-        return pdfData
-    }
-    
-    func displayPDFFromDocument(){ //this works loading a PDF from the bundle, doesn't work loading PDF from the picture data
-        let pdfView = PDFView()
+    func displayPDFFromDocument(){
         pdfView.translatesAutoresizingMaskIntoConstraints = false
         //add PDFView to view
         view.addSubview(pdfView)
@@ -151,9 +84,6 @@ class PDFViewController: UIViewController {
                 UIGraphicsEndPDFContext()
                 //end create PDF
                 
-                
-                
-                
                 let document  = PDFDocument(data: pdfData as Data)
                     print("created document from converted data successfully")
                     pdfView.document = document
@@ -161,59 +91,7 @@ class PDFViewController: UIViewController {
         }
     }
     
-    func viewAllPDF(){
-        let pdfView = PDFView()
-//        for document in documentsToDisplay{
-        let document = documentsToDisplay[0]
-            if let imageData = document.pictureData{
-                print("imageData created successfully")
-                if let image = UIImage(data: imageData){
-                    print("image created successfully")
-                    
-                     let PDFData = createPDFDataFromImage2(image: image)
-                    pdfView.document = PDFDocument(data: PDFData as Data)
-            }
-        }
-        pdfView.translatesAutoresizingMaskIntoConstraints = false
-        pdfView.autoScales = true
-        self.view.addSubview(pdfView)
-    }
-    
-    func createPDFFileAndReturnPath() -> String {
-        
-        let fileName = "pdffilename.pdf"
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0] as NSString
-        let pathForPDF = documentsDirectory.appending("/" + fileName)
-        
-        UIGraphicsBeginPDFContextToFile(pathForPDF, CGRect.zero, nil)
-        
-        UIGraphicsBeginPDFPageWithInfo(CGRect(x: 0, y: 0, width: 100, height: 400), nil)
-        //let font = UIFont(name: "System", size: 14.0)
-        let font = UIFont.systemFont(ofSize: 14.0)
-        
-        let textRect = CGRect(x: 5, y: 3, width: 125, height: 18)
-        let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-        paragraphStyle.alignment = NSTextAlignment.left
-        paragraphStyle.lineBreakMode = NSLineBreakMode.byWordWrapping
-        
-        let textColor = UIColor.black
-        
-        let textFontAttributes = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.paragraphStyle: paragraphStyle
-        ]
-        
-        let text:NSString = "Hello world"
-        
-        text.draw(in: textRect, withAttributes: textFontAttributes)
-        
-        UIGraphicsEndPDFContext()
-        
-        return pathForPDF
-    }
-
+  
     /*
     // MARK: - Navigation
 
