@@ -13,6 +13,9 @@ class PDFViewController: UIViewController {
     
     var documentsToDisplay:[Document] = []
     let pdfView = PDFView()
+   // var pdfDocument = PDFDocument()
+    
+    
     var commonAnnotationWidth = CGFloat()
     var commonAnnotationHeight = CGFloat()
     var commonAnnotationX = CGFloat()
@@ -35,6 +38,10 @@ class PDFViewController: UIViewController {
         navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
         view.addSubview(pdfView)
+//        if let document = pdfView.document{
+//            pdfDocument = document
+//        }
+//
         //displayPDFFromDocument()
         setupPDFView()
        // createSinglePDF()
@@ -60,6 +67,7 @@ class PDFViewController: UIViewController {
         categorySubCategoryAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition2, width: commonAnnotationWidth, height: commonAnnotationHeight)
         occurrenceAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition3, width: commonAnnotationWidth, height: commonAnnotationHeight)
         docDateAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition4, width: commonAnnotationWidth, height: commonAnnotationHeight)
+        //if let page = pdfView.document?.page(at: 0)
         
         if let page = pdfView.document?.page(at: 0){
             let convertedPoint = pdfView.convert(testPoint, to: page)
@@ -74,56 +82,56 @@ class PDFViewController: UIViewController {
     }
     
 
-    func displayPDFFromDocument(){
-        pdfView.translatesAutoresizingMaskIntoConstraints = false
-        pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        //add PDFView to view
-        
-        pdfView.autoScales = true
-        //TODO:- TO FIX: The PDF is way larger than a page, find a way to size it for export?
-//        pdfView.maxScaleFactor = 4.0
-//        pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
-        //set constraints
-        pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        //get image data (in binary)
-        if let imageData = documentsToDisplay[0].pictureData{
-            print("found picture binary data successfully")
-            //create image from image data
-            if let image = UIImage(data: imageData){
-                print("image created successfully")
-                let pdfData = NSMutableData()
-                //create UIImageView from image
-                let imgView = UIImageView.init(image: image)
-                //draw a rectangle at 0,0 and match the width and height of the image
-                let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height) //this should actually be a page rect constant for each page in the completed file, will stay with this for now
-                
-                //begin create PDF
-                UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
-                UIGraphicsBeginPDFPage()  //call this for each new page
-                
-                let context = UIGraphicsGetCurrentContext()
-                imgView.layer.render(in: context!)
-                UIGraphicsEndPDFContext()
-                //end create PDF
-                
-                let document  = PDFDocument(data: pdfData as Data)
-                    print("created document from converted data successfully")
-                    pdfView.document = document
-            }
-        }
-    }
+//    func displayPDFFromDocument(){
+//        pdfView.translatesAutoresizingMaskIntoConstraints = false
+//        pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        //add PDFView to view
+//
+//        pdfView.autoScales = true
+//        //TODO:- TO FIX: The PDF is way larger than a page, find a way to size it for export?
+////        pdfView.maxScaleFactor = 4.0
+////        pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+//        //set constraints
+//        pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+//        pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+//        pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//
+//        //get image data (in binary)
+//        if let imageData = documentsToDisplay[0].pictureData{
+//            print("found picture binary data successfully")
+//            //create image from image data
+//            if let image = UIImage(data: imageData){
+//                print("image created successfully")
+//                let pdfData = NSMutableData()
+//                //create UIImageView from image
+//                let imgView = UIImageView.init(image: image)
+//                //draw a rectangle at 0,0 and match the width and height of the image
+//                let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height) //this should actually be a page rect constant for each page in the completed file, will stay with this for now
+//
+//                //begin create PDF
+//                UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
+//                UIGraphicsBeginPDFPage()  //call this for each new page
+//
+//                let context = UIGraphicsGetCurrentContext()
+//                imgView.layer.render(in: context!)
+//                UIGraphicsEndPDFContext()
+//                //end create PDF
+//
+//                let document  = PDFDocument(data: pdfData as Data)
+//                    print("created document from converted data successfully")
+//                    pdfView.document = document
+//            }
+//        }
+//    }
     
     func setupPDFView(){
         pdfView.translatesAutoresizingMaskIntoConstraints = false
         pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         pdfView.autoScales = true
       //  TODO:- TO FIX: The PDF is way larger than a page, find a way to size it for export?
-                pdfView.maxScaleFactor = 4.0
-                pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+//                pdfView.maxScaleFactor = 4.0
+//                pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
         //set constraints
         pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -173,7 +181,8 @@ class PDFViewController: UIViewController {
                         print("image created successfully from data")
                         let imgView = UIImageView.init(image: image)
                         print("imageView created successfully from image")
-                        UIGraphicsBeginPDFPage()
+                        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+                        UIGraphicsBeginPDFPageWithInfo(imageRect, nil)
                         let context = UIGraphicsGetCurrentContext()
                         imgView.layer.render(in: context!)
                         print("imageView added to graphic context")
@@ -182,36 +191,8 @@ class PDFViewController: UIViewController {
             }
             UIGraphicsEndPDFContext() //This function closes the last page and writes the PDF content to the file or data object
             let document  = PDFDocument(data: pdfData as Data)
-            print("created document from converted data successfully")
+            print("created multipage document from converted data successfully")
             pdfView.document = document
-            
-            //                //get image data (in binary)
-//                if let imageData = documentsToDisplay[0].pictureData{
-//                    print("found picture binary data successfully")
-//                    //create image from image data
-//                    if let image = UIImage(data: imageData){
-//                        print("image created successfully")
-//                        let pdfData = NSMutableData()
-//                        //create UIImageView from image
-//                        let imgView = UIImageView.init(image: image)
-//                        //draw a rectangle at 0,0 and match the width and height of the image
-//                        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height) //this should actually be a page rect constant for each page in the completed file, will stay with this for now
-//
-//                        //begin create PDF
-//                        UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
-//                        UIGraphicsBeginPDFPage()  //call this for each new page
-//
-//                        let context = UIGraphicsGetCurrentContext()
-//                        imgView.layer.render(in: context!)
-//                        UIGraphicsEndPDFContext()  //This function closes the last page and writes the PDF content to the file or data object
-//                        //end create PDF
-//
-//                        let document  = PDFDocument(data: pdfData as Data)
-//                        print("created document from converted data successfully")
-//                        pdfView.document = document
-//                    }
-//                }
-//            }
         }else{
             print("No documents found in the documents to display array")
         }
@@ -232,8 +213,6 @@ class PDFViewController: UIViewController {
         //pdfView.endEditing(true) //doesn't work
     }
     
-    
-
     @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
         if let document = self.pdfView.document{
             guard let data = document.dataRepresentation() else { return }
@@ -241,6 +220,7 @@ class PDFViewController: UIViewController {
             self.present(activityController, animated: true, completion: nil)
         }
     }
+    
     @IBAction func shareButtonPressedTest(_ sender: UIButton) {
         print("It worked")
     }
