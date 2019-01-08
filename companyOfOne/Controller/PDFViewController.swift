@@ -19,14 +19,10 @@ class PDFViewController: UIViewController {
     var commonAnnotationWidth = CGFloat()
     var commonAnnotationHeight = CGFloat()
     var commonAnnotationX = CGFloat()
-    var titleTagAnnotationLocation = CGRect()
-    var categorySubCategoryAnnotationLocation = CGRect()
-    var occurrenceAnnotationLocation = CGRect()
-    var docDateAnnotationLocation = CGRect()
-    var firstTestLocation = CGRect()
-    var secondTestLocation = CGRect()
-    var thirdTestLocation = CGRect()
-    var fourthTestLocation = CGRect()
+    var titleTagAnnotationBounds = CGRect()
+    var categorySubCategoryAnnotationBounds = CGRect()
+    var occurrenceAnnotationBounds = CGRect()
+    var docDateAnnotationBounds = CGRect()
     var yPosition1 = CGFloat()
     var yPosition2  = CGFloat()
     var yPosition3 = CGFloat()
@@ -50,89 +46,40 @@ class PDFViewController: UIViewController {
        // createSinglePDF()
         createMultipagePDF()
         setupAnnotationLocations()
-        addAnnotations(contents: "titleTag", location: firstTestLocation)
-        addAnnotations(contents: "categorySubCategory", location: secondTestLocation)
-        addAnnotations(contents: "occurrence", location: thirdTestLocation)
-        addAnnotations(contents: "docDate", location: fourthTestLocation)
+        addAnnotations(contents: "titleTag", bounds: titleTagAnnotationBounds)
+        addAnnotations(contents: "categorySubCategory", bounds: categorySubCategoryAnnotationBounds)
+        addAnnotations(contents: "occurrence", bounds: occurrenceAnnotationBounds)
+        addAnnotations(contents: "docDate", bounds: docDateAnnotationBounds)
     }
     
     func setupAnnotationLocations(){
         commonAnnotationWidth = 800
         commonAnnotationHeight = 100
-        commonAnnotationX = 400
+        commonAnnotationX = view.frame.width/2 //400
         yPosition1 = 1*(view.frame.height/5)
         yPosition2 = 2*(view.frame.height/5)
         yPosition3 = 3*(view.frame.height/5)
         yPosition4 = 4*(view.frame.height/5)
-        let testPoint = CGPoint(x: commonAnnotationX, y: yPosition1)
-        let testPoint2 = CGPoint(x: commonAnnotationX, y: yPosition2)
-        let testPoint3 = CGPoint(x: commonAnnotationX, y: yPosition3)
-        let testPoint4 = CGPoint(x: commonAnnotationX, y: yPosition4)
- 
-//        titleTagAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition1, width: commonAnnotationWidth, height: commonAnnotationHeight)
-//        categorySubCategoryAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition2, width: commonAnnotationWidth, height: commonAnnotationHeight)
-//        occurrenceAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition3, width: commonAnnotationWidth, height: commonAnnotationHeight)
-//        docDateAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition4, width: commonAnnotationWidth, height: commonAnnotationHeight)
-        //if let page = pdfView.document?.page(at: 0)
-        
+        //create the point for landing the annotation in view space
+        let titleTagPoint = CGPoint(x: commonAnnotationX, y: yPosition1)
+        let categorySubCategoryPoint = CGPoint(x: commonAnnotationX, y: yPosition2)
+        let occurrencePoint = CGPoint(x: commonAnnotationX, y: yPosition3)
+        let docDatePoint = CGPoint(x: commonAnnotationX, y: yPosition4)
+        //convert the point from view spaceto page space
         if let page = pdfView.document?.page(at: 0){
-            let convertedPoint = pdfView.convert(testPoint, to: page)
-            let convertedPoint2 = pdfView.convert(testPoint2, to: page)
-            let convertedPoint3 = pdfView.convert(testPoint3, to: page)
-            let convertedPoint4 = pdfView.convert(testPoint4, to: page)
+            let convertedTitleTagPoint = pdfView.convert(titleTagPoint, to: page)
+            let convertedCategorySubCategoryPoint = pdfView.convert(categorySubCategoryPoint, to: page)
+            let convertedOccurrencePoint = pdfView.convert(occurrencePoint, to: page)
+            let convertedDocDatePoint = pdfView.convert(docDatePoint, to: page)
+            //create the annotation size
             let rectSize = CGSize(width: commonAnnotationWidth, height: commonAnnotationHeight)
-            firstTestLocation = CGRect(origin: convertedPoint, size: rectSize)
-            
-           // firstTestLocation = pdfView.convert(titleTagAnnotationLocation, to: pdfView.page(for: testPoint, nearest: true)!)
-            secondTestLocation = CGRect(origin: convertedPoint2, size: rectSize)
-            thirdTestLocation = CGRect(origin: convertedPoint3, size: rectSize)
-            fourthTestLocation = CGRect(origin: convertedPoint4, size: rectSize)
+            //create and place the rectangles using the converted origin and the common size
+            titleTagAnnotationBounds = CGRect(origin: convertedTitleTagPoint, size: rectSize)
+            categorySubCategoryAnnotationBounds = CGRect(origin: convertedCategorySubCategoryPoint, size: rectSize)
+            occurrenceAnnotationBounds = CGRect(origin: convertedOccurrencePoint, size: rectSize)
+            docDateAnnotationBounds = CGRect(origin: convertedDocDatePoint, size: rectSize)
         }
     }
-    
-
-//    func displayPDFFromDocument(){
-//        pdfView.translatesAutoresizingMaskIntoConstraints = false
-//        pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        //add PDFView to view
-//
-//        pdfView.autoScales = true
-//        //TODO:- TO FIX: The PDF is way larger than a page, find a way to size it for export?
-////        pdfView.maxScaleFactor = 4.0
-////        pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
-//        //set constraints
-//        pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//        pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//
-//        //get image data (in binary)
-//        if let imageData = documentsToDisplay[0].pictureData{
-//            print("found picture binary data successfully")
-//            //create image from image data
-//            if let image = UIImage(data: imageData){
-//                print("image created successfully")
-//                let pdfData = NSMutableData()
-//                //create UIImageView from image
-//                let imgView = UIImageView.init(image: image)
-//                //draw a rectangle at 0,0 and match the width and height of the image
-//                let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height) //this should actually be a page rect constant for each page in the completed file, will stay with this for now
-//
-//                //begin create PDF
-//                UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
-//                UIGraphicsBeginPDFPage()  //call this for each new page
-//
-//                let context = UIGraphicsGetCurrentContext()
-//                imgView.layer.render(in: context!)
-//                UIGraphicsEndPDFContext()
-//                //end create PDF
-//
-//                let document  = PDFDocument(data: pdfData as Data)
-//                    print("created document from converted data successfully")
-//                    pdfView.document = document
-//            }
-//        }
-//    }
     
     func setupPDFView(){
         pdfView.translatesAutoresizingMaskIntoConstraints = false
@@ -207,9 +154,9 @@ class PDFViewController: UIViewController {
         }
     }
         
-    func addAnnotations(contents:String, location: CGRect){
+    func addAnnotations(contents:String, bounds: CGRect){
         let page = pdfView.document?.page(at: 0)
-        let annotation = PDFAnnotation(bounds: location, forType: .widget, withProperties: nil)
+        let annotation = PDFAnnotation(bounds: bounds, forType: .widget, withProperties: nil)
         annotation.widgetFieldType = .text
         annotation.widgetStringValue = contents //this works
         annotation.shouldDisplay = true
@@ -218,7 +165,7 @@ class PDFViewController: UIViewController {
         page?.addAnnotation(annotation)
         //TODO:- TO FIX: Find a way to make the annotation not editable
         //annotation.isReadOnly = true //doesn't work
-        //pdfView.document?.allowsFormFieldEntry = false
+        //pdfView.document?.allowsFormFieldEntry = false //doesn't work
         //pdfView.endEditing(true) //doesn't work
     }
     
