@@ -33,23 +33,16 @@ class PDFViewController: UIViewController {
         super.viewDidLoad()
         navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
-        pdfView = PDFView(frame: self.view.bounds)
-        
-        
+        pdfView = PDFView(frame: self.view.bounds) //does this do anything?
         view.addSubview(pdfView)
-//        if let document = pdfView.document{
-//            pdfDocument = document
-//        }
         setupPDFView()
-        //displayPDFFromDocument()
-        
-       // createSinglePDF()
-        createMultipagePDF()
+       createSinglePDF()
+       // createMultipagePDF()
         setupAnnotationLocations()
-        addAnnotations(contents: "titleTag", bounds: titleTagAnnotationBounds)
-        addAnnotations(contents: "categorySubCategory", bounds: categorySubCategoryAnnotationBounds)
-        addAnnotations(contents: "occurrence", bounds: occurrenceAnnotationBounds)
-        addAnnotations(contents: "docDate", bounds: docDateAnnotationBounds)
+//        addAnnotations(contents: "titleTag", bounds: titleTagAnnotationBounds)
+//        addAnnotations(contents: "categorySubCategory", bounds: categorySubCategoryAnnotationBounds)
+//        addAnnotations(contents: "occurrence", bounds: occurrenceAnnotationBounds)
+//        addAnnotations(contents: "docDate", bounds: docDateAnnotationBounds)
     }
     
     func setupAnnotationLocations(){
@@ -82,9 +75,10 @@ class PDFViewController: UIViewController {
     }
     
     func setupPDFView(){
-        pdfView.translatesAutoresizingMaskIntoConstraints = false
-        pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        pdfView.autoScales = true
+      //  pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+      // pdfView.translatesAutoresizingMaskIntoConstraints = false
+      pdfView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+      pdfView.autoScales = true
       //  TODO:- TO FIX: The PDF is way larger than a page, find a way to size it for export?
 //                pdfView.maxScaleFactor = 4.0
 //                pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
@@ -106,19 +100,29 @@ class PDFViewController: UIViewController {
                 let imgView = UIImageView.init(image: image)
                 //draw a rectangle at 0,0 and match the width and height of the image
                 let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height) //this should actually be a page rect constant for each page in the completed file, will stay with this for now
-                
+                let imageSize = CGSize(width: image.size.width/2, height: 100)
+                let annotationLocation = CGPoint(x: image.size.width/2, y: 1*(image.size.height/5))
+                let annotationLocation2 = CGPoint(x: image.size.width/2, y: 2*(image.size.height/5))
+                let annotationLocation3 = CGPoint(x: image.size.width/2, y: 3*(image.size.height/5))
+                let annotationLocation4 = CGPoint(x: image.size.width/2, y: 4*(image.size.height/5))
                 //begin create PDF
                 UIGraphicsBeginPDFContextToData(pdfData, imageRect, nil)
                 UIGraphicsBeginPDFPage()  //call this for each new page
                 
+                
                 let context = UIGraphicsGetCurrentContext()
                 imgView.layer.render(in: context!)
+                
                 UIGraphicsEndPDFContext()
                 //end create PDF
                 
                 let document  = PDFDocument(data: pdfData as Data)
                 print("created document from converted data successfully")
                 pdfView.document = document
+                addAnnotations(contents: "this is a titleTag", bounds: CGRect(origin: annotationLocation4, size: imageSize))
+                addAnnotations(contents: "this is a category", bounds: CGRect(origin: annotationLocation3, size: imageSize))
+                addAnnotations(contents: "this is a occurrence", bounds: CGRect(origin: annotationLocation2, size: imageSize))
+                addAnnotations(contents: "this is a docDate", bounds: CGRect(origin: annotationLocation, size: imageSize))
             }
         }
     }
@@ -137,8 +141,10 @@ class PDFViewController: UIViewController {
                         print("image created successfully from data")
                         let imgView = UIImageView.init(image: image)
                         print("imageView created successfully from image")
-                        let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
-                        UIGraphicsBeginPDFPageWithInfo(imageRect, nil)
+                        let viewRect = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+                        UIGraphicsBeginPDFPageWithInfo(viewRect, nil)
+                        //  let imageRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+                        //UIGraphicsBeginPDFPageWithInfo(imageRect, nil)
                         let context = UIGraphicsGetCurrentContext()
                         imgView.layer.render(in: context!)
                         print("imageView added to graphic context")
@@ -149,6 +155,7 @@ class PDFViewController: UIViewController {
             let document  = PDFDocument(data: pdfData as Data)
             print("created multipage document from converted data successfully")
             pdfView.document = document
+            //this is where I would add the annotations
         }else{
             print("No documents found in the documents to display array")
         }
@@ -161,10 +168,13 @@ class PDFViewController: UIViewController {
         annotation.widgetStringValue = contents //this works
         annotation.shouldDisplay = true
         annotation.font = UIFont.systemFont(ofSize: 60)
-        annotation.backgroundColor = UIColor.lightGray
+        annotation.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+       
+        
+        
         page?.addAnnotation(annotation)
         //TODO:- TO FIX: Find a way to make the annotation not editable
-        //annotation.isReadOnly = true //doesn't work
+        annotation.isReadOnly = true //doesn't work
         //pdfView.document?.allowsFormFieldEntry = false //doesn't work
         //pdfView.endEditing(true) //doesn't work
     }
