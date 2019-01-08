@@ -119,10 +119,10 @@ class PDFViewController: UIViewController {
                 let document  = PDFDocument(data: pdfData as Data)
                 print("created document from converted data successfully")
                 pdfView.document = document
-                addAnnotations(contents: "this is a titleTag", bounds: CGRect(origin: annotationLocation4, size: imageSize))
-                addAnnotations(contents: "this is a category", bounds: CGRect(origin: annotationLocation3, size: imageSize))
-                addAnnotations(contents: "this is a occurrence", bounds: CGRect(origin: annotationLocation2, size: imageSize))
-                addAnnotations(contents: "this is a docDate", bounds: CGRect(origin: annotationLocation, size: imageSize))
+                addAnnotations(contents: "this is a titleTag", bounds: CGRect(origin: annotationLocation4, size: imageSize), color:#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1).withAlphaComponent(0.7))
+                addAnnotations(contents: "this is a category", bounds: CGRect(origin: annotationLocation3, size: imageSize), color:#colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1).withAlphaComponent(0.7))
+                addAnnotations(contents: "this is a occurrence", bounds: CGRect(origin: annotationLocation2, size: imageSize), color:#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).withAlphaComponent(0.7))
+                addAnnotations(contents: "this is a docDate", bounds: CGRect(origin: annotationLocation, size: imageSize), color:#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1).withAlphaComponent(0.7))
             }
         }
     }
@@ -161,14 +161,15 @@ class PDFViewController: UIViewController {
         }
     }
         
-    func addAnnotations(contents:String, bounds: CGRect){
+    func addAnnotations(contents:String, bounds: CGRect, color: UIColor){
         let page = pdfView.document?.page(at: 0)
         let annotation = PDFAnnotation(bounds: bounds, forType: .widget, withProperties: nil)
         annotation.widgetFieldType = .text
         annotation.widgetStringValue = contents //this works
         annotation.shouldDisplay = true
         annotation.font = UIFont.systemFont(ofSize: 60)
-        annotation.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        annotation.backgroundColor = color
+       // annotation.backgroundColor = UIColor.red.withAlphaComponent(0.5)
        
         
         
