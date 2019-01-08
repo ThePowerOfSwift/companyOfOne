@@ -72,6 +72,8 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     var fromDocsViewController:Bool = false
     var isInEditMode:Bool = true
+    var debugMode:Bool = false
+    
     
     //MARK: Custom Class Instance Variables
     
@@ -188,7 +190,6 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        print("hit return after titleTag text input")
         currentTitleTag = titleTagLabel.text ?? "titleTag label is equal to nil"
         moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
         return true
@@ -552,7 +553,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     //MARK: All GestureRecognizer Functions
     
     @objc func tapToShow_HideEverything(_ sender:UITapGestureRecognizer){
-        print("tapped on the docImage")
+        if debugMode{
+             print("tapped on the docImage")
+        }
         //hide nav
         navigationController!.isNavigationBarHidden = !navigationController!.isNavigationBarHidden
         tabBarController!.tabBar.isHidden = !tabBarController!.tabBar.isHidden
@@ -565,7 +568,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
     
     @objc func swipeOnDocImageViewToSeeNextOrPreviousDoc(_ sender:UISwipeGestureRecognizer){
         if (sender.direction == .left) {
-            print("swiped left on doc ImageView, up one spot")
+            if debugMode{
+                print("swiped left on doc ImageView, up one spot")
+            }
             if let indexPathRow = currentTableViewIndexPathRow{
                 var nextDocIndexPathRow = 0
                 if indexPathRow == ArrayHandler.sharedInstance.completeDocumentArray.count - 1 {
@@ -573,14 +578,18 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 }else{
                     nextDocIndexPathRow = indexPathRow + 1
                 }
-                print("\(nextDocIndexPathRow)")
+                if debugMode{
+                    print("\(nextDocIndexPathRow)")
+                }
                 currentTableViewIndexPathRow = nextDocIndexPathRow
                 let document = ArrayHandler.sharedInstance.completeDocumentArray[nextDocIndexPathRow]
                 unwrapAndUpdateDocument(document: document)
             }
         }
         if (sender.direction == .right) {
-            print("swiped right on on doc ImageView, down one spot")
+            if debugMode{
+                 print("swiped right on on doc ImageView, down one spot")
+            }
             if let indexPathRow = currentTableViewIndexPathRow{
                 var nextDocIndexPathRow = 0
                 if indexPathRow == 0 {
@@ -588,7 +597,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 }else{
                     nextDocIndexPathRow = indexPathRow - 1
                 }
-                print("\(nextDocIndexPathRow)")
+                if debugMode{
+                    print("\(nextDocIndexPathRow)")
+                }
                 currentTableViewIndexPathRow = nextDocIndexPathRow
                 let document = ArrayHandler.sharedInstance.completeDocumentArray[nextDocIndexPathRow]
                 unwrapAndUpdateDocument(document: document)
@@ -621,7 +632,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left on titleTag label")
+                if self.debugMode{
+                    print("swiped left on titleTag label")
+                }
                 //titleTagLabel moved to postion 2, titleTagTextInput moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.titleTagLabelLeadingAnchorToCenterX.constant = self.xPosition2
@@ -630,7 +643,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on titleTag text input")
+                if self.debugMode{
+                    print("swiped right on titleTag text input")
+                }
                 //titleTagLabel moved to postion 3, titleTagTextInput moved to position 4
                 self.moveTitleTagLabelAndTitleTagTextFieldToxPosition3And4()
             }
@@ -650,7 +665,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left on category label")
+                if self.debugMode{
+                    print("swiped left on category label")
+                }
                 //categoryLabel moved to postion 2, categoryPicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition2
@@ -660,7 +677,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on category picker")
+                if self.debugMode{
+                    print("swiped right on category picker")
+                }
                 //categoryLabel moved to postion 3, categoryPicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition3
@@ -676,7 +695,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left categoryPicker")
+                if self.debugMode{
+                    print("swiped left categoryPicker")
+                }
                 //categorySubCategoryLabel moved to postion 1, categoryPicker moved to postion 2, categoryPicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition1
@@ -686,7 +707,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on subCategory picker")
+                if self.debugMode{
+                    print("swiped right on subCategory picker")
+                }
                 //categorySubCategoryLabel moved to postion 2, categoryPicker moved to postion 3, subCategoryPicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.categorySubCategoryLabelLeadingAnchorToCenterX.constant = self.xPosition2
@@ -702,7 +725,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left on occurrence label")
+                if self.debugMode{
+                    print("swiped left on occurrence label")
+                }
                 //occurrenceLabel moved to postion 2, occurrencePicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition2
@@ -712,7 +737,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on occurrence picker")
+                if self.debugMode{
+                    print("swiped right on occurrence picker")
+                }
                 //occurrenceLabel moved to postion 3, occurrencePicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition3
@@ -728,7 +755,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left occurrence picker")
+                if self.debugMode{
+                     print("swiped left occurrence picker")
+                }
                 //occurrenceLabel moved to postion 1, occurrencePicker moved to postion 2, occurrenceDatePicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition1
@@ -738,7 +767,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on occurrence date picker")
+                if self.debugMode{
+                    print("swiped right on occurrence date picker")
+                }
                 //categorySubCategoryLabel moved to postion 2, categoryPicker moved to postion 3, subCategoryPicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.occurrenceLabelLeadingAnchorToCenterX.constant = self.xPosition2
@@ -754,7 +785,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
         DispatchQueue.main.async {[unowned self] in
             
             if (sender.direction == .left) {
-                print("swiped left on docDate label")
+                if self.debugMode{
+                    print("swiped left on docDate label")
+                }
                 //docDateLabel moved to postion 2, docDatePicker moved to position 3
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.docDateLabelViewLeadingAnchorToCenterX.constant = self.xPosition2
@@ -763,7 +796,9 @@ class EditViewController: UIViewController, UITextFieldDelegate, UIPickerViewDat
                 })
             }
             if (sender.direction == .right) {
-                print("swiped right on docDate picker")
+                if self.debugMode{
+                    print("swiped right on docDate picker")
+                }
                 //docDateLabel moved to postion 3, docDatePicker moved to position 4
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, animations: {
                     self.docDateLabelViewLeadingAnchorToCenterX.constant = self.xPosition3

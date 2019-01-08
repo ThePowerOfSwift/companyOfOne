@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if error != nil{
-                print("Authorization unsuccessful")
+                print("Notification Authorization : unsuccessful")
             }else{
-                print("Authorization successful")
+                print("Notification Authorization : successful")
             }
         }
         func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

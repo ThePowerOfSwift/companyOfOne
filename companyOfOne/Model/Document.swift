@@ -13,11 +13,12 @@ import UIKit
 
 
 class Document:NSManagedObject{
+    
+    static var debugMode:Bool = false
 
     class func createDocument(currentDocImage:UIImage?, currentTitleTag:String?, currentCategory:Category?, currentSubCategory:SubCategory?, currentOccurrence:Occurrence?, currentOccurrenceDate:Date?, currentDocumentDate:Date?, isSelectedForExport:Bool?){
         
     let generator = UINotificationFeedbackGenerator()
-        
     let context = AppDelegate.viewContext
     let document = Document(context:context)
     
@@ -47,6 +48,7 @@ class Document:NSManagedObject{
     }
         do {
             try context.save()
+            if debugMode{
             print("Saved succesfully")
             print("\(document.titleTag ?? "title Tag")")
             print("\(document.toCategory?.name ?? "No category")")
@@ -54,22 +56,10 @@ class Document:NSManagedObject{
             print("\(document.toOccurrence?.title ?? "No occurrenct title")")
             print("\(document.toOccurrence?.occurrenceDate?.format() ?? "No occurrence date")")
             print("\(document.documentDate?.format() ?? "No document date")")
-//
+            }
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
         }
         generator.notificationOccurred(.success)
     }
-    
-    
-//    func retrieveAllDocuments(searchTerm: String){
-//        //FetchHandler.currentFilter = filteredBy
-//        FetchHandler.fetchFilteredDocuments(searchTerm: searchTerm)
-//        //print("current filter in retrieveAllDocuments: \(FetchHandler.currentFilter)")
-//
-//    }
-    
-//    func deleteDocument(document: Document){  
-//        FetchHandler.deleteDocumentAndFetchFilteredDocuments(document: document)
-//    }
 }

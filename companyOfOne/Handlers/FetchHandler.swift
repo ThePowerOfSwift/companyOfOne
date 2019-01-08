@@ -13,6 +13,7 @@ class FetchHandler: NSObject {
     //TODO: - I think I can use class functions instead of singleton for this
     override private init() {}
     static var currentFilter:String = ""
+    static var debugMode:Bool = false
     
     class func fetchFilteredDocuments(searchTerm:String){ //class func?
         currentFilter = searchTerm
@@ -20,8 +21,10 @@ class FetchHandler: NSObject {
         let request =
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
-    
-        print("current filter in fetchHandler : \(FetchHandler.currentFilter)")
+        if debugMode{
+            print("current filter in fetchHandler : \(FetchHandler.currentFilter)")
+        }
+        
         if currentFilter == "" {
             request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
         }else{

@@ -27,6 +27,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
+    var debugMode:Bool = false
     
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
@@ -34,7 +35,9 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
             switch exportCountObserverForUIUpdates {
             case 0 :
                 if exportMode == .on{
-                    print("0 selected for export")
+                    if debugMode{
+                         print("0 selected for export")
+                    }
                 }
                 filterButton.title = "Select All"
                 selectedMode = .noneSelected
@@ -49,14 +52,18 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
             // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
             case 1...(ArrayHandler.sharedInstance.completeDocumentArray.count-1):
                 if exportMode == .on{
-                    print("some selected for export")
+                    if debugMode{
+                        print("some selected for export")
+                    }
                 }
                 filterButton.title = "Select All"
                 pressedShareButton.tintColor = nil
                 selectedMode = .someSelected
             case ArrayHandler.sharedInstance.completeDocumentArray.count:
                 if exportMode == .on{
-                    print("all selected for export")
+                    if debugMode{
+                        print("all selected for export")
+                    }
                 }
                 pressedShareButton.tintColor = nil
                 filterButton.title = "Deselect All"
@@ -78,7 +85,9 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("from viewDidLoad:")
+        if debugMode{
+            print("from viewDidLoad:")
+        }
         //self.tabBarController?.tabBar.isHidden = false
         registerNibs()
         updateViewControllerForSelectedTab()
@@ -86,7 +95,9 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("from viewWillAppear:")
+        if debugMode{
+            print("from viewWillAppear:")
+        }
         navigationController!.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
         updateViewControllerForSelectedTab()
@@ -102,8 +113,9 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         selectedTabIndex = tabbarController.selectedIndex
         if let selectedTabIndex = tabBarController?.selectedIndex {
             //     TODO: - TO FIX: This index is not working correctly --> this should be solved when I have a viewController for each tab
-            print("selected tab index: \(selectedTabIndex)")
-        
+            if debugMode{
+                print("selected tab index: \(selectedTabIndex)")
+            }
             switch selectedTabIndex  {
             case 1: self.navBar.topItem?.title = "Documents"
             case 2:  self.navBar.topItem?.title = "Snail Mail"
@@ -160,12 +172,18 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         case .on:
             switch selectedMode {
             case .noneSelected:
-                print("export mode on, none selected :  run the alert function ")
+                if debugMode{
+                    print("export mode on, none selected :  run the alert function ")
+                }
             case .someSelected:
-                print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function ")
+                if debugMode{
+                   print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function ")
+                }
                 performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             case .allSelected:
-                print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
+                if debugMode{
+                    print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
+                }
                 performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             }
         }
@@ -183,7 +201,9 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
                 deSelectAllForExport()
             }
         case .off:
-            print("run the date filter function here")
+            if debugMode{
+                  print("run the date filter function here")
+            }
         }
     }
     

@@ -16,6 +16,7 @@ class TabBarController: UITabBarController{
     var docViewController:DocsViewController?
     var maiViewController:DocsViewController?
     var receiptsViewController:DocsViewController?
+    var debugMode:Bool = false
     
     @IBOutlet weak var homeTabBar: UITabBar!
     
@@ -76,24 +77,33 @@ class TabBarController: UITabBarController{
         if let title = item.title{
             switch title {
             case "Home":
-                print("Title in tab bar for didSelect tabBar item:\(title)")
+                if debugMode{
+                   print("Title in tab bar for didSelect tabBar item:\(title)")
+                }
+                
 //                if let index = tabBarController?.selectedIndex{
 //                  self.myDelegate?.updatedTabBarIndex = index
 //                }
             case "Documents":
-                print("Title in tab bar for didSelect tabBar item:\(title)")
+                if debugMode{
+                    print("Title in tab bar for didSelect tabBar item:\(title)")
+                }
 //                if let index = tabBarController?.selectedIndex{
 //                   self.myDelegate?.updatedTabBarIndex = index
 //                }
                 FetchHandler.fetchFilteredDocuments(searchTerm: "")
             case "Snail Mail":
-                print("Title in tab bar for didSelect tabBar item:\(title)")
+                if debugMode{
+                    print("Title in tab bar for didSelect tabBar item:\(title)")
+                }
 //                if let index = tabBarController?.selectedIndex{
 //                   self.myDelegate?.updatedTabBarIndex = index
 //                }
                 FetchHandler.fetchFilteredDocuments(searchTerm: "Mail")
             case "Personal Receipts":
-                print("Title in tab bar for didSelect tabBar item:\(title)")
+                if debugMode{
+                    print("Title in tab bar for didSelect tabBar item:\(title)")
+                }
 //                if let index = tabBarController?.selectedIndex{
 //                self.myDelegate?.updatedTabBarIndex = index
 //                }

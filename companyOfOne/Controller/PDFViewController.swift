@@ -27,6 +27,7 @@ class PDFViewController: UIViewController {
     var yPosition2  = CGFloat()
     var yPosition3 = CGFloat()
     var yPosition4 = CGFloat()
+    var debugMode:Bool = false
     
     
     override func viewDidLoad() {
@@ -89,12 +90,17 @@ class PDFViewController: UIViewController {
         pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
+
     func createSinglePDF(){
         if let imageData = documentsToDisplay[0].pictureData{
-            print("found picture binary data successfully")
+            if debugMode{
+                print("found picture binary data successfully")
+            }
             //create image from image data
             if let image = UIImage(data: imageData){
-                print("image created successfully")
+                if debugMode{
+                    print("created image from binary data successfully")
+                }
                 let pdfData = NSMutableData()
                 //create UIImageView from image
                 let imgView = UIImageView.init(image: image)
@@ -117,12 +123,20 @@ class PDFViewController: UIViewController {
                 //end create PDF
                 
                 let document  = PDFDocument(data: pdfData as Data)
-                print("created document from converted data successfully")
+                if debugMode{
+                    print("created document from converted data successfully")
+                }
                 pdfView.document = document
+                if debugMode{
+                    print("added the document to the PDFView successfully")
+                }
                 addAnnotations(contents: "this is a titleTag", bounds: CGRect(origin: annotationLocation4, size: imageSize), color:#colorLiteral(red: 0, green: 0.5898008943, blue: 1, alpha: 1).withAlphaComponent(0.7))
                 addAnnotations(contents: "this is a category", bounds: CGRect(origin: annotationLocation3, size: imageSize), color:#colorLiteral(red: 0.1773889844, green: 1, blue: 0.1456064391, alpha: 1).withAlphaComponent(0.7))
                 addAnnotations(contents: "this is a occurrence", bounds: CGRect(origin: annotationLocation2, size: imageSize), color:#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1).withAlphaComponent(0.7))
                 addAnnotations(contents: "this is a docDate", bounds: CGRect(origin: annotationLocation, size: imageSize), color:#colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1).withAlphaComponent(0.7))
+                if debugMode{
+                    print("added the annotations to the PDFView successfully")
+                }
             }
         }
     }
