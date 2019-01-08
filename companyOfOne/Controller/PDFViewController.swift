@@ -12,7 +12,7 @@ import PDFKit
 class PDFViewController: UIViewController {
     
     var documentsToDisplay:[Document] = []
-    let pdfView = PDFView()
+    var pdfView = PDFView()
    // var pdfDocument = PDFDocument()
     
     
@@ -37,13 +37,16 @@ class PDFViewController: UIViewController {
         super.viewDidLoad()
         navigationController!.isNavigationBarHidden = false
          self.tabBarController?.tabBar.isHidden = true
+        pdfView = PDFView(frame: self.view.bounds)
+        
+        
         view.addSubview(pdfView)
 //        if let document = pdfView.document{
 //            pdfDocument = document
 //        }
-//
-        //displayPDFFromDocument()
         setupPDFView()
+        //displayPDFFromDocument()
+        
        // createSinglePDF()
         createMultipagePDF()
         setupAnnotationLocations()
@@ -62,22 +65,28 @@ class PDFViewController: UIViewController {
         yPosition3 = 3*(view.frame.height/5)
         yPosition4 = 4*(view.frame.height/5)
         let testPoint = CGPoint(x: commonAnnotationX, y: yPosition1)
+        let testPoint2 = CGPoint(x: commonAnnotationX, y: yPosition2)
+        let testPoint3 = CGPoint(x: commonAnnotationX, y: yPosition3)
+        let testPoint4 = CGPoint(x: commonAnnotationX, y: yPosition4)
  
-        titleTagAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition1, width: commonAnnotationWidth, height: commonAnnotationHeight)
-        categorySubCategoryAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition2, width: commonAnnotationWidth, height: commonAnnotationHeight)
-        occurrenceAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition3, width: commonAnnotationWidth, height: commonAnnotationHeight)
-        docDateAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition4, width: commonAnnotationWidth, height: commonAnnotationHeight)
+//        titleTagAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition1, width: commonAnnotationWidth, height: commonAnnotationHeight)
+//        categorySubCategoryAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition2, width: commonAnnotationWidth, height: commonAnnotationHeight)
+//        occurrenceAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition3, width: commonAnnotationWidth, height: commonAnnotationHeight)
+//        docDateAnnotationLocation = CGRect(x: commonAnnotationX, y: yPosition4, width: commonAnnotationWidth, height: commonAnnotationHeight)
         //if let page = pdfView.document?.page(at: 0)
         
         if let page = pdfView.document?.page(at: 0){
             let convertedPoint = pdfView.convert(testPoint, to: page)
+            let convertedPoint2 = pdfView.convert(testPoint2, to: page)
+            let convertedPoint3 = pdfView.convert(testPoint3, to: page)
+            let convertedPoint4 = pdfView.convert(testPoint4, to: page)
             let rectSize = CGSize(width: commonAnnotationWidth, height: commonAnnotationHeight)
             firstTestLocation = CGRect(origin: convertedPoint, size: rectSize)
             
            // firstTestLocation = pdfView.convert(titleTagAnnotationLocation, to: pdfView.page(for: testPoint, nearest: true)!)
-            secondTestLocation = pdfView.convert(categorySubCategoryAnnotationLocation, from: page)
-            thirdTestLocation = pdfView.convert(occurrenceAnnotationLocation, from: page)
-            fourthTestLocation = pdfView.convert(docDateAnnotationLocation, from: page)
+            secondTestLocation = CGRect(origin: convertedPoint2, size: rectSize)
+            thirdTestLocation = CGRect(origin: convertedPoint3, size: rectSize)
+            fourthTestLocation = CGRect(origin: convertedPoint4, size: rectSize)
         }
     }
     
