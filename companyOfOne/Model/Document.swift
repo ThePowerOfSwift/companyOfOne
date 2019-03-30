@@ -53,7 +53,7 @@ class Document:NSManagedObject{
             print("\(document.titleTag ?? "title Tag")")
             print("\(document.toCategory?.name ?? "No category")")
             print("\(document.toSubCategory?.name ?? "No subCategory")")
-            print("\(document.toOccurrence?.title ?? "No occurrenct title")")
+            print("\(document.toOccurrence?.title ?? "No occurrence title")")
             print("\(document.toOccurrence?.occurrenceDate?.format() ?? "No occurrence date")")
             print("\(document.documentDate?.format() ?? "No document date")")
             }
