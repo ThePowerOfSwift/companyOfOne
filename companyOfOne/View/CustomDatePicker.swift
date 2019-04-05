@@ -23,13 +23,13 @@ class CustomDatePicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
     
     var day = Calendar.current.component(.day, from: Date()) {
         didSet {
-            selectRow(days.index(of: day)!, inComponent: 1, animated: false)
+            selectRow(days.firstIndex(of: day)!, inComponent: 1, animated: false)
         }
     }
     
     var year = Calendar.current.component(.year, from: Date()) {
         didSet {
-            selectRow(years.index(of: year)!, inComponent: 2, animated: true)
+            selectRow(years.firstIndex(of: year)!, inComponent: 2, animated: true)
         }
     }
     

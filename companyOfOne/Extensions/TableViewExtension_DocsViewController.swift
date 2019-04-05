@@ -69,7 +69,7 @@ extension DocsViewController: UITableViewDelegate,UITableViewDataSource {
         if let cell = tableView.cellForRow(at: indexPath as IndexPath) {
             cell.accessoryType = .disclosureIndicator
             ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport = false
-            if let index = ArrayHandler.sharedInstance.exportArray.index(of: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row]) {
+            if let index = ArrayHandler.sharedInstance.exportArray.firstIndex(of: ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row]) {
                 ArrayHandler.sharedInstance.exportArray.remove(at: index)
             }
             //this propery observer updates state and UI
