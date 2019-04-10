@@ -12,7 +12,7 @@ class ArrayHandler: NSObject {
     static let sharedInstance = ArrayHandler()
     override private init() {}
     var incompleteDocumentArray:[Document] = []
-    var completeDocumentArray:[Document] = []
+    var completeDocumentArray:[Document] = [] 
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
     var exportArray:[Document] = []

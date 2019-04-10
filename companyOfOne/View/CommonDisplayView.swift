@@ -12,6 +12,10 @@ class CommonDisplayView: UIView, UITableViewDataSource, UITableViewDelegate, UIS
     
     let kCONTENT_XIB_NAME = "CommonDisplayView"
     
+    
+    //CommonDisplayView puts together several items for display... the tableView, the searchBar, the exportButton, the filter button and the view title
+    //completed: the search bar and the table view.  TODO: the nav title
+    
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var commonTableView: UITableView!
     @IBOutlet weak var commonSearchBar: UISearchBar!

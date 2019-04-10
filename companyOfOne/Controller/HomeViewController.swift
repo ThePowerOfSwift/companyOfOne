@@ -29,10 +29,10 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     
     override func viewDidLoad() {
-        if let tabItems = tabBarController?.tabBar.items {
-            // In this case we want to modify the badge number of the tab:
-            tabItems[2].badgeValue = "1"
-        }
+//        if let tabItems = tabBarController?.tabBar.items {
+//            // In this case we want to modify the badge number of the tab:
+//            tabItems[2].badgeValue = "1"
+//        }
         registerNibs()
         navigationController?.title = "Home"
         super.viewDidLoad()
