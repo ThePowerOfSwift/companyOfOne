@@ -9,6 +9,8 @@
 import UIKit
 
 class ReceiptsViewController: UIViewController {
+    
+    //This is the template for the new way of doing multiple view controllers sharing a view.
    
     let customView = CommonDisplayView()
     override func viewDidLoad() {
@@ -38,4 +40,4 @@ class ReceiptsViewController: UIViewController {
             customView.commonNavBar.topItem?.title = "Personal Receipts"
         }
     }
-    
+

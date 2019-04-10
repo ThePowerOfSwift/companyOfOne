@@ -108,22 +108,23 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     //MARK: - Custom Functions For Loading View
     
     func updateViewControllerForSelectedTab(){
-        let application = UIApplication.shared.delegate as! AppDelegate
-        let tabbarController = application.window?.rootViewController as! UITabBarController
-        selectedTabIndex = tabbarController.selectedIndex
-        if let selectedTabIndex = tabBarController?.selectedIndex {
-            //     TODO: - TO FIX: This index is not working correctly --> this should be solved when I have a viewController for each tab
-            if debugMode{
-                print("selected tab index: \(selectedTabIndex)")
-            }
-            switch selectedTabIndex  {
-            case 1: self.navBar.topItem?.title = "Documents"
-            case 2:  self.navBar.topItem?.title = "Snail Mail"
-            case 3:  self.navBar.topItem?.title = "Personal Receipts"
-            default: break
-                //            }
-            }            //            docTableView.reloadData()
-        }
+        self.navBar.topItem?.title = "Documents"
+//        let application = UIApplication.shared.delegate as! AppDelegate
+//        let tabbarController = application.window?.rootViewController as! UITabBarController
+//        selectedTabIndex = tabbarController.selectedIndex
+//        if let selectedTabIndex = tabBarController?.selectedIndex {
+//            //     TODO: - TO FIX: This index is not working correctly --> this should be solved when I have a viewController for each tab
+//            if debugMode{
+//                print("selected tab index: \(selectedTabIndex)")
+//            }
+//            switch selectedTabIndex  {
+//            case 1: self.navBar.topItem?.title = "Documents"
+//            case 2:  self.navBar.topItem?.title = "Snail Mail"
+//            case 3:  self.navBar.topItem?.title = "Personal Receipts"
+//            default: break
+//                //            }
+//            }            //            docTableView.reloadData()
+//        }
     }
     
     func setupTableViewForPopulation(){

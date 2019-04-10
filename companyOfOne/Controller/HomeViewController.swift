@@ -34,10 +34,14 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
 //            tabItems[2].badgeValue = "1"
 //        }
         registerNibs()
-        navigationController?.title = "Home"
+        let navbar = navigationController
+        navbar!.title = "Home"
+       // self.navigationController?.title = "Home"
         super.viewDidLoad()
         imagePicker.delegate = self
-        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts")
+        
+        //temp population data!!! This will eventually be the list of occurrence notifications
+        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts") //temp population data!!! This
      
         
     }
@@ -50,12 +54,13 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
     }
     
+    
     func registerNibs(){
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         reminderTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
     
-    //MARK: - Actions
+    //MARK: - Notification Actions
     
     @IBAction func pressedGetDeliveredNotificationsButton(_ sender: UIButton) {
         LocalNotificationHandler.updateDeliveredNotificationInfo { (count
@@ -95,10 +100,13 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
     }
     
+    //MARK: - Button Press Actions
+    
     @IBAction func takePhotoPressed(_ sender: UIBarButtonItem) {
         showAlertForPhotoOrLibrary()
     }
     
+    //MARK: - TableView Delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if ArrayHandler.sharedInstance.completeDocumentArray.count != 0{
