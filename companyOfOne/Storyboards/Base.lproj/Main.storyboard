@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZgC-ow-uaD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZgC-ow-uaD">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -170,7 +170,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HmS-cf-MH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2017" y="324"/>
+            <point key="canvasLocation" x="-2099" y="-137"/>
         </scene>
         <!--Settings-->
         <scene sceneID="tf5-XK-YJR">
@@ -232,7 +232,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-ig-jQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="-1216"/>
+            <point key="canvasLocation" x="878" y="-1611"/>
         </scene>
         <!--Categories-->
         <scene sceneID="aGg-lY-ZUe">
@@ -450,7 +450,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919" y="324"/>
+            <point key="canvasLocation" x="1735" y="-37"/>
         </scene>
         <!--To Home-->
         <scene sceneID="5fc-On-7ay">
@@ -556,7 +556,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="324"/>
+            <point key="canvasLocation" x="-49" y="-391"/>
         </scene>
         <!--Docs-->
         <scene sceneID="mhy-qd-rHW">
@@ -613,7 +613,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918.84057971014499" y="-408.42391304347831"/>
+            <point key="canvasLocation" x="1736" y="-734"/>
         </scene>
         <!--Receipts View Controller-->
         <scene sceneID="ndL-0x-Is3">
@@ -626,6 +626,9 @@
                         <viewLayoutGuide key="safeArea" id="JfY-fb-y4k"/>
                     </view>
                     <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
+                    <connections>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromReceipts" id="3us-5X-79Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gk7-wP-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -643,12 +646,31 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lgp-y5-6ek" kind="relationship" relationship="rootViewController" id="G7N-yx-gnS"/>
+                        <segue destination="a5E-BF-Ecn" kind="relationship" relationship="rootViewController" id="XfR-nv-Ftf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sVl-7T-Lqu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-949" y="324"/>
+            <point key="canvasLocation" x="-949" y="329"/>
+        </scene>
+        <!--Mail View Controller-->
+        <scene sceneID="FSS-mY-6aY">
+            <objects>
+                <viewController id="a5E-BF-Ecn" customClass="MailViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sbg-nj-luf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Nsy-VS-1a0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dGk-oz-tcR"/>
+                    <connections>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromMail" id="C6j-LW-6of"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rei-FS-NXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-53" y="330"/>
         </scene>
         <!--Receipts-->
         <scene sceneID="il0-zF-6B1">
@@ -681,7 +703,6 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G7N-yx-gnS"/>
-        <segue reference="rdm-6b-dxS"/>
+        <segue reference="3us-5X-79Z"/>
     </inferredMetricsTieBreakers>
 </document>
