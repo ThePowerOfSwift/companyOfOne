@@ -17,7 +17,7 @@ class TabBarController: UITabBarController{
     var maiViewController:DocsViewController?
     var receiptsViewController:ReceiptsViewController?
    // var receiptsViewController:DocsViewController?
-    var debugMode:Bool = true
+    var debugMode:Bool = false
     
     @IBOutlet weak var homeTabBar: UITabBar!
     

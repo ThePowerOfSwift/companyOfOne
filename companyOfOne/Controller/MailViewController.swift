@@ -1,5 +1,5 @@
 //
-//  ReceiptsViewController.swift
+//  MailViewController.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-28.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReceiptsViewController: UIViewController {
+class MailViewController: UIViewController {
     
         //This is the template for the new way of doing multiple view controllers sharing a view.
     
@@ -40,7 +40,7 @@ class ReceiptsViewController: UIViewController {
     }
     
     func updateNavBarTitle(){
-            customView.commonNavBar.topItem?.title = "Personal Receipts"
+            customView.commonNavBar.topItem?.title = "Snail Mail"
         }
     }
 

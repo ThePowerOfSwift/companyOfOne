@@ -8,18 +8,86 @@
 
 import UIKit
 
-class CommonDisplayView: UIView, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class CommonDisplayView: UIView
+    //, UITableViewDataSource, UITableViewDelegate
+   // ,UISearchBarDelegate
+{
     
     let kCONTENT_XIB_NAME = "CommonDisplayView"
     
+    //MARK: - Enums
+    enum ExportMode {
+        case on
+        case off
+    }
     
-    //CommonDisplayView puts together several items for display... the tableView, the searchBar, the exportButton, the filter button and the view title
-    //completed: the search bar and the table view.  TODO: the nav title
+    enum SelectedMode {
+        case noneSelected
+        case someSelected
+        case allSelected
+    }
+    
+    //MARK: - Instance Variables
+    var exportMode:ExportMode = .off
+    var selectedMode:SelectedMode = .noneSelected
+    var selectedTabIndex:Int = 0
+    var debugMode:Bool = false
+    
+    //MARK: - Property Observers
+    var exportCountObserverForUIUpdates: Int = 0 {
+        didSet {
+            switch exportCountObserverForUIUpdates {
+            case 0 :
+                if exportMode == .on{
+                    if debugMode{
+                        print("0 selected for export")
+                    }
+                }
+                filterButton.title = "Select All"
+                selectedMode = .noneSelected
+                if exportMode == .off {
+                    pressedSharedButton.image = #imageLiteral(resourceName: "upload")
+                    pressedSharedButton.tintColor = nil
+                    filterButton.image = #imageLiteral(resourceName: "filter")
+                    filterButton.tintColor = nil
+                }else{
+                    pressedSharedButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+                }
+            // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
+            case 1...(ArrayHandler.sharedInstance.completeDocumentArray.count-1):
+                if exportMode == .on{
+                    if debugMode{
+                        print("some selected for export")
+                    }
+                }
+                filterButton.title = "Select All"
+                pressedSharedButton.tintColor = nil
+                selectedMode = .someSelected
+            case ArrayHandler.sharedInstance.completeDocumentArray.count:
+                if exportMode == .on{
+                    if debugMode{
+                        print("all selected for export")
+                    }
+                }
+                pressedSharedButton.tintColor = nil
+                filterButton.title = "Deselect All"
+                selectedMode = .allSelected
+            default: return
+            }
+        }
+    }
+    
+    //MARK: - Outlets
     
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var commonTableView: UITableView!
     @IBOutlet weak var commonSearchBar: UISearchBar!
     @IBOutlet weak var commonNavBar: UINavigationBar!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var pressedSharedButton: UIBarButtonItem!
+    
+    
+    //MARK: - Inits
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,76 +104,94 @@ class CommonDisplayView: UIView, UITableViewDataSource, UITableViewDelegate, UIS
         contentView.fixInView(self)
     }
     
-    // MARK:- TableView delegates
+    //MARK: - Actions
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ArrayHandler.sharedInstance.completeDocumentArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
-        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
-        if cell.isSelectedForExport{
-            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-        } else {
-            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+    @IBAction func shareButton(_ sender: UIBarButtonItem) {
+        switch exportMode {
+        case .off:
+            exportMode = .on
+            pressedSharedButton.image = nil
+            pressedSharedButton.tintColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1).withAlphaComponent(0.5)
+            pressedSharedButton.title = "Export"
+            filterButton.image = nil
+            commonTableView?.allowsMultipleSelection = true
+        case .on:
+            switch selectedMode {
+            case .noneSelected:
+                if debugMode{
+                    print("export mode on, none selected :  run the alert function ")
+                }
+            case .someSelected:
+                if debugMode{
+                    print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function ")
+                }
+                 // TODO: - TO FIX: Why don't these segues work?
+                //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
+            case .allSelected:
+                if debugMode{
+                    print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
+                }
+                // TODO: - TO FIX: Why don't these segues work?
+                //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
+            }
         }
-        
-        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
-        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
-        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
-        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
-        //cell.occurenceLabel.text = document?.occurrence?
-        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
-            cell.docImageView.image = UIImage(data: imageData)
+    }
+    
+    @IBAction func filterButtonPressed(_ sender: UIBarButtonItem) {
+        switch exportMode {
+        case .on:
+            switch selectedMode {
+            case .noneSelected:
+                selectAllForExport()
+            case .someSelected:
+                selectAllForExport()
+            case.allSelected:
+                deSelectAllForExport()
+            }
+        case .off:
+            if debugMode{
+                print("run the date filter function here")
+            }
         }
-        return cell
     }
     
-    // MARK: SearchBar Delegates
+    //MARK: - Export Functions
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        commonSearchBar.showsCancelButton = true
-        commonSearchBar.showsScopeBar = true
-        commonSearchBar.scopeButtonTitles = ["Title/Tag", "Category", "Subcategory"]
-        commonSearchBar.selectedScopeButtonIndex = 0
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        FetchHandler.fetchFilteredDocuments(searchTerm: searchText)
-        //commonDisplayView.commonTableView.reloadData()
-        //print("current filter in textDidChange: \(FetchHandler.currentFilter)")
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //print("Beginning complete search from SearchButtonClicked")
-        completeSearch()
-        //print("Ending complete search from SearchButtonClicked")
-        
-    }
-    
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        //resetSearchBar()
-        return true
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //print("Beginning reset search from CancelButtonClicked")
-        resetSearch()
-        //print("Ending reset search from CancelButtonClicked")
-    }
-    
-    public func resetSearch(){
-        commonSearchBar.endEditing(true)
-        commonSearchBar.showsCancelButton = false
-        commonSearchBar.showsScopeBar = false
-        resignFirstResponder()
-        //updateViewControllerForSelectedTab()
-    }
-    
-    func completeSearch(){
-        commonSearchBar.endEditing(true)
+    func selectAllForExport(){
+        //this sets the model objects isSelectedForExport bool and adds to the exportArray
+        let totalRows = commonTableView.numberOfRows(inSection: 0)
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
+            if item.isSelectedForExport == false {
+                item.isSelectedForExport = true
+                ArrayHandler.sharedInstance.exportArray.append(item)
+            }
+        }
         commonTableView.reloadData()
+        //this selects all of the cells in the current display
+        for row in 0..<totalRows {
+            commonTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+        }
+        //this propery observer updates state and UI
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
+    }
+    
+    func deSelectAllForExport(){
+        //this clears the model objects isSelectedForExport bool and removes the exportArray
+        let totalRows = commonTableView.numberOfRows(inSection: 0)
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
+            item.isSelectedForExport = false
+        }
+        
+        //model updates should happen in the model but ... how?
+        ArrayHandler.sharedInstance.exportArray.removeAll()
+        commonTableView.reloadData()
+        
+        //this deselects all of the cells in the current display
+        for row in 0..<totalRows {
+            commonTableView.deselectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated:false)
+        }
+        ///this propery observer updates state and UI
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
 }
 

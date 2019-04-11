@@ -29,8 +29,8 @@
 		7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */; };
 		7D84BD1821D6758000EE3480 /* ReceiptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1721D6758000EE3480 /* ReceiptsViewController.swift */; };
 		7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */; };
-		7D84BD1E21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */; };
-		7D84BD2021D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */; };
+		7D84BD1E21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1D21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift */; };
+		7D84BD2021D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D84BD1F21D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift */; };
 		7D87889321DFCCDA0071794B /* 45975.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7D87889221DFCCDA0071794B /* 45975.pdf */; };
 		7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */; };
 		7D9C731121B70C2200179C06 /* CommonDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */; };
@@ -40,6 +40,9 @@
 		7DDAA67F21A5DB2F00C047E3 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */; };
 		7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */; };
 		7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */; };
+		7DDD5F60225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */; };
+		7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */; };
+		7DDD5F64225FDB2D00E3205E /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F63225FDB2D00E3205E /* MailViewController.swift */; };
 		7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA724F21C0164C0062D49F /* FetchHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,8 +71,8 @@
 		7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableView.swift; sourceTree = "<group>"; };
 		7D84BD1721D6758000EE3480 /* ReceiptsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptsViewController.swift; sourceTree = "<group>"; };
 		7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDisplayView.swift; sourceTree = "<group>"; };
-		7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarExtenstion_DocsViewController.swift; sourceTree = "<group>"; };
-		7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtension_DocsViewController.swift; sourceTree = "<group>"; };
+		7D84BD1D21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController_SearchBarExtention.swift; sourceTree = "<group>"; };
+		7D84BD1F21D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocsViewController_TableViewExtension.swift; sourceTree = "<group>"; };
 		7D87889221DFCCDA0071794B /* 45975.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 45975.pdf; sourceTree = "<group>"; };
 		7D94F75021CC0DB300D62C8A /* LocalNotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationHandler.swift; sourceTree = "<group>"; };
 		7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CommonDisplayView.xib; path = companyOfOne/View/CommonDisplayView.xib; sourceTree = SOURCE_ROOT; };
@@ -79,6 +82,9 @@
 		7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
 		7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewTableViewCell.swift; sourceTree = "<group>"; };
 		7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocViewTableViewCell.xib; sourceTree = "<group>"; };
+		7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_TableViewExtension.swift; sourceTree = "<group>"; };
+		7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_SearchBarExtenstion.swift; sourceTree = "<group>"; };
+		7DDD5F63225FDB2D00E3205E /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		7DEA724F21C0164C0062D49F /* FetchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,15 +148,16 @@
 		7D669453216A8C100048F4A3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7D46962E218B792D00C36AD3 /* TabBarController.swift */,
+				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
 				7DC93942218E163F001F05DE /* DocsViewController.swift */,
 				7D84BD1721D6758000EE3480 /* ReceiptsViewController.swift */,
-				7D66943C216A89D20048F4A3 /* HomeViewController.swift */,
-				7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */,
+				7DDD5F63225FDB2D00E3205E /* MailViewController.swift */,
 				7D669455216A8DA20048F4A3 /* EditViewController.swift */,
 				7D541DB221DE5D7C004B1462 /* PDFViewController.swift */,
+				7D669459216EA8000048F4A3 /* SettingsViewContoller.swift */,
 				7D66945E216FECDE0048F4A3 /* CategoryTableViewController.swift */,
 				7D669460216FECF40048F4A3 /* SubCategoryTableViewController.swift */,
-				7D46962E218B792D00C36AD3 /* TabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,8 +188,10 @@
 		7D84BD2121D7DC8700EE3480 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7D84BD1D21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift */,
-				7D84BD1F21D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift */,
+				7D84BD1D21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift */,
+				7D84BD1F21D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift */,
+				7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */,
+				7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -278,12 +287,14 @@
 				7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */,
 				7D66943D216A89D20048F4A3 /* HomeViewController.swift in Sources */,
 				7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */,
+				7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift in Sources */,
+				7DDD5F60225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift in Sources */,
 				7D66943B216A89D20048F4A3 /* AppDelegate.swift in Sources */,
 				7D66945D216FE6610048F4A3 /* SettingsTableViewCell.swift in Sources */,
 				7D669456216A8DA20048F4A3 /* EditViewController.swift in Sources */,
 				7D669461216FECF40048F4A3 /* SubCategoryTableViewController.swift in Sources */,
 				7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */,
-				7D84BD2021D7DC6900EE3480 /* TableViewExtension_DocsViewController.swift in Sources */,
+				7D84BD2021D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift in Sources */,
 				7D0A314321810C96007BD331 /* Occurrence.swift in Sources */,
 				7D84BD1821D6758000EE3480 /* ReceiptsViewController.swift in Sources */,
 				7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */,
@@ -292,11 +303,12 @@
 				7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,
+				7DDD5F64225FDB2D00E3205E /* MailViewController.swift in Sources */,
 				7D66944D216A8BD50048F4A3 /* Document.swift in Sources */,
 				7D541DB321DE5D7C004B1462 /* PDFViewController.swift in Sources */,
 				7D14333F219B85C6006C20EC /* DocImage.swift in Sources */,
 				7DC93943218E163F001F05DE /* DocsViewController.swift in Sources */,
-				7D84BD1E21D7DBDE00EE3480 /* SearchBarExtenstion_DocsViewController.swift in Sources */,
+				7D84BD1E21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift in Sources */,
 				7D0A31412181070D007BD331 /* companyOfOneModel.xcdatamodeld in Sources */,
 				7D46962F218B792D00C36AD3 /* TabBarController.swift in Sources */,
 				7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */,

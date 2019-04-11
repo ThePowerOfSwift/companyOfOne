@@ -27,7 +27,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
-    var debugMode:Bool = false
+    var debugMode:Bool = true
     
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
@@ -148,8 +148,13 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
         documentSearchBar.showsCancelButton = false
         documentSearchBar.showsScopeBar = false
         resignFirstResponder()
+        if debugMode{
+            print("about to run the updateViewControllerForSelectedTab")
+        }
         updateViewControllerForSelectedTab()
-        
+        if debugMode{
+            print("completed running the updateViewControllerForSelectedTab")
+        }
     }
     
     func completeSearch(){
