@@ -41,7 +41,7 @@
 		7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */; };
 		7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */; };
 		7DDD5F60225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */; };
-		7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */; };
+		7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift */; };
 		7DDD5F64225FDB2D00E3205E /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F63225FDB2D00E3205E /* MailViewController.swift */; };
 		7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA724F21C0164C0062D49F /* FetchHandler.swift */; };
 /* End PBXBuildFile section */
@@ -83,7 +83,7 @@
 		7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewTableViewCell.swift; sourceTree = "<group>"; };
 		7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocViewTableViewCell.xib; sourceTree = "<group>"; };
 		7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_TableViewExtension.swift; sourceTree = "<group>"; };
-		7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_SearchBarExtenstion.swift; sourceTree = "<group>"; };
+		7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_SearchBarExtension.swift; sourceTree = "<group>"; };
 		7DDD5F63225FDB2D00E3205E /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
 		7DEA724F21C0164C0062D49F /* FetchHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,7 +190,7 @@
 			children = (
 				7D84BD1D21D7DBDE00EE3480 /* DocsViewController_SearchBarExtention.swift */,
 				7D84BD1F21D7DC6900EE3480 /* DocsViewController_TableViewExtension.swift */,
-				7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift */,
+				7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift */,
 				7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */,
 			);
 			path = Extensions;
@@ -287,7 +287,7 @@
 				7D66945F216FECDE0048F4A3 /* CategoryTableViewController.swift in Sources */,
 				7D66943D216A89D20048F4A3 /* HomeViewController.swift in Sources */,
 				7D94F75121CC0DB300D62C8A /* LocalNotificationHandler.swift in Sources */,
-				7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtenstion.swift in Sources */,
+				7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift in Sources */,
 				7DDD5F60225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift in Sources */,
 				7D66943B216A89D20048F4A3 /* AppDelegate.swift in Sources */,
 				7D66945D216FE6610048F4A3 /* SettingsTableViewCell.swift in Sources */,

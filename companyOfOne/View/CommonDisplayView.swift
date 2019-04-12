@@ -117,18 +117,20 @@ class CommonDisplayView: UIView
             switch selectedMode {
             case .noneSelected:
                 if debugMode{
-                    print("Export mode on, none selected :  run the alert function ")
+                    print("CommonDisplayView Share button pressed, Export mode on, none selected.\n")
                 }
+                print("TO DO: Run the alert function\n")
             case .someSelected:
                 if debugMode{
-                    print("Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function\n")
+                    print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
                 }
-                 // TODO: - TO FIX: Why don't these segues work?
+                print("TO DO: Run the export to PDF function here\n")
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             case .allSelected:
                 if debugMode{
-                    print("Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function\n")
+                    print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
                 }
+                print("TO DO: Run the export to PDF function here\n")
                 // TODO: - TO FIX: Why don't these segues work?
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             }
@@ -148,8 +150,9 @@ class CommonDisplayView: UIView
             }
         case .off:
             if debugMode{
-                print("run the date filter function here\n")
+                print("CommonDisplayView Filter Button Pressed, export mode off\n")
             }
+            print("TO DO: Run the date filter function here\n")
         }
     }
 }

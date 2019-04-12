@@ -13,11 +13,12 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     
     func setupTableViewForPopulation(){
         commonTableView.allowsMultipleSelection = false
-        //clears the export Array and deselect all items/cells
-        deSelectAllForExport()
+        
         //makes sure the enums are reset
         exportMode = .off
         selectedMode = .noneSelected
+        //clears the export Array and deselect all items/cells
+        deSelectAllForExport()
         commonTableView.reloadData()
     }
     
@@ -120,7 +121,7 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
             }
         case .off:
             //performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
-            print("TO DO:Fix the perform segue from the didSelectRow in the CommonDisplayView_TableViewExtension")
+            print("TO DO:Fix the perform segue from the didSelectRow in the CommonDisplayView_TableViewExtension\n")
         }
     }
     

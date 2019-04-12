@@ -10,12 +10,12 @@ import UIKit
 
 class MailViewController: UIViewController {
     
-        //This is the template for the new way of doing multiple view controllers sharing a view.
+    //This is the template for the new way of doing multiple view controllers sharing a view.
     
     //MARK: - Constants
     let customView = CommonDisplayView()
-
-
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -23,24 +23,41 @@ class MailViewController: UIViewController {
         createTotalView()
         registerTableViewNibs()
         updateNavBarTitle()
-        
-        // Do any additional setup after loading the view.
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateTableView()
+        confirmAllValues()
+    }
+    
+    
     
     func createTotalView(){
         if let bounds = parent?.view.bounds {
-             customView.frame = bounds
+            customView.frame = bounds
         }
         self.view.addSubview(customView)
+        customView.exportMode = .off
     }
-
+    
     func registerTableViewNibs(){
         let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
         customView.commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
     }
     
     func updateNavBarTitle(){
-            customView.commonNavBar.topItem?.title = "Snail Mail"
+        customView.commonNavBar.topItem?.title = "Paper Mail"
+    }
+    
+    func updateTableView(){
+        customView.setupTableViewForPopulation()
+    }
+    
+    func confirmAllValues(){
+        if customView.debugMode{
+            print("\(self) viewWillAppear confirming export mode is \(customView.exportMode).\n")
+            print("\(self) viewWillAppear confirming selected mode is \(customView.selectedMode).\n")
+            print("\(self) viewWillAppear confirming that \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
         }
     }
-
+}

@@ -27,7 +27,6 @@ class ReceiptsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         updateTableView()
-        customView.exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
         confirmAllValues()
     }
     
@@ -56,9 +55,9 @@ class ReceiptsViewController: UIViewController {
     
     func confirmAllValues(){
         if customView.debugMode{
-            print("ReceiptsViewController viewWillAppear confirming export mode is \(customView.exportMode).\n")
-            print("ReceiptsViewController viewWillAppear confirming selected mode is \(customView.selectedMode).\n")
-            print("ReceiptsViewController viewWillAppear confirming that \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
+            print("\(self) viewWillAppear confirming export mode is \(customView.exportMode).\n")
+            print("\(self) viewWillAppear confirming selected mode is \(customView.selectedMode).\n")
+            print("\(self) viewWillAppear confirming that \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
         }
     }
 }
