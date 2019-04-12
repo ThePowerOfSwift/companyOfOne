@@ -56,8 +56,8 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     
     func registerNibs(){
-        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-        reminderTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+        let nib = UINib(nibName: "CommonTableViewCell", bundle: nil)
+        reminderTableView.register(nib, forCellReuseIdentifier: "commonTableViewCell")
     }
     
     //MARK: - Notification Actions
@@ -122,7 +122,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commonTableViewCell")! as! CommonTableViewCell
         //TODO: FIX THIS: With no items in the array, new installs crash
         cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{

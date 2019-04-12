@@ -1,5 +1,5 @@
 //
-//  DocViewTableViewCell.swift
+//  CommonTableViewCell.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-02.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DocViewTableViewCell: UITableViewCell {
+class CommonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var occurenceLabel: UILabel!
     @IBOutlet weak var docImageView: UIImageView!
@@ -20,7 +20,7 @@ class DocViewTableViewCell: UITableViewCell {
     var isSelectedForExport:Bool = false
     
     
-   // @IBOutlet var docViewTableViewCell: DocViewTableViewCell!
+   // @IBOutlet var commonTableViewCell: CommonTableViewCell!
     
     
     

@@ -16,7 +16,7 @@ extension DocsViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "docViewTableViewCell")! as! DocViewTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "commonTableViewCell")! as! CommonTableViewCell
         cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark

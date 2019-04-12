@@ -137,8 +137,8 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     }
     
     func registerNibs(){
-        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-        docTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+        let nib = UINib(nibName: "CommonTableViewCell", bundle: nil)
+        docTableView.register(nib, forCellReuseIdentifier: "commonTableViewCell")
     }
     
     //MARK: - Search Bar Custom Functions

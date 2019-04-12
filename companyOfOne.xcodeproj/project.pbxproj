@@ -38,8 +38,8 @@
 		7DDAA67821A0F60F00C047E3 /* ArrayHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */; };
 		7DDAA67A21A1040800C047E3 /* AlertHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67921A1040800C047E3 /* AlertHandler.swift */; };
 		7DDAA67F21A5DB2F00C047E3 /* DateHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */; };
-		7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */; };
-		7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */; };
+		7DDAA68821B474FA00C047E3 /* CommonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDAA68621B474FA00C047E3 /* CommonTableViewCell.swift */; };
+		7DDAA68921B474FA00C047E3 /* CommonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DDAA68721B474FA00C047E3 /* CommonTableViewCell.xib */; };
 		7DDD5F60225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */; };
 		7DDD5F62225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift */; };
 		7DDD5F64225FDB2D00E3205E /* MailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDD5F63225FDB2D00E3205E /* MailViewController.swift */; };
@@ -80,8 +80,8 @@
 		7DDAA67721A0F60F00C047E3 /* ArrayHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayHandler.swift; sourceTree = "<group>"; };
 		7DDAA67921A1040800C047E3 /* AlertHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertHandler.swift; sourceTree = "<group>"; };
 		7DDAA67E21A5DB2F00C047E3 /* DateHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHandler.swift; sourceTree = "<group>"; };
-		7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocViewTableViewCell.swift; sourceTree = "<group>"; };
-		7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocViewTableViewCell.xib; sourceTree = "<group>"; };
+		7DDAA68621B474FA00C047E3 /* CommonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTableViewCell.swift; sourceTree = "<group>"; };
+		7DDAA68721B474FA00C047E3 /* CommonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonTableViewCell.xib; sourceTree = "<group>"; };
 		7DDD5F5F225FC8E800E3205E /* CommonDisplayView_TableViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_TableViewExtension.swift; sourceTree = "<group>"; };
 		7DDD5F61225FCE1000E3205E /* CommonDisplayView_SearchBarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDisplayView_SearchBarExtension.swift; sourceTree = "<group>"; };
 		7DDD5F63225FDB2D00E3205E /* MailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailViewController.swift; sourceTree = "<group>"; };
@@ -176,8 +176,8 @@
 			children = (
 				7D9C730F21B70C2200179C06 /* CommonDisplayView.xib */,
 				7D84BD1921D67DE700EE3480 /* CommonDisplayView.swift */,
-				7DDAA68721B474FA00C047E3 /* DocViewTableViewCell.xib */,
-				7DDAA68621B474FA00C047E3 /* DocViewTableViewCell.swift */,
+				7DDAA68721B474FA00C047E3 /* CommonTableViewCell.xib */,
+				7DDAA68621B474FA00C047E3 /* CommonTableViewCell.swift */,
 				7D66945C216FE6610048F4A3 /* SettingsTableViewCell.swift */,
 				7D669457216D743C0048F4A3 /* CustomDatePicker.swift */,
 				7D82E39321D3EA9A0061C47D /* ReminderTableView.swift */,
@@ -267,7 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DDAA68921B474FA00C047E3 /* DocViewTableViewCell.xib in Resources */,
+				7DDAA68921B474FA00C047E3 /* CommonTableViewCell.xib in Resources */,
 				7D669445216A89D50048F4A3 /* LaunchScreen.storyboard in Resources */,
 				7D669442216A89D50048F4A3 /* Assets.xcassets in Resources */,
 				7D87889321DFCCDA0071794B /* 45975.pdf in Resources */,
@@ -300,7 +300,7 @@
 				7DEA725021C0164C0062D49F /* FetchHandler.swift in Sources */,
 				7D84BD1A21D67DE700EE3480 /* CommonDisplayView.swift in Sources */,
 				7D82E39421D3EA9A0061C47D /* ReminderTableView.swift in Sources */,
-				7DDAA68821B474FA00C047E3 /* DocViewTableViewCell.swift in Sources */,
+				7DDAA68821B474FA00C047E3 /* CommonTableViewCell.swift in Sources */,
 				7D669451216A8BF50048F4A3 /* SubCategory.swift in Sources */,
 				7D66945A216EA8000048F4A3 /* SettingsViewContoller.swift in Sources */,
 				7DDD5F64225FDB2D00E3205E /* MailViewController.swift in Sources */,

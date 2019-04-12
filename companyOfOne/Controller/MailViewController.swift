@@ -41,8 +41,8 @@ class MailViewController: UIViewController {
     }
     
     func registerTableViewNibs(){
-        let nib = UINib(nibName: "DocViewTableViewCell", bundle: nil)
-        customView.commonTableView.register(nib, forCellReuseIdentifier: "docViewTableViewCell")
+        let nib = UINib(nibName: "CommonTableViewCell", bundle: nil)
+        customView.commonTableView.register(nib, forCellReuseIdentifier: "commonTableViewCell")
     }
     
     func updateNavBarTitle(){
