@@ -9,8 +9,6 @@
 import UIKit
 
 class CommonDisplayView: UIView
-    //, UITableViewDataSource, UITableViewDelegate
-   // ,UISearchBarDelegate
 {
     
     let kCONTENT_XIB_NAME = "CommonDisplayView"
@@ -31,7 +29,7 @@ class CommonDisplayView: UIView
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
-    var debugMode:Bool = false
+    var debugMode:Bool = true
     
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
@@ -40,7 +38,7 @@ class CommonDisplayView: UIView
             case 0 :
                 if exportMode == .on{
                     if debugMode{
-                        print("0 selected for export")
+                        print("CommonDisplayView exportCountObserverForUIUpdates reports: 0 selected for export\n")
                     }
                 }
                 filterButton.title = "Select All"
@@ -57,7 +55,7 @@ class CommonDisplayView: UIView
             case 1...(ArrayHandler.sharedInstance.completeDocumentArray.count-1):
                 if exportMode == .on{
                     if debugMode{
-                        print("some selected for export")
+                        print("CommonDisplayView exportCountObserverForUIUpdates reports: some selected for export\n")
                     }
                 }
                 filterButton.title = "Select All"
@@ -66,7 +64,7 @@ class CommonDisplayView: UIView
             case ArrayHandler.sharedInstance.completeDocumentArray.count:
                 if exportMode == .on{
                     if debugMode{
-                        print("all selected for export")
+                        print("CommonDisplayView exportCountObserverForUIUpdates reports: all selected for export\n")
                     }
                 }
                 pressedSharedButton.tintColor = nil
@@ -119,17 +117,17 @@ class CommonDisplayView: UIView
             switch selectedMode {
             case .noneSelected:
                 if debugMode{
-                    print("export mode on, none selected :  run the alert function ")
+                    print("Export mode on, none selected :  run the alert function ")
                 }
             case .someSelected:
                 if debugMode{
-                    print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function ")
+                    print("Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected :  run the export function\n")
                 }
                  // TODO: - TO FIX: Why don't these segues work?
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
             case .allSelected:
                 if debugMode{
-                    print("export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function ")
+                    print("Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected:  run the export function\n")
                 }
                 // TODO: - TO FIX: Why don't these segues work?
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
@@ -150,48 +148,9 @@ class CommonDisplayView: UIView
             }
         case .off:
             if debugMode{
-                print("run the date filter function here")
+                print("run the date filter function here\n")
             }
         }
-    }
-    
-    //MARK: - Export Functions
-    
-    func selectAllForExport(){
-        //this sets the model objects isSelectedForExport bool and adds to the exportArray
-        let totalRows = commonTableView.numberOfRows(inSection: 0)
-        for item in ArrayHandler.sharedInstance.completeDocumentArray {
-            if item.isSelectedForExport == false {
-                item.isSelectedForExport = true
-                ArrayHandler.sharedInstance.exportArray.append(item)
-            }
-        }
-        commonTableView.reloadData()
-        //this selects all of the cells in the current display
-        for row in 0..<totalRows {
-            commonTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
-        }
-        //this propery observer updates state and UI
-        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
-    }
-    
-    func deSelectAllForExport(){
-        //this clears the model objects isSelectedForExport bool and removes the exportArray
-        let totalRows = commonTableView.numberOfRows(inSection: 0)
-        for item in ArrayHandler.sharedInstance.completeDocumentArray {
-            item.isSelectedForExport = false
-        }
-        
-        //model updates should happen in the model but ... how?
-        ArrayHandler.sharedInstance.exportArray.removeAll()
-        commonTableView.reloadData()
-        
-        //this deselects all of the cells in the current display
-        for row in 0..<totalRows {
-            commonTableView.deselectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated:false)
-        }
-        ///this propery observer updates state and UI
-        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
     }
 }
 

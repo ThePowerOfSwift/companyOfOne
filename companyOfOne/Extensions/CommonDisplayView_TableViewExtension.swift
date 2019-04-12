@@ -11,6 +11,65 @@ import UIKit
 
 extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     
+    func setupTableViewForPopulation(){
+        commonTableView.allowsMultipleSelection = false
+        //clears the export Array and deselect all items/cells
+        deSelectAllForExport()
+        //makes sure the enums are reset
+        exportMode = .off
+        selectedMode = .noneSelected
+        commonTableView.reloadData()
+    }
+    
+    //MARK: - Export Functions
+    
+    func selectAllForExport(){
+        if debugMode{
+            print("CommonDisplayView_TableViewExtension selectAllForExport function run\n")
+        }
+        let totalRows = commonTableView.numberOfRows(inSection: 0)
+        //for each item in the completeDocumentArray
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
+            //this toggles the model objects isSelectedForExport bool
+            if item.isSelectedForExport == false {
+                item.isSelectedForExport = true
+                //this adds the item to the exportArray
+                ArrayHandler.sharedInstance.exportArray.append(item)
+            }
+        }
+        commonTableView.reloadData()
+        //this changes the UI color of all of the cells in the current display to reflected selected status
+        for row in 0..<totalRows {
+            commonTableView.selectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+        }
+        //Sets the propery observer to exportArray.count which will update the view UI for export workflow
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
+    }
+    
+    func deSelectAllForExport(){
+        if debugMode{
+            print("CommonDisplayView_TableViewExtension deSelectAllForExport function run\n")
+        }
+        let totalRows = commonTableView.numberOfRows(inSection: 0)
+        //for each item in the completeDocumentArray
+        for item in ArrayHandler.sharedInstance.completeDocumentArray {
+            //this sets the model objects isSelectedForExport bool to false
+            item.isSelectedForExport = false
+        }
+        //this clears the exportArray
+        ArrayHandler.sharedInstance.exportArray.removeAll()
+        commonTableView.reloadData()
+        
+        //this changes the UI color of all of the cells in the current display to reflected deselected status
+        for row in 0..<totalRows {
+            commonTableView.deselectRow(at: NSIndexPath(row: row, section: 0) as IndexPath, animated:false)
+        }
+        //Sets the propery observer to exportArray.count which will update the view UI for export workflow
+        exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
+    }
+    
+    //MARK: - TableView Delegate Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ArrayHandler.sharedInstance.completeDocumentArray.count//?? 2
     }
@@ -61,7 +120,7 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
             }
         case .off:
             //performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
-            print("TO DO:Fix the perform segue")
+            print("TO DO:Fix the perform segue from the didSelectRow in the CommonDisplayView_TableViewExtension")
         }
     }
     

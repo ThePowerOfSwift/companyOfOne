@@ -27,7 +27,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
-    var debugMode:Bool = true
+    var debugMode:Bool = false
     
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
@@ -86,7 +86,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     override func viewDidLoad() {
         super.viewDidLoad()
         if debugMode{
-            print("from viewDidLoad:")
+            print("from DocsViewController viewDidLoad:")
         }
         //self.tabBarController?.tabBar.isHidden = false
         registerNibs()
@@ -96,7 +96,7 @@ class DocsViewController: UIViewController, UITabBarControllerDelegate , UITabBa
     
     override func viewWillAppear(_ animated: Bool) {
         if debugMode{
-            print("from viewWillAppear:")
+            print("from DocsViewController viewWillAppear:")
         }
         navigationController!.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
