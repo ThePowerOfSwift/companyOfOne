@@ -33,7 +33,7 @@ class TabBarController: UITabBarController{
 
         tabBar.items?[1].title = "Documents"
 
-        tabBar.items?[2].title = "Snail Mail"
+        tabBar.items?[2].title = "Personal Mail"
 
         tabBar.items?[3].title = "Personal Receipts"
 
