@@ -11,24 +11,20 @@ import UIKit
 class ReceiptsViewController: UIViewController, MySegueDelegate {
     
     
-    func segueToEditViewControllerCalled() {
-        performSegue(withIdentifier: "toEditViewControllerFromReceipts", sender: self)
-    }
-    func segueToPDFViewControllerCalled() {
-        performSegue(withIdentifier: "toPDFViewControllerFromReceiptsExportButton", sender: self)
-    }
+ 
     
     
     //This is the template for the new way of doing multiple view controllers sharing a view.
     
     //MARK: - Constants
     let customView = CommonDisplayView()
-    
+    var createdIdentifierForPDFSegue = String()
+    var createdIdentifierForEditSegue = String()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
+        
         createTotalView()
         registerTableViewNibs()
         updateNavBarTitleAndHiddenStatus()
@@ -40,8 +36,6 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
         updateNavBarTitleAndHiddenStatus()
         confirmAllValues()
     }
-    
-    
     
     func createTotalView(){
         if let bounds = parent?.view.bounds {
@@ -59,7 +53,11 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
     func updateNavBarTitleAndHiddenStatus(){
         navigationController!.isNavigationBarHidden = true
         customView.commonNavBar.topItem?.title = "Personal Receipts"
-        
+        ///this allows the name of the nav to be used to identify the segue, hopefully so the segue code can be reusable
+        if let navTitle = customView.commonNavBar.topItem?.title {
+            createdIdentifierForPDFSegue =  "\(navTitle)toPDFViewController"
+            createdIdentifierForEditSegue =  "\(navTitle)toEditViewController"
+        }
     }
     
     func updateTableView(){
@@ -74,10 +72,21 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
         }
     }
     
-    //MARK: - Segue Functions
+    
+        //MARK: - Segue Functions
+    
+    
+    func segueToEditViewControllerCalled() {
+        performSegue(withIdentifier: "\(createdIdentifierForEditSegue)", sender: self)
+    }
+    func segueToPDFViewControllerCalled() {
+        performSegue(withIdentifier: "\(createdIdentifierForPDFSegue)", sender: self)
+    }
+    
+    //if segue.identifier == "toEditViewControllerFromReceipts" {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toEditViewControllerFromReceipts" {
+        if segue.identifier == "\(createdIdentifierForEditSegue)" {
             if let indexPath = customView.commonTableView.indexPathForSelectedRow {
                 let nextController = segue.destination as! EditViewController
                 nextController.fromDocsViewController = true
@@ -114,10 +123,14 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
             }
             
         }
-        if segue.identifier == "toPDFViewControllerFromReceiptsExportButton" {
+        if segue.identifier == "\(createdIdentifierForPDFSegue)" {
             let nextController = segue.destination as! PDFViewController
             nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
         }
+//        if segue.identifier == "\(self)toPDFViewController" {
+//            let nextController = segue.destination as! PDFViewController
+//            nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
+//        }
     }
 }
 

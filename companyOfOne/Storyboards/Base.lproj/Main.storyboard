@@ -627,8 +627,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
                     <connections>
-                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromReceipts" id="3us-5X-79Z"/>
-                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromReceiptsExportButton" id="JKg-4m-U4h"/>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="Personal ReceiptstoEditViewController" id="3us-5X-79Z"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="Personal ReceiptstoPDFViewController" id="JKg-4m-U4h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gk7-wP-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -705,7 +705,7 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iwy-Ng-PJS"/>
-        <segue reference="C6j-LW-6of"/>
+        <segue reference="JKg-4m-U4h"/>
+        <segue reference="3us-5X-79Z"/>
     </inferredMetricsTieBreakers>
 </document>
