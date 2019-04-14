@@ -190,6 +190,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         }
         currentImage = image
         performSegue(withIdentifier: "toEditViewController", sender: nil)
+        //self.delegate?.segueCalled()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

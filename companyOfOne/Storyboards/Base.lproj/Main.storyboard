@@ -450,7 +450,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1735" y="-37"/>
+            <point key="canvasLocation" x="2928" y="730"/>
         </scene>
         <!--To Home-->
         <scene sceneID="5fc-On-7ay">
@@ -613,7 +613,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1736" y="-734"/>
+            <point key="canvasLocation" x="2928" y="-254"/>
         </scene>
         <!--Receipts View Controller-->
         <scene sceneID="ndL-0x-Is3">
@@ -628,11 +628,12 @@
                     <navigationItem key="navigationItem" id="UOi-k1-0ul"/>
                     <connections>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromReceipts" id="3us-5X-79Z"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromReceiptsExportButton" id="JKg-4m-U4h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gk7-wP-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49.275362318840585" y="1069.5652173913045"/>
+            <point key="canvasLocation" x="-54" y="1070"/>
         </scene>
         <!--Mail-->
         <scene sceneID="NTL-Gr-XW7">
@@ -666,6 +667,7 @@
                     <navigationItem key="navigationItem" id="dGk-oz-tcR"/>
                     <connections>
                         <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromMail" id="C6j-LW-6of"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromMailExportButton" id="iwy-Ng-PJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rei-FS-NXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -703,6 +705,7 @@
         <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3us-5X-79Z"/>
+        <segue reference="iwy-Ng-PJS"/>
+        <segue reference="C6j-LW-6of"/>
     </inferredMetricsTieBreakers>
 </document>

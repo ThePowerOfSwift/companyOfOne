@@ -121,6 +121,7 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
             }
         case .off:
             //performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
+            self.delegate?.segueToEditViewControllerCalled()
             print("TO DO:Fix the perform segue from the didSelectRow in the CommonDisplayView_TableViewExtension\n")
         }
     }

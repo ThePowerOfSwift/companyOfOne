@@ -31,6 +31,8 @@ class CommonDisplayView: UIView
     var selectedTabIndex:Int = 0
     var debugMode:Bool = true
     
+    weak var delegate: MySegueDelegate?
+    
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
@@ -126,6 +128,7 @@ class CommonDisplayView: UIView
                 }
                 print("TO DO: Run the export to PDF function here\n")
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
+                self.delegate?.segueToPDFViewControllerCalled()
             case .allSelected:
                 if debugMode{
                     print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
@@ -133,6 +136,7 @@ class CommonDisplayView: UIView
                 print("TO DO: Run the export to PDF function here\n")
                 // TODO: - TO FIX: Why don't these segues work?
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
+                self.delegate?.segueToPDFViewControllerCalled()
             }
         }
     }

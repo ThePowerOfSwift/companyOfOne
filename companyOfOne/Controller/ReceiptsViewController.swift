@@ -8,7 +8,16 @@
 
 import UIKit
 
-class ReceiptsViewController: UIViewController {
+class ReceiptsViewController: UIViewController, MySegueDelegate {
+    
+    
+    func segueToEditViewControllerCalled() {
+        performSegue(withIdentifier: "toEditViewControllerFromReceipts", sender: self)
+    }
+    func segueToPDFViewControllerCalled() {
+        performSegue(withIdentifier: "toPDFViewControllerFromReceiptsExportButton", sender: self)
+    }
+    
     
     //This is the template for the new way of doing multiple view controllers sharing a view.
     
@@ -22,11 +31,13 @@ class ReceiptsViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         createTotalView()
         registerTableViewNibs()
-        updateNavBarTitle()
+        updateNavBarTitleAndHiddenStatus()
+        customView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         updateTableView()
+        updateNavBarTitleAndHiddenStatus()
         confirmAllValues()
     }
     
@@ -45,8 +56,10 @@ class ReceiptsViewController: UIViewController {
         customView.commonTableView.register(nib, forCellReuseIdentifier: "commonTableViewCell")
     }
     
-    func updateNavBarTitle(){
+    func updateNavBarTitleAndHiddenStatus(){
+        navigationController!.isNavigationBarHidden = true
         customView.commonNavBar.topItem?.title = "Personal Receipts"
+        
     }
     
     func updateTableView(){
@@ -58,6 +71,52 @@ class ReceiptsViewController: UIViewController {
             print("\(self) viewWillAppear confirming export mode is \(customView.exportMode).\n")
             print("\(self) viewWillAppear confirming selected mode is \(customView.selectedMode).\n")
             print("\(self) viewWillAppear confirming that \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
+        }
+    }
+    
+    //MARK: - Segue Functions
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toEditViewControllerFromReceipts" {
+            if let indexPath = customView.commonTableView.indexPathForSelectedRow {
+                let nextController = segue.destination as! EditViewController
+                nextController.fromDocsViewController = true
+                nextController.currentTableViewIndexPathRow = indexPath.row
+                if let titleTag = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag {
+                    nextController.currentTitleTag = titleTag
+                }
+                if let categoryName = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name {
+                    nextController.categorySubCategoryLabels[0] = categoryName
+                }
+                if let subCategoryName = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name {
+                    nextController.categorySubCategoryLabels[1] = subCategoryName
+                }
+                if let documentDate = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate{
+                    nextController.currentDate = documentDate
+                }
+                if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
+                    if let image = UIImage(data: imageData) {
+                        nextController.currentImage = image
+                    }
+                }
+                if let occurrence = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toOccurrence{
+                    if let title = occurrence.title {
+                        nextController.occurrenceLabels[0] = title
+                    }
+                    if let formattedOccurrenceDate = occurrence.occurrenceDate?.format() {
+                        nextController.occurrenceLabels[1] = formattedOccurrenceDate
+                    }
+                }
+                //                if let occurrenceDate = ArrayHandler.sharedInstance.documentArray[indexPath.row].toOccurrence.occurrenceDate{
+                //                    let formattedOccurrenceDate = occurrenceDate?.format()
+                //                    nextController.occurrenceLabels.insert(formattedOccurrenceDate, at: 1)
+                //                }
+            }
+            
+        }
+        if segue.identifier == "toPDFViewControllerFromReceiptsExportButton" {
+            let nextController = segue.destination as! PDFViewController
+            nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
         }
     }
 }
