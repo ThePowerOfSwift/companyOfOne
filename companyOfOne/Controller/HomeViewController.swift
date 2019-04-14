@@ -41,7 +41,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         imagePicker.delegate = self
         
         //temp population data!!! This will eventually be the list of occurrence notifications
-        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts") //temp population data!!! This
+        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts") 
      
         
     }

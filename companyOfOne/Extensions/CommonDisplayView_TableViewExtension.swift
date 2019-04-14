@@ -120,9 +120,7 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
                 exportCountObserverForUIUpdates = ArrayHandler.sharedInstance.exportArray.count
             }
         case .off:
-            //performSegue(withIdentifier: "toEditViewControllerFromDocs", sender: self)
             self.delegate?.segueToEditViewControllerCalled()
-            print("TO DO:Fix the perform segue from the didSelectRow in the CommonDisplayView_TableViewExtension\n")
         }
     }
     

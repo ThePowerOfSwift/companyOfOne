@@ -29,7 +29,7 @@ class CommonDisplayView: UIView
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
     var selectedTabIndex:Int = 0
-    var debugMode:Bool = true
+    var debugMode:Bool = false
     
     weak var delegate: MySegueDelegate?
     

@@ -450,7 +450,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4vZ-TH-gGd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928" y="730"/>
+            <point key="canvasLocation" x="3287" y="721"/>
         </scene>
         <!--To Home-->
         <scene sceneID="5fc-On-7ay">
@@ -480,78 +480,14 @@
                     <view key="view" contentMode="scaleToFill" id="XXO-Yw-SZi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZoW-2d-JNY">
-                                <rect key="frame" x="0.0" y="64" width="414" height="44"/>
-                                <items>
-                                    <navigationItem id="956-r8-QJV">
-                                        <barButtonItem key="leftBarButtonItem" image="filter" landscapeImage="filter" id="5c9-kA-xgB">
-                                            <connections>
-                                                <action selector="filterButtonPressed:" destination="Lgp-y5-6ek" id="qqK-Sw-DMn"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="upload" id="TI9-Wc-7hy">
-                                            <connections>
-                                                <action selector="shareButton:" destination="Lgp-y5-6ek" id="3bl-AC-s76"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <searchBar contentMode="redraw" placeholder="Type your seach here ..." translatesAutoresizingMaskIntoConstraints="NO" id="dYL-YX-39P">
-                                <rect key="frame" x="0.0" y="108" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Lgp-y5-6ek" id="Hvn-aT-kie"/>
-                                </connections>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="56" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOG-ec-3jD">
-                                <rect key="frame" x="0.0" y="164" width="414" height="467"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="Lgp-y5-6ek" id="425-VL-tVD"/>
-                                    <outlet property="delegate" destination="Lgp-y5-6ek" id="WHQ-Tb-Gsc"/>
-                                </connections>
-                            </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Potential calculation area" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKU-1z-yCh">
-                                <rect key="frame" x="0.0" y="631" width="414" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="aWt-sw-jgI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="ZoW-2d-JNY" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="1Zx-zh-n0T"/>
-                            <constraint firstItem="xkd-cG-3W5" firstAttribute="trailing" secondItem="HOG-ec-3jD" secondAttribute="trailing" id="7Nf-5s-IfF"/>
-                            <constraint firstItem="dYL-YX-39P" firstAttribute="top" secondItem="ZoW-2d-JNY" secondAttribute="bottom" id="ETA-EV-Hxh"/>
-                            <constraint firstItem="ZoW-2d-JNY" firstAttribute="trailing" secondItem="xkd-cG-3W5" secondAttribute="trailing" id="KSl-hK-bjT"/>
-                            <constraint firstItem="dYL-YX-39P" firstAttribute="trailing" secondItem="xkd-cG-3W5" secondAttribute="trailing" id="Qbx-as-hjN"/>
-                            <constraint firstItem="HOG-ec-3jD" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="RWO-IQ-8rB"/>
-                            <constraint firstItem="dYL-YX-39P" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="gVF-br-kby"/>
-                            <constraint firstItem="SKU-1z-yCh" firstAttribute="top" secondItem="HOG-ec-3jD" secondAttribute="bottom" id="hjc-oI-ZdG"/>
-                            <constraint firstItem="HOG-ec-3jD" firstAttribute="top" secondItem="dYL-YX-39P" secondAttribute="bottom" id="osl-Dc-bck"/>
-                            <constraint firstItem="SKU-1z-yCh" firstAttribute="leading" secondItem="xkd-cG-3W5" secondAttribute="leading" id="piq-7G-vym"/>
-                            <constraint firstItem="ZoW-2d-JNY" firstAttribute="top" secondItem="xkd-cG-3W5" secondAttribute="top" id="uLn-d2-QbL"/>
-                            <constraint firstItem="SKU-1z-yCh" firstAttribute="trailing" secondItem="xkd-cG-3W5" secondAttribute="trailing" id="uSq-kh-TNX"/>
-                            <constraint firstItem="SKU-1z-yCh" firstAttribute="bottom" secondItem="xkd-cG-3W5" secondAttribute="bottom" id="wMF-1v-RDh"/>
-                            <constraint firstItem="SKU-1z-yCh" firstAttribute="bottom" secondItem="xkd-cG-3W5" secondAttribute="bottom" id="xkH-Vm-Fph"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xkd-cG-3W5"/>
                     </view>
                     <navigationItem key="navigationItem" id="5p9-eW-jDR"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="docTableView" destination="HOG-ec-3jD" id="16L-wM-qzw"/>
-                        <outlet property="documentSearchBar" destination="dYL-YX-39P" id="fqD-21-ziO"/>
-                        <outlet property="filterButton" destination="5c9-kA-xgB" id="yZ7-bT-yoR"/>
-                        <outlet property="navBar" destination="ZoW-2d-JNY" id="heM-dI-2Pa"/>
-                        <outlet property="pressedShareButton" destination="TI9-Wc-7hy" id="USz-jp-f3L"/>
-                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromDocs" id="rdm-6b-dxS"/>
-                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromDocsExportButton" id="SyU-3f-8WO"/>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="DocumentstoEditViewController" id="rdm-6b-dxS"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="DocumentstoPDFViewController" id="SyU-3f-8WO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWO-Wj-pbk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,6 +516,7 @@
         <!--View Controller-->
         <scene sceneID="vsN-BF-j41">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="3EQ-bs-0kq" customClass="PDFViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2S2-zv-r7W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -611,9 +548,8 @@
                         <viewLayoutGuide key="safeArea" id="DM7-Pd-j0b"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928" y="-254"/>
+            <point key="canvasLocation" x="3287" y="-391"/>
         </scene>
         <!--Receipts View Controller-->
         <scene sceneID="ndL-0x-Is3">
@@ -666,8 +602,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="dGk-oz-tcR"/>
                     <connections>
-                        <segue destination="HVc-xq-BOx" kind="show" identifier="toEditViewControllerFromMail" id="C6j-LW-6of"/>
-                        <segue destination="3EQ-bs-0kq" kind="show" identifier="toPDFViewControllerFromMailExportButton" id="iwy-Ng-PJS"/>
+                        <segue destination="HVc-xq-BOx" kind="show" identifier="Personal MailtoEditViewController" id="C6j-LW-6of"/>
+                        <segue destination="3EQ-bs-0kq" kind="show" identifier="Personal MailtoPDFViewController" id="iwy-Ng-PJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rei-FS-NXZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -696,16 +632,14 @@
     </scenes>
     <resources>
         <image name="document" width="30" height="30"/>
-        <image name="filter" width="30" height="30"/>
         <image name="home" width="30" height="30"/>
         <image name="mail" width="30" height="30"/>
         <image name="menu" width="30" height="30"/>
         <image name="plus" width="30" height="30"/>
         <image name="receipts" width="30" height="30"/>
-        <image name="upload" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JKg-4m-U4h"/>
-        <segue reference="3us-5X-79Z"/>
+        <segue reference="SyU-3f-8WO"/>
+        <segue reference="rdm-6b-dxS"/>
     </inferredMetricsTieBreakers>
 </document>

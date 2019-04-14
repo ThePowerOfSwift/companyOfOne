@@ -9,22 +9,14 @@
 import UIKit
 
 class ReceiptsViewController: UIViewController, MySegueDelegate {
-    
-    
- 
-    
-    
-    //This is the template for the new way of doing multiple view controllers sharing a view.
-    
+
     //MARK: - Constants
     let customView = CommonDisplayView()
     var createdIdentifierForPDFSegue = String()
     var createdIdentifierForEditSegue = String()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         createTotalView()
         registerTableViewNibs()
         updateNavBarTitleAndHiddenStatus()
@@ -52,6 +44,8 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
     
     func updateNavBarTitleAndHiddenStatus(){
         navigationController!.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = false
+        //MARK: - This code is specific to the viewController and must be changed on reuse
         customView.commonNavBar.topItem?.title = "Personal Receipts"
         ///this allows the name of the nav to be used to identify the segue, hopefully so the segue code can be reusable
         if let navTitle = customView.commonNavBar.topItem?.title {
@@ -72,9 +66,7 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
         }
     }
     
-    
         //MARK: - Segue Functions
-    
     
     func segueToEditViewControllerCalled() {
         performSegue(withIdentifier: "\(createdIdentifierForEditSegue)", sender: self)
@@ -83,8 +75,8 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
         performSegue(withIdentifier: "\(createdIdentifierForPDFSegue)", sender: self)
     }
     
-    //if segue.identifier == "toEditViewControllerFromReceipts" {
     
+    //TODO: - TO FIX: Reuseable segue code - https://www.natashatherobot.com/protocol-oriented-segue-identifiers-swift/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "\(createdIdentifierForEditSegue)" {
             if let indexPath = customView.commonTableView.indexPathForSelectedRow {
@@ -127,10 +119,6 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
             let nextController = segue.destination as! PDFViewController
             nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
         }
-//        if segue.identifier == "\(self)toPDFViewController" {
-//            let nextController = segue.destination as! PDFViewController
-//            nextController.documentsToDisplay = ArrayHandler.sharedInstance.exportArray
-//        }
     }
 }
 
