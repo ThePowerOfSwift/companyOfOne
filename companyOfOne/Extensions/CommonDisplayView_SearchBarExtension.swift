@@ -9,40 +9,70 @@
 import Foundation
 import UIKit
 
+// so first fetch scoped documents
+// then fetch searchTerm filtered documents from that array
+
 extension CommonDisplayView: UISearchBarDelegate {
-//    
+   
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         commonSearchBar.showsCancelButton = true
         commonSearchBar.showsScopeBar = true
-        commonSearchBar.scopeButtonTitles = ["Title/Tag", "Category", "Subcategory"]
+        commonSearchBar.scopeButtonTitles = ["Category", "Subcategory", "Title/Tag"]
         commonSearchBar.selectedScopeButtonIndex = 0
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        FetchHandler.fetchFilteredDocuments(searchTerm: searchText)
-        //FetchHandler.currentFilter = searchText
-        // document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
+        if debugMode{
+            print("\(self) textDidChange\n")
+        }
+        
+        //This passes the info to the FetchHandler
+        FetchHandler.fetchSearchScope(searchScope: commonSearchBar.selectedScopeButtonIndex)
+        FetchHandler.fetchSearchText(searchText: searchText)
+        
+        
+        //let searchScope = commonSearchBar.selectedScopeButtonIndex
+        FetchHandler.fetchFilteredDocuments()
+
         commonTableView.reloadData()
-        //print("current filter in textDidChange: \(FetchHandler.currentFilter)")
+
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //print("Beginning complete search from SearchButtonClicked")
+        if debugMode{
+            print("\(self) seachBarSearchButtonClicked\n")
+        }
         completeSearch()
-        //print("Ending complete search from SearchButtonClicked")
+
         
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        if debugMode{
+            print("\(self) searchBarShouldEndEditing\n")
+        }
         //resetSearchBar()
         return true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        //print("Beginning reset search from CancelButtonClicked")
+        if debugMode{
+            print("\(self) searchBarCancelButtonClicked\n")
+        }
         resetSearch()
-        //print("Ending reset search from CancelButtonClicked")
     }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        FetchHandler.fetchSearchScope(searchScope: selectedScope)
+        FetchHandler.fetchFilteredDocuments()
+    }
+    
+    func collectSearchText(searchText:String) {
+        
+    }
+    
+    
+    
     
     //MARK: - Search Bar Custom Functions
     
@@ -60,4 +90,9 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonSearchBar.endEditing(true)
         commonTableView.reloadData()
     }
-}
+    }
+
+// Here is how I would like the search bar to work:
+// for each scope tab, you can enter in a seach term and all three would be used
+// for Mail and Receipts tabs, in the seach bar with the category scope, it would be autopopulated and greyed out.
+//

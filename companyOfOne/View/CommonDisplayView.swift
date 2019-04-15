@@ -25,11 +25,19 @@ class CommonDisplayView: UIView
         case allSelected
     }
     
+    enum SearchBarScope {
+        case isTitleTag
+        case isCategory
+        case isSubCategory
+    }
+    
     //MARK: - Instance Variables
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
+    var searchBarScope:SearchBarScope = .isCategory
     var selectedTabIndex:Int = 0
     var debugMode:Bool = false
+    
     
     weak var delegate: MySegueDelegate?
     

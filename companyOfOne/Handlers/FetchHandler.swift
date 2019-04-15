@@ -12,16 +12,51 @@ import CoreData
 class FetchHandler: NSObject {
     //TODO: - I think I can use class functions instead of singleton for this, yes works
     override private init() {}
+    
+    
     //Default filter
     static var currentFilter:String = ""
-    static var debugMode:Bool = false
+    static var currentScope:Int = 0
+    static var debugMode:Bool = true
     
     
-    //This is the function that populates the .completeDocumentArray per viewController (tab) and 
-    class func fetchFilteredDocuments(searchTerm:String){
+    
+     class func fetchSearchText(searchText:String){
+        currentFilter = searchText
+    }
+    class func fetchSearchScope(searchScope:Int){
+        currentScope = searchScope
+    }
         
-        //move the searchTerm to a class variable so it can me used in any class function
-        currentFilter = searchTerm
+    //This is the function that populates the .completeDocumentArray per viewController (tab) and 
+   // class func fetchFilteredDocuments(searchTerm:String, searchScope:Int){
+        class func fetchFilteredDocuments(){
+        
+        //move the searchScope and searchTerm to class variables so it can be used in any class function
+//        currentScope = searchScope
+//        currentFilter = searchTerm
+        
+        switch currentScope{
+        case 0:
+            if debugMode{
+                print("\(self) : search scope is Category")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+            }
+        case 1:
+            if debugMode{
+                print("\(self) : search scope is SubCategory")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+            }
+            
+        case 2:
+            if debugMode{
+                print("\(self) : search scope is Title/Tag")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+            }
+        default:
+            print("Default for scope")
+        }
+      
         
         //set up the context of the coreData request for a Document sorted by documentDate
         let context = AppDelegate.viewContext
@@ -29,9 +64,7 @@ class FetchHandler: NSObject {
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
         
-        if debugMode{
-            print("current filter in fetchHandler : \(FetchHandler.currentFilter)")
-        }
+       
         
         //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
         if currentFilter == "" {
@@ -57,10 +90,10 @@ class FetchHandler: NSObject {
             print("Could not save deletion. \(error), \(error.userInfo)")
         }
         //this updates the local array after deletion of a document
-        fetchFilteredDocuments(searchTerm: currentFilter)
+        fetchFilteredDocuments()
         if debugMode{
-            print("current filter in fetchHandler for refresh after delete of document: \(FetchHandler.currentFilter)")
+            print("\(self) : search scope is \(currentScope)")
+            print("\(self) : search filter is \(currentFilter)")
         }
-        
     }
 }

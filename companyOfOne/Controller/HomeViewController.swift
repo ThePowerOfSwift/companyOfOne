@@ -41,12 +41,16 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         imagePicker.delegate = self
         
         //temp population data!!! This will eventually be the list of occurrence notifications
-        FetchHandler.fetchFilteredDocuments(searchTerm: "Receipts") 
+        FetchHandler.fetchSearchText(searchText: "Receipts")
+        FetchHandler.fetchFilteredDocuments()
      
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        FetchHandler.fetchSearchText(searchText: "Receipts")
+        FetchHandler.fetchFilteredDocuments()
         
         if let tabItems = tabBarController?.tabBar.items {
             // In this case we want to modify the badge number of the third tab:
