@@ -1,5 +1,5 @@
 //
-//  TableViewExtension_DocsViewController.swift
+//  TableViewExtension_CommonDisplayView.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-29.
@@ -25,8 +25,8 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     //MARK: - Export Functions
     
     func selectAllForExport(){
-        if debugMode{
-            print("CommonDisplayView_TableViewExtension selectAllForExport function run\n")
+        if exportDebugMode{
+            print("CommonDisplayView_TableViewExtension reports: selectAllForExport function run with the following results:\n")
         }
         let totalRows = commonTableView.numberOfRows(inSection: 0)
         //for each item in the completeDocumentArray
@@ -48,8 +48,8 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     }
     
     func deSelectAllForExport(){
-        if debugMode{
-            print("CommonDisplayView_TableViewExtension deSelectAllForExport function run\n")
+        if exportDebugMode{
+            print("CommonDisplayView_TableViewExtension reports: deSelectAllForExport function run with the following results:\n")
         }
         let totalRows = commonTableView.numberOfRows(inSection: 0)
         //for each item in the completeDocumentArray

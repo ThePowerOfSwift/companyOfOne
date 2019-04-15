@@ -15,9 +15,9 @@ class FetchHandler: NSObject {
     
     
     //Default filter
-    static var currentFilter:String = ""
+    static var currentFilter:String = "All But Mail And Receipts"
     static var currentScope:Int = 0
-    static var debugMode:Bool = true
+    static var fetchHandlerDebugMode:Bool = true
     
     
     
@@ -38,20 +38,20 @@ class FetchHandler: NSObject {
         
         switch currentScope{
         case 0:
-            if debugMode{
+            if fetchHandlerDebugMode{
                 print("\(self) : search scope is Category")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
         case 1:
-            if debugMode{
+            if fetchHandlerDebugMode{
                 print("\(self) : search scope is SubCategory")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
             
         case 2:
-            if debugMode{
+            if fetchHandlerDebugMode{
                 print("\(self) : search scope is Title/Tag")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
         default:
             print("Default for scope")
@@ -67,7 +67,7 @@ class FetchHandler: NSObject {
        
         
         //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
-        if currentFilter == "" {
+        if currentFilter == "All But Mail And Receipts" {
             request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
             
             //Mail and Receipts are fetched using the actual search term against category names
@@ -91,9 +91,9 @@ class FetchHandler: NSObject {
         }
         //this updates the local array after deletion of a document
         fetchFilteredDocuments()
-        if debugMode{
+        if fetchHandlerDebugMode{
             print("\(self) : search scope is \(currentScope)")
-            print("\(self) : search filter is \(currentFilter)")
+            print("\(self) : search filter is \(currentFilter)\n")
         }
     }
 }

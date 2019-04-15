@@ -1,5 +1,5 @@
 //
-//  SearchBarExtenstion_DocsViewController.swift
+//  SearchBarExtenstion_CommonDisplayView.swift
 //  companyOfOne
 //
 //  Created by Jamie on 2018-12-29.
@@ -22,7 +22,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if debugMode{
+        if searchBarDebugMode{
             print("\(self) textDidChange\n")
         }
         
@@ -39,7 +39,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if debugMode{
+        if searchBarDebugMode{
             print("\(self) seachBarSearchButtonClicked\n")
         }
         completeSearch()
@@ -48,7 +48,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        if debugMode{
+        if searchBarDebugMode{
             print("\(self) searchBarShouldEndEditing\n")
         }
         //resetSearchBar()
@@ -56,7 +56,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        if debugMode{
+        if searchBarDebugMode{
             print("\(self) searchBarCancelButtonClicked\n")
         }
         resetSearch()

@@ -36,8 +36,9 @@ class CommonDisplayView: UIView
     var selectedMode:SelectedMode = .noneSelected
     var searchBarScope:SearchBarScope = .isCategory
     var selectedTabIndex:Int = 0
-    var debugMode:Bool = false
-    
+    var exportDebugMode:Bool = false
+    var tableViewDebugMode:Bool = false
+    var searchBarDebugMode:Bool = true
     
     weak var delegate: MySegueDelegate?
     
@@ -47,8 +48,8 @@ class CommonDisplayView: UIView
             switch exportCountObserverForUIUpdates {
             case 0 :
                 if exportMode == .on{
-                    if debugMode{
-                        print("CommonDisplayView exportCountObserverForUIUpdates reports: 0 selected for export\n")
+                    if exportDebugMode{
+                        print("CommonDisplayView exportCountObserverForUIUpdates (property observer) reports: 0 selected for export\n")
                     }
                 }
                 filterButton.title = "Select All"
@@ -64,7 +65,7 @@ class CommonDisplayView: UIView
             // TODO: - TO FIX: What happens when there is only one items --> Thread 1: Fatal error: Can't form Range with upperBound < lowerBound
             case 1...(ArrayHandler.sharedInstance.completeDocumentArray.count-1):
                 if exportMode == .on{
-                    if debugMode{
+                    if exportDebugMode{
                         print("CommonDisplayView exportCountObserverForUIUpdates reports: some selected for export\n")
                     }
                 }
@@ -73,7 +74,7 @@ class CommonDisplayView: UIView
                 selectedMode = .someSelected
             case ArrayHandler.sharedInstance.completeDocumentArray.count:
                 if exportMode == .on{
-                    if debugMode{
+                    if exportDebugMode{
                         print("CommonDisplayView exportCountObserverForUIUpdates reports: all selected for export\n")
                     }
                 }
@@ -126,19 +127,19 @@ class CommonDisplayView: UIView
         case .on:
             switch selectedMode {
             case .noneSelected:
-                if debugMode{
+                if exportDebugMode{
                     print("CommonDisplayView Share button pressed, Export mode on, none selected.\n")
                 }
                 print("TO DO: Run the alert function\n")
             case .someSelected:
-                if debugMode{
+                if exportDebugMode{
                     print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
                 }
                 print("TO DO: Run the export to PDF function here\n")
                 //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
                 self.delegate?.segueToPDFViewControllerCalled()
             case .allSelected:
-                if debugMode{
+                if exportDebugMode{
                     print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
                 }
                 print("TO DO: Run the export to PDF function here\n")
@@ -161,7 +162,7 @@ class CommonDisplayView: UIView
                 deSelectAllForExport()
             }
         case .off:
-            if debugMode{
+            if exportDebugMode{
                 print("CommonDisplayView Filter Button Pressed, export mode off\n")
             }
             print("TO DO: Run the date filter function here\n")

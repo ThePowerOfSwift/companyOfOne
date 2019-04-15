@@ -59,10 +59,10 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
     }
     
     func confirmAllValues(){
-        if customView.debugMode{
-            print("\(self) viewWillAppear confirming export mode is \(customView.exportMode).\n")
-            print("\(self) viewWillAppear confirming selected mode is \(customView.selectedMode).\n")
-            print("\(self) viewWillAppear confirming that \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
+        if customView.exportDebugMode{
+            print("\(self) viewWillAppear (function) reports: export mode is \(customView.exportMode).")
+            print("\(self) viewWillAppear (function) reports: selected mode is \(customView.selectedMode).")
+            print("\(self) viewWillAppear (function) reports: \(customView.exportCountObserverForUIUpdates) documents are selected for export\n")
         }
     }
     
