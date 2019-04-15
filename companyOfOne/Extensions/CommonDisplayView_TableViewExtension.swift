@@ -77,43 +77,25 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commonTableViewCell")! as! CommonTableViewCell
+        if tableViewDebugMode{
+            print("CommonDisplayView_TableViewExtension reports: ArrayHandler.sharedInstance.completeDocumentArray has \(ArrayHandler.sharedInstance.completeDocumentArray.count) objects in it")
+        }
+        cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
+        if cell.isSelectedForExport{
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        } else {
+            cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        }
         
-        
-//        if ArrayHandler.sharedInstance.completeDocumentArray.count == 0{
-//            if tableViewDebugMode{
-//                print("CommonDisplayView_TableViewExtension reports: ArrayHandler.sharedInstance.completeDocumentArray is empty")
-//            }
-//            cell.titleTagLabel.text = "No Results Found"
-//            //            cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
-//            //            cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
-//            //            cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
-//            //            //cell.occurenceLabel.text = document?.occurrence?
-//            //            if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
-//            //                cell.docImageView.image = UIImage(data: imageData)
-//            //}
-//            return cell
-//
-//        }else{
-            if tableViewDebugMode{
-                print("CommonDisplayView_TableViewExtension reports: ArrayHandler.sharedInstance.completeDocumentArray has \(ArrayHandler.sharedInstance.completeDocumentArray.count) objects in it")
-            }
-            cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
-            if cell.isSelectedForExport{
-                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-            } else {
-                cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-            }
-            
-            cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
-            cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
-            cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
-            cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
-            //cell.occurenceLabel.text = document?.occurrence?
-            if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
-                cell.docImageView.image = UIImage(data: imageData)
-            }
-            return cell
-       // }
+        cell.titleTagLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].titleTag
+        cell.categoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toCategory?.name
+        cell.subCategoryLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].toSubCategory?.name
+        cell.dateLabel.text = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].documentDate?.format()
+        //cell.occurenceLabel.text = document?.occurrence?
+        if let imageData = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].pictureData {
+            cell.docImageView.image = UIImage(data: imageData)
+        }
+        return cell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

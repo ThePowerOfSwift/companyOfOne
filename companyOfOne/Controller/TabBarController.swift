@@ -35,12 +35,12 @@ class TabBarController: UITabBarController{
     
     //MARK: - This is what populates the tableView in each tab
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-       
+        
         if let title = item.title{
             switch title {
             case "Home":
                 if debugMode{
-                   print("Title in tab bar for didSelect tabBar item:\(title)")
+                    print("Title in tab bar for didSelect tabBar item:\(title)")
                 }
             case "Documents":
                 if debugMode{
