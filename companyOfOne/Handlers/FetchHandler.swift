@@ -21,42 +21,16 @@ class FetchHandler: NSObject {
     
     
     
-     class func fetchSearchText(searchText:String){
+    class func fetchSearchText(searchText:String){
         currentFilter = searchText
     }
     class func fetchSearchScope(searchScope:Int){
         currentScope = searchScope
     }
         
-    //This is the function that populates the .completeDocumentArray per viewController (tab) and 
-   // class func fetchFilteredDocuments(searchTerm:String, searchScope:Int){
-        class func fetchFilteredDocuments(){
-        
-        //move the searchScope and searchTerm to class variables so it can be used in any class function
-//        currentScope = searchScope
-//        currentFilter = searchTerm
-        
-        switch currentScope{
-        case 0:
-            if fetchHandlerDebugMode{
-                print("\(self) : search scope is Category")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
-            }
-        case 1:
-            if fetchHandlerDebugMode{
-                print("\(self) : search scope is SubCategory")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
-            }
-            
-        case 2:
-            if fetchHandlerDebugMode{
-                print("\(self) : search scope is Title/Tag")
-                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
-            }
-        default:
-            print("Default for scope")
-        }
-      
+    //This is the function that populates the .completeDocumentArray per viewController (tab)
+  
+    class func fetchFilteredDocuments(){
         
         //set up the context of the coreData request for a Document sorted by documentDate
         let context = AppDelegate.viewContext
@@ -64,21 +38,61 @@ class FetchHandler: NSObject {
             NSFetchRequest<NSManagedObject>(entityName: "Document")
         request.sortDescriptors = [NSSortDescriptor(key: "documentDate", ascending: true)]
         
+        
+        //break up the requests based on currentScope
+        switch currentScope{
+        case 0:  //Category
+        
+            if fetchHandlerDebugMode{
+                print("\(self) : search scope is Category")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
+            }
+            if currentFilter == "All But Mail And Receipts" {
+                            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
+                
+                            //Mail and Receipts are fetched using the actual search term against category names
+                        }else{
+                            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+                        }
+            ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+            
+        case 1: //SubCategory
+            if fetchHandlerDebugMode{
+                print("\(self) : search scope is SubCategory")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
+            }
+            request.predicate = NSPredicate(format: "toSubCategory.name == %@", currentFilter)
+            ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+
+        case 2: //Title/Tag
+            if fetchHandlerDebugMode{
+                print("\(self) : search scope is Title/Tag")
+                print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
+            }
+            request.predicate = NSPredicate(format: "titleTag == %@", currentFilter)
+            ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+        default:
+            print("Default for scope")
+        }
+      
+        
        
         
-        //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
-        if currentFilter == "All But Mail And Receipts" {
-            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
-            
-            //Mail and Receipts are fetched using the actual search term against category names
-        }else{
-            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
-        }
-        //whatever is fetched is added to the singleton arrays
-        ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+       
         
-        //I think this will be for documents created using the occurrence system
-        ArrayHandler.sharedInstance.incompleteDocumentArray = try! context.fetch(request) as! [Document]
+//        //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
+//        if currentFilter == "All But Mail And Receipts" {
+//            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
+//            
+//            //Mail and Receipts are fetched using the actual search term against category names
+//        }else{
+//            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+//        }
+        //whatever is fetched is added to the singleton arrays
+//        ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+//        
+//        //I think this will be for documents created using the occurrence system
+//        ArrayHandler.sharedInstance.incompleteDocumentArray = try! context.fetch(request) as! [Document]
     }
     
     class func deleteDocumentAndFetchFilteredDocuments(document: Document){

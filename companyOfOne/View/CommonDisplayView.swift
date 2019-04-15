@@ -37,8 +37,8 @@ class CommonDisplayView: UIView
     var searchBarScope:SearchBarScope = .isCategory
     var selectedTabIndex:Int = 0
     var exportDebugMode:Bool = false
-    var tableViewDebugMode:Bool = false
-    var searchBarDebugMode:Bool = true
+    var tableViewDebugMode:Bool = true
+    var searchBarDebugMode:Bool = false
     
     weak var delegate: MySegueDelegate?
     

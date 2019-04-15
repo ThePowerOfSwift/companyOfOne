@@ -29,9 +29,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         //This passes the info to the FetchHandler
         FetchHandler.fetchSearchScope(searchScope: commonSearchBar.selectedScopeButtonIndex)
         FetchHandler.fetchSearchText(searchText: searchText)
-        
-        
-        //let searchScope = commonSearchBar.selectedScopeButtonIndex
+
         FetchHandler.fetchFilteredDocuments()
 
         commonTableView.reloadData()
@@ -65,6 +63,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         FetchHandler.fetchSearchScope(searchScope: selectedScope)
         FetchHandler.fetchFilteredDocuments()
+        commonTableView.reloadData()
     }
     
     func collectSearchText(searchText:String) {
