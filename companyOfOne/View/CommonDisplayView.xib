@@ -43,7 +43,7 @@
                 </navigationBar>
                 <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pOX-Qu-FG3">
                     <rect key="frame" x="0.0" y="64" width="375" height="56"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="a6Y-8r-O1V"/>
                     </connections>

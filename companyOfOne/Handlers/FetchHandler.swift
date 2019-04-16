@@ -54,7 +54,7 @@ class FetchHandler: NSObject {
                 
                 //Mail and Receipts are fetched using the actual search term against category names
             }else{
-                request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+                request.predicate = NSPredicate(format: "toCategory.name BEGINSWITH[c] %@", currentFilter)
             }
             ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
             
@@ -63,7 +63,7 @@ class FetchHandler: NSObject {
                 print("\(self) : search scope is SubCategory")
                 print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
-            request.predicate = NSPredicate(format: "toSubCategory.name == %@", currentFilter)
+            request.predicate = NSPredicate(format: "toSubCategory.name BEGINSWITH[c] %@", currentFilter)
             ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
             
         case 2: //Title/Tag
@@ -71,10 +71,13 @@ class FetchHandler: NSObject {
                 print("\(self) : search scope is Title/Tag")
                 print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
-            request.predicate = NSPredicate(format: "titleTag == %@", currentFilter)
+            request.predicate = NSPredicate(format: "titleTag BEGINSWITH[c] %@", currentFilter)
             ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
         default:
-            print("Default for scope")
+            if fetchHandlerDebugMode{
+                print("\(self) : ERROR: search scope is \(FetchHandler.currentScope) ")
+                print("\(self) : ERROR: search filter is \(FetchHandler.currentFilter)\n")
+            }
         }
         
         

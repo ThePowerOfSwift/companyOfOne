@@ -13,19 +13,21 @@ import UIKit
 // then fetch searchTerm filtered documents from that array
 
 extension CommonDisplayView: UISearchBarDelegate {
-   
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if searchBarDebugMode{
+            print("CommonDisplayView_SeachBarExtension searchBarTextDidBeginEditing (function) reports: function called\n")
+        }
         commonSearchBar.showsCancelButton = true
         commonSearchBar.showsScopeBar = true
         commonSearchBar.scopeButtonTitles = ["Category", "Subcategory", "Title/Tag"]
-        commonSearchBar.selectedScopeButtonIndex = 0
+        commonSearchBar.selectedScopeButtonIndex = commonSearchBar.selectedScopeButtonIndex
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBarDebugMode{
-            print("\(self) textDidChange\n")
+            print("CommonDisplayView_SeachBarExtension textDidChange (function) reports: function called\n")
         }
-        
         //This passes the info to the FetchHandler
         FetchHandler.updateSearchScope(searchScope: commonSearchBar.selectedScopeButtonIndex)
         FetchHandler.updateSearchText(searchText: searchText)
@@ -36,14 +38,14 @@ extension CommonDisplayView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if searchBarDebugMode{
-            print("\(self) seachBarSearchButtonClicked\n")
+            print("CommonDisplayView_SeachBarExtension searchBarSearchButtonClicked (function) reports: done button clicked\n")
         }
         completeSearch()
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         if searchBarDebugMode{
-            print("\(self) searchBarShouldEndEditing\n")
+            print("CommonDisplayView_SeachBarExtension searchBarShouldEndEditing (function) reports: function called\n")
         }
         //resetSearchBar()
         return true
@@ -51,7 +53,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         if searchBarDebugMode{
-            print("\(self) searchBarCancelButtonClicked\n")
+            print("CommonDisplayView_SeachBarExtension searchBarCancelButtonClicked (function) reports: cancel button clicked\n")
         }
         resetSearch()
     }
@@ -62,30 +64,30 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonTableView.reloadData()
     }
     
-    func collectSearchText(searchText:String) {
-        
-    }
-    
-    
-    
-    
     //MARK: - Search Bar Custom Functions
     
     func resetSearch(){
-        commonSearchBar.endEditing(true)
+        if searchBarDebugMode{
+            print("CommonDisplayView_SeachBarExtension resetSearch (function) reports: function called\n")
+        }
+        commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
         commonSearchBar.showsCancelButton = false
         commonSearchBar.showsScopeBar = false
         resignFirstResponder()
         //TODO: TO FIX: How do I get the selected tab from here?  I need it to refresh when there are no seach results back to the tab search
-        
-        //updateViewControllerForSelectedTab()
+        let tabBarController = TabBarController()
+        let selectedTab = tabBarController.selectedIndex
+        FetchHandler.updateSearchScope(searchScope: selectedTab)
+        FetchHandler.fetchFilteredDocuments()
+        //commonTableView.reloadData()
         
     }
     
     func completeSearch(){
-        //document.retrieveAllDocuments(filteredBy: "\(FetchHandler.currentFilter)")
-        commonSearchBar.endEditing(true)
-        commonTableView.reloadData()
+        if searchBarDebugMode{
+            print("CommonDisplayView_SeachBarExtension completeSearch (function) reports: function called\n")
+        }
+        commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
     }
     }
 
