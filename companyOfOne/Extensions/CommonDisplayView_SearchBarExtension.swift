@@ -21,7 +21,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonSearchBar.showsCancelButton = true
         commonSearchBar.showsScopeBar = true
         commonSearchBar.scopeButtonTitles = ["Category", "Subcategory", "Title/Tag"]
-        commonSearchBar.selectedScopeButtonIndex = commonSearchBar.selectedScopeButtonIndex
+        //commonSearchBar.selectedScopeButtonIndex = commonSearchBar.selectedScopeButtonIndex
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -71,22 +71,50 @@ extension CommonDisplayView: UISearchBarDelegate {
             print("CommonDisplayView_SeachBarExtension resetSearch (function) reports: function called\n")
         }
         commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
-        commonSearchBar.showsCancelButton = false
+        commonSearchBar.text = nil
         commonSearchBar.showsScopeBar = false
         resignFirstResponder()
-        //TODO: TO FIX: How do I get the selected tab from here?  I need it to refresh when there are no seach results back to the tab search
-        let tabBarController = TabBarController()
-        let selectedTab = tabBarController.selectedIndex
-        FetchHandler.updateSearchScope(searchScope: selectedTab)
-        FetchHandler.fetchFilteredDocuments()
-        //commonTableView.reloadData()
         
+        //TODO: TO FIX: This works but it is U-G-L-Y!!  I have this code in my tab bar, can't I just force a press?
+        let application = UIApplication.shared.delegate as! AppDelegate
+        let tabbarController = application.window?.rootViewController as! UITabBarController
+        let selectedIndex = tabbarController.selectedIndex
+        switch selectedIndex {
+        case 1:
+            if searchBarDebugMode{
+                print("Current selected index for tab:\(selectedIndex)")
+            }
+            FetchHandler.updateSearchScope(searchScope: 0)
+            commonSearchBar.selectedScopeButtonIndex = 0
+            FetchHandler.updateSearchText(searchText: "All But Mail And Receipts")
+            FetchHandler.fetchFilteredDocuments()
+        case 2:
+            if searchBarDebugMode{
+                print("Current selected index for tab:\(selectedIndex)")
+            }
+            FetchHandler.updateSearchScope(searchScope: 0)
+            commonSearchBar.selectedScopeButtonIndex = 0
+            FetchHandler.updateSearchText(searchText: "Mail")
+            FetchHandler.fetchFilteredDocuments()
+        case 3:
+            if searchBarDebugMode{
+                print("Current selected index for tab:\(selectedIndex)")
+            }
+            FetchHandler.updateSearchScope(searchScope: 0)
+            commonSearchBar.selectedScopeButtonIndex = 0
+            FetchHandler.updateSearchText(searchText: "Receipts")
+            FetchHandler.fetchFilteredDocuments()
+        default:
+            print("ERROR: Default code run")
+        }
+       commonTableView.reloadData()
     }
     
     func completeSearch(){
         if searchBarDebugMode{
             print("CommonDisplayView_SeachBarExtension completeSearch (function) reports: function called\n")
         }
+        //commonSearchBar.showsCancelButton = false
         commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
     }
     }

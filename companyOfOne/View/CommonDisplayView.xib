@@ -41,7 +41,7 @@
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pOX-Qu-FG3">
+                <searchBar contentMode="redraw" placeholder="Enter search term..." translatesAutoresizingMaskIntoConstraints="NO" id="pOX-Qu-FG3">
                     <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     <connections>

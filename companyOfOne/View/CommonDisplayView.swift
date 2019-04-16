@@ -45,6 +45,7 @@ class CommonDisplayView: UIView
     //MARK: - Property Observers
     var exportCountObserverForUIUpdates: Int = 0 {
         didSet {
+            //TODO: TO FIX: This also crashes if there is only one result
             switch exportCountObserverForUIUpdates {
             case 0 :
                 if exportMode == .on{
