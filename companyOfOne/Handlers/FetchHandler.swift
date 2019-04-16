@@ -21,15 +21,15 @@ class FetchHandler: NSObject {
     
     
     
-    class func fetchSearchText(searchText:String){
+    class func updateSearchText(searchText:String){
         currentFilter = searchText
     }
-    class func fetchSearchScope(searchScope:Int){
+    class func updateSearchScope(searchScope:Int){
         currentScope = searchScope
     }
-        
+    
     //This is the function that populates the .completeDocumentArray per viewController (tab)
-  
+    
     class func fetchFilteredDocuments(){
         
         //set up the context of the coreData request for a Document sorted by documentDate
@@ -41,19 +41,21 @@ class FetchHandler: NSObject {
         
         //break up the requests based on currentScope
         switch currentScope{
+            
+            //TODO: - TO ADD: Need the results to happen immediatelty instead of waiting for the full word
+            
         case 0:  //Category
-        
             if fetchHandlerDebugMode{
                 print("\(self) : search scope is Category")
                 print("\(self) : search filter is \(FetchHandler.currentFilter)\n")
             }
             if currentFilter == "All But Mail And Receipts" {
-                            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
+                request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
                 
-                            //Mail and Receipts are fetched using the actual search term against category names
-                        }else{
-                            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
-                        }
+                //Mail and Receipts are fetched using the actual search term against category names
+            }else{
+                request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+            }
             ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
             
         case 1: //SubCategory
@@ -63,7 +65,7 @@ class FetchHandler: NSObject {
             }
             request.predicate = NSPredicate(format: "toSubCategory.name == %@", currentFilter)
             ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
-
+            
         case 2: //Title/Tag
             if fetchHandlerDebugMode{
                 print("\(self) : search scope is Title/Tag")
@@ -74,25 +76,25 @@ class FetchHandler: NSObject {
         default:
             print("Default for scope")
         }
-      
         
-       
         
-       
         
-//        //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
-//        if currentFilter == "All But Mail And Receipts" {
-//            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
-//            
-//            //Mail and Receipts are fetched using the actual search term against category names
-//        }else{
-//            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
-//        }
+        
+        
+        
+        //        //Documents are fetched using a blank filter (everything) and then removing what the Mail and Receipts filters fetch, ugly!
+        //        if currentFilter == "All But Mail And Receipts" {
+        //            request.predicate = NSPredicate(format: "toCategory.name != %@  AND toCategory.name != %@ ", "Mail", "Receipts")
+        //
+        //            //Mail and Receipts are fetched using the actual search term against category names
+        //        }else{
+        //            request.predicate = NSPredicate(format: "toCategory.name == %@", currentFilter)
+        //        }
         //whatever is fetched is added to the singleton arrays
-//        ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
-//        
-//        //I think this will be for documents created using the occurrence system
-//        ArrayHandler.sharedInstance.incompleteDocumentArray = try! context.fetch(request) as! [Document]
+        //        ArrayHandler.sharedInstance.completeDocumentArray = try! context.fetch(request) as! [Document]
+        //
+        //        //I think this will be for documents created using the occurrence system
+        //        ArrayHandler.sharedInstance.incompleteDocumentArray = try! context.fetch(request) as! [Document]
     }
     
     class func deleteDocumentAndFetchFilteredDocuments(document: Document){

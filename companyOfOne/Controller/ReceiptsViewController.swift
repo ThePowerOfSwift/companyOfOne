@@ -76,7 +76,7 @@ class ReceiptsViewController: UIViewController, MySegueDelegate {
     }
     
     
-    //TODO: - TO FIX: Reuseable segue code - https://www.natashatherobot.com/protocol-oriented-segue-identifiers-swift/
+    //TODO: - TO ADD: Reuseable segue code - https://www.natashatherobot.com/protocol-oriented-segue-identifiers-swift/
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "\(createdIdentifierForEditSegue)" {
             if let indexPath = customView.commonTableView.indexPathForSelectedRow {

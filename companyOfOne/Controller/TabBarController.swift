@@ -46,19 +46,22 @@ class TabBarController: UITabBarController{
                 if debugMode{
                     print("Title in tab bar for didSelect tabBar item:\(title)")
                 }
-                FetchHandler.fetchSearchText(searchText: "All But Mail And Receipts")
+                FetchHandler.updateSearchScope(searchScope: 0)
+                FetchHandler.updateSearchText(searchText: "All But Mail And Receipts")
                 FetchHandler.fetchFilteredDocuments()
             case "Personal Mail":
                 if debugMode{
                     print("Title in tab bar for didSelect tabBar item:\(title)")
                 }
-                FetchHandler.fetchSearchText(searchText: "Mail")
+                FetchHandler.updateSearchScope(searchScope: 0)
+                FetchHandler.updateSearchText(searchText: "Mail")
                 FetchHandler.fetchFilteredDocuments()
             case "Personal Receipts":
                 if debugMode{
                     print("Title in tab bar for didSelect tabBar item:\(title)")
                 }
-                FetchHandler.fetchSearchText(searchText: "Receipts")
+                FetchHandler.updateSearchScope(searchScope: 0)
+                FetchHandler.updateSearchText(searchText: "Receipts")
                 FetchHandler.fetchFilteredDocuments()
             default: break
             }

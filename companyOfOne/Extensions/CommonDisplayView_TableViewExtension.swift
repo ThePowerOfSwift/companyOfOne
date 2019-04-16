@@ -78,7 +78,7 @@ extension CommonDisplayView: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commonTableViewCell")! as! CommonTableViewCell
         if tableViewDebugMode{
-            print("CommonDisplayView_TableViewExtension reports: ArrayHandler.sharedInstance.completeDocumentArray has \(ArrayHandler.sharedInstance.completeDocumentArray.count) objects in it")
+            print("CommonDisplayView_TableViewExtension cellForRowAt (function) reports: ArrayHandler.sharedInstance.completeDocumentArray has \(ArrayHandler.sharedInstance.completeDocumentArray.count) objects in it")
         }
         cell.isSelectedForExport = ArrayHandler.sharedInstance.completeDocumentArray[indexPath.row].isSelectedForExport
         if cell.isSelectedForExport{

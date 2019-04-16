@@ -41,7 +41,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
         imagePicker.delegate = self
         
         //temp population data!!! This will eventually be the list of occurrence notifications
-        FetchHandler.fetchSearchText(searchText: "Receipts")
+        FetchHandler.updateSearchText(searchText: "Receipts")
         FetchHandler.fetchFilteredDocuments()
      
         
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController, UINavigationControllerDelegate, UIIm
     
     override func viewDidAppear(_ animated: Bool) {
         
-        FetchHandler.fetchSearchText(searchText: "Receipts")
+        FetchHandler.updateSearchText(searchText: "Receipts")
         FetchHandler.fetchFilteredDocuments()
         
         if let tabItems = tabBarController?.tabBar.items {

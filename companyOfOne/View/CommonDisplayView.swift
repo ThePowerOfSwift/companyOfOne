@@ -37,8 +37,8 @@ class CommonDisplayView: UIView
     var searchBarScope:SearchBarScope = .isCategory
     var selectedTabIndex:Int = 0
     var exportDebugMode:Bool = false
-    var tableViewDebugMode:Bool = true
-    var searchBarDebugMode:Bool = false
+    var tableViewDebugMode:Bool = false
+    var searchBarDebugMode:Bool = true
     
     weak var delegate: MySegueDelegate?
     
@@ -143,8 +143,6 @@ class CommonDisplayView: UIView
                     print("CommonDisplayView Share button pressed, Export mode on, \(ArrayHandler.sharedInstance.exportArray.count) items selected.\n")
                 }
                 print("TO DO: Run the export to PDF function here\n")
-                // TODO: - TO FIX: Why don't these segues work?
-                //performSegue(withIdentifier: "toPDFViewControllerFromDocsExportButton", sender: self)
                 self.delegate?.segueToPDFViewControllerCalled()
             }
         }

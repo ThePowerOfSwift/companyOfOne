@@ -27,11 +27,9 @@ extension CommonDisplayView: UISearchBarDelegate {
         }
         
         //This passes the info to the FetchHandler
-        FetchHandler.fetchSearchScope(searchScope: commonSearchBar.selectedScopeButtonIndex)
-        FetchHandler.fetchSearchText(searchText: searchText)
-
+        FetchHandler.updateSearchScope(searchScope: commonSearchBar.selectedScopeButtonIndex)
+        FetchHandler.updateSearchText(searchText: searchText)
         FetchHandler.fetchFilteredDocuments()
-
         commonTableView.reloadData()
 
     }
@@ -41,8 +39,6 @@ extension CommonDisplayView: UISearchBarDelegate {
             print("\(self) seachBarSearchButtonClicked\n")
         }
         completeSearch()
-
-        
     }
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
@@ -61,7 +57,7 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        FetchHandler.fetchSearchScope(searchScope: selectedScope)
+        FetchHandler.updateSearchScope(searchScope: selectedScope)
         FetchHandler.fetchFilteredDocuments()
         commonTableView.reloadData()
     }
@@ -80,6 +76,8 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonSearchBar.showsCancelButton = false
         commonSearchBar.showsScopeBar = false
         resignFirstResponder()
+        //TODO: TO FIX: How do I get the selected tab from here?  I need it to refresh when there are no seach results back to the tab search
+        
         //updateViewControllerForSelectedTab()
         
     }
