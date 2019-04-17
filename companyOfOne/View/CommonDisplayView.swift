@@ -34,7 +34,7 @@ class CommonDisplayView: UIView
     //MARK: - Instance Variables
     var exportMode:ExportMode = .off
     var selectedMode:SelectedMode = .noneSelected
-    var searchBarScope:SearchBarScope = .isCategory
+    //var searchBarScope:SearchBarScope = .isCategory
     var selectedTabIndex:Int = 0
     var exportDebugMode:Bool = false
     var tableViewDebugMode:Bool = false
@@ -52,10 +52,16 @@ class CommonDisplayView: UIView
                     if exportDebugMode{
                         print("CommonDisplayView exportCountObserverForUIUpdates (property observer) reports: 0 selected for export\n")
                     }
+//                    commonSearchBar.isUserInteractionEnabled = false
+//                    filterButton.title = "Select All"
+//                    selectedMode = .noneSelected
                 }
+                
+                commonSearchBar.isUserInteractionEnabled = false
                 filterButton.title = "Select All"
                 selectedMode = .noneSelected
                 if exportMode == .off {
+                    commonSearchBar.isUserInteractionEnabled = true
                     pressedSharedButton.image = #imageLiteral(resourceName: "upload")
                     pressedSharedButton.tintColor = nil
                     filterButton.image = #imageLiteral(resourceName: "filter")
@@ -69,7 +75,12 @@ class CommonDisplayView: UIView
                     if exportDebugMode{
                         print("CommonDisplayView exportCountObserverForUIUpdates reports: some selected for export\n")
                     }
+//                    commonSearchBar.isUserInteractionEnabled = false
+//                    filterButton.title = "Select All"
+//                    pressedSharedButton.tintColor = nil
+//                    selectedMode = .someSelected
                 }
+                commonSearchBar.isUserInteractionEnabled = false
                 filterButton.title = "Select All"
                 pressedSharedButton.tintColor = nil
                 selectedMode = .someSelected
@@ -78,7 +89,12 @@ class CommonDisplayView: UIView
                     if exportDebugMode{
                         print("CommonDisplayView exportCountObserverForUIUpdates reports: all selected for export\n")
                     }
+//                    commonSearchBar.isUserInteractionEnabled = false
+//                    pressedSharedButton.tintColor = nil
+//                    filterButton.title = "Deselect All"
+//                    selectedMode = .allSelected
                 }
+                commonSearchBar.isUserInteractionEnabled = false
                 pressedSharedButton.tintColor = nil
                 filterButton.title = "Deselect All"
                 selectedMode = .allSelected

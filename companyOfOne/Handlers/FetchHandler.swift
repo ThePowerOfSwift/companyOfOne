@@ -17,7 +17,7 @@ class FetchHandler: NSObject {
     //Default filter
     static var currentFilter:String = "All But Mail And Receipts"
     static var currentScope:Int = 0
-    static var fetchHandlerDebugMode:Bool = true
+    static var fetchHandlerDebugMode:Bool = false
     
     
     

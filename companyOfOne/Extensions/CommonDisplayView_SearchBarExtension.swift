@@ -14,6 +14,8 @@ import UIKit
 
 extension CommonDisplayView: UISearchBarDelegate {
     
+    //MARK: - Search Bar Delegates
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         if searchBarDebugMode{
             print("CommonDisplayView_SeachBarExtension searchBarTextDidBeginEditing (function) reports: function called\n")
@@ -21,8 +23,11 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonSearchBar.showsCancelButton = true
         commonSearchBar.showsScopeBar = true
         commonSearchBar.scopeButtonTitles = ["Category", "Subcategory", "Title/Tag"]
+        commonSearchBar.placeholder = "Search by category..."
+        }
+
         //commonSearchBar.selectedScopeButtonIndex = commonSearchBar.selectedScopeButtonIndex
-    }
+
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBarDebugMode{
@@ -33,7 +38,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         FetchHandler.updateSearchText(searchText: searchText)
         FetchHandler.fetchFilteredDocuments()
         commonTableView.reloadData()
-
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -47,7 +52,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         if searchBarDebugMode{
             print("CommonDisplayView_SeachBarExtension searchBarShouldEndEditing (function) reports: function called\n")
         }
-        //resetSearchBar()
+        commonSearchBar.placeholder = "Search your documents..."
         return true
     }
     
@@ -59,9 +64,26 @@ extension CommonDisplayView: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        FetchHandler.updateSearchScope(searchScope: selectedScope)
-        FetchHandler.fetchFilteredDocuments()
-        commonTableView.reloadData()
+        switch selectedScope {
+        case 0:
+            commonSearchBar.placeholder = "Search by category..."
+            FetchHandler.updateSearchScope(searchScope: selectedScope)
+            FetchHandler.fetchFilteredDocuments()
+            commonTableView.reloadData()
+        case 1:
+            commonSearchBar.placeholder = "Search by subcategory..."
+            FetchHandler.updateSearchScope(searchScope: selectedScope)
+            FetchHandler.fetchFilteredDocuments()
+            commonTableView.reloadData()
+        case 2:
+            commonSearchBar.placeholder = "Search by title/tag..."
+            FetchHandler.updateSearchScope(searchScope: selectedScope)
+            FetchHandler.fetchFilteredDocuments()
+            commonTableView.reloadData()
+        default:
+            commonSearchBar.placeholder = "Search your documents..."
+      
+    }
     }
     
     //MARK: - Search Bar Custom Functions
@@ -73,6 +95,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
         commonSearchBar.text = nil
         commonSearchBar.showsScopeBar = false
+        commonSearchBar.showsCancelButton = false
         resignFirstResponder()
         
         //TODO: TO FIX: This works but it is U-G-L-Y!!  I have this code in my tab bar, can't I just force a press?
@@ -107,7 +130,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         default:
             print("ERROR: Default code run")
         }
-       commonTableView.reloadData()
+        commonTableView.reloadData()
     }
     
     func completeSearch(){
@@ -117,7 +140,7 @@ extension CommonDisplayView: UISearchBarDelegate {
         //commonSearchBar.showsCancelButton = false
         commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
     }
-    }
+}
 
 // Here is how I would like the search bar to work:
 // for each scope tab, you can enter in a seach term and all three would be used
