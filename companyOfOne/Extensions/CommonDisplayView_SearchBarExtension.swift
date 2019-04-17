@@ -137,8 +137,8 @@ extension CommonDisplayView: UISearchBarDelegate {
         if searchBarDebugMode{
             print("CommonDisplayView_SeachBarExtension completeSearch (function) reports: function called\n")
         }
-        //commonSearchBar.showsCancelButton = false
         commonSearchBar.endEditing(true) //This calls searchBarShouldEndEditing
+        (commonSearchBar.value(forKey: "_cancelButton") as? UIButton)?.isEnabled = true
     }
 }
 
