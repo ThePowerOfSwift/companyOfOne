@@ -9,5 +9,5 @@
 import Foundation
 
 protocol MyShareDelegate: class {
-    func populateCategoryTableviewInShareExtension()->[Category]
+    func populateCategoryTableviewInShareExtension(categoryArray:[Category])
 }

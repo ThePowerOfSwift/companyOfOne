@@ -11,13 +11,9 @@ import Social
 
 class ShareViewController: SLComposeServiceViewController {
     
-    weak var delegate: MyShareDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let localArray = self.delegate?.populateCategoryTableviewInShareExtension()
-        print("ShareViewController reports: \(String(describing: localArray))")
         
 //        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
 //        let navSize = self.navigationController?.navigationBar.frame.size
@@ -67,6 +63,7 @@ class ShareViewController: SLComposeServiceViewController {
             category.title = "Category:SubCategory"
             //category.value = "This has to be populated by the category array from my app"
             category.tapHandler = {
+                self.performSegue(withIdentifier: "toShareEditViewContoller", sender: Any?.self)
                 print("This is what happens when a config item is tapped")
             }
             configItems.append(category)

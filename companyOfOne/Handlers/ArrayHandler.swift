@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArrayHandler: NSObject, MyShareDelegate {
+class ArrayHandler: NSObject{
 
     static let sharedInstance = ArrayHandler()
     override private init() {}
@@ -17,10 +17,11 @@ class ArrayHandler: NSObject, MyShareDelegate {
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
     var exportArray:[Document] = []
+    weak var delegate: MyShareDelegate?
     
-
-    func populateCategoryTableviewInShareExtension() -> [Category] {
-        print("ArrayHandler reports: \(self.categoryArray)")
-        return self.categoryArray
+    
+    func requestCategoryArray(){
+        let category = categoryArray
+        delegate?.populateCategoryTableviewInShareExtension(categoryArray: category)
     }
 }
