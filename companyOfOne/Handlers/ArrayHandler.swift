@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ArrayHandler: NSObject {
+class ArrayHandler: NSObject, MyShareDelegate {
+
     static let sharedInstance = ArrayHandler()
     override private init() {}
     var incompleteDocumentArray:[Document] = []
@@ -16,4 +17,10 @@ class ArrayHandler: NSObject {
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
     var exportArray:[Document] = []
+    
+
+    func populateCategoryTableviewInShareExtension() -> [Category] {
+        print("ArrayHandler reports: \(self.categoryArray)")
+        return self.categoryArray
+    }
 }
