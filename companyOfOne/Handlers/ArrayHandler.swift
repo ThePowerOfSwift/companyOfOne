@@ -17,11 +17,4 @@ class ArrayHandler: NSObject{
     var categoryArray:[Category] = []
     var subCategoryArray:[SubCategory] = []
     var exportArray:[Document] = []
-    weak var delegate: MyShareDelegate?
-    
-    
-    func requestCategoryArray(){
-        let category = categoryArray
-        delegate?.populateCategoryTableviewInShareExtension(categoryArray: category)
     }
-}

@@ -132,6 +132,7 @@ class CommonDisplayView: UIView
     
     //MARK: - Actions
     
+    
     @IBAction func shareButton(_ sender: UIBarButtonItem) {
         switch exportMode {
         case .off:

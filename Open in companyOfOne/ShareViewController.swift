@@ -9,11 +9,10 @@
 import UIKit
 import Social
 
-class ShareViewController: SLComposeServiceViewController {
+class ShareViewController: SLComposeServiceViewController, MyShareDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
 //        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
 //        let navSize = self.navigationController?.navigationBar.frame.size
@@ -42,6 +41,10 @@ class ShareViewController: SLComposeServiceViewController {
                 row.backgroundColor = #colorLiteral(red: 0.9994240403, green: 0.9855536819, blue: 0, alpha: 1)
             }
         }
+    }
+    
+    func populateCategoryTableviewInShareExtension(categoryArray: [Category]) {
+        print("\(categoryArray)")
     }
 
     override func isContentValid() -> Bool {

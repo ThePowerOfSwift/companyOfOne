@@ -9,14 +9,16 @@
 import UIKit
 
 class ShareEditViewController: UIViewController{
+
+    
     
     override func viewDidLoad() {
-    
-       // let arrayHandler = ArrayHandler()
+
         
         // pull this formt the category view controller which should hold the most recent, not private array.  Must unpack the names though, rather than the object
-    
+        
     }
+
     /*
     // MARK: - Navigation
 

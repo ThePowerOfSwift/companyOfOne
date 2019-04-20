@@ -13,12 +13,15 @@ class CategoryTableViewController: UITableViewController {
     
     var category = Category()
     var selectedSettingName = String()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = selectedSettingName
         //this updates the local array
         category.retrieveAllCategories()
+        
+ 
     }
     
     // MARK: - TableView Functions

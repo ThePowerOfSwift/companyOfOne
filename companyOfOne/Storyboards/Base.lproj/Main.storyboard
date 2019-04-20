@@ -337,7 +337,7 @@
         <!--Add Details-->
         <scene sceneID="uHV-io-vYj">
             <objects>
-                <viewController id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="HVc-xq-BOx" customClass="EditViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AbT-8H-nlk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -516,7 +516,6 @@
         <!--View Controller-->
         <scene sceneID="vsN-BF-j41">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="3EQ-bs-0kq" customClass="PDFViewController" customModule="companyOfOne" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2S2-zv-r7W">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -548,6 +547,7 @@
                         <viewLayoutGuide key="safeArea" id="DM7-Pd-j0b"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qw8-V0-1b1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3287" y="-391"/>
         </scene>
